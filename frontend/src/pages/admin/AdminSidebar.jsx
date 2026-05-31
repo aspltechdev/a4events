@@ -68,6 +68,30 @@ function AdminSidebar() {
     Inquiries
   </Link>
 </li>
+
+<br/>
+<li>
+  <Link to="/admin/contacts">
+    Contact Messages
+  </Link>
+</li>
+
+<br/>
+<li>
+  <Link to="/admin/hero-slides">
+    Hero Slides
+  </Link>
+</li>
+<br />
+<li>
+  <Link to="/admin/gallery">
+    Gallery
+  </Link>
+</li>
+<br />
+<Link to="/admin/testimonials">
+  Testimonials
+</Link>
         <br />
 
         <li>

@@ -22,6 +22,9 @@ model Product {
   description String
   price       Float
   image       String?
+
+  featured    Boolean  @default(false)
+
   createdAt   DateTime @default(now())
 }
 
@@ -31,12 +34,17 @@ model Event {
   description String
   location    String
   eventDate   DateTime
+
   bannerImage String?
+
+  featured    Boolean  @default(false)
+
   createdAt   DateTime @default(now())
 }
 
 model Inquiry {
   id        Int      @id @default(autoincrement())
+
   name      String
   phone     String
   email     String?
@@ -46,4 +54,94 @@ model Inquiry {
   eventId   Int?
 
   createdAt DateTime @default(now())
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+
+  name      String
+  email     String
+  phone     String?
+
+  subject   String?
+  message   String
+
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id Int @id @default(1)
+
+  siteName    String?
+  companyName String?
+
+  phone       String?
+  email       String?
+  address     String?
+
+  facebook    String?
+  instagram   String?
+  youtube     String?
+
+  logo        String?
+  favicon     String?
+
+  updatedAt   DateTime @updatedAt
+}
+
+model HeroSlide {
+  id Int @id @default(autoincrement())
+
+  title       String
+  subtitle    String
+
+  buttonText  String?
+  buttonLink  String?
+
+  image       String?
+
+  order       Int      @default(0)
+
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+}
+
+model HomeContent {
+  id Int @id @default(1)
+
+  aboutTitle   String?
+  aboutContent String?
+
+  ctaTitle     String?
+  ctaSubtitle  String?
+
+  updatedAt    DateTime @updatedAt
+}
+
+model Gallery {
+  id Int @id @default(autoincrement())
+
+  title      String?
+  category   String?
+
+  image      String
+
+  createdAt  DateTime @default(now())
+}
+
+model Testimonial {
+  id Int @id @default(autoincrement())
+
+  name       String
+
+  company    String?
+
+  review     String
+
+  rating     Int      @default(5)
+
+  image      String?
+
+  createdAt  DateTime @default(now())
 }

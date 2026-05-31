@@ -1,3 +1,5 @@
+
+
 // import { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 // import api from '../../services/api';
@@ -9,8 +11,11 @@
 //   const [formData, setFormData] = useState({
 //     title: '',
 //     description: '',
-//     price: ''
+//     price: '',
+//     image: ''
 //   });
+
+//   const [file, setFile] = useState(null);
 
 //   useEffect(() => {
 //     loadProduct();
@@ -18,13 +23,13 @@
 
 //   const loadProduct = async () => {
 //     try {
-//       const { data } =
-//         await api.get(`/products/${id}`);
+//       const { data } = await api.get(`/products/${id}`);
 
 //       setFormData({
 //         title: data.title,
 //         description: data.description,
-//         price: data.price
+//         price: data.price,
+//         image: data.image || ''
 //       });
 
 //     } catch (error) {
@@ -36,16 +41,40 @@
 //     e.preventDefault();
 
 //     try {
-//       const token =
-//         localStorage.getItem('token');
+//       const token = localStorage.getItem('token');
+
+//       let imageUrl = formData.image;
+
+//       // Upload new image if selected
+//       if (file) {
+//         const uploadData = new FormData();
+
+//         uploadData.append('image', file);
+
+//         const uploadResponse = await api.post(
+//           '/upload?type=product',
+//           uploadData,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`
+//             }
+//           }
+//         );
+
+//         imageUrl = uploadResponse.data.imageUrl;
+//       }
 
 //       await api.put(
 //         `/products/${id}`,
-//         formData,
+//         {
+//           title: formData.title,
+//           description: formData.description,
+//           price: Number(formData.price),
+//           image: imageUrl
+//         },
 //         {
 //           headers: {
-//             Authorization:
-//               `Bearer ${token}`
+//             Authorization: `Bearer ${token}`
 //           }
 //         }
 //       );
@@ -99,6 +128,26 @@
 
 //         <br /><br />
 
+//         {formData.image && (
+//           <>
+//             <img
+//               src={`http://localhost:5000${formData.image}`}
+//               alt="Product"
+//               width="200"
+//             />
+//             <br /><br />
+//           </>
+//         )}
+
+//         <input
+//           type="file"
+//           onChange={(e) =>
+//             setFile(e.target.files[0])
+//           }
+//         />
+
+//         <br /><br />
+
 //         <button type="submit">
 //           Update Product
 //         </button>
@@ -122,7 +171,8 @@ function EditProduct() {
     title: '',
     description: '',
     price: '',
-    image: ''
+    image: '',
+    featured: false
   });
 
   const [file, setFile] = useState(null);
@@ -136,10 +186,11 @@ function EditProduct() {
       const { data } = await api.get(`/products/${id}`);
 
       setFormData({
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        image: data.image || ''
+        title: data.title || '',
+        description: data.description || '',
+        price: data.price || '',
+        image: data.image || '',
+        featured: data.featured || false
       });
 
     } catch (error) {
@@ -171,7 +222,8 @@ function EditProduct() {
           }
         );
 
-        imageUrl = uploadResponse.data.imageUrl;
+        imageUrl =
+          uploadResponse.data.imageUrl;
       }
 
       await api.put(
@@ -180,7 +232,8 @@ function EditProduct() {
           title: formData.title,
           description: formData.description,
           price: Number(formData.price),
-          image: imageUrl
+          image: imageUrl,
+          featured: formData.featured
         },
         {
           headers: {
@@ -198,70 +251,102 @@ function EditProduct() {
 
   return (
     <AdminLayout>
-      <h1>Edit Product</h1>
+      <div>
+        <h1>Edit Product</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          value={formData.title}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              title: e.target.value
-            })
-          }
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                title: e.target.value
+              })
+            }
+          />
 
-        <br /><br />
+          <br />
+          <br />
 
-        <textarea
-          value={formData.description}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              description: e.target.value
-            })
-          }
-        />
+          <textarea
+            placeholder="Description"
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                description: e.target.value
+              })
+            }
+          />
 
-        <br /><br />
+          <br />
+          <br />
 
-        <input
-          type="number"
-          value={formData.price}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              price: e.target.value
-            })
-          }
-        />
+          <input
+            type="number"
+            placeholder="Price"
+            value={formData.price}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                price: e.target.value
+              })
+            }
+          />
 
-        <br /><br />
+          <br />
+          <br />
 
-        {formData.image && (
-          <>
-            <img
-              src={`http://localhost:5000${formData.image}`}
-              alt="Product"
-              width="200"
+          <h4>Current Image</h4>
+
+          {formData.image && (
+            <>
+              <img
+                src={`http://localhost:5000${formData.image}`}
+                alt="Product"
+                width="200"
+              />
+
+              <br />
+              <br />
+            </>
+          )}
+
+          <input
+            type="file"
+            onChange={(e) =>
+              setFile(e.target.files[0])
+            }
+          />
+
+          <br />
+          <br />
+
+          <label>
+            <input
+              type="checkbox"
+              checked={formData.featured}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  featured: e.target.checked
+                })
+              }
             />
-            <br /><br />
-          </>
-        )}
+            {' '}
+            Featured Product
+          </label>
 
-        <input
-          type="file"
-          onChange={(e) =>
-            setFile(e.target.files[0])
-          }
-        />
+          <br />
+          <br />
 
-        <br /><br />
-
-        <button type="submit">
-          Update Product
-        </button>
-      </form>
+          <button type="submit">
+            Update Product
+          </button>
+        </form>
+      </div>
     </AdminLayout>
   );
 }

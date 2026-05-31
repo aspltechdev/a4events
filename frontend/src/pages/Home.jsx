@@ -7,6 +7,14 @@
 //   );
 // }
 
+import About from "../components/home/About";
+import ContactCTA from "../components/home/ContactCTA";
+import FeaturedProducts from "../components/home/FeaturedProducts";
+import Gallery from "../components/home/Gallery";
+import Hero from "../components/home/Hero";
+import Testimonials from "../components/home/Testimonials";
+import UpcomingEvents from "../components/home/UpcomingEvents";
+import WhyChooseUs from "../components/home/WhyChooseUs";
 import PublicLayout from "../layouts/PublicLayout";
 
 
@@ -19,7 +27,14 @@ import PublicLayout from "../layouts/PublicLayout";
 function Home() {
   return (
     <PublicLayout>
-      <h1>Home</h1>
+<Hero/>
+<About/>
+<FeaturedProducts/>
+<UpcomingEvents/>
+<WhyChooseUs/>
+<ContactCTA/>
+<Gallery/>
+<Testimonials/>
     </PublicLayout>
   );
 }

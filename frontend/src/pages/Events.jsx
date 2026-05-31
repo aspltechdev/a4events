@@ -44,6 +44,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import PublicLayout from '../layouts/PublicLayout';
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -58,6 +59,7 @@ function Events() {
   };
 
   return (
+    <PublicLayout>
     <div style={{ padding: '20px' }}>
       <h1>Events</h1>
 
@@ -96,6 +98,7 @@ function Events() {
         ))}
       </div>
     </div>
+    </PublicLayout>
   );
 }
 

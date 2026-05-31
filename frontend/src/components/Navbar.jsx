@@ -6,7 +6,7 @@ function Navbar() {
       <Link to="/">Home</Link> |{' '}
       <Link to="/products">Products</Link> |{' '}
       <Link to="/events">Events</Link> |{' '}
-      <Link to="/login">Login</Link>
+      <Link to="/contact">Contact</Link>
     </nav>
   );
 }

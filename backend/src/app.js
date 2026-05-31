@@ -8,6 +8,30 @@ const eventRoutes = require('./routes/eventRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const inquiryRoutes =
   require('./routes/inquiryRoutes');
+const contactRoutes =
+  require('./routes/contactRoutes');
+
+  const dashboardRoutes =
+  require('./routes/dashboardRoutes');
+
+const homeContentRoutes =
+  require('./routes/homeContentRoutes');
+
+  const heroSlideRoutes =
+  require('./routes/heroSlideRoutes');
+
+
+
+const galleryRoutes =
+  require('./routes/galleryRoutes');
+
+
+const testimonialRoutes =
+  require('./routes/testimonialRoutes');
+
+
+
+
 
 const app = express();
 
@@ -20,6 +44,11 @@ app.use('/api/events', eventRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.use(
+  '/api/dashboard',
+  dashboardRoutes
+);
+
+app.use(
   '/uploads',
   express.static(path.join(__dirname, 'uploads'))
 );
@@ -27,6 +56,43 @@ app.use(
   '/api/inquiries',
   inquiryRoutes
 );
+
+app.use(
+  '/api/contact',
+  contactRoutes
+);
+
+app.use(
+  '/api/home-content',
+  homeContentRoutes
+);
+
+app.use(
+  '/api/testimonials',
+  testimonialRoutes
+);
+
+app.use(
+  '/api/hero-slides',
+  heroSlideRoutes
+);
+
+
+
+app.use(
+  '/api/gallery',
+  galleryRoutes
+);
+
+
+
+
+
+
+
+
+
+
 app.get('/', (req, res) => {
   res.json({
     message: 'A4 Events API Running'
