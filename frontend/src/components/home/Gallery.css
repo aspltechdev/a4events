@@ -1,0 +1,196 @@
+/* ==================================
+   SECTION
+================================== */
+
+.a4-gallery-section {
+  padding: 120px 24px;
+  background: #ffffff;
+}
+
+/* ==================================
+   CONTAINER
+================================== */
+
+.a4-gallery-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-gallery-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.a4-gallery-tag {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 24px;
+}
+
+.a4-gallery-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+  font-weight: 800;
+
+  color: #111827;
+
+  letter-spacing: -0.05em;
+
+  margin-bottom: 20px;
+}
+
+.a4-gallery-description {
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #64748b;
+
+  line-height: 1.8;
+
+  font-size: 1.1rem;
+}
+
+/* ==================================
+   GRID
+================================== */
+
+.a4-gallery-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 24px;
+}
+
+/* ==================================
+   CARD
+================================== */
+
+.a4-gallery-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  height: 350px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.05);
+
+  transition: all 0.4s ease;
+}
+
+.a4-gallery-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ==================================
+   IMAGE
+================================== */
+
+.a4-gallery-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 1s ease;
+}
+
+.a4-gallery-card:hover
+.a4-gallery-image {
+  transform: scale(1.08);
+}
+
+/* ==================================
+   OVERLAY
+================================== */
+
+.a4-gallery-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.75),
+      rgba(0,0,0,.15),
+      transparent
+    );
+
+  opacity: 0;
+
+  transition: all 0.4s ease;
+}
+
+.a4-gallery-card:hover
+.a4-gallery-overlay {
+  opacity: 1;
+}
+
+/* ==================================
+   CONTENT
+================================== */
+
+.a4-gallery-content span {
+  color: white;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+
+  .a4-gallery-section {
+    padding: 80px 20px;
+  }
+
+  .a4-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-gallery-card {
+    height: 280px;
+  }
+
+  .a4-gallery-title {
+    font-size: 2.5rem;
+  }
+}

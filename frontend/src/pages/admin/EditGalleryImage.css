@@ -1,0 +1,130 @@
+.a4-admin-edit-gallery-page {
+  padding: 10px;
+}
+
+.a4-admin-edit-gallery-header {
+  margin-bottom: 30px;
+}
+
+.a4-admin-edit-gallery-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.a4-admin-edit-gallery-header p {
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.a4-admin-edit-gallery-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 30px;
+}
+
+.a4-admin-edit-gallery-form {
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+.a4-admin-gallery-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.a4-admin-gallery-field label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #334155;
+}
+
+.a4-admin-gallery-field input {
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  outline: none;
+}
+
+.a4-admin-gallery-field input:focus {
+  border-color: #111827;
+}
+
+.a4-admin-gallery-update-btn {
+  width: 100%;
+  padding: 15px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #111827;
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Preview */
+
+.a4-admin-gallery-preview-card {
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.a4-admin-gallery-preview-image {
+  width: 100%;
+  height: 550px;
+
+  object-fit: cover;
+}
+
+.a4-admin-gallery-preview-content {
+  padding: 24px;
+}
+
+.a4-admin-gallery-preview-category {
+  display: inline-block;
+
+  background: #f1f5f9;
+  color: #475569;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 15px;
+}
+
+.a4-admin-gallery-preview-content h3 {
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+@media (max-width: 1200px) {
+
+  .a4-admin-edit-gallery-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-admin-gallery-preview-image {
+    height: 350px;
+  }
+
+}

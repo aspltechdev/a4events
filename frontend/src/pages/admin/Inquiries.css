@@ -1,0 +1,155 @@
+.a4-inquiries-page {
+  padding: 10px;
+}
+
+.a4-inquiries-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.a4-inquiries-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.a4-inquiries-header p {
+  color: #64748b;
+}
+
+.a4-inquiries-count {
+  background: #111827;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.a4-inquiries-search-wrap {
+  margin-bottom: 25px;
+}
+
+.a4-inquiries-search {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  outline: none;
+}
+
+.a4-inquiries-table-wrapper {
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+.a4-inquiries-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.a4-inquiries-table thead {
+  background: #f8fafc;
+}
+
+.a4-inquiries-table th {
+  text-align: left;
+  padding: 18px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.a4-inquiries-table td {
+  padding: 18px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.a4-message-preview {
+  max-width: 250px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  color: #64748b;
+}
+
+.a4-badge-product {
+  background: #eff6ff;
+  color: #2563eb;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.a4-badge-event {
+  background: #ecfdf5;
+  color: #16a34a;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.a4-delete-inquiry-btn {
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.a4-delete-inquiry-btn:hover {
+  background: #dc2626;
+}
+
+.a4-empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+}
+
+@media (max-width: 992px) {
+
+  .a4-inquiries-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .a4-inquiries-table {
+    min-width: 900px;
+  }
+}

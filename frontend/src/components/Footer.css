@@ -1,0 +1,125 @@
+/* ==================================
+   FOOTER
+================================== */
+
+.a4-footer {
+  background: #0f172a;
+
+  color: white;
+
+  padding-top: 80px;
+}
+
+/* ==================================
+   CONTAINER
+================================== */
+
+.a4-footer-container {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 0 24px 60px;
+
+  display: grid;
+
+  grid-template-columns:
+    2fr 1fr 1fr 1fr;
+
+  gap: 60px;
+}
+
+/* ==================================
+   BRAND
+================================== */
+
+.a4-footer-logo {
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  margin-bottom: 20px;
+}
+
+.a4-footer-description {
+  color: rgba(255,255,255,.7);
+
+  line-height: 1.9;
+
+  max-width: 400px;
+}
+
+/* ==================================
+   COLUMN
+================================== */
+
+.a4-footer-column h4 {
+  font-size: 1rem;
+
+  margin-bottom: 24px;
+
+  color: white;
+}
+
+.a4-footer-column a,
+.a4-footer-column p {
+  display: block;
+
+  text-decoration: none;
+
+  color: rgba(255,255,255,.7);
+
+  margin-bottom: 14px;
+
+  transition: .3s;
+}
+
+.a4-footer-column a:hover {
+  color: white;
+}
+
+/* ==================================
+   BOTTOM
+================================== */
+
+.a4-footer-bottom {
+  border-top:
+    1px solid rgba(255,255,255,.08);
+
+  padding: 25px;
+
+  text-align: center;
+}
+
+.a4-footer-bottom p {
+  color: rgba(255,255,255,.6);
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 992px) {
+
+  .a4-footer-container {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .a4-footer-container {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+  .a4-footer {
+    text-align: center;
+  }
+
+  .a4-footer-description {
+    margin: auto;
+  }
+}

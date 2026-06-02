@@ -1,0 +1,165 @@
+/* ==========================================
+   PAGE
+========================================== */
+
+.a4-add-event-page {
+  max-width: 1000px;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.a4-add-event-header {
+  margin-bottom: 30px;
+}
+
+.a4-add-event-header h1 {
+  font-size: 2.2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 8px;
+}
+
+.a4-add-event-header p {
+  color: #64748b;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.a4-add-event-form {
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 32px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+/* ==========================================
+   GROUP
+========================================== */
+
+.a4-event-form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-bottom: 24px;
+}
+
+.a4-event-form-group label {
+  margin-bottom: 10px;
+
+  font-weight: 600;
+
+  color: #334155;
+}
+
+.a4-event-form-group input,
+.a4-event-form-group textarea {
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: .3s;
+}
+
+.a4-event-form-group input:focus,
+.a4-event-form-group textarea:focus {
+  border-color: #111827;
+
+  box-shadow:
+    0 0 0 4px rgba(17,24,39,.05);
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.a4-event-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+/* ==========================================
+   IMAGE PREVIEW
+========================================== */
+
+.a4-event-image-preview {
+  width: 100%;
+
+  max-width: 320px;
+
+  margin-top: 20px;
+
+  border-radius: 18px;
+
+  border: 1px solid #e2e8f0;
+
+  object-fit: cover;
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.a4-save-event-btn {
+  border: none;
+
+  padding: 15px 28px;
+
+  border-radius: 14px;
+
+  background: #111827;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.a4-save-event-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .a4-event-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-add-event-form {
+    padding: 24px;
+  }
+
+  .a4-add-event-header h1 {
+    font-size: 1.9rem;
+  }
+}

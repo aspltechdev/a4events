@@ -1,0 +1,219 @@
+/* ==================================
+   A4 ABOUT SECTION
+================================== */
+
+.a4-about-section {
+  position: relative;
+  overflow: hidden;
+
+  padding: 140px 24px;
+
+  background: #ffffff;
+}
+
+/* ==================================
+   CONTAINER
+================================== */
+
+.a4-about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  text-align: center;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* ==================================
+   TAG
+================================== */
+
+.a4-about-tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 12px 22px;
+
+  border-radius: 999px;
+
+  background: #f5f7fa;
+
+  border: 1px solid #e6eaf0;
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 30px;
+}
+
+/* ==================================
+   TITLE
+================================== */
+
+.a4-about-title {
+  font-size: clamp(3rem, 7vw, 6rem);
+
+  font-weight: 800;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.06em;
+
+  color: #111827;
+
+  margin-bottom: 35px;
+
+  max-width: 900px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==================================
+   DESCRIPTION
+================================== */
+
+.a4-about-description {
+  max-width: 760px;
+
+  margin: 0 auto 28px;
+
+  font-size: 1.15rem;
+
+  line-height: 1.9;
+
+  color: #64748b;
+}
+
+/* ==================================
+   BACKGROUND GLOW
+================================== */
+
+.a4-about-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  background: rgba(59, 130, 246, 0.08);
+
+  filter: blur(120px);
+
+  top: -180px;
+  left: -150px;
+}
+
+.a4-about-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.08);
+
+  filter: blur(140px);
+
+  bottom: -220px;
+  right: -180px;
+}
+
+/* ==================================
+   OPTIONAL STATS SECTION
+================================== */
+
+.a4-about-stats {
+  margin-top: 70px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 30px;
+}
+
+.a4-about-stat-card {
+  padding: 30px;
+
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #eef2f7;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.a4-about-stat-number {
+  font-size: 2.2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 10px;
+}
+
+.a4-about-stat-label {
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 992px) {
+  .a4-about-section {
+    padding: 100px 24px;
+  }
+
+  .a4-about-description {
+    font-size: 1.05rem;
+  }
+
+  .a4-about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .a4-about-title {
+    font-size: 2.8rem;
+  }
+
+  .a4-about-description {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .a4-about-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .a4-about-section {
+    padding: 80px 20px;
+  }
+
+  .a4-about-title {
+    font-size: 2.2rem;
+  }
+}

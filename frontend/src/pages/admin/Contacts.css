@@ -1,0 +1,182 @@
+/* ==================================
+   PAGE
+================================== */
+
+.a4-contacts-page {
+  padding: 10px;
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-contacts-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.a4-contacts-header h1 {
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 6px;
+}
+
+.a4-contacts-header p {
+  color: #64748b;
+}
+
+.a4-contact-count {
+  background: #111827;
+
+  color: white;
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  font-weight: 700;
+}
+
+/* ==================================
+   SEARCH
+================================== */
+
+.a4-contact-search-wrap {
+  margin-bottom: 25px;
+}
+
+.a4-contact-search {
+  width: 100%;
+
+  max-width: 420px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  outline: none;
+}
+
+/* ==================================
+   TABLE
+================================== */
+
+.a4-contact-table-wrapper {
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+.a4-contact-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.a4-contact-table thead {
+  background: #f8fafc;
+}
+
+.a4-contact-table th {
+  text-align: left;
+
+  padding: 18px;
+
+  font-weight: 700;
+
+  color: #334155;
+}
+
+.a4-contact-table td {
+  padding: 18px;
+
+  border-top:
+    1px solid #f1f5f9;
+}
+
+/* ==================================
+   MESSAGE PREVIEW
+================================== */
+
+.a4-contact-message {
+  max-width: 280px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  color: #64748b;
+}
+
+/* ==================================
+   BUTTON
+================================== */
+
+.a4-contact-delete-btn {
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.a4-contact-delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ==================================
+   EMPTY
+================================== */
+
+.a4-contact-empty {
+  text-align: center;
+
+  padding: 40px;
+
+  color: #64748b;
+}
+
+/* ==================================
+   MOBILE
+================================== */
+
+@media (max-width: 992px) {
+
+  .a4-contact-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .a4-contact-table {
+    min-width: 1100px;
+  }
+}

@@ -1,0 +1,161 @@
+/* ==========================================
+   PAGE
+========================================== */
+
+.a4-add-product-page {
+  max-width: 900px;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.a4-add-product-header {
+  margin-bottom: 30px;
+}
+
+.a4-add-product-header h1 {
+  font-size: 2.2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 8px;
+}
+
+.a4-add-product-header p {
+  color: #64748b;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.a4-add-product-form {
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 32px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+/* ==========================================
+   FORM GROUP
+========================================== */
+
+.a4-form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-bottom: 24px;
+}
+
+.a4-form-group label {
+  margin-bottom: 10px;
+
+  font-weight: 600;
+
+  color: #334155;
+}
+
+.a4-form-group input,
+.a4-form-group textarea {
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: .3s;
+}
+
+.a4-form-group input:focus,
+.a4-form-group textarea:focus {
+  border-color: #111827;
+
+  box-shadow:
+    0 0 0 4px rgba(17,24,39,.05);
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.a4-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+/* ==========================================
+   CHECKBOX
+========================================== */
+
+.a4-checkbox-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 25px;
+}
+
+.a4-checkbox-row span {
+  color: #475569;
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.a4-save-product-btn {
+  border: none;
+
+  padding: 15px 28px;
+
+  border-radius: 14px;
+
+  background: #111827;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.a4-save-product-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .a4-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-add-product-form {
+    padding: 24px;
+  }
+}

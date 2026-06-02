@@ -1,0 +1,80 @@
+/* ==================================
+   ADMIN LAYOUT
+================================== */
+
+.a4-admin-layout {
+  min-height: 100vh;
+
+  background: #f8fafc;
+}
+
+/* ==================================
+   CONTENT
+================================== */
+
+.a4-admin-content {
+  margin-left: 280px;
+
+  min-height: 100vh;
+
+  padding: 40px;
+
+  background: #f8fafc;
+}
+
+/* ==================================
+   PAGE CARD
+================================== */
+
+.a4-admin-page {
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+/* ==================================
+   TITLES
+================================== */
+
+.a4-admin-title {
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 10px;
+}
+
+.a4-admin-subtitle {
+  color: #64748b;
+
+  margin-bottom: 30px;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 992px) {
+
+  .a4-admin-content {
+    margin-left: 240px;
+
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .a4-admin-content {
+    margin-left: 0;
+
+    padding: 20px;
+  }
+}

@@ -1,0 +1,162 @@
+/* ==================================
+   CARD
+================================== */
+
+.a4-inquiry-card {
+  background: #ffffff;
+
+  border-radius: 32px;
+
+  padding: 45px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,.06);
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-inquiry-header {
+  margin-bottom: 35px;
+}
+
+.a4-inquiry-tag {
+  display: inline-block;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  background: #fff7ed;
+
+  color: #c2410c;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 20px;
+}
+
+.a4-inquiry-title {
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-bottom: 12px;
+}
+
+.a4-inquiry-description {
+  color: #64748b;
+
+  line-height: 1.7;
+}
+
+/* ==================================
+   FORM
+================================== */
+
+.a4-inquiry-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.a4-inquiry-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+/* ==================================
+   INPUTS
+================================== */
+
+.a4-inquiry-form input,
+.a4-inquiry-form textarea {
+  width: 100%;
+
+  padding: 16px 20px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e2e8f0;
+
+  font-size: 15px;
+
+  transition: .3s ease;
+
+  background: white;
+}
+
+.a4-inquiry-form input:focus,
+.a4-inquiry-form textarea:focus {
+  outline: none;
+
+  border-color: #ea580c;
+
+  box-shadow:
+    0 0 0 4px rgba(234,88,12,.08);
+}
+
+.a4-inquiry-form textarea {
+  resize: none;
+}
+
+/* ==================================
+   BUTTON
+================================== */
+
+.a4-inquiry-btn {
+  border: none;
+
+  padding: 16px 24px;
+
+  border-radius: 999px;
+
+  background: #111827;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.a4-inquiry-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(17,24,39,.15);
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+
+  .a4-inquiry-card {
+    padding: 28px;
+  }
+
+  .a4-inquiry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-inquiry-title {
+    font-size: 1.7rem;
+  }
+}

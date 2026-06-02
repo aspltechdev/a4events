@@ -1,0 +1,150 @@
+.a4-admin-edit-testimonial-page {
+  padding: 10px;
+}
+
+.a4-admin-edit-testimonial-header {
+  margin-bottom: 30px;
+}
+
+.a4-admin-edit-testimonial-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.a4-admin-edit-testimonial-header p {
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.a4-admin-edit-testimonial-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 30px;
+}
+
+/* FORM */
+
+.a4-admin-edit-testimonial-form {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 24px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+.a4-admin-testimonial-field {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+}
+
+.a4-admin-testimonial-field label {
+  margin-bottom: 10px;
+
+  font-weight: 600;
+
+  color: #334155;
+}
+
+.a4-admin-testimonial-field input,
+.a4-admin-testimonial-field textarea,
+.a4-admin-testimonial-field select {
+  padding: 14px 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  outline: none;
+}
+
+.a4-admin-testimonial-update-btn {
+  width: 100%;
+
+  border: none;
+
+  background: #111827;
+
+  color: white;
+
+  padding: 15px;
+
+  border-radius: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* PREVIEW */
+
+.a4-admin-testimonial-preview-card {
+  background: white;
+
+  padding: 35px;
+
+  border-radius: 24px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,.08);
+}
+
+.a4-admin-testimonial-preview-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+}
+
+.a4-admin-testimonial-preview-avatar {
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.a4-admin-testimonial-preview-top h3 {
+  color: #111827;
+}
+
+.a4-admin-testimonial-preview-top p {
+  color: #64748b;
+}
+
+.a4-admin-testimonial-preview-rating {
+  color: #f59e0b;
+
+  font-size: 1.5rem;
+
+  margin-bottom: 20px;
+}
+
+.a4-admin-testimonial-preview-review {
+  color: #475569;
+
+  line-height: 1.9;
+
+  font-size: 1.05rem;
+}
+
+@media (max-width:1200px){
+
+  .a4-admin-edit-testimonial-layout{
+    grid-template-columns:1fr;
+  }
+
+}

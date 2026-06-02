@@ -1,0 +1,263 @@
+/* ==================================
+   PAGE
+================================== */
+
+.a4-event-page {
+  background: #ffffff;
+}
+
+/* ==================================
+   HERO
+================================== */
+
+.a4-event-hero {
+  position: relative;
+
+  min-height: 90vh;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+/* ==================================
+   OVERLAY
+================================== */
+
+.a4-event-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.95),
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.25)
+    );
+}
+
+/* ==================================
+   CONTENT
+================================== */
+
+.a4-event-hero-content {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 1400px;
+
+  width: 100%;
+
+  margin: auto;
+
+  padding: 0 24px 80px;
+}
+
+.a4-event-back {
+  display: inline-block;
+
+  color: white;
+
+  text-decoration: none;
+
+  margin-bottom: 30px;
+}
+
+.a4-event-tag {
+  display: inline-block;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.12);
+
+  backdrop-filter: blur(15px);
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 25px;
+}
+
+.a4-event-title {
+  font-size: clamp(3rem, 7vw, 7rem);
+
+  font-weight: 800;
+
+  line-height: .9;
+
+  letter-spacing: -.05em;
+
+  color: white;
+
+  margin-bottom: 40px;
+}
+
+/* ==================================
+   META
+================================== */
+
+.a4-event-meta {
+  display: flex;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 35px;
+}
+
+.a4-event-meta-card {
+  min-width: 180px;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.12);
+
+  backdrop-filter: blur(20px);
+}
+
+.a4-event-meta-card span {
+  color:
+    rgba(255,255,255,.7);
+
+  font-size: 13px;
+}
+
+.a4-event-meta-card h4 {
+  color: white;
+
+  margin-top: 10px;
+}
+
+/* ==================================
+   BUTTON
+================================== */
+
+.a4-event-book-btn {
+  padding: 16px 32px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: white;
+
+  color: #111827;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.a4-event-book-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* ==================================
+   CONTENT AREA
+================================== */
+
+.a4-event-content-container {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 80px 24px;
+}
+
+/* ==================================
+   CARDS
+================================== */
+
+.a4-event-description-card,
+.a4-event-location-card,
+.a4-event-inquiry {
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 30px;
+
+  padding: 40px;
+
+  margin-bottom: 40px;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.05);
+}
+
+.a4-event-description-card h2,
+.a4-event-location-card h2,
+.a4-event-inquiry h2 {
+  margin-bottom: 20px;
+
+  color: #111827;
+}
+
+.a4-event-description-card p {
+  line-height: 1.9;
+
+  color: #64748b;
+}
+
+/* ==================================
+   MAP
+================================== */
+
+.a4-event-map {
+  width: 100%;
+
+  height: 450px;
+
+  border: none;
+
+  border-radius: 24px;
+
+  margin-top: 20px;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+
+  .a4-event-title {
+    font-size: 3rem;
+  }
+
+  .a4-event-meta {
+    flex-direction: column;
+  }
+
+  .a4-event-content-container {
+    padding: 60px 20px;
+  }
+
+  .a4-event-description-card,
+  .a4-event-location-card,
+  .a4-event-inquiry {
+    padding: 25px;
+  }
+
+  .a4-event-map {
+    height: 300px;
+  }
+}

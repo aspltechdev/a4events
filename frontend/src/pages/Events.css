@@ -1,0 +1,235 @@
+/* ==================================
+   PAGE
+================================== */
+
+.a4-events-page {
+  background: #ffffff;
+  padding: 140px 24px 100px;
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-events-page-header {
+  max-width: 900px;
+
+  margin: 0 auto 80px;
+
+  text-align: center;
+}
+
+.a4-events-page-tag {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 24px;
+}
+
+.a4-events-page-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+
+  font-weight: 800;
+
+  line-height: .95;
+
+  letter-spacing: -.05em;
+
+  color: #111827;
+
+  margin-bottom: 20px;
+}
+
+.a4-events-page-description {
+  color: #64748b;
+
+  font-size: 1.15rem;
+
+  line-height: 1.8;
+}
+
+/* ==================================
+   GRID
+================================== */
+
+.a4-events-page-grid {
+  max-width: 1400px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(350px, 1fr));
+
+  gap: 32px;
+}
+
+/* ==================================
+   CARD
+================================== */
+
+.a4-events-page-card {
+  text-decoration: none;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  background: white;
+
+  border: 1px solid #eef2f7;
+
+  transition: all .4s ease;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.05);
+}
+
+.a4-events-page-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 25px 60px rgba(15,23,42,.12);
+}
+
+/* ==================================
+   IMAGE
+================================== */
+
+.a4-events-page-image-wrapper {
+  position: relative;
+
+  height: 280px;
+
+  overflow: hidden;
+}
+
+.a4-events-page-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 1s ease;
+}
+
+.a4-events-page-card:hover
+.a4-events-page-image {
+  transform: scale(1.08);
+}
+
+.a4-events-page-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.5),
+      transparent
+    );
+}
+
+/* ==================================
+   CONTENT
+================================== */
+
+.a4-events-page-content {
+  padding: 28px;
+}
+
+.a4-events-page-badge {
+  display: inline-block;
+
+  padding: 6px 14px;
+
+  border-radius: 999px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+.a4-events-page-event-title {
+  font-size: 1.5rem;
+
+  color: #111827;
+
+  font-weight: 700;
+
+  margin-bottom: 15px;
+}
+
+.a4-events-page-location {
+  color: #64748b;
+
+  margin-bottom: 25px;
+
+  line-height: 1.7;
+}
+
+/* ==================================
+   BUTTON
+================================== */
+
+.a4-events-page-btn {
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: #111827;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+
+  .a4-events-page {
+    padding: 120px 20px 80px;
+  }
+
+  .a4-events-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-events-page-image-wrapper {
+    height: 240px;
+  }
+
+  .a4-events-page-title {
+    font-size: 2.8rem;
+  }
+}

@@ -1,22 +1,42 @@
-import AdminSidebar from './AdminSidebar';
+// import AdminSidebar from './AdminSidebar';
+
+// function AdminLayout({ children }) {
+//   return (
+//     <div
+//       style={{
+//         display: 'flex'
+//       }}
+//     >
+//       <AdminSidebar />
+
+//       <div
+//         style={{
+//           flex: 1,
+//           padding: '20px'
+//         }}
+//       >
+//         {children}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default AdminLayout;
+
+
+import AdminSidebar from "./AdminSidebar";
+import "./AdminLayout.css";
 
 function AdminLayout({ children }) {
   return (
-    <div
-      style={{
-        display: 'flex'
-      }}
-    >
+    <div className="a4-admin-layout">
+
       <AdminSidebar />
 
-      <div
-        style={{
-          flex: 1,
-          padding: '20px'
-        }}
-      >
+      <main className="a4-admin-content">
         {children}
-      </div>
+      </main>
+
     </div>
   );
 }

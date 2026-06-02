@@ -41,10 +41,75 @@
 // export default Events;
 
 
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../services/api';
-import PublicLayout from '../layouts/PublicLayout';
+// import { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import api from '../services/api';
+// import PublicLayout from '../layouts/PublicLayout';
+
+// function Events() {
+//   const [events, setEvents] = useState([]);
+
+//   useEffect(() => {
+//     fetchEvents();
+//   }, []);
+
+//   const fetchEvents = async () => {
+//     const { data } = await api.get('/events');
+//     setEvents(data);
+//   };
+
+//   return (
+//     <PublicLayout>
+//     <div style={{ padding: '20px' }}>
+//       <h1>Events</h1>
+
+//       <div
+//         style={{
+//           display: 'grid',
+//           gridTemplateColumns:
+//             'repeat(auto-fill, minmax(250px, 1fr))',
+//           gap: '20px'
+//         }}
+//       >
+//         {events.map((event) => (
+//           <div
+//             key={event.id}
+//             style={{
+//               border: '1px solid #ddd',
+//               borderRadius: '10px',
+//               padding: '15px'
+//             }}
+//           >
+//             {event.bannerImage && (
+//   <img
+//     src={`http://localhost:5000${event.bannerImage}`}
+//     alt={event.title}
+//     width="250"
+//   />
+// )}
+//             <h3>{event.title}</h3>
+
+//             <p>{event.location}</p>
+
+//             <Link to={`/events/${event.id}`}>
+//               View Details
+//             </Link>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//     </PublicLayout>
+//   );
+// }
+
+// export default Events;
+
+
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import api from "../services/api";
+import PublicLayout from "../layouts/PublicLayout";
+import "./Events.css";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -54,50 +119,88 @@ function Events() {
   }, []);
 
   const fetchEvents = async () => {
-    const { data } = await api.get('/events');
-    setEvents(data);
+    try {
+      const { data } = await api.get("/events");
+      setEvents(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <PublicLayout>
-    <div style={{ padding: '20px' }}>
-      <h1>Events</h1>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns:
-            'repeat(auto-fill, minmax(250px, 1fr))',
-          gap: '20px'
-        }}
-      >
-        {events.map((event) => (
-          <div
-            key={event.id}
-            style={{
-              border: '1px solid #ddd',
-              borderRadius: '10px',
-              padding: '15px'
-            }}
-          >
-            {event.bannerImage && (
-  <img
-    src={`http://localhost:5000${event.bannerImage}`}
-    alt={event.title}
-    width="250"
-  />
-)}
-            <h3>{event.title}</h3>
+      <section className="a4-events-page">
 
-            <p>{event.location}</p>
+        <div className="a4-events-page-header">
 
-            <Link to={`/events/${event.id}`}>
-              View Details
+          <span className="a4-events-page-tag">
+            DISCOVER EVENTS
+          </span>
+
+          <h1 className="a4-events-page-title">
+            Experiences Worth
+            Remembering
+          </h1>
+
+          <p className="a4-events-page-description">
+            Explore concerts, festivals, workshops,
+            conferences and unforgettable experiences
+            happening around you.
+          </p>
+
+        </div>
+
+        <div className="a4-events-page-grid">
+
+          {events.map((event) => (
+            <Link
+              key={event.id}
+              to={`/events/${event.id}`}
+              className="a4-events-page-card"
+            >
+
+              <div className="a4-events-page-image-wrapper">
+
+                {event.bannerImage && (
+                  <img
+                    src={`http://localhost:5000${event.bannerImage}`}
+                    alt={event.title}
+                    className="a4-events-page-image"
+                  />
+                )}
+
+                <div className="a4-events-page-overlay"></div>
+
+              </div>
+
+              <div className="a4-events-page-content">
+
+                <span className="a4-events-page-badge">
+                  Featured Event
+                </span>
+
+                <h3 className="a4-events-page-event-title">
+                  {event.title}
+                </h3>
+
+                <div className="a4-events-page-location">
+                  {event.location}
+                </div>
+
+                <button className="a4-events-page-btn">
+                  View Details
+                </button>
+
+              </div>
+
             </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+
+        </div>
+
+      </section>
+
     </PublicLayout>
   );
 }

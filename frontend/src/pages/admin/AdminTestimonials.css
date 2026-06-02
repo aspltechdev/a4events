@@ -1,0 +1,192 @@
+.a4-admin-testimonials-page {
+  padding: 10px;
+}
+
+/* HEADER */
+
+.a4-admin-testimonials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.a4-admin-testimonials-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.a4-admin-testimonials-header p {
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.a4-admin-testimonials-add-btn {
+  text-decoration: none;
+
+  background: #111827;
+  color: white;
+
+  padding: 14px 24px;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+}
+
+/* SEARCH */
+
+.a4-admin-testimonials-toolbar {
+  margin-bottom: 30px;
+}
+
+.a4-admin-testimonials-search {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  outline: none;
+}
+
+/* GRID */
+
+.a4-admin-testimonials-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(350px, 1fr));
+
+  gap: 24px;
+}
+
+/* CARD */
+
+.a4-admin-testimonial-card {
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 24px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+
+  transition: .3s;
+}
+
+.a4-admin-testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+/* TOP */
+
+.a4-admin-testimonial-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.a4-admin-testimonial-avatar {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.a4-admin-testimonial-top h3 {
+  color: #111827;
+}
+
+.a4-admin-testimonial-top p {
+  color: #64748b;
+}
+
+/* RATING */
+
+.a4-admin-testimonial-rating {
+  color: #f59e0b;
+
+  font-size: 1.2rem;
+
+  margin-bottom: 15px;
+}
+
+/* REVIEW */
+
+.a4-admin-testimonial-review {
+  color: #475569;
+
+  line-height: 1.8;
+
+  margin-bottom: 25px;
+}
+
+/* ACTIONS */
+
+.a4-admin-testimonial-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.a4-admin-testimonial-edit-btn {
+  flex: 1;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  background: #111827;
+
+  color: white;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+}
+
+.a4-admin-testimonial-delete-btn {
+  flex: 1;
+
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .a4-admin-testimonials-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .a4-admin-testimonials-grid{
+    grid-template-columns:1fr;
+  }
+
+}

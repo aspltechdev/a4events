@@ -1,0 +1,70 @@
+/* ==================================
+   GLOBAL LAYOUT
+================================== */
+
+.a4-layout {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+}
+
+/* ==================================
+   MAIN CONTENT
+================================== */
+
+.a4-layout-main {
+  flex: 1;
+
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+/* ==================================
+   GLOBAL SPACING FIX
+================================== */
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+
+  overflow-x: hidden;
+}
+
+/* ==================================
+   SMOOTH SCROLLING
+================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==================================
+   IMAGE FIXES
+================================== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==================================
+   BUTTON RESET
+================================== */
+
+button {
+  font-family: inherit;
+}
+
+/* ==================================
+   LINK RESET
+================================== */
+
+a {
+  text-decoration: none;
+}

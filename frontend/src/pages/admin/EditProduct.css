@@ -1,0 +1,114 @@
+.a4-edit-product-page {
+  max-width: 1000px;
+}
+
+.a4-edit-product-header {
+  margin-bottom: 30px;
+}
+
+.a4-edit-product-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.a4-edit-product-header p {
+  color: #64748b;
+}
+
+.a4-edit-product-form {
+  background: #fff;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.05);
+}
+
+.a4-edit-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.a4-edit-group label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.a4-edit-group input,
+.a4-edit-group textarea {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  transition: .3s;
+}
+
+.a4-edit-group input:focus,
+.a4-edit-group textarea:focus {
+  border-color: #111827;
+  box-shadow:
+    0 0 0 4px rgba(17,24,39,.05);
+}
+
+.a4-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.a4-image-section {
+  margin-bottom: 25px;
+}
+
+.a4-image-section label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.a4-product-preview {
+  width: 240px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+}
+
+.a4-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.a4-update-product-btn {
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 15px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.a4-update-product-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+
+  .a4-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-edit-product-form {
+    padding: 24px;
+  }
+
+  .a4-product-preview {
+    width: 100%;
+  }
+}

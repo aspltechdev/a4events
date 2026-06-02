@@ -1,0 +1,253 @@
+/* ==================================
+   SECTION
+================================== */
+
+.a4-upcoming-section {
+  padding: 120px 24px;
+  background: #f8fafc;
+}
+
+.a4-upcoming-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-upcoming-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.a4-upcoming-tag {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 24px;
+}
+
+.a4-upcoming-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+  font-weight: 800;
+
+  color: #111827;
+
+  letter-spacing: -0.05em;
+
+  margin-bottom: 20px;
+}
+
+.a4-upcoming-description {
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #64748b;
+
+  font-size: 1.1rem;
+
+  line-height: 1.8;
+}
+
+/* ==================================
+   GRID
+================================== */
+
+.a4-upcoming-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(350px, 1fr));
+
+  gap: 28px;
+}
+
+/* ==================================
+   CARD
+================================== */
+
+.a4-upcoming-card {
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition: all 0.4s ease;
+}
+
+.a4-upcoming-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ==================================
+   IMAGE
+================================== */
+
+.a4-upcoming-image-wrapper {
+  position: relative;
+
+  height: 520px;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+}
+
+.a4-upcoming-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 1s ease;
+}
+
+.a4-upcoming-card:hover
+.a4-upcoming-image {
+  transform: scale(1.08);
+}
+
+/* ==================================
+   OVERLAY
+================================== */
+
+.a4-upcoming-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.9),
+      rgba(0,0,0,.2),
+      transparent
+    );
+}
+
+/* ==================================
+   CONTENT
+================================== */
+
+.a4-upcoming-content {
+  position: absolute;
+
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+
+  z-index: 5;
+}
+
+.a4-upcoming-badge {
+  display: inline-block;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.15);
+
+  backdrop-filter: blur(15px);
+
+  color: white;
+
+  font-size: 12px;
+
+  margin-bottom: 16px;
+}
+
+.a4-upcoming-event-title {
+  color: white;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  margin-bottom: 12px;
+}
+
+.a4-upcoming-location {
+  color: rgba(255,255,255,.8);
+
+  margin-bottom: 25px;
+
+  font-size: 15px;
+}
+
+/* ==================================
+   BUTTON
+================================== */
+
+.a4-upcoming-btn {
+  border: none;
+
+  background: white;
+
+  color: #111827;
+
+  padding: 12px 22px;
+
+  border-radius: 999px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.a4-upcoming-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 992px) {
+
+  .a4-upcoming-image-wrapper {
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .a4-upcoming-section {
+    padding: 80px 20px;
+  }
+
+  .a4-upcoming-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-upcoming-image-wrapper {
+    height: 380px;
+  }
+
+  .a4-upcoming-event-title {
+    font-size: 1.6rem;
+  }
+}

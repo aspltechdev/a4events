@@ -1,0 +1,196 @@
+/* ==========================
+   NAVBAR
+========================== */
+
+.navbar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  z-index: 9999;
+
+  padding: 20px 0;
+
+  background: rgba(0,0,0,0.15);
+
+  backdrop-filter: blur(20px);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.navbar-container {
+  max-width: 1440px;
+
+  margin: auto;
+
+  padding: 0 50px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+/* ==========================
+   LOGO
+========================== */
+
+.logo {
+  text-decoration: none;
+
+  color: #fff;
+
+  font-size: 1.5rem;
+
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}
+
+/* ==========================
+   NAV LINKS
+========================== */
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,.8);
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  transition: all .3s ease;
+
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -6px;
+
+  width: 0;
+
+  height: 2px;
+
+  background: white;
+
+  transition: .3s ease;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ==========================
+   ACTIONS
+========================== */
+
+.nav-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-login {
+  height: 48px;
+
+  padding: 0 24px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,.1);
+
+  background: rgba(255,255,255,.04);
+
+  color: white;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(20px);
+
+  transition: .3s ease;
+}
+
+.nav-login:hover {
+  background: rgba(255,255,255,.08);
+}
+
+.nav-cta {
+  height: 48px;
+
+  padding: 0 28px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  background: white;
+
+  color: black;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(255,255,255,.2);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 992px) {
+
+  .navbar-container {
+    padding: 0 24px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-login {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-cta {
+    height: 42px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,161 @@
+/* ==================================
+   SECTION
+================================== */
+
+.a4-why-section {
+  padding: 120px 24px;
+
+  background: #ffffff;
+}
+
+/* ==================================
+   CONTAINER
+================================== */
+
+.a4-why-container {
+  max-width: 1400px;
+
+  margin: 0 auto;
+}
+
+/* ==================================
+   HEADER
+================================== */
+
+.a4-why-header {
+  text-align: center;
+
+  margin-bottom: 70px;
+}
+
+.a4-why-tag {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 24px;
+}
+
+.a4-why-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+  font-weight: 800;
+
+  letter-spacing: -0.05em;
+
+  color: #111827;
+
+  margin-bottom: 20px;
+}
+
+.a4-why-description {
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #64748b;
+
+  line-height: 1.8;
+
+  font-size: 1.1rem;
+}
+
+/* ==================================
+   GRID
+================================== */
+
+.a4-why-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+/* ==================================
+   CARD
+================================== */
+
+.a4-why-card {
+  padding: 40px;
+
+  background: #ffffff;
+
+  border: 1px solid #eef2f7;
+
+  border-radius: 28px;
+
+  transition: all 0.35s ease;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.a4-why-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.10);
+}
+
+.a4-why-card-title {
+  font-size: 1.4rem;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  margin-bottom: 16px;
+}
+
+.a4-why-card-description {
+  color: #64748b;
+
+  line-height: 1.8;
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 1200px) {
+
+  .a4-why-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .a4-why-section {
+    padding: 80px 20px;
+  }
+
+  .a4-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .a4-why-card {
+    padding: 30px;
+  }
+
+  .a4-why-title {
+    font-size: 2.5rem;
+  }
+}
