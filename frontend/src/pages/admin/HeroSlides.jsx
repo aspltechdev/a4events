@@ -124,6 +124,8 @@ import "./HeroSlides.css";
 
 function HeroSlides() {
   const [slides, setSlides] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     fetchSlides();
@@ -205,8 +207,14 @@ function HeroSlides() {
 
               <div className="a4-slide-image-wrap">
 
-                <img
+                {/* <img
                   src={`http://localhost:5000${slide.image}`}
+                  alt={slide.title}
+                  className="a4-slide-image"
+                /> */}
+
+                <img
+                  src={`${API_URL}${slide.image}`}
                   alt={slide.title}
                   className="a4-slide-image"
                 />
