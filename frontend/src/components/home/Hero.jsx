@@ -206,7 +206,134 @@
 // }
 
 // export default Hero;
+
+
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import api from "../../services/api";
+// import "./Hero.css";
+
+// function Hero() {
+//   const [slides, setSlides] = useState([]);
+//   const [current, setCurrent] = useState(0);
+
+//   useEffect(() => {
+//     loadSlides();
+//   }, []);
+
+//   useEffect(() => {
+//     if (!slides.length) return;
+
+//     const timer = setInterval(() => {
+//       setCurrent((prev) => (prev + 1) % slides.length);
+//     }, 6000);
+
+//     return () => clearInterval(timer);
+//   }, [slides]);
+
+//   const loadSlides = async () => {
+//     try {
+//       const { data } = await api.get("/hero-slides");
+//       setSlides(data);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   if (!slides.length) return null;
+
+//   const slide = slides[current];
+
+//   return (
+//     <section className="hero">
+//       {/* Background Image */}
+//       <div
+//         className="hero-bg"
+//         style={{
+//           backgroundImage: `url(http://localhost:5000${slide.image})`,
+//         }}
+//       />
+
+//       {/* Overlay */}
+//       <div className="hero-overlay" />
+
+//       {/* Left Glow */}
+//       <div className="hero-glow hero-glow-left" />
+
+//       {/* Right Glow */}
+//       <div className="hero-glow hero-glow-right" />
+
+//       {/* Main Content */}
+//       <div className="hero-container">
+//         <div className="hero-content">
+//           <span className="hero-label">
+//             FEATURED EVENT
+//           </span>
+
+//           <h1 className="hero-title">
+//             {slide.title}
+//           </h1>
+
+//           <p className="hero-description">
+//             {slide.subtitle}
+//           </p>
+
+//           <div className="hero-actions">
+//             <button className="primary-btn">
+//               Book Tickets
+//             </button>
+
+//             <button className="secondary-btn">
+//               View Details
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* <div className="hero-panel">
+//           <div className="panel-item">
+//             <span>Location</span>
+//             <h4>Bangalore</h4>
+//           </div>
+
+//           <div className="panel-item">
+//             <span>Date</span>
+//             <h4>15 Aug 2026</h4>
+//           </div>
+
+//           <div className="panel-item">
+//             <span>Audience</span>
+//             <h4>20,000+</h4>
+//           </div>
+//         </div> */}
+//       </div>
+
+//       {/* Slide Navigation */}
+//       <div className="hero-pagination">
+//         {slides.map((_, index) => (
+//           <button
+//             key={index}
+//             className={`hero-dot ${
+//               current === index ? "active" : ""
+//             }`}
+//             onClick={() => setCurrent(index)}
+//           />
+//         ))}
+//       </div>
+
+//       {/* Bottom Fade */}
+//       <div className="hero-bottom-fade" />
+//     </section>
+//   );
+// }
+
+// export default Hero;
+
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../../services/api";
 import "./Hero.css";
 
@@ -231,7 +358,12 @@ function Hero() {
   const loadSlides = async () => {
     try {
       const { data } = await api.get("/hero-slides");
-      setSlides(data);
+
+      const activeSlides = data
+        .filter((slide) => slide.isActive)
+        .sort((a, b) => a.order - b.order);
+
+      setSlides(activeSlides);
     } catch (err) {
       console.error(err);
     }
@@ -241,9 +373,15 @@ function Hero() {
 
   const slide = slides[current];
 
+  const isInternalLink =
+    slide.buttonLink &&
+    !slide.buttonLink.startsWith("http") &&
+    !slide.buttonLink.startsWith("https");
+
   return (
     <section className="hero">
       {/* Background Image */}
+
       <div
         className="hero-bg"
         style={{
@@ -252,15 +390,19 @@ function Hero() {
       />
 
       {/* Overlay */}
+
       <div className="hero-overlay" />
 
       {/* Left Glow */}
+
       <div className="hero-glow hero-glow-left" />
 
       {/* Right Glow */}
+
       <div className="hero-glow hero-glow-right" />
 
       {/* Main Content */}
+
       <div className="hero-container">
         <div className="hero-content">
           <span className="hero-label">
@@ -275,18 +417,91 @@ function Hero() {
             {slide.subtitle}
           </p>
 
-          <div className="hero-actions">
-            <button className="primary-btn">
-              Book Tickets
-            </button>
+          {/* <div className="hero-actions">
+         
 
-            <button className="secondary-btn">
-              View Details
-            </button>
-          </div>
+            {slide.buttonLink ? (
+              isInternalLink ? (
+                <Link
+                  to={slide.buttonLink}
+                  className="primary-btn"
+                >
+                  {slide.buttonText ||
+                    "Explore Events"}
+                </Link>
+              ) : (
+                <a
+                  href={slide.buttonLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="primary-btn"
+                >
+                  {slide.buttonText ||
+                    "Explore Events"}
+                </a>
+              )
+            ) : (
+              <Link
+                to="/events"
+                className="primary-btn"
+              >
+                {slide.buttonText ||
+                  "Explore Events"}
+              </Link>
+            )}
+
+      
+
+            <Link
+              to="/events"
+              className="secondary-btn"
+            >
+              View Events
+            </Link>
+          </div> */}
+
+
+          <div className="hero-actions">
+  {slide.buttonLink ? (
+    isInternalLink ? (
+      <Link
+        to={slide.buttonLink}
+        className="primary-btn"
+      >
+        Book Now
+      </Link>
+    ) : (
+      <a
+        href={slide.buttonLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="primary-btn"
+      >
+        Book Now
+      </a>
+    )
+  ) : (
+    <Link
+      to="/events"
+      className="primary-btn"
+    >
+      Book Now
+    </Link>
+  )}
+
+  <Link
+    to="/events"
+    className="secondary-btn"
+  >
+    View Events
+  </Link>
+</div>
         </div>
 
-        {/* <div className="hero-panel">
+        {/* Optional Stats Panel */}
+
+        {/*
+        <div className="hero-panel">
           <div className="panel-item">
             <span>Location</span>
             <h4>Bangalore</h4>
@@ -301,23 +516,30 @@ function Hero() {
             <span>Audience</span>
             <h4>20,000+</h4>
           </div>
-        </div> */}
+        </div>
+        */}
       </div>
 
       {/* Slide Navigation */}
+
       <div className="hero-pagination">
         {slides.map((_, index) => (
           <button
             key={index}
             className={`hero-dot ${
-              current === index ? "active" : ""
+              current === index
+                ? "active"
+                : ""
             }`}
-            onClick={() => setCurrent(index)}
+            onClick={() =>
+              setCurrent(index)
+            }
           />
         ))}
       </div>
 
       {/* Bottom Fade */}
+
       <div className="hero-bottom-fade" />
     </section>
   );

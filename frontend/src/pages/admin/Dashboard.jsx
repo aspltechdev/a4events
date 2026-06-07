@@ -370,10 +370,10 @@ function Dashboard() {
             <h2>{dashboard.events}</h2>
           </div>
 
-          <div className="a4-stat-card">
+          {/* <div className="a4-stat-card">
             <span>Inquiries</span>
             <h2>{dashboard.inquiries}</h2>
-          </div>
+          </div> */}
 
           <div className="a4-stat-card">
             <span>Contacts</span>
@@ -432,7 +432,7 @@ function Dashboard() {
 
           </div>
 
-          <div className="a4-dashboard-card">
+          {/* <div className="a4-dashboard-card">
 
             <h3>
               Latest Inquiries
@@ -453,7 +453,7 @@ function Dashboard() {
               )
             )}
 
-          </div>
+          </div> */}
 
           <div className="a4-dashboard-card">
 

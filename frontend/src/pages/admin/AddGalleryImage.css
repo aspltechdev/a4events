@@ -1,0 +1,96 @@
+.gallery-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.gallery-header {
+  margin-bottom: 30px;
+}
+
+.gallery-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.gallery-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+.gallery-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.08);
+}
+
+.gallery-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.gallery-form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.gallery-form-group input[type="text"] {
+  height: 50px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.gallery-form-group input[type="text"]:focus {
+  border-color: #2563eb;
+}
+
+.gallery-form-group input[type="file"] {
+  padding: 12px;
+  border: 1px dashed #bbb;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.gallery-preview {
+  margin-bottom: 25px;
+}
+
+.gallery-preview label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.gallery-preview img {
+  width: 100%;
+  max-width: 450px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.gallery-submit-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  height: 52px;
+  padding: 0 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.gallery-submit-btn:hover {
+  background: #1d4ed8;
+}

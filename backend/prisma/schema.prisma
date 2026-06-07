@@ -29,17 +29,20 @@ model Product {
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  location    String
-  eventDate   DateTime
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  location     String
+  eventDate    DateTime
+  bannerImage  String?
 
-  bannerImage String?
+  bookingLink  String?
+  sponsorName  String?
+  sponsorLogo  String?
 
-  featured    Boolean  @default(false)
+  featured     Boolean @default(false)
 
-  createdAt   DateTime @default(now())
+  createdAt    DateTime @default(now())
 }
 
 model Inquiry {

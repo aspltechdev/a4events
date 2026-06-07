@@ -362,6 +362,297 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import api from "../../services/api";
+// import AdminLayout from "./AdminLayout";
+// import "./EditEvent.css";
+
+// function EditEvent() {
+//   const { id } = useParams();
+
+//   const [formData, setFormData] = useState({
+//     title: "",
+//     description: "",
+//     location: "",
+//     eventDate: "",
+//     bannerImage: "",
+//   });
+
+//   const [file, setFile] = useState(null);
+
+//   useEffect(() => {
+//     loadEvent();
+//   }, []);
+
+//   const loadEvent = async () => {
+//     try {
+//       const { data } = await api.get(`/events/${id}`);
+
+//       setFormData({
+//         title: data.title || "",
+//         description: data.description || "",
+//         location: data.location || "",
+//         eventDate: data.eventDate
+//           ? data.eventDate.split("T")[0]
+//           : "",
+//         bannerImage: data.bannerImage || "",
+//       });
+
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const token = localStorage.getItem("token");
+
+//       let bannerImage =
+//         formData.bannerImage;
+
+//       if (file) {
+//         const uploadData =
+//           new FormData();
+
+//         uploadData.append(
+//           "image",
+//           file
+//         );
+
+//         const uploadResponse =
+//           await api.post(
+//             "/upload?type=event",
+//             uploadData,
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+
+//         bannerImage =
+//           uploadResponse.data.imageUrl;
+//       }
+
+//       await api.put(
+//         `/events/${id}`,
+//         {
+//           title: formData.title,
+//           description:
+//             formData.description,
+//           location: formData.location,
+//           eventDate:
+//             formData.eventDate,
+//           bannerImage,
+//         },
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+
+//       alert(
+//         "Event Updated Successfully"
+//       );
+
+//     } catch (error) {
+//       console.error(error);
+//       alert(
+//         "Failed to update event"
+//       );
+//     }
+//   };
+
+//   return (
+//     <AdminLayout>
+
+//       <div className="a4-edit-event-page">
+
+//         <div className="a4-edit-event-header">
+
+//           <h1>Edit Event</h1>
+
+//           <p>
+//             Update event information,
+//             banner, location and date.
+//           </p>
+
+//         </div>
+
+//         <form
+//           onSubmit={handleSubmit}
+//           className="a4-edit-event-form"
+//         >
+
+//           <div className="a4-event-edit-group">
+
+//             <label>
+//               Event Title
+//             </label>
+
+//             <input
+//               type="text"
+//               value={formData.title}
+//               placeholder="Event Title"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   title:
+//                     e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-event-edit-group">
+
+//             <label>
+//               Event Description
+//             </label>
+
+//             <textarea
+//               rows="6"
+//               value={
+//                 formData.description
+//               }
+//               placeholder="Event Description"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   description:
+//                     e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-event-edit-grid">
+
+//             <div className="a4-event-edit-group">
+
+//               <label>
+//                 Location
+//               </label>
+
+//               <input
+//                 type="text"
+//                 value={formData.location}
+//                 placeholder="Event Location"
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     location:
+//                       e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//             <div className="a4-event-edit-group">
+
+//               <label>
+//                 Event Date
+//               </label>
+
+//               <input
+//                 type="date"
+//                 value={
+//                   formData.eventDate
+//                 }
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     eventDate:
+//                       e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//           </div>
+
+//           {/* Current Banner */}
+
+//           {formData.bannerImage &&
+//             !file && (
+//               <div className="a4-event-banner-section">
+
+//                 <label>
+//                   Current Banner
+//                 </label>
+
+//                 <img
+//                   src={`http://localhost:5000${formData.bannerImage}`}
+//                   alt="Current Banner"
+//                   className="a4-event-banner-preview"
+//                 />
+
+//               </div>
+//             )}
+
+//           {/* New Banner Preview */}
+
+//           {file && (
+//             <div className="a4-event-banner-section">
+
+//               <label>
+//                 New Banner Preview
+//               </label>
+
+//               <img
+//                 src={URL.createObjectURL(
+//                   file
+//                 )}
+//                 alt="Preview"
+//                 className="a4-event-banner-preview"
+//               />
+
+//             </div>
+//           )}
+
+//           <div className="a4-event-edit-group">
+
+//             <label>
+//               Upload New Banner
+//             </label>
+
+//             <input
+//               type="file"
+//               onChange={(e) =>
+//                 setFile(
+//                   e.target.files[0]
+//                 )
+//               }
+//             />
+
+//           </div>
+
+//           <button
+//             type="submit"
+//             className="a4-update-event-btn"
+//           >
+//             Update Event
+//           </button>
+
+//         </form>
+
+//       </div>
+
+//     </AdminLayout>
+//   );
+// }
+
+// export default EditEvent;
+
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
@@ -377,6 +668,10 @@ function EditEvent() {
     location: "",
     eventDate: "",
     bannerImage: "",
+    bookingLink: "",
+    sponsorName: "",
+    sponsorLogo: "",
+    featured: false,
   });
 
   const [file, setFile] = useState(null);
@@ -397,8 +692,11 @@ function EditEvent() {
           ? data.eventDate.split("T")[0]
           : "",
         bannerImage: data.bannerImage || "",
+        bookingLink: data.bookingLink || "",
+        sponsorName: data.sponsorName || "",
+        sponsorLogo: data.sponsorLogo || "",
+        featured: data.featured || false,
       });
-
     } catch (error) {
       console.error(error);
     }
@@ -410,43 +708,38 @@ function EditEvent() {
     try {
       const token = localStorage.getItem("token");
 
-      let bannerImage =
-        formData.bannerImage;
+      let bannerImage = formData.bannerImage;
 
       if (file) {
-        const uploadData =
-          new FormData();
+        const uploadData = new FormData();
 
-        uploadData.append(
-          "image",
-          file
+        uploadData.append("image", file);
+
+        const uploadResponse = await api.post(
+          "/upload?type=event",
+          uploadData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
-        const uploadResponse =
-          await api.post(
-            "/upload?type=event",
-            uploadData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-        bannerImage =
-          uploadResponse.data.imageUrl;
+        bannerImage = uploadResponse.data.imageUrl;
       }
 
       await api.put(
         `/events/${id}`,
         {
           title: formData.title,
-          description:
-            formData.description,
+          description: formData.description,
           location: formData.location,
-          eventDate:
-            formData.eventDate,
+          eventDate: formData.eventDate,
           bannerImage,
+          bookingLink: formData.bookingLink,
+          sponsorName: formData.sponsorName,
+          sponsorLogo: formData.sponsorLogo,
+          featured: formData.featured,
         },
         {
           headers: {
@@ -455,44 +748,33 @@ function EditEvent() {
         }
       );
 
-      alert(
-        "Event Updated Successfully"
-      );
-
+      alert("Event Updated Successfully");
     } catch (error) {
       console.error(error);
-      alert(
-        "Failed to update event"
-      );
+      alert("Failed to update event");
     }
   };
 
   return (
     <AdminLayout>
-
       <div className="a4-edit-event-page">
-
         <div className="a4-edit-event-header">
-
           <h1>Edit Event</h1>
 
           <p>
-            Update event information,
-            banner, location and date.
+            Update event information, banner, location,
+            sponsor details and booking link.
           </p>
-
         </div>
 
         <form
           onSubmit={handleSubmit}
           className="a4-edit-event-form"
         >
+          {/* Event Title */}
 
           <div className="a4-event-edit-group">
-
-            <label>
-              Event Title
-            </label>
+            <label>Event Title</label>
 
             <input
               type="text"
@@ -501,44 +783,35 @@ function EditEvent() {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  title:
-                    e.target.value,
+                  title: e.target.value,
                 })
               }
             />
-
           </div>
 
-          <div className="a4-event-edit-group">
+          {/* Description */}
 
-            <label>
-              Event Description
-            </label>
+          <div className="a4-event-edit-group">
+            <label>Event Description</label>
 
             <textarea
               rows="6"
-              value={
-                formData.description
-              }
+              value={formData.description}
               placeholder="Event Description"
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  description:
-                    e.target.value,
+                  description: e.target.value,
                 })
               }
             />
-
           </div>
 
+          {/* Location & Date */}
+
           <div className="a4-event-edit-grid">
-
             <div className="a4-event-edit-group">
-
-              <label>
-                Location
-              </label>
+              <label>Location</label>
 
               <input
                 type="text"
@@ -547,92 +820,166 @@ function EditEvent() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    location:
-                      e.target.value,
+                    location: e.target.value,
                   })
                 }
               />
-
             </div>
 
             <div className="a4-event-edit-group">
-
-              <label>
-                Event Date
-              </label>
+              <label>Event Date</label>
 
               <input
                 type="date"
-                value={
-                  formData.eventDate
-                }
+                value={formData.eventDate}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    eventDate:
-                      e.target.value,
+                    eventDate: e.target.value,
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          {/* Booking Link */}
+
+          <div className="a4-event-edit-group">
+            <label>Booking Link</label>
+
+            <input
+              type="url"
+              value={formData.bookingLink}
+              placeholder="https://example.com/book"
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  bookingLink: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          {/* Sponsor Details */}
+
+          <div className="a4-event-edit-grid">
+            <div className="a4-event-edit-group">
+              <label>Sponsor Name</label>
+
+              <input
+                type="text"
+                value={formData.sponsorName}
+                placeholder="Sponsor Name"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    sponsorName: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className="a4-event-edit-group">
+              <label>Sponsor Logo URL</label>
+
+              <input
+                type="text"
+                value={formData.sponsorLogo}
+                placeholder="https://logo-url.com/logo.png"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    sponsorLogo: e.target.value,
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          {/* Sponsor Logo Preview */}
+
+          {formData.sponsorLogo && (
+            <div className="a4-event-banner-section">
+              <label>Sponsor Logo Preview</label>
+
+              <img
+                src={formData.sponsorLogo}
+                alt="Sponsor Logo"
+                className="a4-event-banner-preview"
+                style={{
+                  maxWidth: "180px",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          )}
+
+          {/* Featured Toggle */}
+
+          <div className="a4-event-edit-group">
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                cursor: "pointer",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={formData.featured}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    featured: e.target.checked,
                   })
                 }
               />
 
-            </div>
-
+              Featured Event
+            </label>
           </div>
 
           {/* Current Banner */}
 
-          {formData.bannerImage &&
-            !file && (
-              <div className="a4-event-banner-section">
+          {formData.bannerImage && !file && (
+            <div className="a4-event-banner-section">
+              <label>Current Banner</label>
 
-                <label>
-                  Current Banner
-                </label>
-
-                <img
-                  src={`http://localhost:5000${formData.bannerImage}`}
-                  alt="Current Banner"
-                  className="a4-event-banner-preview"
-                />
-
-              </div>
-            )}
+              <img
+                src={`http://localhost:5000${formData.bannerImage}`}
+                alt="Current Banner"
+                className="a4-event-banner-preview"
+              />
+            </div>
+          )}
 
           {/* New Banner Preview */}
 
           {file && (
             <div className="a4-event-banner-section">
-
-              <label>
-                New Banner Preview
-              </label>
+              <label>New Banner Preview</label>
 
               <img
-                src={URL.createObjectURL(
-                  file
-                )}
+                src={URL.createObjectURL(file)}
                 alt="Preview"
                 className="a4-event-banner-preview"
               />
-
             </div>
           )}
 
-          <div className="a4-event-edit-group">
+          {/* Upload Banner */}
 
-            <label>
-              Upload New Banner
-            </label>
+          <div className="a4-event-edit-group">
+            <label>Upload New Banner</label>
 
             <input
               type="file"
+              accept="image/*"
               onChange={(e) =>
-                setFile(
-                  e.target.files[0]
-                )
+                setFile(e.target.files[0])
               }
             />
-
           </div>
 
           <button
@@ -641,11 +988,8 @@ function EditEvent() {
           >
             Update Event
           </button>
-
         </form>
-
       </div>
-
     </AdminLayout>
   );
 }

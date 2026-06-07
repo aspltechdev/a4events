@@ -112,3 +112,19 @@
     width: 100%;
   }
 }
+
+
+.a4-back-btn {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.a4-back-btn:hover {
+  text-decoration: underline;
+}

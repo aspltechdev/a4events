@@ -381,14 +381,288 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import api from "../../services/api";
+// import AdminLayout from "./AdminLayout";
+// import "./EditProduct.css";
+
+// function EditProduct() {
+//   const { id } = useParams();
+
+//   const [formData, setFormData] = useState({
+//     title: "",
+//     description: "",
+//     price: "",
+//     image: "",
+//     featured: false,
+//   });
+
+//   const [file, setFile] = useState(null);
+
+//   useEffect(() => {
+//     loadProduct();
+//   }, []);
+
+//   const loadProduct = async () => {
+//     try {
+//       const { data } = await api.get(`/products/${id}`);
+
+//       setFormData({
+//         title: data.title || "",
+//         description: data.description || "",
+//         price: data.price || "",
+//         image: data.image || "",
+//         featured: data.featured || false,
+//       });
+
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const token = localStorage.getItem("token");
+
+//       let imageUrl = formData.image;
+
+//       if (file) {
+//         const uploadData = new FormData();
+
+//         uploadData.append("image", file);
+
+//         const uploadResponse = await api.post(
+//           "/upload?type=product",
+//           uploadData,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+
+//         imageUrl =
+//           uploadResponse.data.imageUrl;
+//       }
+
+//       await api.put(
+//         `/products/${id}`,
+//         {
+//           title: formData.title,
+//           description: formData.description,
+//           price: Number(formData.price),
+//           image: imageUrl,
+//           featured: formData.featured,
+//         },
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+
+//       alert("Product Updated Successfully");
+
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <AdminLayout>
+
+//       <div className="a4-edit-product-page">
+
+//         <div className="a4-edit-product-header">
+
+//           <h1>Edit Product</h1>
+
+//           <p>
+//             Update product details, pricing and images.
+//           </p>
+
+//         </div>
+
+//         <form
+//           onSubmit={handleSubmit}
+//           className="a4-edit-product-form"
+//         >
+
+//           <div className="a4-edit-group">
+
+//             <label>
+//               Product Title
+//             </label>
+
+//             <input
+//               type="text"
+//               value={formData.title}
+//               placeholder="Product Title"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   title: e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-edit-group">
+
+//             <label>
+//               Description
+//             </label>
+
+//             <textarea
+//               rows="5"
+//               value={formData.description}
+//               placeholder="Product Description"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   description: e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-edit-grid">
+
+//             <div className="a4-edit-group">
+
+//               <label>
+//                 Price
+//               </label>
+
+//               <input
+//                 type="number"
+//                 value={formData.price}
+//                 placeholder="Price"
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     price: e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//             <div className="a4-edit-group">
+
+//               <label>
+//                 Upload New Image
+//               </label>
+
+//               <input
+//                 type="file"
+//                 onChange={(e) =>
+//                   setFile(e.target.files[0])
+//                 }
+//               />
+
+//             </div>
+
+//           </div>
+
+//           {/* Current Image */}
+
+//           {formData.image && !file && (
+//             <div className="a4-image-section">
+
+//               <label>
+//                 Current Image
+//               </label>
+
+//               <img
+//                 src={`http://localhost:5000${formData.image}`}
+//                 alt="Current Product"
+//                 className="a4-product-preview"
+//               />
+
+//             </div>
+//           )}
+
+//           {/* New Preview */}
+
+//           {file && (
+//             <div className="a4-image-section">
+
+//               <label>
+//                 New Image Preview
+//               </label>
+
+//               <img
+//                 src={URL.createObjectURL(file)}
+//                 alt="Preview"
+//                 className="a4-product-preview"
+//               />
+
+//             </div>
+//           )}
+
+//           <div className="a4-checkbox-row">
+
+//             <input
+//               type="checkbox"
+//               checked={formData.featured}
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   featured: e.target.checked,
+//                 })
+//               }
+//             />
+
+//             <span>
+//               Featured Product
+//             </span>
+
+//           </div>
+
+//           <button
+//             type="submit"
+//             className="a4-update-product-btn"
+//           >
+//             Update Product
+//           </button>
+
+//         </form>
+
+//       </div>
+
+//     </AdminLayout>
+//   );
+// }
+
+// export default EditProduct;
+
+
+
+
+
+
+
+
+
+
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {
+  useParams,
+  useNavigate
+} from "react-router-dom";
 import api from "../../services/api";
 import AdminLayout from "./AdminLayout";
 import "./EditProduct.css";
 
 function EditProduct() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -406,14 +680,18 @@ function EditProduct() {
 
   const loadProduct = async () => {
     try {
-      const { data } = await api.get(`/products/${id}`);
+      const { data } = await api.get(
+        `/products/${id}`
+      );
 
       setFormData({
         title: data.title || "",
-        description: data.description || "",
+        description:
+          data.description || "",
         price: data.price || "",
         image: data.image || "",
-        featured: data.featured || false,
+        featured:
+          data.featured || false,
       });
 
     } catch (error) {
@@ -425,24 +703,31 @@ function EditProduct() {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       let imageUrl = formData.image;
 
       if (file) {
-        const uploadData = new FormData();
+        const uploadData =
+          new FormData();
 
-        uploadData.append("image", file);
-
-        const uploadResponse = await api.post(
-          "/upload?type=product",
-          uploadData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+        uploadData.append(
+          "image",
+          file
         );
+
+        const uploadResponse =
+          await api.post(
+            "/upload?type=product",
+            uploadData,
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${token}`,
+              },
+            }
+          );
 
         imageUrl =
           uploadResponse.data.imageUrl;
@@ -452,36 +737,60 @@ function EditProduct() {
         `/products/${id}`,
         {
           title: formData.title,
-          description: formData.description,
-          price: Number(formData.price),
+          description:
+            formData.description,
+          price: Number(
+            formData.price
+          ),
           image: imageUrl,
-          featured: formData.featured,
+          featured:
+            formData.featured,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization:
+              `Bearer ${token}`,
           },
         }
       );
 
-      alert("Product Updated Successfully");
+      alert(
+        "Product Updated Successfully"
+      );
+
+      navigate("/admin/products");
 
     } catch (error) {
       console.error(error);
+      alert(
+        "Failed to update product"
+      );
     }
   };
 
   return (
     <AdminLayout>
-
       <div className="a4-edit-product-page">
 
         <div className="a4-edit-product-header">
 
+          <button
+            type="button"
+            className="a4-back-btn"
+            onClick={() =>
+              navigate(
+                "/admin/products"
+              )
+            }
+          >
+            ← Back to Products
+          </button>
+
           <h1>Edit Product</h1>
 
           <p>
-            Update product details, pricing and images.
+            Update product details,
+            pricing and images.
           </p>
 
         </div>
@@ -504,7 +813,8 @@ function EditProduct() {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  title: e.target.value,
+                  title:
+                    e.target.value,
                 })
               }
             />
@@ -519,12 +829,15 @@ function EditProduct() {
 
             <textarea
               rows="5"
-              value={formData.description}
+              value={
+                formData.description
+              }
               placeholder="Product Description"
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  description: e.target.value,
+                  description:
+                    e.target.value,
                 })
               }
             />
@@ -546,7 +859,8 @@ function EditProduct() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    price: e.target.value,
+                    price:
+                      e.target.value,
                   })
                 }
               />
@@ -562,7 +876,9 @@ function EditProduct() {
               <input
                 type="file"
                 onChange={(e) =>
-                  setFile(e.target.files[0])
+                  setFile(
+                    e.target.files[0]
+                  )
                 }
               />
 
@@ -570,25 +886,22 @@ function EditProduct() {
 
           </div>
 
-          {/* Current Image */}
+          {formData.image &&
+            !file && (
+              <div className="a4-image-section">
 
-          {formData.image && !file && (
-            <div className="a4-image-section">
+                <label>
+                  Current Image
+                </label>
 
-              <label>
-                Current Image
-              </label>
+                <img
+                  src={`http://localhost:5000${formData.image}`}
+                  alt="Current Product"
+                  className="a4-product-preview"
+                />
 
-              <img
-                src={`http://localhost:5000${formData.image}`}
-                alt="Current Product"
-                className="a4-product-preview"
-              />
-
-            </div>
-          )}
-
-          {/* New Preview */}
+              </div>
+            )}
 
           {file && (
             <div className="a4-image-section">
@@ -598,7 +911,9 @@ function EditProduct() {
               </label>
 
               <img
-                src={URL.createObjectURL(file)}
+                src={URL.createObjectURL(
+                  file
+                )}
                 alt="Preview"
                 className="a4-product-preview"
               />
@@ -610,11 +925,14 @@ function EditProduct() {
 
             <input
               type="checkbox"
-              checked={formData.featured}
+              checked={
+                formData.featured
+              }
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  featured: e.target.checked,
+                  featured:
+                    e.target.checked,
                 })
               }
             />
@@ -635,7 +953,6 @@ function EditProduct() {
         </form>
 
       </div>
-
     </AdminLayout>
   );
 }

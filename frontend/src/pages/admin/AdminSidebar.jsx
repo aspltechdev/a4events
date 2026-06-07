@@ -194,12 +194,12 @@ function AdminSidebar() {
             Add Event
           </Link>
 
-          <Link
+          {/* <Link
             to="/admin/inquiries"
             className="a4-admin-link"
           >
             Inquiries
-          </Link>
+          </Link> */}
 
           <Link
             to="/admin/contacts"
@@ -222,12 +222,12 @@ function AdminSidebar() {
             Gallery
           </Link>
 
-          <Link
+          {/* <Link
             to="/admin/testimonials"
             className="a4-admin-link"
           >
             Testimonials
-          </Link>
+          </Link> */}
 
         </nav>
 
