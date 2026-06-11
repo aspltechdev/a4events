@@ -651,6 +651,315 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import {
+//   useParams,
+//   useNavigate
+// } from "react-router-dom";
+// import api from "../../services/api";
+// import AdminLayout from "./AdminLayout";
+// import "./EditProduct.css";
+
+// function EditProduct() {
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+
+//   const [formData, setFormData] = useState({
+//     title: "",
+//     description: "",
+//     price: "",
+//     image: "",
+//     featured: false,
+//   });
+
+//   const [file, setFile] = useState(null);
+
+//   useEffect(() => {
+//     loadProduct();
+//   }, []);
+
+//   const loadProduct = async () => {
+//     try {
+//       const { data } = await api.get(
+//         `/products/${id}`
+//       );
+
+//       setFormData({
+//         title: data.title || "",
+//         description:
+//           data.description || "",
+//         price: data.price || "",
+//         image: data.image || "",
+//         featured:
+//           data.featured || false,
+//       });
+
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const token =
+//         localStorage.getItem("token");
+
+//       let imageUrl = formData.image;
+
+//       if (file) {
+//         const uploadData =
+//           new FormData();
+
+//         uploadData.append(
+//           "image",
+//           file
+//         );
+
+//         const uploadResponse =
+//           await api.post(
+//             "/upload?type=product",
+//             uploadData,
+//             {
+//               headers: {
+//                 Authorization:
+//                   `Bearer ${token}`,
+//               },
+//             }
+//           );
+
+//         imageUrl =
+//           uploadResponse.data.imageUrl;
+//       }
+
+//       await api.put(
+//         `/products/${id}`,
+//         {
+//           title: formData.title,
+//           description:
+//             formData.description,
+//           price: Number(
+//             formData.price
+//           ),
+//           image: imageUrl,
+//           featured:
+//             formData.featured,
+//         },
+//         {
+//           headers: {
+//             Authorization:
+//               `Bearer ${token}`,
+//           },
+//         }
+//       );
+
+//       alert(
+//         "Product Updated Successfully"
+//       );
+
+//       navigate("/admin/products");
+
+//     } catch (error) {
+//       console.error(error);
+//       alert(
+//         "Failed to update product"
+//       );
+//     }
+//   };
+
+//   return (
+//     <AdminLayout>
+//       <div className="a4-edit-product-page">
+
+//         <div className="a4-edit-product-header">
+
+//           <button
+//             type="button"
+//             className="a4-back-btn"
+//             onClick={() =>
+//               navigate(
+//                 "/admin/products"
+//               )
+//             }
+//           >
+//             ← Back to Products
+//           </button>
+
+//           <h1>Edit Product</h1>
+
+//           <p>
+//             Update product details,
+//             pricing and images.
+//           </p>
+
+//         </div>
+
+//         <form
+//           onSubmit={handleSubmit}
+//           className="a4-edit-product-form"
+//         >
+
+//           <div className="a4-edit-group">
+
+//             <label>
+//               Product Title
+//             </label>
+
+//             <input
+//               type="text"
+//               value={formData.title}
+//               placeholder="Product Title"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   title:
+//                     e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-edit-group">
+
+//             <label>
+//               Description
+//             </label>
+
+//             <textarea
+//               rows="5"
+//               value={
+//                 formData.description
+//               }
+//               placeholder="Product Description"
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   description:
+//                     e.target.value,
+//                 })
+//               }
+//             />
+
+//           </div>
+
+//           <div className="a4-edit-grid">
+
+//             <div className="a4-edit-group">
+
+//               <label>
+//                 Price
+//               </label>
+
+//               <input
+//                 type="number"
+//                 value={formData.price}
+//                 placeholder="Price"
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     price:
+//                       e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//             <div className="a4-edit-group">
+
+//               <label>
+//                 Upload New Image
+//               </label>
+
+//               <input
+//                 type="file"
+//                 onChange={(e) =>
+//                   setFile(
+//                     e.target.files[0]
+//                   )
+//                 }
+//               />
+
+//             </div>
+
+//           </div>
+
+//           {formData.image &&
+//             !file && (
+//               <div className="a4-image-section">
+
+//                 <label>
+//                   Current Image
+//                 </label>
+
+//                 <img
+//                   src={`http://localhost:5000${formData.image}`}
+//                   alt="Current Product"
+//                   className="a4-product-preview"
+//                 />
+
+//               </div>
+//             )}
+
+//           {file && (
+//             <div className="a4-image-section">
+
+//               <label>
+//                 New Image Preview
+//               </label>
+
+//               <img
+//                 src={URL.createObjectURL(
+//                   file
+//                 )}
+//                 alt="Preview"
+//                 className="a4-product-preview"
+//               />
+
+//             </div>
+//           )}
+
+//           <div className="a4-checkbox-row">
+
+//             <input
+//               type="checkbox"
+//               checked={
+//                 formData.featured
+//               }
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   featured:
+//                     e.target.checked,
+//                 })
+//               }
+//             />
+
+//             <span>
+//               Featured Product
+//             </span>
+
+//           </div>
+
+//           <button
+//             type="submit"
+//             className="a4-update-product-btn"
+//           >
+//             Update Product
+//           </button>
+
+//         </form>
+
+//       </div>
+//     </AdminLayout>
+//   );
+// }
+
+// export default EditProduct;
+
+
 import { useEffect, useState } from "react";
 import {
   useParams,
@@ -668,6 +977,8 @@ function EditProduct() {
     title: "",
     description: "",
     price: "",
+    category: "Organics",
+    discountPercent: 0,
     image: "",
     featured: false,
   });
@@ -686,9 +997,12 @@ function EditProduct() {
 
       setFormData({
         title: data.title || "",
-        description:
-          data.description || "",
+        description: data.description || "",
         price: data.price || "",
+        category:
+          data.category || "Organics",
+        discountPercent:
+          data.discountPercent || 0,
         image: data.image || "",
         featured:
           data.featured || false,
@@ -742,6 +1056,11 @@ function EditProduct() {
           price: Number(
             formData.price
           ),
+          category:
+            formData.category,
+          discountPercent: Number(
+            formData.discountPercent
+          ),
           image: imageUrl,
           featured:
             formData.featured,
@@ -762,6 +1081,7 @@ function EditProduct() {
 
     } catch (error) {
       console.error(error);
+
       alert(
         "Failed to update product"
       );
@@ -790,7 +1110,8 @@ function EditProduct() {
 
           <p>
             Update product details,
-            pricing and images.
+            pricing, discounts and
+            images.
           </p>
 
         </div>
@@ -844,17 +1165,74 @@ function EditProduct() {
 
           </div>
 
+          <div className="a4-edit-group">
+
+            <label>
+              Category
+            </label>
+
+            <select
+              value={
+                formData.category
+              }
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  category:
+                    e.target.value,
+                })
+              }
+            >
+              <option value="Millet Mix & Soups">
+                Millet Mix & Soups
+              </option>
+
+              <option value="Organics">
+                Organics
+              </option>
+
+              <option value="Pulses">
+                Pulses
+              </option>
+
+              <option value="Oil">
+                Oil
+              </option>
+
+              <option value="Rice">
+                Rice
+              </option>
+
+              <option value="Snacks">
+                Snacks
+              </option>
+
+              <option value="Frozen Items">
+                Frozen Items
+              </option>
+
+              <option value="Fresh Items">
+                Fresh Items -
+                Seasonal Fruits &
+                Flowers
+              </option>
+            </select>
+
+          </div>
+
           <div className="a4-edit-grid">
 
             <div className="a4-edit-group">
 
               <label>
-                Price
+                Price (₹)
               </label>
 
               <input
                 type="number"
-                value={formData.price}
+                value={
+                  formData.price
+                }
                 placeholder="Price"
                 onChange={(e) =>
                   setFormData({
@@ -870,19 +1248,45 @@ function EditProduct() {
             <div className="a4-edit-group">
 
               <label>
-                Upload New Image
+                Discount (%)
               </label>
 
               <input
-                type="file"
+                type="number"
+                min="0"
+                max="100"
+                value={
+                  formData.discountPercent
+                }
+                placeholder="0"
                 onChange={(e) =>
-                  setFile(
-                    e.target.files[0]
-                  )
+                  setFormData({
+                    ...formData,
+                    discountPercent:
+                      e.target.value,
+                  })
                 }
               />
 
             </div>
+
+          </div>
+
+          <div className="a4-edit-group">
+
+            <label>
+              Upload New Image
+            </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setFile(
+                  e.target.files[0]
+                )
+              }
+            />
 
           </div>
 

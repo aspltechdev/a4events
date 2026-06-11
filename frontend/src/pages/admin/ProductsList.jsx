@@ -156,6 +156,155 @@
 // export default ProductsList;
 
 
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+// import api from "../../services/api";
+// import AdminLayout from "./AdminLayout";
+// import "./ProductsList.css";
+
+// function ProductsList() {
+//   const [products, setProducts] = useState([]);
+//   const [search, setSearch] = useState("");
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, []);
+
+//   const fetchProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const deleteProduct = async (id) => {
+//     const token = localStorage.getItem("token");
+
+//     if (!window.confirm("Delete Product?")) {
+//       return;
+//     }
+
+//     try {
+//       await api.delete(`/products/${id}`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+
+//       fetchProducts();
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const filteredProducts = products.filter(
+//     (product) =>
+//       product.title
+//         .toLowerCase()
+//         .includes(search.toLowerCase())
+//   );
+
+//   return (
+//     <AdminLayout>
+
+//       <div className="a4-products-admin">
+
+//         <div className="a4-products-header">
+
+//           <div>
+//             <h1>Products</h1>
+//             <p>
+//               Manage all food, snacks and beverages.
+//             </p>
+//           </div>
+
+//           <Link
+//             to="/admin/products/add"
+//             className="a4-add-product-btn"
+//           >
+//             + Add Product
+//           </Link>
+
+//         </div>
+
+//         <div className="a4-products-toolbar">
+
+//           <input
+//             type="text"
+//             placeholder="Search products..."
+//             value={search}
+//             onChange={(e) =>
+//               setSearch(e.target.value)
+//             }
+//             className="a4-product-search"
+//           />
+
+//         </div>
+
+//         <div className="a4-products-grid">
+
+//           {filteredProducts.map((product) => (
+//             <div
+//               key={product.id}
+//               className="a4-product-card"
+//             >
+
+//               <div className="a4-product-image-wrapper">
+
+//                 <img
+//                   src={`http://localhost:5000${product.image}`}
+//                   alt={product.title}
+//                   className="a4-product-image"
+//                 />
+
+//               </div>
+
+//               <div className="a4-product-content">
+
+//                 <h3>{product.title}</h3>
+
+//                 <div className="a4-product-price">
+//                   ₹{product.price}
+//                 </div>
+
+//                 <div className="a4-product-actions">
+
+//                   <Link
+//                     to={`/admin/products/edit/${product.id}`}
+//                     className="a4-edit-btn"
+//                   >
+//                     Edit
+//                   </Link>
+
+//                   <button
+//                     onClick={() =>
+//                       deleteProduct(product.id)
+//                     }
+//                     className="a4-delete-btn"
+//                   >
+//                     Delete
+//                   </button>
+
+//                 </div>
+
+//               </div>
+
+//             </div>
+//           ))}
+
+//         </div>
+
+//       </div>
+
+//     </AdminLayout>
+//   );
+// }
+
+// export default ProductsList;
+
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
@@ -208,15 +357,15 @@ function ProductsList() {
 
   return (
     <AdminLayout>
-
       <div className="a4-products-admin">
 
         <div className="a4-products-header">
 
           <div>
             <h1>Products</h1>
+
             <p>
-              Manage all food, snacks and beverages.
+              Manage all products and categories.
             </p>
           </div>
 
@@ -245,59 +394,96 @@ function ProductsList() {
 
         <div className="a4-products-grid">
 
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="a4-product-card"
-            >
+          {filteredProducts.map((product) => {
 
-              <div className="a4-product-image-wrapper">
+            const discountedPrice =
+              product.price -
+              (product.price *
+                (product.discountPercent || 0)) /
+                100;
 
-                <img
-                  src={`http://localhost:5000${product.image}`}
-                  alt={product.title}
-                  className="a4-product-image"
-                />
+            return (
+              <div
+                key={product.id}
+                className="a4-product-card"
+              >
 
-              </div>
+                <div className="a4-product-image-wrapper">
 
-              <div className="a4-product-content">
+                  <img
+                    src={`http://localhost:5000${product.image}`}
+                    alt={product.title}
+                    className="a4-product-image"
+                  />
 
-                <h3>{product.title}</h3>
+                  {product.featured && (
+                    <span className="a4-featured-badge">
+                      Featured
+                    </span>
+                  )}
 
-                <div className="a4-product-price">
-                  ₹{product.price}
-                </div>
-
-                <div className="a4-product-actions">
-
-                  <Link
-                    to={`/admin/products/edit/${product.id}`}
-                    className="a4-edit-btn"
-                  >
-                    Edit
-                  </Link>
-
-                  <button
-                    onClick={() =>
-                      deleteProduct(product.id)
-                    }
-                    className="a4-delete-btn"
-                  >
-                    Delete
-                  </button>
+                  {product.discountPercent > 0 && (
+                    <span className="a4-discount-badge">
+                      {product.discountPercent}% OFF
+                    </span>
+                  )}
 
                 </div>
 
-              </div>
+                <div className="a4-product-content">
 
-            </div>
-          ))}
+                  <h3>
+                    {product.title}
+                  </h3>
+
+                  <div className="a4-product-category">
+                    {product.category}
+                  </div>
+
+                  <div className="a4-product-pricing">
+
+                    <span className="a4-final-price">
+                      ₹{discountedPrice.toFixed(2)}
+                    </span>
+
+                    {product.discountPercent >
+                      0 && (
+                      <span className="a4-old-price">
+                        ₹{product.price}
+                      </span>
+                    )}
+
+                  </div>
+
+                  <div className="a4-product-actions">
+
+                    <Link
+                      to={`/admin/products/edit/${product.id}`}
+                      className="a4-edit-btn"
+                    >
+                      Edit
+                    </Link>
+
+                    <button
+                      onClick={() =>
+                        deleteProduct(product.id)
+                      }
+                      className="a4-delete-btn"
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          })}
 
         </div>
 
       </div>
-
     </AdminLayout>
   );
 }

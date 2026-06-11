@@ -1,236 +1,376 @@
-/* ==================================
-   CTA SECTION
-================================== */
+/* ContactCTA.css - Ultra Premium Light Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-.a4-cta-section {
-  position: relative;
-
-  overflow: hidden;
-
-  padding: 140px 24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff7ed 0%,
-      #ffffff 50%,
-      #f8fafc 100%
-    );
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ==================================
-   CONTAINER
-================================== */
-
-.a4-cta-container {
-  max-width: 1000px;
-
-  margin: 0 auto;
-
-  text-align: center;
-
+/* Wrapper */
+.cta__wrapper {
   position: relative;
+  width: 100%;
+  background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  padding: 100px 0;
+  overflow: hidden;
+}
 
+/* Background Elements */
+.cta__bgSubtle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.01) 2px,
+      rgba(59, 130, 246, 0.01) 4px
+    );
+  pointer-events: none;
+}
+
+.cta__bgGradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.02), transparent 70%);
+  pointer-events: none;
+}
+
+/* Accent Lines */
+.cta__accentLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cta__accentLine {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08), transparent);
+}
+
+.cta__accentLine:nth-child(1) {
+  left: 15%;
+}
+
+.cta__accentLine:nth-child(2) {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cta__accentLine:nth-child(3) {
+  right: 15%;
+  left: auto;
+}
+
+/* Floating Orbs */
+.cta__floatingOrb {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.03), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatOrb 20s ease-in-out infinite;
+}
+
+.cta__floatingOrbTwo {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.02), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatOrb 25s ease-in-out infinite reverse;
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+}
+
+/* Container */
+.cta__container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5%;
   z-index: 2;
 }
 
-/* ==================================
-   TAG
-================================== */
-
-.a4-cta-tag {
-  display: inline-block;
-
-  padding: 10px 20px;
-
-  border-radius: 999px;
-
+/* Content */
+.cta__content {
+  text-align: center;
   background: #ffffff;
+  border-radius: 32px;
+  padding: 60px 50px;
+  border: 1px solid #f0f2f5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
 
-  border: 1px solid #fed7aa;
+/* Badge */
+.cta__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
 
-  color: #c2410c;
+.cta__badgeDot {
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
 
-  font-size: 12px;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
 
+.cta__badgeText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
+
+/* Title */
+.cta__title {
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: 700;
-
-  letter-spacing: 3px;
-
-  margin-bottom: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+  margin-bottom: 20px;
 }
 
-/* ==================================
-   TITLE
-================================== */
-
-.a4-cta-title {
-  font-size: clamp(2.8rem, 6vw, 5rem);
-
-  line-height: 1;
-
-  font-weight: 800;
-
-  letter-spacing: -0.05em;
-
-  color: #111827;
-
-  margin-bottom: 24px;
+.cta__titleAccent {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* ==================================
-   DESCRIPTION
-================================== */
-
-.a4-cta-description {
-  max-width: 700px;
-
-  margin: 0 auto 40px;
-
-  color: #64748b;
-
-  font-size: 1.15rem;
-
-  line-height: 1.8;
+/* Description */
+.cta__description {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5a6874;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* ==================================
-   ACTIONS
-================================== */
-
-.a4-cta-actions {
+/* Buttons */
+.cta__buttons {
   display: flex;
-
   justify-content: center;
-
-  gap: 16px;
-
+  gap: 20px;
+  margin-bottom: 50px;
   flex-wrap: wrap;
 }
 
-/* ==================================
-   PRIMARY BUTTON
-================================== */
-
-.a4-cta-primary-btn {
+.cta__btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  background: #1a1a1a;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
   border: none;
-
-  padding: 16px 32px;
-
-  border-radius: 999px;
-
-  background: #111827;
-
-  color: white;
-
-  font-weight: 600;
-
   cursor: pointer;
+}
 
+.cta__btnPrimary:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -8px rgba(59, 130, 246, 0.3);
+}
+
+.cta__btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  background: transparent;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
   transition: all 0.3s ease;
-}
-
-.a4-cta-primary-btn:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 15px 35px rgba(17, 24, 39, 0.18);
-}
-
-/* ==================================
-   SECONDARY BUTTON
-================================== */
-
-.a4-cta-secondary-btn {
   border: 1px solid #e2e8f0;
-
-  padding: 16px 32px;
-
-  border-radius: 999px;
-
-  background: white;
-
-  color: #111827;
-
-  font-weight: 600;
-
   cursor: pointer;
-
-  transition: all 0.3s ease;
 }
 
-.a4-cta-secondary-btn:hover {
-  transform: translateY(-3px);
-
-  border-color: #cbd5e1;
+.cta__btnSecondary:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.02);
+  transform: translateY(-2px);
 }
 
-/* ==================================
-   BACKGROUND GLOWS
-================================== */
+.cta__btnArrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
 
-.a4-cta-section::before {
-  content: "";
+.cta__btnPrimary:hover .cta__btnArrow,
+.cta__btnSecondary:hover .cta__btnArrow {
+  transform: translateX(4px);
+}
 
-  position: absolute;
+/* Trust Section */
+.cta__trustSection {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid #f0f2f5;
+}
 
-  width: 400px;
-  height: 400px;
+.cta__trustLine {
+  width: 48px;
+  height: 2px;
+  background: #3b82f6;
+  margin: 0 auto 24px auto;
+}
 
+.cta__trustBadges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cta__trustBadge {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #6c7a8a;
+}
+
+.cta__trustSeparator {
+  width: 3px;
+  height: 3px;
+  background: #d1d9e6;
   border-radius: 50%;
-
-  background:
-    rgba(249, 115, 22, 0.08);
-
-  filter: blur(120px);
-
-  top: -120px;
-  left: -100px;
 }
 
-.a4-cta-section::after {
-  content: "";
-
-  position: absolute;
-
-  width: 450px;
-  height: 450px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(59, 130, 246, 0.05);
-
-  filter: blur(140px);
-
-  bottom: -150px;
-  right: -100px;
-}
-
-/* ==================================
-   RESPONSIVE
-================================== */
-
+/* Responsive Design */
 @media (max-width: 768px) {
-
-  .a4-cta-section {
-    padding: 90px 20px;
+  .cta__wrapper {
+    padding: 70px 0;
   }
-
-  .a4-cta-title {
-    font-size: 2.5rem;
+  
+  .cta__content {
+    padding: 45px 35px;
   }
-
-  .a4-cta-description {
-    font-size: 1rem;
+  
+  .cta__title {
+    font-size: 28px;
   }
+  
+  .cta__description {
+    font-size: 16px;
+    margin-bottom: 35px;
+  }
+  
+  .cta__buttons {
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .cta__btnPrimary,
+  .cta__btnSecondary {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+  
+  .cta__trustBadges {
+    gap: 16px;
+  }
+}
 
-  .a4-cta-actions {
+@media (max-width: 550px) {
+  .cta__content {
+    padding: 40px 25px;
+  }
+  
+  .cta__title {
+    font-size: 24px;
+  }
+  
+  .cta__buttons {
     flex-direction: column;
-  }
-
-  .a4-cta-primary-btn,
-  .a4-cta-secondary-btn {
     width: 100%;
+    gap: 12px;
+  }
+  
+  .cta__btnPrimary,
+  .cta__btnSecondary {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cta__trustSeparator {
+    display: none;
+  }
+  
+  .cta__trustBadges {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cta__trustBadge {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta__content {
+    padding: 35px 20px;
+  }
+  
+  .cta__title {
+    font-size: 22px;
+  }
+  
+  .cta__description {
+    font-size: 15px;
   }
 }

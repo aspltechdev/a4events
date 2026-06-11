@@ -1,219 +1,456 @@
-/* ==================================
-   A4 ABOUT SECTION
-================================== */
+/* About.css - Ultra Premium Light Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-.a4-about-section {
-  position: relative;
-  overflow: hidden;
-
-  padding: 140px 24px;
-
-  background: #ffffff;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ==================================
-   CONTAINER
-================================== */
-
-.a4-about-container {
-  max-width: 1100px;
-  margin: 0 auto;
-
-  text-align: center;
-
+.about-premium-light {
   position: relative;
+  width: 100%;
+  background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  overflow: hidden;
+}
+
+/* Background Elements */
+.bg-gradient-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.03), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.02), transparent 50%);
+  pointer-events: none;
+}
+
+.bg-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Accent Lines */
+.accent-lines-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.accent-line-light {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08), transparent);
+}
+
+.accent-line-light:first-child {
+  left: 10%;
+}
+
+.accent-line-light:last-child {
+  right: 10%;
+}
+
+/* Main Container */
+.container-premium-light {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 5%;
   z-index: 2;
 }
 
-/* ==================================
-   TAG
-================================== */
+/* Header Section */
+.header-premium-light {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+}
 
-.a4-about-tag {
+.badge-premium-light {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
 
-  padding: 12px 22px;
+.badge-dot-light {
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+}
 
-  border-radius: 999px;
-
-  background: #f5f7fa;
-
-  border: 1px solid #e6eaf0;
-
-  color: #475569;
-
+.badge-text-light {
   font-size: 12px;
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #3b82f6;
   text-transform: uppercase;
-
-  margin-bottom: 30px;
 }
 
-/* ==================================
-   TITLE
-================================== */
-
-.a4-about-title {
-  font-size: clamp(3rem, 7vw, 6rem);
-
-  font-weight: 800;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.06em;
-
-  color: #111827;
-
-  margin-bottom: 35px;
-
-  max-width: 900px;
-
-  margin-left: auto;
-  margin-right: auto;
+.title-premium-light {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 24px;
 }
 
-/* ==================================
-   DESCRIPTION
-================================== */
-
-.a4-about-description {
-  max-width: 760px;
-
-  margin: 0 auto 28px;
-
-  font-size: 1.15rem;
-
-  line-height: 1.9;
-
-  color: #64748b;
+.title-accent-light {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* ==================================
-   BACKGROUND GLOW
-================================== */
-
-.a4-about-section::before {
-  content: "";
-
-  position: absolute;
-
-  width: 450px;
-  height: 450px;
-
-  border-radius: 50%;
-
-  background: rgba(59, 130, 246, 0.08);
-
-  filter: blur(120px);
-
-  top: -180px;
-  left: -150px;
+.description-premium-light {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #475569;
+  font-weight: 400;
 }
 
-.a4-about-section::after {
-  content: "";
-
-  position: absolute;
-
-  width: 500px;
-  height: 500px;
-
-  border-radius: 50%;
-
-  background: rgba(168, 85, 247, 0.08);
-
-  filter: blur(140px);
-
-  bottom: -220px;
-  right: -180px;
-}
-
-/* ==================================
-   OPTIONAL STATS SECTION
-================================== */
-
-.a4-about-stats {
-  margin-top: 70px;
-
+/* Two Column Grid */
+.two-column-grid {
   display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
 }
 
-.a4-about-stat-card {
-  padding: 30px;
-
+/* Column Styles */
+.column-events,
+.column-products {
+  background: #f8fafc;
   border-radius: 24px;
-
-  background: #ffffff;
-
-  border: 1px solid #eef2f7;
-
-  box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.04);
+  padding: 40px;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
 }
 
-.a4-about-stat-number {
-  font-size: 2.2rem;
-
-  font-weight: 800;
-
-  color: #111827;
-
-  margin-bottom: 10px;
+.column-events:hover,
+.column-products:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
 }
 
-.a4-about-stat-label {
+.column-label-light {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.label-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b82f6;
+  letter-spacing: 1px;
+}
+
+.label-line {
+  width: 30px;
+  height: 1px;
+  background: #3b82f6;
+}
+
+.label-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
   color: #64748b;
+  text-transform: uppercase;
+}
 
+.column-heading {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.column-paragraph {
   font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 32px;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
-
-@media (max-width: 992px) {
-  .a4-about-section {
-    padding: 100px 24px;
-  }
-
-  .a4-about-description {
-    font-size: 1.05rem;
-  }
-
-  .a4-about-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Metrics Grid */
+.metrics-grid {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-@media (max-width: 768px) {
-  .a4-about-title {
-    font-size: 2.8rem;
-  }
+.metric-block {
+  flex: 1;
+}
 
-  .a4-about-description {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
 
-  .a4-about-stats {
+.metric-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+/* Divider */
+.divider-light {
+  width: 40px;
+  height: 2px;
+  background: #3b82f6;
+  margin-bottom: 32px;
+}
+
+/* Category Group */
+.category-group {
+  width: 100%;
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.group-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+}
+
+.group-count {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Category Chips for Events */
+.category-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chip-light {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.chip-light:hover {
+  padding-left: 8px;
+  border-bottom-color: #3b82f6;
+}
+
+.chip-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.chip-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3b82f6;
+}
+
+/* Product Grid Categories */
+.product-grid-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.product-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.product-chip:hover {
+  border-color: #3b82f6;
+  transform: translateX(2px);
+}
+
+.product-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.product-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.fresh-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 6px;
+}
+
+/* Trust Section */
+.trust-section-light {
+  text-align: center;
+  padding-top: 40px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.trust-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  margin: 0 auto 32px auto;
+}
+
+.trust-badges-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.trust-item-light {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: 0.3px;
+}
+
+.trust-dot {
+  width: 4px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 50%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .two-column-grid {
+    gap: 40px;
+  }
+  
+  .column-events,
+  .column-products {
+    padding: 30px;
+  }
+  
+  .product-grid-categories {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .a4-about-section {
-    padding: 80px 20px;
+@media (max-width: 768px) {
+  .two-column-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
+  
+  .container-premium-light {
+    padding: 60px 5%;
+  }
+  
+  .metrics-grid {
+    gap: 16px;
+  }
+  
+  .metric-value {
+    font-size: 24px;
+  }
+  
+  .trust-badges-light {
+    gap: 16px;
+  }
+  
+  .trust-dot {
+    display: none;
+  }
+  
+  .trust-item-light {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+  }
+  
+  .trust-badges-light {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 
-  .a4-about-title {
-    font-size: 2.2rem;
+@media (max-width: 480px) {
+  .column-events,
+  .column-products {
+    padding: 24px;
+  }
+  
+  .column-heading {
+    font-size: 20px;
+  }
+  
+  .metrics-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .metric-block {
+    text-align: left;
+  }
+  
+  .category-chips {
+    gap: 8px;
+  }
+  
+  .title-premium-light {
+    font-size: 32px;
+  }
+  
+  .description-premium-light {
+    font-size: 16px;
   }
 }

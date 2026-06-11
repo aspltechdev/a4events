@@ -1,125 +1,265 @@
-// // // import { useEffect, useState } from 'react';
-// // // import { useParams } from 'react-router-dom';
-// // // import api from '../services/api';
+// // // // import { useEffect, useState } from 'react';
+// // // // import { useParams } from 'react-router-dom';
+// // // // import api from '../services/api';
 
-// // // function ProductDetails() {
-// // //   const { id } = useParams();
-// // //   const [product, setProduct] = useState(null);
+// // // // function ProductDetails() {
+// // // //   const { id } = useParams();
+// // // //   const [product, setProduct] = useState(null);
 
-// // //   useEffect(() => {
-// // //     loadProduct();
-// // //   }, []);
+// // // //   useEffect(() => {
+// // // //     loadProduct();
+// // // //   }, []);
 
-// // //   const loadProduct = async () => {
-// // //     const { data } = await api.get(`/products/${id}`);
-// // //     setProduct(data);
-// // //   };
+// // // //   const loadProduct = async () => {
+// // // //     const { data } = await api.get(`/products/${id}`);
+// // // //     setProduct(data);
+// // // //   };
 
-// // //   if (!product) return <h2>Loading...</h2>;
+// // // //   if (!product) return <h2>Loading...</h2>;
+
+// // // // //   return (
+// // // // //     <div>
+// // // // //       <h1>{product.title}</h1>
+// // // // //       <p>{product.description}</p>
+// // // // //       <p>₹{product.price}</p>
+
+// // // // //       {product.image && (
+// // // // //         <img
+// // // // //           src={`http://localhost:5000${product.image}`}
+// // // // //           alt={product.title}
+// // // // //           width="300"
+// // // // //         />
+// // // // //       )}
+// // // // //     </div>
+// // // // //   );
+// // // // return (
+// // // //   <div style={{ padding: '20px' }}>
+// // // //     <Link to="/products">
+// // // //       ← Back
+// // // //     </Link>
+
+// // // //     <h1>{product.title}</h1>
+
+// // // //     {product.image && (
+// // // //       <img
+// // // //         src={`http://localhost:5000${product.image}`}
+// // // //         alt={product.title}
+// // // //         style={{
+// // // //           width: '500px',
+// // // //           maxWidth: '100%'
+// // // //         }}
+// // // //       />
+// // // //     )}
+
+// // // //     <p>{product.description}</p>
+
+// // // //     <h2>₹{product.price}</h2>
+
+// // // //     <button>
+// // // //       Enquire Now
+// // // //     </button>
+// // // //   </div>
+// // // // );
+// // // // }
+
+// // // // export default ProductDetails;
+
+
+// // // // import { useEffect, useState } from 'react';
+// // // // import { useParams, Link } from 'react-router-dom';
+// // // // import api from '../services/api';
+// // // // import InquiryForm from '../components/InquiryForm';
+// // // // function ProductDetails() {
+// // // //   const { id } = useParams();
+// // // //   const [product, setProduct] = useState(null);
+
+// // // //   useEffect(() => {
+// // // //     loadProduct();
+// // // //   }, []);
+
+// // // //   const loadProduct = async () => {
+// // // //     try {
+// // // //       const { data } = await api.get(`/products/${id}`);
+// // // //       setProduct(data);
+// // // //     } catch (error) {
+// // // //       console.error(error);
+// // // //     }
+// // // //   };
+
+// // // //   if (!product) return <h2>Loading...</h2>;
 
 // // // //   return (
-// // // //     <div>
+// // // //     <div style={{ padding: '20px' }}>
+// // // //       <Link to="/products">
+// // // //         ← Back
+// // // //       </Link>
+
 // // // //       <h1>{product.title}</h1>
-// // // //       <p>{product.description}</p>
-// // // //       <p>₹{product.price}</p>
 
 // // // //       {product.image && (
 // // // //         <img
 // // // //           src={`http://localhost:5000${product.image}`}
 // // // //           alt={product.title}
-// // // //           width="300"
+// // // //           style={{
+// // // //             width: '500px',
+// // // //             maxWidth: '100%'
+// // // //           }}
 // // // //         />
 // // // //       )}
+
+// // // //       <p>{product.description}</p>
+
+// // // //       <h2>₹{product.price}</h2>
+// // // // {/* 
+// // // //       <button>
+// // // //         Enquire Now
+// // // //       </button> */}
+// // // //       <InquiryForm productId={product.id} />
 // // // //     </div>
 // // // //   );
-// // // return (
-// // //   <div style={{ padding: '20px' }}>
-// // //     <Link to="/products">
-// // //       ← Back
-// // //     </Link>
+// // // // }
 
-// // //     <h1>{product.title}</h1>
+// // // // export default ProductDetails;
 
-// // //     {product.image && (
-// // //       <img
-// // //         src={`http://localhost:5000${product.image}`}
-// // //         alt={product.title}
-// // //         style={{
-// // //           width: '500px',
-// // //           maxWidth: '100%'
-// // //         }}
-// // //       />
-// // //     )}
+// // // // import { useEffect, useState } from "react";
+// // // // import { useParams, Link } from "react-router-dom";
+// // // // import api from "../services/api";
+// // // // import InquiryForm from "../components/InquiryForm";
+// // // // import "./ProductDetails.css";
 
-// // //     <p>{product.description}</p>
+// // // // function ProductDetails() {
+// // // //   const { id } = useParams();
 
-// // //     <h2>₹{product.price}</h2>
+// // // //   const [product, setProduct] = useState(null);
 
-// // //     <button>
-// // //       Enquire Now
-// // //     </button>
-// // //   </div>
-// // // );
-// // // }
+// // // //   useEffect(() => {
+// // // //     loadProduct();
+// // // //   }, []);
 
-// // // export default ProductDetails;
+// // // //   const loadProduct = async () => {
+// // // //     try {
+// // // //       const { data } = await api.get(`/products/${id}`);
+// // // //       setProduct(data);
+// // // //     } catch (error) {
+// // // //       console.error(error);
+// // // //     }
+// // // //   };
+
+// // // //   if (!product) {
+// // // //     return <h2>Loading...</h2>;
+// // // //   }
+
+// // // //   const firstLocation =
+// // // //     product.locations?.[0];
+
+// // // //   return (
+// // // //     <div className="a4-product-details">
+
+// // // //       <div className="a4-product-details-container">
+
+// // // //         <Link
+// // // //           to="/products"
+// // // //           className="a4-back-link"
+// // // //         >
+// // // //           ← Back to Products
+// // // //         </Link>
+
+// // // //         <div className="a4-product-layout">
+
+// // // //           <div className="a4-product-image-section">
+
+// // // //             <img
+// // // //               src={`http://localhost:5000${product.image}`}
+// // // //               alt={product.title}
+// // // //               className="a4-product-main-image"
+// // // //             />
+
+// // // //           </div>
+
+// // // //           <div className="a4-product-info-section">
+
+// // // //             <h1 className="a4-product-title">
+// // // //               {product.title}
+// // // //             </h1>
+
+// // // //             <p className="a4-product-description">
+// // // //               {product.description}
+// // // //             </p>
+
+// // // //             <div className="a4-product-price">
+// // // //               ₹{product.price}
+// // // //             </div>
+
+// // // //           </div>
+
+// // // //         </div>
+
+// // // //         {/* Available Locations */}
+
+// // // //         {product.locations?.length > 0 && (
+// // // //           <>
+// // // //             <div className="a4-location-header">
+// // // //               <h2>Available At</h2>
+// // // //             </div>
+
+// // // //             <div className="a4-location-grid">
+
+// // // //               {product.locations.map(
+// // // //                 (location, index) => (
+// // // //                   <div
+// // // //                     key={index}
+// // // //                     className="a4-location-card"
+// // // //                   >
+// // // //                     <h4>{location.name}</h4>
+
+// // // //                     <p>
+// // // //                       {location.address}
+// // // //                     </p>
+// // // //                   </div>
+// // // //                 )
+// // // //               )}
+
+// // // //             </div>
+// // // //           </>
+// // // //         )}
+
+// // // //         {/* Google Map */}
+
+// // // //         {firstLocation && (
+// // // //           <div className="a4-map-wrapper">
+
+// // // //             <iframe
+// // // //               title="Store Location"
+// // // //               width="100%"
+// // // //               height="450"
+// // // //               style={{
+// // // //                 border: 0,
+// // // //                 borderRadius: "24px",
+// // // //               }}
+// // // //               loading="lazy"
+// // // //               allowFullScreen
+// // // //               src={`https://maps.google.com/maps?q=${firstLocation.lat},${firstLocation.lng}&z=15&output=embed`}
+// // // //             />
+
+// // // //           </div>
+// // // //         )}
+
+// // // //         <div className="a4-inquiry-wrapper">
+// // // //           <InquiryForm
+// // // //             productId={product.id}
+// // // //           />
+// // // //         </div>
+
+// // // //       </div>
+
+// // // //     </div>
+// // // //   );
+// // // // }
+
+// // // // export default ProductDetails;
 
 
-// // // import { useEffect, useState } from 'react';
-// // // import { useParams, Link } from 'react-router-dom';
-// // // import api from '../services/api';
-// // // import InquiryForm from '../components/InquiryForm';
-// // // function ProductDetails() {
-// // //   const { id } = useParams();
-// // //   const [product, setProduct] = useState(null);
 
-// // //   useEffect(() => {
-// // //     loadProduct();
-// // //   }, []);
-
-// // //   const loadProduct = async () => {
-// // //     try {
-// // //       const { data } = await api.get(`/products/${id}`);
-// // //       setProduct(data);
-// // //     } catch (error) {
-// // //       console.error(error);
-// // //     }
-// // //   };
-
-// // //   if (!product) return <h2>Loading...</h2>;
-
-// // //   return (
-// // //     <div style={{ padding: '20px' }}>
-// // //       <Link to="/products">
-// // //         ← Back
-// // //       </Link>
-
-// // //       <h1>{product.title}</h1>
-
-// // //       {product.image && (
-// // //         <img
-// // //           src={`http://localhost:5000${product.image}`}
-// // //           alt={product.title}
-// // //           style={{
-// // //             width: '500px',
-// // //             maxWidth: '100%'
-// // //           }}
-// // //         />
-// // //       )}
-
-// // //       <p>{product.description}</p>
-
-// // //       <h2>₹{product.price}</h2>
-// // // {/* 
-// // //       <button>
-// // //         Enquire Now
-// // //       </button> */}
-// // //       <InquiryForm productId={product.id} />
-// // //     </div>
-// // //   );
-// // // }
-
-// // // export default ProductDetails;
 
 // // // import { useEffect, useState } from "react";
 // // // import { useParams, Link } from "react-router-dom";
@@ -134,7 +274,7 @@
 
 // // //   useEffect(() => {
 // // //     loadProduct();
-// // //   }, []);
+// // //   }, [id]);
 
 // // //   const loadProduct = async () => {
 // // //     try {
@@ -146,117 +286,144 @@
 // // //   };
 
 // // //   if (!product) {
-// // //     return <h2>Loading...</h2>;
+// // //     return (
+// // //       <div className="a4-product-loading">
+// // //         Loading...
+// // //       </div>
+// // //     );
 // // //   }
 
-// // //   const firstLocation =
-// // //     product.locations?.[0];
-
 // // //   return (
-// // //     <div className="a4-product-details">
+// // //     <section className="a4-product-page">
 
-// // //       <div className="a4-product-details-container">
+// // //       <div className="a4-product-container">
 
 // // //         <Link
 // // //           to="/products"
-// // //           className="a4-back-link"
+// // //           className="a4-product-back"
 // // //         >
 // // //           ← Back to Products
 // // //         </Link>
 
-// // //         <div className="a4-product-layout">
+// // //         <div className="a4-product-hero">
 
-// // //           <div className="a4-product-image-section">
+// // //           <div className="a4-product-image-col">
 
 // // //             <img
 // // //               src={`http://localhost:5000${product.image}`}
 // // //               alt={product.title}
-// // //               className="a4-product-main-image"
+// // //               className="a4-product-image"
 // // //             />
 
 // // //           </div>
 
-// // //           <div className="a4-product-info-section">
+// // //           <div className="a4-product-content-col">
+
+// // //             <span className="a4-product-badge">
+// // //               BEST SELLER
+// // //             </span>
 
 // // //             <h1 className="a4-product-title">
 // // //               {product.title}
 // // //             </h1>
 
-// // //             <p className="a4-product-description">
-// // //               {product.description}
-// // //             </p>
-
 // // //             <div className="a4-product-price">
 // // //               ₹{product.price}
 // // //             </div>
 
+// // //             <p className="a4-product-description">
+// // //               {product.description}
+// // //             </p>
+
+// // //             <div className="a4-product-features">
+
+// // //               <div className="a4-feature-chip">
+// // //                 Freshly Prepared
+// // //               </div>
+
+// // //               <div className="a4-feature-chip">
+// // //                 Premium Quality
+// // //               </div>
+
+// // //               <div className="a4-feature-chip">
+// // //                 Available In Store
+// // //               </div>
+
+// // //             </div>
+
+// // //             <button className="a4-order-btn">
+// // //               Enquire Now
+// // //             </button>
+
 // // //           </div>
 
 // // //         </div>
 
-// // //         {/* Available Locations */}
+// // //         {/* Store Locations */}
 
-// // //         {product.locations?.length > 0 && (
-// // //           <>
-// // //             <div className="a4-location-header">
-// // //               <h2>Available At</h2>
+// // //         <div className="a4-stores-section">
+
+// // //           <h2 className="a4-section-title">
+// // //             Available At Our Stores
+// // //           </h2>
+
+// // //           <div className="a4-store-grid">
+
+// // //             <div className="a4-store-card">
+// // //               <h4>Akshayaa Bakery</h4>
+// // //               <p>Main Branch, Pondicherry</p>
 // // //             </div>
 
-// // //             <div className="a4-location-grid">
-
-// // //               {product.locations.map(
-// // //                 (location, index) => (
-// // //                   <div
-// // //                     key={index}
-// // //                     className="a4-location-card"
-// // //                   >
-// // //                     <h4>{location.name}</h4>
-
-// // //                     <p>
-// // //                       {location.address}
-// // //                     </p>
-// // //                   </div>
-// // //                 )
-// // //               )}
-
+// // //             <div className="a4-store-card">
+// // //               <h4>Akshayaa Bakery</h4>
+// // //               <p>Lawspet, Pondicherry</p>
 // // //             </div>
-// // //           </>
-// // //         )}
 
-// // //         {/* Google Map */}
-
-// // //         {firstLocation && (
-// // //           <div className="a4-map-wrapper">
-
-// // //             <iframe
-// // //               title="Store Location"
-// // //               width="100%"
-// // //               height="450"
-// // //               style={{
-// // //                 border: 0,
-// // //                 borderRadius: "24px",
-// // //               }}
-// // //               loading="lazy"
-// // //               allowFullScreen
-// // //               src={`https://maps.google.com/maps?q=${firstLocation.lat},${firstLocation.lng}&z=15&output=embed`}
-// // //             />
+// // //             <div className="a4-store-card">
+// // //               <h4>Akshayaa Bakery</h4>
+// // //               <p>Muthialpet, Pondicherry</p>
+// // //             </div>
 
 // // //           </div>
-// // //         )}
 
-// // //         <div className="a4-inquiry-wrapper">
-// // //           <InquiryForm
-// // //             productId={product.id}
+// // //         </div>
+
+// // //         {/* Map */}
+
+// // //         <div className="a4-map-section">
+
+// // //           <h2 className="a4-section-title">
+// // //             Find Us
+// // //           </h2>
+
+// // //           <iframe
+// // //             title="Store Location"
+// // //             className="a4-map"
+// // //             src="https://maps.google.com/maps?q=Pondicherry&t=&z=13&ie=UTF8&iwloc=&output=embed"
 // // //           />
+
+// // //         </div>
+
+// // //         {/* Inquiry */}
+
+// // //         <div className="a4-inquiry-section">
+
+// // //           <h2 className="a4-section-title">
+// // //             Product Inquiry
+// // //           </h2>
+
+// // //           <InquiryForm productId={product.id} />
+
 // // //         </div>
 
 // // //       </div>
 
-// // //     </div>
+// // //     </section>
 // // //   );
 // // // }
 
 // // // export default ProductDetails;
+
 
 
 
@@ -271,6 +438,29 @@
 // //   const { id } = useParams();
 
 // //   const [product, setProduct] = useState(null);
+
+// //   const stores = [
+// //     {
+// //       name: "Spicelands",
+// //       location: "Frankfurt, Germany",
+// //       url: "https://www.google.com/search?q=Spicelands+Frankfurt",
+// //     },
+// //     {
+// //       name: "Jaffna Basar Frankfurt",
+// //       location: "Frankfurt, Germany",
+// //       url: "https://share.google/2UoWe8LQQSIOXPF5k",
+// //     },
+// //     {
+// //       name: "Kabil Kiosk",
+// //       location: "Frankfurt, Germany",
+// //       url: "https://share.google/CoGFCKg0t0YOubr4n",
+// //     },
+// //     {
+// //       name: "Transfood",
+// //       location: "Frankfurt, Germany",
+// //       url: "https://share.google/XxcAq4OFJXW41qScg",
+// //     },
+// //   ];
 
 // //   useEffect(() => {
 // //     loadProduct();
@@ -295,9 +485,7 @@
 
 // //   return (
 // //     <section className="a4-product-page">
-
 // //       <div className="a4-product-container">
-
 // //         <Link
 // //           to="/products"
 // //           className="a4-product-back"
@@ -305,20 +493,18 @@
 // //           ← Back to Products
 // //         </Link>
 
+// //         {/* Product Hero */}
+
 // //         <div className="a4-product-hero">
-
 // //           <div className="a4-product-image-col">
-
 // //             <img
 // //               src={`http://localhost:5000${product.image}`}
 // //               alt={product.title}
 // //               className="a4-product-image"
 // //             />
-
 // //           </div>
 
 // //           <div className="a4-product-content-col">
-
 // //             <span className="a4-product-badge">
 // //               BEST SELLER
 // //             </span>
@@ -336,7 +522,6 @@
 // //             </p>
 
 // //             <div className="a4-product-features">
-
 // //               <div className="a4-feature-chip">
 // //                 Freshly Prepared
 // //               </div>
@@ -346,8 +531,419 @@
 // //               </div>
 
 // //               <div className="a4-feature-chip">
+// //                 Available In Stores
+// //               </div>
+
+// //               <div className="a4-feature-chip">
+// //                 Imported Product
+// //               </div>
+// //             </div>
+
+// //             <button
+// //               className="a4-order-btn"
+// //               onClick={() =>
+// //                 document
+// //                   .getElementById("inquiry-section")
+// //                   ?.scrollIntoView({
+// //                     behavior: "smooth",
+// //                   })
+// //               }
+// //             >
+// //               Enquire Now
+// //             </button>
+// //           </div>
+// //         </div>
+
+// //         {/* Store Locations */}
+
+// //         <div className="a4-stores-section">
+// //           <h2 className="a4-section-title">
+// //             Available At Our Stores
+// //           </h2>
+
+// //           <p className="a4-section-subtitle">
+// //             Visit any of our trusted retail partners in
+// //             Frankfurt to purchase this product.
+// //           </p>
+
+// //           <div className="a4-store-grid">
+// //             {stores.map((store, index) => (
+// //               <a
+// //                 key={index}
+// //                 href={store.url}
+// //                 target="_blank"
+// //                 rel="noopener noreferrer"
+// //                 className="a4-store-card"
+// //               >
+// //                 <div className="a4-store-icon">
+// //                   📍
+// //                 </div>
+
+// //                 <h4>{store.name}</h4>
+
+// //                 <p>{store.location}</p>
+
+// //                 <span className="a4-store-link">
+// //                   View Location →
+// //                 </span>
+// //               </a>
+// //             ))}
+// //           </div>
+// //         </div>
+
+// //         {/* Store Map */}
+
+// //         <div className="a4-map-section">
+// //           <h2 className="a4-section-title">
+// //             Find Our Stores
+// //           </h2>
+
+// //           <p className="a4-section-subtitle">
+// //             Our partner stores are conveniently located
+// //             across Frankfurt, Germany.
+// //           </p>
+
+// //           <iframe
+// //             title="Store Locations"
+// //             className="a4-map"
+// //             src="https://maps.google.com/maps?q=Frankfurt,Germany&t=&z=12&ie=UTF8&iwloc=&output=embed"
+// //             loading="lazy"
+// //             allowFullScreen
+// //           />
+// //         </div>
+
+// //         {/* Inquiry Form */}
+
+// //         <div
+// //           id="inquiry-section"
+// //           className="a4-inquiry-section"
+// //         >
+// //           <h2 className="a4-section-title">
+// //             Product Inquiry
+// //           </h2>
+
+// //           <p className="a4-section-subtitle">
+// //             Have questions about this product?
+// //             Contact us and we'll get back to you soon.
+// //           </p>
+
+// //           <InquiryForm productId={product.id} />
+// //         </div>
+// //       </div>
+// //     </section>
+// //   );
+// // }
+
+// // export default ProductDetails;
+
+
+// // import { useEffect, useState } from "react";
+// // import { useParams, Link } from "react-router-dom";
+// // import api from "../services/api";
+// // import InquiryForm from "../components/InquiryForm";
+// // import StoreMap from "../components/StoreMap";
+// // import "./ProductDetails.css";
+
+// // function ProductDetails() {
+// //   const { id } = useParams();
+// //   const [product, setProduct] = useState(null);
+
+// //   useEffect(() => {
+// //     loadProduct();
+// //   }, [id]);
+
+// //   const loadProduct = async () => {
+// //     try {
+// //       const { data } = await api.get(`/products/${id}`);
+// //       setProduct(data);
+// //     } catch (error) {
+// //       console.error(error);
+// //     }
+// //   };
+
+// //   const stores = [
+// //     {
+// //       name: "Spicelands",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.1109,
+// //       lng: 8.6821,
+// //     },
+// //     {
+// //       name: "Jaffna Basar Frankfurt",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.115,
+// //       lng: 8.69,
+// //     },
+// //     {
+// //       name: "Kabil Kiosk",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.103,
+// //       lng: 8.675,
+// //     },
+// //     {
+// //       name: "Transfood",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.099,
+// //       lng: 8.701,
+// //     },
+// //   ];
+
+// //   if (!product) {
+// //     return <div className="a4-product-loading">Loading...</div>;
+// //   }
+
+// //   return (
+// //     <section className="a4-product-page">
+// //       <div className="a4-product-container">
+// //         <Link to="/products" className="a4-product-back">
+// //           ← Back to Products
+// //         </Link>
+
+// //         <div className="a4-product-hero">
+// //           <div className="a4-product-image-col">
+// //             <img
+// //               src={`http://localhost:5000${product.image}`}
+// //               alt={product.title}
+// //               className="a4-product-image"
+// //             />
+// //           </div>
+
+// //           <div className="a4-product-content-col">
+// //             <span className="a4-product-badge">
+// //               BEST SELLER
+// //             </span>
+
+// //             <h1 className="a4-product-title">
+// //               {product.title}
+// //             </h1>
+
+// //             <div className="a4-product-price">
+// //               ₹{product.price}
+// //             </div>
+
+// //             <p className="a4-product-description">
+// //               {product.description}
+// //             </p>
+
+// //             <div className="a4-product-features">
+// //               <div className="a4-feature-chip">Freshly Prepared</div>
+// //               <div className="a4-feature-chip">Premium Quality</div>
+// //               <div className="a4-feature-chip">Available In Store</div>
+// //             </div>
+
+// //             <button className="a4-order-btn">
+// //               Enquire Now
+// //             </button>
+// //           </div>
+// //         </div>
+
+// //         {/* Store Cards */}
+
+// //         <div className="a4-stores-section">
+// //           <h2 className="a4-section-title">
+// //             Available At Our Stores
+// //           </h2>
+
+// //           <div className="a4-store-grid">
+// //             {stores.map((store, index) => (
+// //               <div
+// //                 key={index}
+// //                 className="a4-store-card"
+// //               >
+// //                 <h4>{store.name}</h4>
+// //                 <p>{store.address}</p>
+// //               </div>
+// //             ))}
+// //           </div>
+// //         </div>
+
+// //         {/* Interactive Map with Markers */}
+
+// //         <div className="a4-map-section">
+// //           <h2 className="a4-section-title">
+// //             Store Locations
+// //           </h2>
+
+// //           <StoreMap stores={stores} />
+// //         </div>
+
+// //         {/* Inquiry */}
+
+// //         {/* <div className="a4-inquiry-section">
+// //           <h2 className="a4-section-title">
+// //             Product Inquiry
+// //           </h2>
+
+// //           <InquiryForm productId={product.id} />
+// //         </div> */}
+// //       </div>
+// //     </section>
+// //   );
+// // }
+
+// // export default ProductDetails;
+
+
+// // import { useEffect, useState } from "react";
+// // import { useParams, Link } from "react-router-dom";
+// // import api from "../services/api";
+// // import StoreMap from "../components/StoreMap";
+// // import "./ProductDetails.css";
+// // import PublicLayout from "../layouts/PublicLayout";
+
+// // function ProductDetails() {
+// //   const { id } = useParams();
+
+// //   const [product, setProduct] = useState(null);
+
+// //   useEffect(() => {
+// //     loadProduct();
+// //   }, [id]);
+
+// //   const loadProduct = async () => {
+// //     try {
+// //       const { data } = await api.get(
+// //         `/products/${id}`
+// //       );
+
+// //       setProduct(data);
+// //     } catch (error) {
+// //       console.error(error);
+// //     }
+// //   };
+
+// //   const stores = [
+// //     {
+// //       name: "Spicelands",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.1109,
+// //       lng: 8.6821,
+// //     },
+// //     {
+// //       name: "Jaffna Basar Frankfurt",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.115,
+// //       lng: 8.69,
+// //     },
+// //     {
+// //       name: "Kabil Kiosk",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.103,
+// //       lng: 8.675,
+// //     },
+// //     {
+// //       name: "Transfood",
+// //       address: "Frankfurt, Germany",
+// //       lat: 50.099,
+// //       lng: 8.701,
+// //     },
+// //   ];
+
+// //   if (!product) {
+// //     return (
+// //       <div className="a4-product-loading">
+// //         Loading...
+// //       </div>
+// //     );
+// //   }
+
+// //   const discountedPrice =
+// //     product.price -
+// //     (product.price *
+// //       (product.discountPercent || 0)) /
+// //       100;
+
+// //   return (
+
+// //     <PublicLayout>
+// //     <section className="a4-product-page">
+
+// //       <div className="a4-product-container">
+
+// //         <Link
+// //           to="/products"
+// //           className="a4-product-back"
+// //         >
+// //           ← Back to Products
+// //         </Link>
+
+// //         <div className="a4-product-hero">
+
+// //           <div className="a4-product-image-col">
+
+// //             {product.image && (
+// //               <img
+// //                 src={`http://localhost:5000${product.image}`}
+// //                 alt={product.title}
+// //                 className="a4-product-image"
+// //               />
+// //             )}
+
+// //           </div>
+
+// //           <div className="a4-product-content-col">
+
+// //             <div className="a4-product-top-badges">
+
+// //               {product.featured && (
+// //                 <span className="a4-featured-badge">
+// //                   Featured Product
+// //                 </span>
+// //               )}
+
+// //               <span className="a4-category-badge">
+// //                 {product.category}
+// //               </span>
+
+// //             </div>
+
+// //             <h1 className="a4-product-title">
+// //               {product.title}
+// //             </h1>
+
+// //             <div className="a4-product-price-box">
+
+// //               <span className="a4-product-final-price">
+// //                 ₹{discountedPrice.toFixed(2)}
+// //               </span>
+
+// //               {product.discountPercent > 0 && (
+// //                 <>
+// //                   <span className="a4-product-old-price">
+// //                     ₹{product.price}
+// //                   </span>
+
+// //                   <span className="a4-product-discount">
+// //                     {product.discountPercent}% OFF
+// //                   </span>
+// //                 </>
+// //               )}
+
+// //             </div>
+
+// //             <p className="a4-product-description">
+// //               {product.description}
+// //             </p>
+
+// //             <div className="a4-product-features">
+
+// //               <div className="a4-feature-chip">
+// //                 Premium Quality
+// //               </div>
+
+// //               <div className="a4-feature-chip">
+// //                 Category: {product.category}
+// //               </div>
+
+// //               <div className="a4-feature-chip">
 // //                 Available In Store
 // //               </div>
+
+// //               {product.discountPercent > 0 && (
+// //                 <div className="a4-feature-chip">
+// //                   Save {product.discountPercent}%
+// //                 </div>
+// //               )}
 
 // //             </div>
 
@@ -359,7 +955,7 @@
 
 // //         </div>
 
-// //         {/* Store Locations */}
+// //         {/* Stores */}
 
 // //         <div className="a4-stores-section">
 
@@ -369,20 +965,16 @@
 
 // //           <div className="a4-store-grid">
 
-// //             <div className="a4-store-card">
-// //               <h4>Akshayaa Bakery</h4>
-// //               <p>Main Branch, Pondicherry</p>
-// //             </div>
+// //             {stores.map((store, index) => (
+// //               <div
+// //                 key={index}
+// //                 className="a4-store-card"
+// //               >
+// //                 <h4>{store.name}</h4>
 
-// //             <div className="a4-store-card">
-// //               <h4>Akshayaa Bakery</h4>
-// //               <p>Lawspet, Pondicherry</p>
-// //             </div>
-
-// //             <div className="a4-store-card">
-// //               <h4>Akshayaa Bakery</h4>
-// //               <p>Muthialpet, Pondicherry</p>
-// //             </div>
+// //                 <p>{store.address}</p>
+// //               </div>
+// //             ))}
 
 // //           </div>
 
@@ -393,32 +985,17 @@
 // //         <div className="a4-map-section">
 
 // //           <h2 className="a4-section-title">
-// //             Find Us
+// //             Store Locations
 // //           </h2>
 
-// //           <iframe
-// //             title="Store Location"
-// //             className="a4-map"
-// //             src="https://maps.google.com/maps?q=Pondicherry&t=&z=13&ie=UTF8&iwloc=&output=embed"
-// //           />
-
-// //         </div>
-
-// //         {/* Inquiry */}
-
-// //         <div className="a4-inquiry-section">
-
-// //           <h2 className="a4-section-title">
-// //             Product Inquiry
-// //           </h2>
-
-// //           <InquiryForm productId={product.id} />
+// //           <StoreMap stores={stores} />
 
 // //         </div>
 
 // //       </div>
 
 // //     </section>
+// //     </PublicLayout>
 // //   );
 // // }
 
@@ -431,233 +1008,241 @@
 // import { useEffect, useState } from "react";
 // import { useParams, Link } from "react-router-dom";
 // import api from "../services/api";
-// import InquiryForm from "../components/InquiryForm";
+// import StoreMap from "../components/StoreMap";
+// import PublicLayout from "../layouts/PublicLayout";
 // import "./ProductDetails.css";
 
 // function ProductDetails() {
 //   const { id } = useParams();
-
 //   const [product, setProduct] = useState(null);
-
-//   const stores = [
-//     {
-//       name: "Spicelands",
-//       location: "Frankfurt, Germany",
-//       url: "https://www.google.com/search?q=Spicelands+Frankfurt",
-//     },
-//     {
-//       name: "Jaffna Basar Frankfurt",
-//       location: "Frankfurt, Germany",
-//       url: "https://share.google/2UoWe8LQQSIOXPF5k",
-//     },
-//     {
-//       name: "Kabil Kiosk",
-//       location: "Frankfurt, Germany",
-//       url: "https://share.google/CoGFCKg0t0YOubr4n",
-//     },
-//     {
-//       name: "Transfood",
-//       location: "Frankfurt, Germany",
-//       url: "https://share.google/XxcAq4OFJXW41qScg",
-//     },
-//   ];
+//   const [loading, setLoading] = useState(true);
 
 //   useEffect(() => {
 //     loadProduct();
 //   }, [id]);
 
 //   const loadProduct = async () => {
+//     setLoading(true);
 //     try {
 //       const { data } = await api.get(`/products/${id}`);
 //       setProduct(data);
 //     } catch (error) {
 //       console.error(error);
+//     } finally {
+//       setLoading(false);
 //     }
 //   };
 
-//   if (!product) {
+//   const stores = [
+//     {
+//       name: "Spicelands",
+//       address: "Frankfurt, Germany",
+//       lat: 50.1109,
+//       lng: 8.6821,
+//     },
+//     {
+//       name: "Jaffna Basar Frankfurt",
+//       address: "Frankfurt, Germany",
+//       lat: 50.115,
+//       lng: 8.69,
+//     },
+//     {
+//       name: "Kabil Kiosk",
+//       address: "Frankfurt, Germany",
+//       lat: 50.103,
+//       lng: 8.675,
+//     },
+//     {
+//       name: "Transfood",
+//       address: "Frankfurt, Germany",
+//       lat: 50.099,
+//       lng: 8.701,
+//     },
+//   ];
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent / 100);
+//     }
+//     return price;
+//   };
+
+//   if (loading) {
 //     return (
-//       <div className="a4-product-loading">
-//         Loading...
-//       </div>
+//       <PublicLayout>
+//         <div className="prdd__loading">
+//           <div className="prdd__loadingContent">
+//             <div className="prdd__loadingSpinner"></div>
+//             <p>Loading product details...</p>
+//           </div>
+//         </div>
+//       </PublicLayout>
 //     );
 //   }
 
+//   if (!product) {
+//     return (
+//       <PublicLayout>
+//         <div className="prdd__notFound">
+//           <div className="prdd__notFoundContent">
+//             <h2>Product Not Found</h2>
+//             <p>The product you're looking for doesn't exist or has been removed.</p>
+//             <Link to="/products" className="prdd__backLink">Back to Products →</Link>
+//           </div>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//   const hasDiscount = product.discountPercent && product.discountPercent > 0;
+
 //   return (
-//     <section className="a4-product-page">
-//       <div className="a4-product-container">
-//         <Link
-//           to="/products"
-//           className="a4-product-back"
-//         >
-//           ← Back to Products
-//         </Link>
+//     <PublicLayout>
+//       <section className="prdd__wrapper">
+//         <div className="prdd__bgSubtle"></div>
+//         <div className="prdd__bgGradient"></div>
 
-//         {/* Product Hero */}
+//         <div className="prdd__container">
+//           {/* Back Navigation */}
+//           <Link to="/products" className="prdd__backButton">
+//             ← Back to Products
+//           </Link>
 
-//         <div className="a4-product-hero">
-//           <div className="a4-product-image-col">
-//             <img
-//               src={`http://localhost:5000${product.image}`}
-//               alt={product.title}
-//               className="a4-product-image"
-//             />
-//           </div>
-
-//           <div className="a4-product-content-col">
-//             <span className="a4-product-badge">
-//               BEST SELLER
-//             </span>
-
-//             <h1 className="a4-product-title">
-//               {product.title}
-//             </h1>
-
-//             <div className="a4-product-price">
-//               ₹{product.price}
-//             </div>
-
-//             <p className="a4-product-description">
-//               {product.description}
-//             </p>
-
-//             <div className="a4-product-features">
-//               <div className="a4-feature-chip">
-//                 Freshly Prepared
-//               </div>
-
-//               <div className="a4-feature-chip">
-//                 Premium Quality
-//               </div>
-
-//               <div className="a4-feature-chip">
-//                 Available In Stores
-//               </div>
-
-//               <div className="a4-feature-chip">
-//                 Imported Product
-//               </div>
-//             </div>
-
-//             <button
-//               className="a4-order-btn"
-//               onClick={() =>
-//                 document
-//                   .getElementById("inquiry-section")
-//                   ?.scrollIntoView({
-//                     behavior: "smooth",
-//                   })
-//               }
-//             >
-//               Enquire Now
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Store Locations */}
-
-//         <div className="a4-stores-section">
-//           <h2 className="a4-section-title">
-//             Available At Our Stores
-//           </h2>
-
-//           <p className="a4-section-subtitle">
-//             Visit any of our trusted retail partners in
-//             Frankfurt to purchase this product.
-//           </p>
-
-//           <div className="a4-store-grid">
-//             {stores.map((store, index) => (
-//               <a
-//                 key={index}
-//                 href={store.url}
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="a4-store-card"
-//               >
-//                 <div className="a4-store-icon">
-//                   📍
+//           {/* Product Hero Section */}
+//           <div className="prdd__hero">
+//             {/* Image Column */}
+//             <div className="prdd__imageColumn">
+//               <div className="prdd__imageWrapper">
+//                 {product.image && (
+//                   <img
+//                     src={`http://localhost:5000${product.image}`}
+//                     alt={product.title}
+//                     className="prdd__image"
+//                   />
+//                 )}
+//                 <div className="prdd__imageOverlay"></div>
+                
+//                 {/* Badges */}
+//                 <div className="prdd__badges">
+//                   {product.featured && (
+//                     <span className="prdd__featuredBadge">Featured</span>
+//                   )}
+//                   {hasDiscount && (
+//                     <span className="prdd__discountBadge">
+//                       {product.discountPercent}% OFF
+//                     </span>
+//                   )}
 //                 </div>
+//               </div>
+//             </div>
 
-//                 <h4>{store.name}</h4>
+//             {/* Content Column */}
+//             <div className="prdd__contentColumn">
+//               <div className="prdd__category">
+//                 {product.category}
+//               </div>
+              
+//               <h1 className="prdd__title">{product.title}</h1>
+              
+//               <div className="prdd__pricing">
+//                 <span className="prdd__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                 {hasDiscount && (
+//                   <>
+//                     <span className="prdd__priceOriginal">₹{product.price}</span>
+//                     <span className="prdd__saveBadge">Save {product.discountPercent}%</span>
+//                   </>
+//                 )}
+//               </div>
+              
+//               <p className="prdd__description">{product.description}</p>
+              
+//               <div className="prdd__features">
+//                 <div className="prdd__featureItem">Premium Quality</div>
+//                 <div className="prdd__featureItem">100% Organic</div>
+//                 <div className="prdd__featureItem">Lab Tested</div>
+//                 <div className="prdd__featureItem">Chemical Free</div>
+//                 {hasDiscount && (
+//                   <div className="prdd__featureItem prdd__featureHighlight">
+//                     Limited Time Offer
+//                   </div>
+//                 )}
+//               </div>
+              
+//               <button className="prdd__enquireBtn">
+//                 Enquire Now
+//                 <span className="prdd__btnArrow">→</span>
+//               </button>
+//             </div>
+//           </div>
 
-//                 <p>{store.location}</p>
+//           {/* Store Availability Section */}
+//           <div className="prdd__storeSection">
+//             <div className="prdd__sectionHeader">
+//               <div className="prdd__sectionLine"></div>
+//               <span className="prdd__sectionLabel">AVAILABILITY</span>
+//             </div>
+//             <h2 className="prdd__sectionTitle">Available at our stores</h2>
+            
+//             <div className="prdd__storeGrid">
+//               {stores.map((store, index) => (
+//                 <div key={index} className="prdd__storeCard">
+//                   <div className="prdd__storeIcon"></div>
+//                   <div className="prdd__storeInfo">
+//                     <h4 className="prdd__storeName">{store.name}</h4>
+//                     <p className="prdd__storeAddress">{store.address}</p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
 
-//                 <span className="a4-store-link">
-//                   View Location →
-//                 </span>
-//               </a>
-//             ))}
+//           {/* Map Section */}
+//           <div className="prdd__mapSection">
+//             <div className="prdd__sectionHeader">
+//               <div className="prdd__sectionLine"></div>
+//               <span className="prdd__sectionLabel">FIND US</span>
+//             </div>
+//             <h2 className="prdd__sectionTitle">Store Locations</h2>
+//             <div className="prdd__mapWrapper">
+//               <StoreMap stores={stores} />
+//             </div>
 //           </div>
 //         </div>
-
-//         {/* Store Map */}
-
-//         <div className="a4-map-section">
-//           <h2 className="a4-section-title">
-//             Find Our Stores
-//           </h2>
-
-//           <p className="a4-section-subtitle">
-//             Our partner stores are conveniently located
-//             across Frankfurt, Germany.
-//           </p>
-
-//           <iframe
-//             title="Store Locations"
-//             className="a4-map"
-//             src="https://maps.google.com/maps?q=Frankfurt,Germany&t=&z=12&ie=UTF8&iwloc=&output=embed"
-//             loading="lazy"
-//             allowFullScreen
-//           />
-//         </div>
-
-//         {/* Inquiry Form */}
-
-//         <div
-//           id="inquiry-section"
-//           className="a4-inquiry-section"
-//         >
-//           <h2 className="a4-section-title">
-//             Product Inquiry
-//           </h2>
-
-//           <p className="a4-section-subtitle">
-//             Have questions about this product?
-//             Contact us and we'll get back to you soon.
-//           </p>
-
-//           <InquiryForm productId={product.id} />
-//         </div>
-//       </div>
-//     </section>
+//       </section>
+//     </PublicLayout>
 //   );
 // }
 
 // export default ProductDetails;
 
 
+
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/api";
-import InquiryForm from "../components/InquiryForm";
 import StoreMap from "../components/StoreMap";
+import PublicLayout from "../layouts/PublicLayout";
 import "./ProductDetails.css";
 
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadProduct();
   }, [id]);
 
   const loadProduct = async () => {
+    setLoading(true);
     try {
       const { data } = await api.get(`/products/${id}`);
       setProduct(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -688,96 +1273,139 @@ function ProductDetails() {
     },
   ];
 
-  if (!product) {
-    return <div className="a4-product-loading">Loading...</div>;
+  const calculateDiscountedPrice = (price, discountPercent) => {
+    if (discountPercent && discountPercent > 0) {
+      return price - (price * discountPercent / 100);
+    }
+    return price;
+  };
+
+  if (loading) {
+    return (
+      <PublicLayout>
+        <div className="pdt__loading">
+          <div className="pdt__loadingSpinner"></div>
+        </div>
+      </PublicLayout>
+    );
   }
 
+  if (!product) {
+    return (
+      <PublicLayout>
+        <div className="pdt__notFound">
+          <div className="pdt__notFoundContent">
+            <h2>Product Not Found</h2>
+            <Link to="/products" className="pdt__notFoundLink">Browse Products →</Link>
+          </div>
+        </div>
+      </PublicLayout>
+    );
+  }
+
+  const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+  const hasDiscount = product.discountPercent && product.discountPercent > 0;
+
   return (
-    <section className="a4-product-page">
-      <div className="a4-product-container">
-        <Link to="/products" className="a4-product-back">
-          ← Back to Products
-        </Link>
+    <PublicLayout>
+      <section className="pdt__wrapper">
+        <div className="pdt__container">
+          {/* Back Navigation */}
+          <Link to="/products" className="pdt__backLink">
+            ← Back to Products
+          </Link>
 
-        <div className="a4-product-hero">
-          <div className="a4-product-image-col">
-            <img
-              src={`http://localhost:5000${product.image}`}
-              alt={product.title}
-              className="a4-product-image"
-            />
-          </div>
-
-          <div className="a4-product-content-col">
-            <span className="a4-product-badge">
-              BEST SELLER
-            </span>
-
-            <h1 className="a4-product-title">
-              {product.title}
-            </h1>
-
-            <div className="a4-product-price">
-              ₹{product.price}
-            </div>
-
-            <p className="a4-product-description">
-              {product.description}
-            </p>
-
-            <div className="a4-product-features">
-              <div className="a4-feature-chip">Freshly Prepared</div>
-              <div className="a4-feature-chip">Premium Quality</div>
-              <div className="a4-feature-chip">Available In Store</div>
-            </div>
-
-            <button className="a4-order-btn">
-              Enquire Now
-            </button>
-          </div>
-        </div>
-
-        {/* Store Cards */}
-
-        <div className="a4-stores-section">
-          <h2 className="a4-section-title">
-            Available At Our Stores
-          </h2>
-
-          <div className="a4-store-grid">
-            {stores.map((store, index) => (
-              <div
-                key={index}
-                className="a4-store-card"
-              >
-                <h4>{store.name}</h4>
-                <p>{store.address}</p>
+          {/* Product Grid */}
+          <div className="pdt__grid">
+            {/* Image Section */}
+            <div className="pdt__imageSection">
+              <div className="pdt__imageCard">
+                <img
+                  src={`http://localhost:5000${product.image}`}
+                  alt={product.title}
+                  className="pdt__image"
+                />
+                {hasDiscount && (
+                  <div className="pdt__discountPill">
+                    {product.discountPercent}% OFF
+                  </div>
+                )}
+                {product.featured && !hasDiscount && (
+                  <div className="pdt__featuredPill">
+                    Featured
+                  </div>
+                )}
               </div>
-            ))}
+            </div>
+
+            {/* Info Section */}
+            <div className="pdt__infoSection">
+              <div className="pdt__categoryBadge">{product.category}</div>
+              
+              <h1 className="pdt__title">{product.title}</h1>
+              
+              <div className="pdt__priceWrapper">
+                <div className="pdt__priceBox">
+                  <span className="pdt__priceCurrent">₹{Math.round(discountedPrice)}</span>
+                  {hasDiscount && (
+                    <span className="pdt__priceOriginal">₹{product.price}</span>
+                  )}
+                </div>
+                {hasDiscount && (
+                  <div className="pdt__saveText">Save {product.discountPercent}%</div>
+                )}
+              </div>
+              
+              <p className="pdt__description">{product.description}</p>
+              
+              <div className="pdt__features">
+                <div className="pdt__feature">Premium Quality</div>
+                <div className="pdt__feature">100% Organic</div>
+                <div className="pdt__feature">Lab Tested</div>
+                <div className="pdt__feature">Chemical Free</div>
+              </div>
+              
+              <button className="pdt__enquireBtn">
+                Enquire Now
+              </button>
+            </div>
+          </div>
+
+          {/* Store Availability Section */}
+          <div className="pdt__storeSection">
+            <div className="pdt__sectionHeader">
+              <div className="pdt__sectionLine"></div>
+              <span className="pdt__sectionLabel">AVAILABLE AT</span>
+            </div>
+            <h2 className="pdt__sectionTitle">Our Store Locations</h2>
+            
+            <div className="pdt__storeGrid">
+              {stores.map((store, index) => (
+                <div key={index} className="pdt__storeCard">
+                  <div className="pdt__storeCardInner">
+                    <h4 className="pdt__storeName">{store.name}</h4>
+                    <p className="pdt__storeAddress">{store.address}</p>
+                    <div className="pdt__storeStock">In Stock</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Map Section */}
+          <div className="pdt__mapSection">
+            <div className="pdt__sectionHeader">
+              <div className="pdt__sectionLine"></div>
+              <span className="pdt__sectionLabel">FIND US</span>
+            </div>
+            <h2 className="pdt__sectionTitle">Store Locations Map</h2>
+            <div className="pdt__mapWrapper">
+              <StoreMap stores={stores} />
+            </div>
           </div>
         </div>
-
-        {/* Interactive Map with Markers */}
-
-        <div className="a4-map-section">
-          <h2 className="a4-section-title">
-            Store Locations
-          </h2>
-
-          <StoreMap stores={stores} />
-        </div>
-
-        {/* Inquiry */}
-
-        {/* <div className="a4-inquiry-section">
-          <h2 className="a4-section-title">
-            Product Inquiry
-          </h2>
-
-          <InquiryForm productId={product.id} />
-        </div> */}
-      </div>
-    </section>
+      </section>
+    </PublicLayout>
   );
 }
 

@@ -1,235 +1,419 @@
-/* ==================================
-   PAGE
-================================== */
+/* Events.css - Ultra Premium Production Level */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-.a4-events-page {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Wrapper */
+.ev__wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   background: #ffffff;
-  padding: 140px 24px 100px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  padding: 60px 0 100px 0;
+  overflow: hidden;
 }
 
-/* ==================================
-   HEADER
-================================== */
+/* Background Elements */
+.ev__bgSubtle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.01) 2px,
+      rgba(59, 130, 246, 0.01) 4px
+    );
+  pointer-events: none;
+}
 
-.a4-events-page-header {
-  max-width: 900px;
+.ev__bgGradient {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.02), transparent 70%);
+  pointer-events: none;
+}
 
-  margin: 0 auto 80px;
+/* Container */
+.ev__container {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 5%;
+  z-index: 2;
+}
 
+/* Hero Section */
+.ev__hero {
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px auto;
 }
 
-.a4-events-page-tag {
-  display: inline-block;
-
-  padding: 10px 20px;
-
-  border-radius: 999px;
-
-  background: #f8fafc;
-
-  border: 1px solid #e2e8f0;
-
-  color: #475569;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
+.ev__heroBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
-.a4-events-page-title {
-  font-size: clamp(3rem, 6vw, 5rem);
+.ev__heroLine {
+  width: 32px;
+  height: 1px;
+  background: #3b82f6;
+}
 
-  font-weight: 800;
+.ev__heroText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
 
-  line-height: .95;
-
-  letter-spacing: -.05em;
-
-  color: #111827;
-
+.ev__heroTitle {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
   margin-bottom: 20px;
 }
 
-.a4-events-page-description {
-  color: #64748b;
-
-  font-size: 1.15rem;
-
-  line-height: 1.8;
+.ev__heroAccent {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* ==================================
-   GRID
-================================== */
+.ev__heroDescription {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5a6874;
+  font-weight: 400;
+}
 
-.a4-events-page-grid {
-  max-width: 1400px;
+/* Event Section */
+.ev__section {
+  margin-bottom: 70px;
+}
 
-  margin: auto;
+.ev__section:last-of-type {
+  margin-bottom: 0;
+}
 
+.ev__sectionHeader {
+  margin-bottom: 40px;
+}
+
+.ev__sectionMarker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ev__sectionLine {
+  width: 30px;
+  height: 2px;
+  background: #3b82f6;
+}
+
+.ev__sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
+
+.ev__sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+}
+
+/* Events Grid */
+.ev__grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(350px, 1fr));
-
-  gap: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
-/* ==================================
-   CARD
-================================== */
-
-.a4-events-page-card {
+/* Card Link */
+.ev__cardLink {
   text-decoration: none;
+  display: block;
+  height: 100%;
+}
 
+/* Event Card */
+.ev__card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 20px;
   overflow: hidden;
-
-  border-radius: 30px;
-
-  background: white;
-
-  border: 1px solid #eef2f7;
-
-  transition: all .4s ease;
-
-  box-shadow:
-    0 10px 30px rgba(15,23,42,.05);
+  transition: all 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.a4-events-page-card:hover {
-  transform: translateY(-10px);
-
-  box-shadow:
-    0 25px 60px rgba(15,23,42,.12);
+.ev__card:hover {
+  transform: translateY(-6px);
+  border-color: #e2e8f0;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
 }
 
-/* ==================================
-   IMAGE
-================================== */
-
-.a4-events-page-image-wrapper {
+/* Card Image */
+.ev__cardImage {
   position: relative;
-
-  height: 280px;
-
+  width: 100%;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+  background: #f8fafc;
 }
 
-.a4-events-page-image {
+.ev__image {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
 }
 
-.a4-events-page-card:hover
-.a4-events-page-image {
-  transform: scale(1.08);
+.ev__card:hover .ev__image {
+  transform: scale(1.05);
 }
 
-.a4-events-page-overlay {
+.ev__imageOverlay {
   position: absolute;
-
   inset: 0;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.5),
-      transparent
-    );
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.2));
+  pointer-events: none;
 }
 
-/* ==================================
-   CONTENT
-================================== */
-
-.a4-events-page-content {
-  padding: 28px;
+/* Date Card - Premium Design */
+.ev__dateCard {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 70px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 2;
 }
 
-.a4-events-page-badge {
-  display: inline-block;
-
-  padding: 6px 14px;
-
-  border-radius: 999px;
-
-  background: #f1f5f9;
-
-  color: #475569;
-
-  font-size: 12px;
-
+.ev__dateMonth {
+  display: block;
+  font-size: 10px;
   font-weight: 700;
-
-  margin-bottom: 16px;
+  letter-spacing: 1px;
+  color: #3b82f6;
+  text-transform: uppercase;
 }
 
-.a4-events-page-event-title {
-  font-size: 1.5rem;
-
-  color: #111827;
-
-  font-weight: 700;
-
-  margin-bottom: 15px;
+.ev__dateDay {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.2;
 }
 
-.a4-events-page-location {
-  color: #64748b;
-
-  margin-bottom: 25px;
-
-  line-height: 1.7;
+/* Card Content */
+.ev__cardContent {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ==================================
-   BUTTON
-================================== */
-
-.a4-events-page-btn {
-  padding: 12px 22px;
-
-  border: none;
-
-  border-radius: 999px;
-
-  background: #111827;
-
-  color: white;
-
+.ev__title {
+  font-size: 18px;
   font-weight: 600;
-
-  cursor: pointer;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
+.ev__location {
+  font-size: 13px;
+  color: #6c7a8a;
+  margin-bottom: 12px;
+}
+
+.ev__description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6c7a8a;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* Card Footer */
+.ev__cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #f0f2f5;
+  margin-top: auto;
+}
+
+.ev__dateFull {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a99a8;
+}
+
+.ev__linkArrow {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.ev__card:hover .ev__linkArrow {
+  transform: translateX(4px);
+}
+
+/* Empty State */
+.ev__empty {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f8fafc;
+  border-radius: 24px;
+}
+
+.ev__emptyContent h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.ev__emptyContent p {
+  font-size: 15px;
+  color: #6c7a8a;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ev__grid {
+    gap: 24px;
+  }
+  
+  .ev__sectionTitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ev__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
 
 @media (max-width: 768px) {
-
-  .a4-events-page {
-    padding: 120px 20px 80px;
+  .ev__wrapper {
+    padding: 40px 0 70px 0;
   }
+  
+  .ev__hero {
+    margin-bottom: 60px;
+  }
+  
+  .ev__heroTitle {
+    font-size: 32px;
+  }
+  
+  .ev__heroDescription {
+    font-size: 16px;
+  }
+  
+  .ev__section {
+    margin-bottom: 50px;
+  }
+  
+  .ev__sectionTitle {
+    font-size: 22px;
+  }
+  
+  .ev__grid {
+    gap: 20px;
+  }
+  
+  .ev__cardContent {
+    padding: 20px;
+  }
+  
+  .ev__title {
+    font-size: 17px;
+  }
+}
 
-  .a4-events-page-grid {
+@media (max-width: 600px) {
+  .ev__grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .a4-events-page-image-wrapper {
-    height: 240px;
+  
+  .ev__dateCard {
+    padding: 8px 12px;
+    min-width: 60px;
   }
+  
+  .ev__dateDay {
+    font-size: 18px;
+  }
+}
 
-  .a4-events-page-title {
-    font-size: 2.8rem;
+@media (max-width: 480px) {
+  .ev__heroTitle {
+    font-size: 28px;
+  }
+  
+  .ev__sectionTitle {
+    font-size: 20px;
+  }
+  
+  .ev__cardContent {
+    padding: 16px;
+  }
+  
+  .ev__cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }

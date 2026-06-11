@@ -1,196 +1,331 @@
-/* ==================================
-   SECTION
-================================== */
+/* Gallery.css - Professional UI Design */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-.a4-gallery-section {
-  padding: 120px 24px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.gallery-premium {
+  width: 100%;
   background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  padding: 100px 0;
 }
 
-/* ==================================
-   CONTAINER
-================================== */
-
-.a4-gallery-container {
-  max-width: 1400px;
+.gallery-container {
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 5%;
 }
 
-/* ==================================
-   HEADER
-================================== */
-
-.a4-gallery-header {
+/* Header Styles */
+.gallery-header {
   text-align: center;
-  margin-bottom: 70px;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
 }
 
-.a4-gallery-tag {
-  display: inline-block;
-
-  padding: 10px 20px;
-
-  border-radius: 999px;
-
-  background: #f8fafc;
-
-  border: 1px solid #e2e8f0;
-
-  color: #475569;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
-  margin-bottom: 24px;
-}
-
-.a4-gallery-title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-
-  font-weight: 800;
-
-  color: #111827;
-
-  letter-spacing: -0.05em;
-
+.gallery-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.a4-gallery-description {
-  max-width: 700px;
-
-  margin: auto;
-
-  color: #64748b;
-
-  line-height: 1.8;
-
-  font-size: 1.1rem;
+.gallery-badge-line {
+  width: 30px;
+  height: 1px;
+  background: #3b82f6;
 }
 
-/* ==================================
-   GRID
-================================== */
+.gallery-badge-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
 
-.a4-gallery-grid {
+.gallery-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111111;
+  margin-bottom: 20px;
+}
+
+.gallery-title-accent {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gallery-description {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #666666;
+  font-weight: 400;
+}
+
+/* Gallery Grid - Simple 3 Column Layout */
+.gallery-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(320px, 1fr));
-
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  margin-bottom: 60px;
 }
 
-/* ==================================
-   CARD
-================================== */
-
-.a4-gallery-card {
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 28px;
-
-  height: 350px;
-
+/* Gallery Item */
+.gallery-item {
   cursor: pointer;
-
-  box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.05);
-
-  transition: all 0.4s ease;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.a4-gallery-card:hover {
-  transform: translateY(-10px);
+.gallery-item:hover {
+  transform: translateY(-4px);
 }
 
-/* ==================================
-   IMAGE
-================================== */
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f5f5f5;
+  border-radius: 16px;
+}
 
-.a4-gallery-image {
+.gallery-image {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  transition: transform 1s ease;
+  transition: transform 0.4s ease;
+  display: block;
 }
 
-.a4-gallery-card:hover
-.a4-gallery-image {
-  transform: scale(1.08);
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
 }
 
-/* ==================================
-   OVERLAY
-================================== */
-
-.a4-gallery-overlay {
+/* Overlay */
+.gallery-overlay {
   position: absolute;
-
-  inset: 0;
-
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-
-  align-items: flex-end;
-
-  padding: 24px;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.75),
-      rgba(0,0,0,.15),
-      transparent
-    );
-
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-
-  transition: all 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
-.a4-gallery-card:hover
-.a4-gallery-overlay {
+.gallery-item:hover .gallery-overlay {
   opacity: 1;
 }
 
-/* ==================================
-   CONTENT
-================================== */
-
-.a4-gallery-content span {
-  color: white;
-
-  font-size: 1.2rem;
-
-  font-weight: 600;
+.gallery-overlay-content {
+  text-align: center;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
+.gallery-item:hover .gallery-overlay-content {
+  transform: translateY(0);
+}
+
+.gallery-plus {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 300;
+  color: white;
+  line-height: 44px;
+  margin-bottom: 8px;
+}
+
+.gallery-caption {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+/* Footer */
+.gallery-footer {
+  text-align: center;
+}
+
+.gallery-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.gallery-view-all:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.gallery-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-view-all:hover .gallery-arrow {
+  transform: translateX(4px);
+}
+
+/* Lightbox Modal */
+.gallery-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery-lightbox-content {
+  position: relative;
+  max-width: 85vw;
+  max-height: 85vh;
+  cursor: default;
+}
+
+.gallery-lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.gallery-lightbox-close:hover {
+  opacity: 0.7;
+}
+
+.gallery-lightbox-image {
+  max-width: 85vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.gallery-lightbox-caption {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.gallery-lightbox-caption p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .gallery-grid {
+    gap: 20px;
+  }
+  
+  .gallery-title {
+    font-size: 38px;
+  }
+}
 
 @media (max-width: 768px) {
-
-  .a4-gallery-section {
-    padding: 80px 20px;
+  .gallery-premium {
+    padding: 70px 0;
   }
+  
+  .gallery-header {
+    margin-bottom: 50px;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 50px;
+  }
+  
+  .gallery-title {
+    font-size: 32px;
+  }
+  
+  .gallery-description {
+    font-size: 16px;
+  }
+  
+  .gallery-plus {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    line-height: 38px;
+  }
+  
+  .gallery-caption {
+    font-size: 12px;
+  }
+}
 
-  .a4-gallery-grid {
+@media (max-width: 550px) {
+  .gallery-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .a4-gallery-card {
-    height: 280px;
+  
+  .gallery-title {
+    font-size: 28px;
   }
-
-  .a4-gallery-title {
-    font-size: 2.5rem;
+  
+  .gallery-view-all {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+  
+  .gallery-lightbox-close {
+    top: -40px;
+    font-size: 32px;
+  }
+  
+  .gallery-lightbox-image {
+    max-width: 92vw;
   }
 }

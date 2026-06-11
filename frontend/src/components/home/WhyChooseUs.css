@@ -1,161 +1,400 @@
-/* ==================================
-   SECTION
-================================== */
+/* WhyChooseUs.css - Ultra Premium Light Theme - 4 Cards */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
-.a4-why-section {
-  padding: 120px 24px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Wrapper */
+.wc__wrapper {
+  position: relative;
+  width: 100%;
   background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  padding: 100px 0;
+  overflow: hidden;
 }
 
-/* ==================================
-   CONTAINER
-================================== */
+/* Background Elements */
+.wc__bgSubtle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.01) 2px,
+      rgba(59, 130, 246, 0.01) 4px
+    );
+  pointer-events: none;
+}
 
-.a4-why-container {
-  max-width: 1400px;
+.wc__bgGradient {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.02), transparent 70%);
+  pointer-events: none;
+}
 
+.wc__accentOrb {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.015), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.wc__accentOrbTwo {
+  position: absolute;
+  top: 20%;
+  left: -5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.01), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Container */
+.wc__container {
+  position: relative;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 5%;
+  z-index: 2;
 }
 
-/* ==================================
-   HEADER
-================================== */
-
-.a4-why-header {
+/* Header Section */
+.wc__header {
   text-align: center;
-
-  margin-bottom: 70px;
+  max-width: 780px;
+  margin: 0 auto 70px auto;
 }
 
-.a4-why-tag {
-  display: inline-block;
-
-  padding: 10px 20px;
-
-  border-radius: 999px;
-
-  background: #f8fafc;
-
-  border: 1px solid #e2e8f0;
-
-  color: #475569;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
+.wc__headerMarker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
-.a4-why-title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+.wc__markerLine {
+  width: 32px;
+  height: 1px;
+  background: #3b82f6;
+}
 
-  font-weight: 800;
+.wc__markerText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
 
-  letter-spacing: -0.05em;
-
-  color: #111827;
-
+.wc__headline {
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
   margin-bottom: 20px;
 }
 
-.a4-why-description {
-  max-width: 700px;
-
-  margin: auto;
-
-  color: #64748b;
-
-  line-height: 1.8;
-
-  font-size: 1.1rem;
+.wc__headlineAccent {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* ==================================
-   GRID
-================================== */
+.wc__subhead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5a6874;
+  font-weight: 400;
+}
 
-.a4-why-grid {
+/* 4 Cards Grid */
+.wc__grid {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-bottom: 80px;
+}
 
-  grid-template-columns:
-    repeat(4, 1fr);
+/* Feature Card */
+.wc__card {
+  background: #ffffff;
+  border: 1px solid #f0f2f5;
+  border-radius: 20px;
+  padding: 32px 28px;
+  transition: all 0.4s cubic-bezier(0.2, 0.95, 0.4, 1.05);
+  opacity: 0;
+  animation: wc__cardEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
+@keyframes wc__cardEntry {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wc__card:hover {
+  transform: translateY(-6px);
+  border-color: #e2e8f0;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+}
+
+/* Highlight Card (Trusted Partnerships) */
+.wc__cardHighlight {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-color: rgba(59, 130, 246, 0.2);
+  position: relative;
+}
+
+.wc__cardHighlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+/* Card Number */
+.wc__cardNumber {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.wc__cardNumber span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #3b82f6;
+}
+
+.wc__cardLine {
+  width: 40px;
+  height: 1px;
+  background: #e2e8f0;
+  transition: width 0.3s ease;
+}
+
+.wc__card:hover .wc__cardLine {
+  width: 60px;
+  background: #3b82f6;
+}
+
+/* Card Title */
+.wc__cardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+/* Card Description */
+.wc__cardDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5a6874;
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+/* Card Link */
+.wc__cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3b82f6;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.wc__cardArrow {
+  transition: transform 0.3s ease;
+}
+
+.wc__card:hover .wc__cardLink {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.wc__card:hover .wc__cardArrow {
+  transform: translateX(4px);
+}
+
+/* Stats Section */
+.wc__statsSection {
+  padding-top: 40px;
+  border-top: 1px solid #f0f2f5;
+}
+
+.wc__statsLine {
+  width: 48px;
+  height: 2px;
+  background: #3b82f6;
+  margin: 0 auto 48px auto;
+}
+
+.wc__statsGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
-/* ==================================
-   CARD
-================================== */
-
-.a4-why-card {
-  padding: 40px;
-
-  background: #ffffff;
-
-  border: 1px solid #eef2f7;
-
-  border-radius: 28px;
-
-  transition: all 0.35s ease;
-
-  box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.04);
+.wc__statItem {
+  text-align: center;
+  flex: 1;
 }
 
-.a4-why-card:hover {
-  transform: translateY(-10px);
-
-  box-shadow:
-    0 25px 60px rgba(15, 23, 42, 0.10);
-}
-
-.a4-why-card-title {
-  font-size: 1.4rem;
-
+.wc__statNumber {
+  font-size: 40px;
   font-weight: 700;
-
-  color: #111827;
-
-  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #1a1a1a, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
 }
 
-.a4-why-card-description {
-  color: #64748b;
-
-  line-height: 1.8;
+.wc__statLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c7a8a;
+  letter-spacing: 0.3px;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
+.wc__statSeparator {
+  width: 1px;
+  height: 40px;
+  background: #e2e8f0;
+}
 
-@media (max-width: 1200px) {
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .wc__grid {
+    gap: 24px;
+  }
+  
+  .wc__card {
+    padding: 28px 24px;
+  }
+  
+  .wc__cardTitle {
+    font-size: 18px;
+  }
+}
 
-  .a4-why-grid {
-    grid-template-columns:
-      repeat(2, 1fr);
+@media (max-width: 900px) {
+  .wc__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .wc__statsGrid {
+    justify-content: center;
+    gap: 32px;
+  }
+  
+  .wc__statItem {
+    flex: none;
+    min-width: 140px;
   }
 }
 
 @media (max-width: 768px) {
-
-  .a4-why-section {
-    padding: 80px 20px;
+  .wc__wrapper {
+    padding: 70px 0;
   }
+  
+  .wc__header {
+    margin-bottom: 50px;
+  }
+  
+  .wc__headline {
+    font-size: 32px;
+  }
+  
+  .wc__subhead {
+    font-size: 16px;
+  }
+  
+  .wc__statsGrid {
+    flex-direction: column;
+    gap: 28px;
+  }
+  
+  .wc__statSeparator {
+    display: none;
+  }
+  
+  .wc__statNumber {
+    font-size: 36px;
+  }
+}
 
-  .a4-why-grid {
+@media (max-width: 550px) {
+  .wc__grid {
     grid-template-columns: 1fr;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .a4-why-card {
-    padding: 30px;
+  
+  .wc__card {
+    padding: 28px;
   }
+}
 
-  .a4-why-title {
-    font-size: 2.5rem;
+@media (max-width: 480px) {
+  .wc__headline {
+    font-size: 28px;
+  }
+  
+  .wc__cardTitle {
+    font-size: 18px;
+  }
+  
+  .wc__cardDescription {
+    font-size: 13px;
   }
 }

@@ -17,43 +17,51 @@ model User {
 }
 
 model Product {
-  id              Int      @id @default(autoincrement())
-  title           String
-  description     String
-  price           Float
-  image           String?
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  image       String?
 
-  category        String?
-  discountPercent Int      @default(0)
+  featured    Boolean  @default(false)
 
-  featured        Boolean  @default(false)
+  category    String?
+  discountPercent Int? @default(0)
 
-  createdAt       DateTime @default(now())
+  heroSlides  HeroSlide[]
+
+  createdAt   DateTime @default(now())
 }
+
 model Event {
-  id           Int      @id @default(autoincrement())
-  title        String
-  description  String
-  location     String
-  eventDate    DateTime
-  bannerImage  String?
+  id Int @id @default(autoincrement())
 
-  bookingLink  String?
-  sponsorName  String?
-  sponsorLogo  String?
+  title       String
+  description String
 
-  featured     Boolean @default(false)
+  location  String
+  eventDate DateTime
 
-  createdAt    DateTime @default(now())
+  bannerImage String?
+  bookingLink String?
+
+  sponsorName String?
+  sponsorLogo String?
+
+  featured Boolean @default(false)
+
+  heroSlides HeroSlide[]
+
+  createdAt DateTime @default(now())
 }
 
 model Inquiry {
-  id        Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name      String
-  phone     String
-  email     String?
-  message   String
+  name    String
+  phone   String
+  email   String?
+  message String
 
   productId Int?
   eventId   Int?
@@ -62,14 +70,14 @@ model Inquiry {
 }
 
 model Contact {
-  id        Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name      String
-  email     String
-  phone     String?
+  name  String
+  email String
+  phone String?
 
-  subject   String?
-  message   String
+  subject String?
+  message String
 
   createdAt DateTime @default(now())
 }
@@ -80,42 +88,44 @@ model Setting {
   siteName    String?
   companyName String?
 
-  phone       String?
-  email       String?
-  address     String?
+  phone   String?
+  email   String?
+  address String?
 
-  facebook    String?
-  instagram   String?
-  youtube     String?
+  facebook  String?
+  instagram String?
+  youtube   String?
 
-  logo        String?
-  favicon     String?
+  logo    String?
+  favicon String?
 
-  updatedAt   DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model HeroSlide {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  title       String
-  subtitle    String?
+  title    String
+  subtitle String?
 
-  image       String
+  image String?
 
-  buttonText  String?
-  buttonLink  String?
+  buttonText String?
+  buttonLink String?
 
-  slideType   String   @default("custom")
+  slideType String @default("custom")
 
-  productId   Int?
-  eventId     Int?
+  productId Int?
+  eventId   Int?
 
-  order       Int      @default(1)
-  isActive    Boolean  @default(true)
+  product Product? @relation(fields: [productId], references: [id])
+  event   Event?   @relation(fields: [eventId], references: [id])
 
-  createdAt   DateTime @default(now())
+  order    Int     @default(1)
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
 }
-
 
 model HomeContent {
   id Int @id @default(1)
@@ -123,35 +133,35 @@ model HomeContent {
   aboutTitle   String?
   aboutContent String?
 
-  ctaTitle     String?
-  ctaSubtitle  String?
+  ctaTitle    String?
+  ctaSubtitle String?
 
-  updatedAt    DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Gallery {
   id Int @id @default(autoincrement())
 
-  title      String?
-  category   String?
+  title    String?
+  category String?
 
-  image      String
+  image String
 
-  createdAt  DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model Testimonial {
   id Int @id @default(autoincrement())
 
-  name       String
+  name String
 
-  company    String?
+  company String?
 
-  review     String
+  review String
 
-  rating     Int      @default(5)
+  rating Int @default(5)
 
-  image      String?
+  image String?
 
-  createdAt  DateTime @default(now())
+  createdAt DateTime @default(now())
 }
