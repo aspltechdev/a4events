@@ -17,17 +17,19 @@ model User {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  price       Float
-  image       String?
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  price           Float
+  image           String?
 
-  featured    Boolean  @default(false)
+  category        String?
+  discountPercent Int      @default(0)
 
-  createdAt   DateTime @default(now())
+  featured        Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
 }
-
 model Event {
   id           Int      @id @default(autoincrement())
   title        String
@@ -93,22 +95,27 @@ model Setting {
 }
 
 model HeroSlide {
-  id Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
 
   title       String
-  subtitle    String
+  subtitle    String?
+
+  image       String
 
   buttonText  String?
   buttonLink  String?
 
-  image       String?
+  slideType   String   @default("custom")
 
-  order       Int      @default(0)
+  productId   Int?
+  eventId     Int?
 
+  order       Int      @default(1)
   isActive    Boolean  @default(true)
 
   createdAt   DateTime @default(now())
 }
+
 
 model HomeContent {
   id Int @id @default(1)

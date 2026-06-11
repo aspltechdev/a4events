@@ -1,8 +1,165 @@
+// const prisma = require('../config/db');
+
+// // GET ALL SLIDES
+// const getHeroSlides = async (req, res) => {
+//   try {
+//     const slides = await prisma.heroSlide.findMany({
+//       orderBy: {
+//         order: 'asc'
+//       }
+//     });
+
+//     res.json(slides);
+
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       message: 'Failed to fetch hero slides'
+//     });
+//   }
+// };
+
+// // GET SINGLE SLIDE
+// const getHeroSlideById = async (req, res) => {
+//   try {
+//     const slide = await prisma.heroSlide.findUnique({
+//       where: {
+//         id: Number(req.params.id)
+//       }
+//     });
+
+//     if (!slide) {
+//       return res.status(404).json({
+//         message: 'Slide not found'
+//       });
+//     }
+
+//     res.json(slide);
+
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       message: 'Failed to fetch slide'
+//     });
+//   }
+// };
+
+// // CREATE
+// const createHeroSlide = async (req, res) => {
+//   try {
+//     const {
+//       title,
+//       subtitle,
+//       buttonText,
+//       buttonLink,
+//       image,
+//       order,
+//       isActive
+//     } = req.body;
+
+//     const slide =
+//       await prisma.heroSlide.create({
+//         data: {
+//           title,
+//           subtitle,
+//           buttonText,
+//           buttonLink,
+//           image,
+//           order: Number(order || 0),
+//           isActive
+//         }
+//       });
+
+//     res.status(201).json(slide);
+
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       message: 'Failed to create slide'
+//     });
+//   }
+// };
+
+// // UPDATE
+// const updateHeroSlide = async (req, res) => {
+//   try {
+//     const {
+//       title,
+//       subtitle,
+//       buttonText,
+//       buttonLink,
+//       image,
+//       order,
+//       isActive
+//     } = req.body;
+
+//     const slide =
+//       await prisma.heroSlide.update({
+//         where: {
+//           id: Number(req.params.id)
+//         },
+//         data: {
+//           title,
+//           subtitle,
+//           buttonText,
+//           buttonLink,
+//           image,
+//           order: Number(order || 0),
+//           isActive
+//         }
+//       });
+
+//     res.json(slide);
+
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       message: 'Failed to update slide'
+//     });
+//   }
+// };
+
+// // DELETE
+// const deleteHeroSlide = async (req, res) => {
+//   try {
+//     await prisma.heroSlide.delete({
+//       where: {
+//         id: Number(req.params.id)
+//       }
+//     });
+
+//     res.json({
+//       message: 'Slide deleted'
+//     });
+
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       message: 'Failed to delete slide'
+//     });
+//   }
+// };
+
+// module.exports = {
+//   getHeroSlides,
+//   getHeroSlideById,
+//   createHeroSlide,
+//   updateHeroSlide,
+//   deleteHeroSlide
+// };
+
+
 const prisma = require('../config/db');
 
 // GET ALL SLIDES
 const getHeroSlides = async (req, res) => {
   try {
+
     const slides = await prisma.heroSlide.findMany({
       orderBy: {
         order: 'asc'
@@ -12,17 +169,20 @@ const getHeroSlides = async (req, res) => {
     res.json(slides);
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
       message: 'Failed to fetch hero slides'
     });
+
   }
 };
 
 // GET SINGLE SLIDE
 const getHeroSlideById = async (req, res) => {
   try {
+
     const slide = await prisma.heroSlide.findUnique({
       where: {
         id: Number(req.params.id)
@@ -38,17 +198,20 @@ const getHeroSlideById = async (req, res) => {
     res.json(slide);
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
       message: 'Failed to fetch slide'
     });
+
   }
 };
 
-// CREATE
+// CREATE HERO SLIDE
 const createHeroSlide = async (req, res) => {
   try {
+
     const {
       title,
       subtitle,
@@ -56,7 +219,10 @@ const createHeroSlide = async (req, res) => {
       buttonLink,
       image,
       order,
-      isActive
+      isActive,
+      slideType,
+      productId,
+      eventId
     } = req.body;
 
     const slide =
@@ -67,25 +233,39 @@ const createHeroSlide = async (req, res) => {
           buttonText,
           buttonLink,
           image,
-          order: Number(order || 0),
-          isActive
+          order: Number(order || 1),
+          isActive,
+
+          slideType: slideType || "custom",
+
+          productId: productId
+            ? Number(productId)
+            : null,
+
+          eventId: eventId
+            ? Number(eventId)
+            : null
         }
       });
 
     res.status(201).json(slide);
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
-      message: 'Failed to create slide'
+      message: 'Failed to create slide',
+      error: error.message
     });
+
   }
 };
 
-// UPDATE
+// UPDATE HERO SLIDE
 const updateHeroSlide = async (req, res) => {
   try {
+
     const {
       title,
       subtitle,
@@ -93,7 +273,10 @@ const updateHeroSlide = async (req, res) => {
       buttonLink,
       image,
       order,
-      isActive
+      isActive,
+      slideType,
+      productId,
+      eventId
     } = req.body;
 
     const slide =
@@ -107,25 +290,39 @@ const updateHeroSlide = async (req, res) => {
           buttonText,
           buttonLink,
           image,
-          order: Number(order || 0),
-          isActive
+          order: Number(order || 1),
+          isActive,
+
+          slideType: slideType || "custom",
+
+          productId: productId
+            ? Number(productId)
+            : null,
+
+          eventId: eventId
+            ? Number(eventId)
+            : null
         }
       });
 
     res.json(slide);
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
-      message: 'Failed to update slide'
+      message: 'Failed to update slide',
+      error: error.message
     });
+
   }
 };
 
-// DELETE
+// DELETE HERO SLIDE
 const deleteHeroSlide = async (req, res) => {
   try {
+
     await prisma.heroSlide.delete({
       where: {
         id: Number(req.params.id)
@@ -137,11 +334,13 @@ const deleteHeroSlide = async (req, res) => {
     });
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
       message: 'Failed to delete slide'
     });
+
   }
 };
 
