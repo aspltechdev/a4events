@@ -1,33 +1,162 @@
-// import { useState } from 'react';
-// import api from '../services/api';
-// import PublicLayout from '../layouts/PublicLayout';
+// // import { useState } from 'react';
+// // import api from '../services/api';
+// // import PublicLayout from '../layouts/PublicLayout';
+
+// // function Contact() {
+// //   const [formData, setFormData] = useState({
+// //     name: '',
+// //     email: '',
+// //     phone: '',
+// //     subject: '',
+// //     message: ''
+// //   });
+
+// //   const handleSubmit = async (e) => {
+// //     e.preventDefault();
+
+// //     try {
+// //       await api.post(
+// //         '/contact',
+// //         formData
+// //       );
+
+// //       alert('Message Sent');
+
+// //       setFormData({
+// //         name: '',
+// //         email: '',
+// //         phone: '',
+// //         subject: '',
+// //         message: ''
+// //       });
+
+// //     } catch (error) {
+// //       console.error(error);
+// //     }
+// //   };
+
+// //   return (
+// //     <PublicLayout>
+// //     <div>
+// //       <h1>Contact Us</h1>
+
+// //       <form onSubmit={handleSubmit}>
+// //         <input
+// //           placeholder="Name"
+// //           value={formData.name}
+// //           onChange={(e) =>
+// //             setFormData({
+// //               ...formData,
+// //               name: e.target.value
+// //             })
+// //           }
+// //         />
+
+// //         <br /><br />
+
+// //         <input
+// //           placeholder="Email"
+// //           value={formData.email}
+// //           onChange={(e) =>
+// //             setFormData({
+// //               ...formData,
+// //               email: e.target.value
+// //             })
+// //           }
+// //         />
+
+// //         <br /><br />
+
+// //         <input
+// //           placeholder="Phone"
+// //           value={formData.phone}
+// //           onChange={(e) =>
+// //             setFormData({
+// //               ...formData,
+// //               phone: e.target.value
+// //             })
+// //           }
+// //         />
+
+// //         <br /><br />
+
+// //         <input
+// //           placeholder="Subject"
+// //           value={formData.subject}
+// //           onChange={(e) =>
+// //             setFormData({
+// //               ...formData,
+// //               subject: e.target.value
+// //             })
+// //           }
+// //         />
+
+// //         <br /><br />
+
+// //         <textarea
+// //           placeholder="Message"
+// //           value={formData.message}
+// //           onChange={(e) =>
+// //             setFormData({
+// //               ...formData,
+// //               message: e.target.value
+// //             })
+// //           }
+// //         />
+
+// //         <br /><br />
+
+// //         <button type="submit">
+// //           Send Message
+// //         </button>
+// //       </form>
+// //     </div> 
+// //     </PublicLayout>
+// //   );
+// // }
+
+// // export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useState } from "react";
+// import api from "../services/api";
+// import PublicLayout from "../layouts/PublicLayout";
+// import "./Contact.css";
 
 // function Contact() {
 //   const [formData, setFormData] = useState({
-//     name: '',
-//     email: '',
-//     phone: '',
-//     subject: '',
-//     message: ''
+//     name: "",
+//     email: "",
+//     phone: "",
+//     subject: "",
+//     message: "",
 //   });
 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 
 //     try {
-//       await api.post(
-//         '/contact',
-//         formData
-//       );
+//       await api.post("/contact", formData);
 
-//       alert('Message Sent');
+//       alert("Message Sent Successfully");
 
 //       setFormData({
-//         name: '',
-//         email: '',
-//         phone: '',
-//         subject: '',
-//         message: ''
+//         name: "",
+//         email: "",
+//         phone: "",
+//         subject: "",
+//         message: "",
 //       });
 
 //     } catch (error) {
@@ -37,97 +166,142 @@
 
 //   return (
 //     <PublicLayout>
-//     <div>
-//       <h1>Contact Us</h1>
 
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           placeholder="Name"
-//           value={formData.name}
-//           onChange={(e) =>
-//             setFormData({
-//               ...formData,
-//               name: e.target.value
-//             })
-//           }
-//         />
+//       <section className="a4-contact-page">
 
-//         <br /><br />
+//         <div className="a4-contact-header">
 
-//         <input
-//           placeholder="Email"
-//           value={formData.email}
-//           onChange={(e) =>
-//             setFormData({
-//               ...formData,
-//               email: e.target.value
-//             })
-//           }
-//         />
+//           <span className="a4-contact-tag">
+//             GET IN TOUCH
+//           </span>
 
-//         <br /><br />
+//           <h1 className="a4-contact-title">
+//             Let's Create Something Amazing Together
+//           </h1>
 
-//         <input
-//           placeholder="Phone"
-//           value={formData.phone}
-//           onChange={(e) =>
-//             setFormData({
-//               ...formData,
-//               phone: e.target.value
-//             })
-//           }
-//         />
+//           <p className="a4-contact-description">
+//             Have a question, need assistance, or want
+//             to discuss an upcoming event? We'd love to hear from you.
+//           </p>
 
-//         <br /><br />
+//         </div>
 
-//         <input
-//           placeholder="Subject"
-//           value={formData.subject}
-//           onChange={(e) =>
-//             setFormData({
-//               ...formData,
-//               subject: e.target.value
-//             })
-//           }
-//         />
+//         <div className="a4-contact-container">
 
-//         <br /><br />
+//           {/* Contact Info */}
 
-//         <textarea
-//           placeholder="Message"
-//           value={formData.message}
-//           onChange={(e) =>
-//             setFormData({
-//               ...formData,
-//               message: e.target.value
-//             })
-//           }
-//         />
+//           <div className="a4-contact-info">
 
-//         <br /><br />
+//             <div className="a4-contact-card">
+//               <h3>Email</h3>
+//               <p>info@a4events.com</p>
+//             </div>
 
-//         <button type="submit">
-//           Send Message
-//         </button>
-//       </form>
-//     </div> 
+//             <div className="a4-contact-card">
+//               <h3>Phone</h3>
+//               <p>+91 98765 43210</p>
+//             </div>
+
+//             <div className="a4-contact-card">
+//               <h3>Location</h3>
+//               <p>Pondicherry, India</p>
+//             </div>
+
+//           </div>
+
+//           {/* Form */}
+
+//           <form
+//             onSubmit={handleSubmit}
+//             className="a4-contact-form"
+//           >
+
+//             <div className="a4-contact-grid">
+
+//               <input
+//                 type="text"
+//                 placeholder="Your Name"
+//                 value={formData.name}
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     name: e.target.value,
+//                   })
+//                 }
+//               />
+
+//               <input
+//                 type="email"
+//                 placeholder="Email Address"
+//                 value={formData.email}
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     email: e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//             <div className="a4-contact-grid">
+
+//               <input
+//                 type="text"
+//                 placeholder="Phone Number"
+//                 value={formData.phone}
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     phone: e.target.value,
+//                   })
+//                 }
+//               />
+
+//               <input
+//                 type="text"
+//                 placeholder="Subject"
+//                 value={formData.subject}
+//                 onChange={(e) =>
+//                   setFormData({
+//                     ...formData,
+//                     subject: e.target.value,
+//                   })
+//                 }
+//               />
+
+//             </div>
+
+//             <textarea
+//               rows="6"
+//               placeholder="Tell us about your requirement..."
+//               value={formData.message}
+//               onChange={(e) =>
+//                 setFormData({
+//                   ...formData,
+//                   message: e.target.value,
+//                 })
+//               }
+//             />
+
+//             <button
+//               type="submit"
+//               className="a4-contact-btn"
+//             >
+//               Send Message
+//             </button>
+
+//           </form>
+
+//         </div>
+
+//       </section>
+
 //     </PublicLayout>
 //   );
 // }
 
 // export default Contact;
-
-
-
-
-
-
-
-
-
-
-
-
 
 import { useState } from "react";
 import api from "../services/api";
@@ -143,14 +317,17 @@ function Contact() {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       await api.post("/contact", formData);
-
-      alert("Message Sent Successfully");
-
+      
+      setSubmitStatus("success");
       setFormData({
         name: "",
         email: "",
@@ -159,144 +336,199 @@ function Contact() {
         message: "",
       });
 
+      setTimeout(() => setSubmitStatus(null), 3000);
     } catch (error) {
       console.error(error);
+      setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus(null), 3000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <PublicLayout>
-
       <section className="a4-contact-page">
+        {/* Background Elements */}
+        <div className="a4-contact-bg"></div>
+        <div className="a4-contact-bg-accent"></div>
 
-        <div className="a4-contact-header">
-
-          <span className="a4-contact-tag">
-            GET IN TOUCH
-          </span>
-
-          <h1 className="a4-contact-title">
-            Let's Create Something Amazing Together
-          </h1>
-
-          <p className="a4-contact-description">
-            Have a question, need assistance, or want
-            to discuss an upcoming event? We'd love to hear from you.
-          </p>
-
-        </div>
-
-        <div className="a4-contact-container">
-
-          {/* Contact Info */}
-
-          <div className="a4-contact-info">
-
-            <div className="a4-contact-card">
-              <h3>Email</h3>
-              <p>info@a4events.com</p>
+        <div className="a4-contact-container-main">
+          {/* Header */}
+          <div className="a4-contact-header">
+            <div className="a4-contact-badge">
+              <span className="a4-contact-badge-line"></span>
+              <span className="a4-contact-tag">GET IN TOUCH</span>
             </div>
 
-            <div className="a4-contact-card">
-              <h3>Phone</h3>
-              <p>+91 98765 43210</p>
-            </div>
+            <h1 className="a4-contact-title">
+              Let's Create Something
+              <br />
+              <span className="a4-contact-title-accent">Amazing Together</span>
+            </h1>
 
-            <div className="a4-contact-card">
-              <h3>Location</h3>
-              <p>Pondicherry, India</p>
-            </div>
-
+            <p className="a4-contact-description">
+              Have a question, need assistance, or want
+              to discuss an upcoming event? We'd love to hear from you.
+            </p>
           </div>
 
-          {/* Form */}
+          <div className="a4-contact-content">
+            {/* Contact Info Cards */}
+            <div className="a4-contact-info">
+              <div className="a4-contact-card">
+                <div className="a4-contact-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M3 5h16a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M1 7l10 7 10-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="a4-contact-card-content">
+                  <h3>Email</h3>
+                  <p>info@a4events.com</p>
+                </div>
+              </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="a4-contact-form"
-          >
+              <div className="a4-contact-card">
+                <div className="a4-contact-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M16 14l-3-3m0 0a7 7 0 10-10 0 7 7 0 0010 0z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M13 11l3 3m0 0l3 3-3-3z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="a4-contact-card-content">
+                  <h3>Phone</h3>
+                  <p>+91 98765 43210</p>
+                </div>
+              </div>
 
-            <div className="a4-contact-grid">
-
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    name: e.target.value,
-                  })
-                }
-              />
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    email: e.target.value,
-                  })
-                }
-              />
-
+              <div className="a4-contact-card">
+                <div className="a4-contact-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M11 2C8.24 2 6 4.24 6 7c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" strokeWidth="1.5"/>
+                    <circle cx="11" cy="7" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+                  </svg>
+                </div>
+                <div className="a4-contact-card-content">
+                  <h3>Location</h3>
+                  <p>Germany</p>
+                </div>
+              </div>
             </div>
 
-            <div className="a4-contact-grid">
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="a4-contact-form">
+              <div className="a4-contact-grid">
+                <div className="a4-contact-input-wrapper">
+                  <svg className="a4-contact-input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="6" r="4" stroke="currentColor" strokeWidth="1.3"/>
+                    <path d="M3 16c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
 
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    phone: e.target.value,
-                  })
-                }
-              />
+                <div className="a4-contact-input-wrapper">
+                  <svg className="a4-contact-input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M3 5h12a2 2 0 012 2v6a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.3"/>
+                    <path d="M1 7l8 5 8-5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+              </div>
 
-              <input
-                type="text"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    subject: e.target.value,
-                  })
-                }
-              />
+              <div className="a4-contact-grid">
+                <div className="a4-contact-input-wrapper">
+                  <svg className="a4-contact-input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M5 2h8a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.3"/>
+                    <path d="M7 14h4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                  />
+                </div>
 
-            </div>
+                <div className="a4-contact-input-wrapper">
+                  <svg className="a4-contact-input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.3"/>
+                    <path d="M9 5v4l2.5 2.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={(e) =>
+                      setFormData({ ...formData, subject: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
 
-            <textarea
-              rows="6"
-              placeholder="Tell us about your requirement..."
-              value={formData.message}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  message: e.target.value,
-                })
-              }
-            />
+              <div className="a4-contact-input-wrapper a4-contact-textarea-wrapper">
+                <svg className="a4-contact-input-icon a4-contact-textarea-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M2 4h14M2 9h10M2 14h6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                </svg>
+                <textarea
+                  rows="5"
+                  placeholder="Tell us about your requirement..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  required
+                />
+              </div>
 
-            <button
-              type="submit"
-              className="a4-contact-btn"
-            >
-              Send Message
-            </button>
-
-          </form>
-
+              <button
+                type="submit"
+                className={`a4-contact-btn ${isSubmitting ? 'a4-contact-btn-loading' : ''} ${submitStatus === 'success' ? 'a4-contact-btn-success' : ''}`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="a4-contact-btn-spinner"></span>
+                    Sending...
+                  </>
+                ) : submitStatus === 'success' ? (
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M4 9l3 3 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Message Sent
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
-
       </section>
-
     </PublicLayout>
   );
 }

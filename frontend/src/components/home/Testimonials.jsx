@@ -159,6 +159,133 @@
 
 
 
+// import "./Testimonials.css";
+
+// function Testimonials() {
+//   const testimonials = [
+//     {
+//       name: "Rahul Kumar",
+//       role: "Event Enthusiast",
+//       review: "Booking tickets was incredibly simple. The event experience exceeded all expectations and everything was perfectly organized.",
+//       rating: 5
+//     },
+//     {
+//       name: "Priya Sharma",
+//       role: "Frequent Attendee",
+//       review: "A fantastic platform for discovering new events. I found amazing experiences that I would have otherwise missed.",
+//       rating: 5
+//     },
+//     {
+//       name: "Arjun Singh",
+//       role: "Verified Buyer",
+//       review: "From booking to event day, everything was seamless. One of the best event platforms I've used.",
+//       rating: 5
+//     },
+//     {
+//       name: "Meera Nair",
+//       role: "Product Lover",
+//       review: "The organic products are exceptional. Fresh, pure, and delivered on time. Highly recommend their millet mixes!",
+//       rating: 5
+//     },
+//     {
+//       name: "Vikram Reddy",
+//       role: "Regular Customer",
+//       review: "Love their organic rice and pulses. Quality is consistent and pricing is reasonable. Will continue buying.",
+//       rating: 5
+//     },
+//     {
+//       name: "Anjali Desai",
+//       role: "Health Conscious",
+//       review: "Finally found authentic organic products. The cold pressed oils and millet snacks are now my daily essentials.",
+//       rating: 5
+//     }
+//   ];
+
+//   return (
+//     <section className="tm__wrapper">
+//       {/* Background Elements */}
+//       <div className="tm__bgSubtle"></div>
+//       <div className="tm__bgGradient"></div>
+
+//       <div className="tm__container">
+//         {/* Header Section */}
+//         <div className="tm__header">
+//           <div className="tm__headerMarker">
+//             <span className="tm__markerLine"></span>
+//             <span className="tm__markerText">WHAT OUR COMMUNITY SAYS</span>
+//           </div>
+          
+//           <h2 className="tm__headline">
+//             Trusted by thousands for
+//             <br />
+//             <span className="tm__headlineAccent">events & organic products</span>
+//           </h2>
+          
+//           <p className="tm__subhead">
+//             Hear what our community has to say about their experiences discovering events 
+//             and enjoying premium organic products through our platform.
+//           </p>
+//         </div>
+
+//         {/* Testimonials Grid */}
+//         <div className="tm__grid">
+//           {testimonials.map((testimonial, index) => (
+//             <div 
+//               key={index} 
+//               className="tm__card"
+//               style={{ animationDelay: `${index * 0.08}s` }}
+//             >
+//               {/* Quote Icon */}
+//               <div className="tm__quoteIcon">
+//                 <span>“</span>
+//               </div>
+              
+//               {/* Rating Stars */}
+//               <div className="tm__rating">
+//                 {[...Array(5)].map((_, i) => (
+//                   <span key={i} className="tm__star">★</span>
+//                 ))}
+//               </div>
+              
+//               {/* Review Text */}
+//               <p className="tm__review">"{testimonial.review}"</p>
+              
+//               {/* User Info */}
+//               <div className="tm__userInfo">
+//                 <div className="tm__userInitial">
+//                   <span>{testimonial.name.charAt(0)}</span>
+//                 </div>
+//                 <div className="tm__userDetails">
+//                   <div className="tm__userName">{testimonial.name}</div>
+//                   <div className="tm__userRole">{testimonial.role}</div>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Trust Badges */}
+//         <div className="tm__trustSection">
+//           <div className="tm__trustLine"></div>
+//           <div className="tm__trustBadges">
+//             <div className="tm__trustBadge">4.9 ★ Overall Rating</div>
+//             <div className="tm__trustSeparator"></div>
+//             <div className="tm__trustBadge">10,000+ Happy Customers</div>
+//             <div className="tm__trustSeparator"></div>
+//             <div className="tm__trustBadge">Verified Reviews</div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Testimonials;
+
+
+
+
+
 import "./Testimonials.css";
 
 function Testimonials() {
@@ -237,13 +364,20 @@ function Testimonials() {
             >
               {/* Quote Icon */}
               <div className="tm__quoteIcon">
-                <span>“</span>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 16C8 16 4 16 4 12C4 8 8 4 12 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 16C8 16 8 28 8 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M22 16C22 16 18 16 18 12C18 8 22 4 26 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M22 16C22 16 22 28 22 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
               </div>
               
               {/* Rating Stars */}
               <div className="tm__rating">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="tm__star">★</span>
+                  <svg key={i} className="tm__star" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1L10 5.5L15 6L11 9.5L12 14.5L8 12L4 14.5L5 9.5L1 6L6 5.5L8 1Z" fill="currentColor"/>
+                  </svg>
                 ))}
               </div>
               
@@ -252,7 +386,7 @@ function Testimonials() {
               
               {/* User Info */}
               <div className="tm__userInfo">
-                <div className="tm__userInitial">
+                <div className="tm__userAvatar">
                   <span>{testimonial.name.charAt(0)}</span>
                 </div>
                 <div className="tm__userDetails">
@@ -268,11 +402,26 @@ function Testimonials() {
         <div className="tm__trustSection">
           <div className="tm__trustLine"></div>
           <div className="tm__trustBadges">
-            <div className="tm__trustBadge">4.9 ★ Overall Rating</div>
+            <div className="tm__trustBadge">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1L8.5 5.5L13 6L9.5 9L10.5 13.5L7 11L3.5 13.5L4.5 9L1 6L5.5 5.5L7 1Z" fill="currentColor"/>
+              </svg>
+              4.9 ★ Overall Rating
+            </div>
             <div className="tm__trustSeparator"></div>
-            <div className="tm__trustBadge">10,000+ Happy Customers</div>
+            <div className="tm__trustBadge">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1L8.5 5.5L13 6L9.5 9L10.5 13.5L7 11L3.5 13.5L4.5 9L1 6L5.5 5.5L7 1Z" fill="currentColor"/>
+              </svg>
+              10,000+ Happy Customers
+            </div>
             <div className="tm__trustSeparator"></div>
-            <div className="tm__trustBadge">Verified Reviews</div>
+            <div className="tm__trustBadge">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1L8.5 5.5L13 6L9.5 9L10.5 13.5L7 11L3.5 13.5L4.5 9L1 6L5.5 5.5L7 1Z" fill="currentColor"/>
+              </svg>
+              Verified Reviews
+            </div>
           </div>
         </div>
       </div>

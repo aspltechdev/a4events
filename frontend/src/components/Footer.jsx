@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.jpeg";
 import "./Footer.css";
 
 function Footer() {
@@ -10,9 +11,14 @@ function Footer() {
         {/* Brand */}
         <div className="a4-footer-brand">
 
-          <h2 className="a4-footer-logo">
-            A4 Events
-          </h2>
+          <Link to="/" className="a4-footer-logo-link">
+            <img
+              src={logo}
+              alt="A4 Events Logo"
+              className="a4-footer-logo-image"
+            />
+            <span className="a4-footer-logo-text">A4 Events</span>
+          </Link>
 
           <p className="a4-footer-description">
             Discover, explore and book unforgettable

@@ -1,80 +1,400 @@
-/* ==================================
-   ADMIN LAYOUT
-================================== */
+/* ============================================
+   Production-Grade Admin Layout - Light Theme
+   ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+:root {
+  --admin-bg-primary: #FAF8F5;
+  --admin-bg-secondary: #F5F1EB;
+  --admin-bg-white: #FFFFFF;
+  --admin-bg-card: #FFFDF9;
+  
+  --admin-text-dark: #1A1815;
+  --admin-text-charcoal: #2C2A27;
+  --admin-text-body: #5C5852;
+  --admin-text-muted: #8B8579;
+  --admin-text-light: #B0A89C;
+  
+  --admin-accent-blue: #2E5A9E;
+  --admin-accent-blue-light: #4A90D9;
+  --admin-accent-blue-pale: rgba(46, 90, 158, 0.06);
+  --admin-accent-gold: #C9A050;
+  
+  --admin-border-light: #E5DFD7;
+  --admin-border-medium: #D9D1C7;
+  
+  --admin-shadow-sm: 0 1px 3px rgba(26, 24, 21, 0.04);
+  --admin-shadow-md: 0 4px 16px rgba(26, 24, 21, 0.06);
+  
+  --admin-ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --admin-duration-fast: 0.25s;
+  --admin-duration-normal: 0.4s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Admin Layout ===== */
 .a4-admin-layout {
+  display: flex;
   min-height: 100vh;
-
-  background: #f8fafc;
+  background: var(--admin-bg-primary);
 }
 
-/* ==================================
-   CONTENT
-================================== */
-
+/* ===== Main Content Area ===== */
 .a4-admin-content {
-  margin-left: 280px;
-
-  min-height: 100vh;
-
-  padding: 40px;
-
-  background: #f8fafc;
+  flex: 1;
+  overflow-y: auto;
+  background: linear-gradient(135deg, var(--admin-bg-white) 0%, var(--admin-bg-primary) 50%, var(--admin-bg-secondary) 100%);
+  position: relative;
 }
 
-/* ==================================
-   PAGE CARD
-================================== */
-
-.a4-admin-page {
-  background: white;
-
-  border-radius: 24px;
-
-  padding: 30px;
-
-  box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.05);
+.a4-admin-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(46, 90, 158, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(30%, -20%);
 }
 
-/* ==================================
-   TITLES
-================================== */
+.a4-admin-content-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  animation: contentFadeIn 0.5s var(--admin-ease-out) forwards;
+}
 
-.a4-admin-title {
-  font-size: 2rem;
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* ===== Admin Content Typography ===== */
+.a4-admin-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
   font-weight: 800;
-
-  color: #111827;
-
-  margin-bottom: 10px;
+  color: var(--admin-text-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
 }
 
-.a4-admin-subtitle {
-  color: #64748b;
-
-  margin-bottom: 30px;
+.a4-admin-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--admin-text-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
+.a4-admin-content h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--admin-text-charcoal);
+  margin-bottom: 1rem;
+}
 
-@media (max-width: 992px) {
+.a4-admin-content p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--admin-text-body);
+  margin-bottom: 1rem;
+}
 
-  .a4-admin-content {
-    margin-left: 240px;
+/* ===== Admin Cards ===== */
+.a4-admin-card {
+  background: var(--admin-bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--admin-border-light);
+  box-shadow: var(--admin-shadow-sm);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all var(--admin-duration-fast) var(--admin-ease-out);
+}
 
-    padding: 24px;
+.a4-admin-card:hover {
+  box-shadow: var(--admin-shadow-md);
+  transform: translateY(-1px);
+}
+
+/* ===== Admin Tables ===== */
+.a4-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--admin-bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--admin-border-light);
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.a4-admin-table thead {
+  background: var(--admin-accent-blue-pale);
+  border-bottom: 2px solid var(--admin-border-light);
+}
+
+.a4-admin-table th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted);
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.a4-admin-table td {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--admin-text-body);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--admin-border-light);
+}
+
+.a4-admin-table tbody tr {
+  transition: all var(--admin-duration-fast);
+}
+
+.a4-admin-table tbody tr:hover {
+  background: rgba(46, 90, 158, 0.02);
+}
+
+.a4-admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Admin Buttons ===== */
+.a4-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all var(--admin-duration-fast) var(--admin-ease-out);
+  text-decoration: none;
+  border: none;
+}
+
+.a4-admin-btn-primary {
+  background: var(--admin-accent-blue);
+  color: white;
+  box-shadow: 0 4px 15px rgba(46, 90, 158, 0.2);
+}
+
+.a4-admin-btn-primary:hover {
+  background: var(--admin-accent-blue-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(46, 90, 158, 0.3);
+}
+
+.a4-admin-btn-secondary {
+  background: transparent;
+  color: var(--admin-accent-blue);
+  border: 1.5px solid var(--admin-accent-blue);
+}
+
+.a4-admin-btn-secondary:hover {
+  background: var(--admin-accent-blue);
+  color: white;
+}
+
+.a4-admin-btn-danger {
+  background: transparent;
+  color: #DC3545;
+  border: 1.5px solid rgba(220, 53, 69, 0.3);
+}
+
+.a4-admin-btn-danger:hover {
+  background: #DC3545;
+  color: white;
+  border-color: #DC3545;
+}
+
+/* ===== Admin Form Elements ===== */
+.a4-admin-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--admin-text-dark);
+  background: var(--admin-bg-white);
+  border: 1.5px solid var(--admin-border-light);
+  border-radius: 10px;
+  outline: none;
+  transition: all var(--admin-duration-fast);
+}
+
+.a4-admin-input:focus {
+  border-color: var(--admin-accent-blue-light);
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.1);
+}
+
+.a4-admin-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--admin-text-charcoal);
+  margin-bottom: 0.4rem;
+}
+
+/* ===== Admin Grid ===== */
+.a4-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ===== Admin Stats Card ===== */
+.a4-admin-stat-card {
+  background: var(--admin-bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--admin-border-light);
+  box-shadow: var(--admin-shadow-sm);
+  padding: 1.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  transition: all var(--admin-duration-fast) var(--admin-ease-out);
+}
+
+.a4-admin-stat-card:hover {
+  box-shadow: var(--admin-shadow-md);
+  transform: translateY(-2px);
+}
+
+.a4-admin-stat-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--admin-accent-blue-pale);
+  color: var(--admin-accent-blue);
+}
+
+.a4-admin-stat-info h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.03em;
+}
+
+.a4-admin-stat-info p {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--admin-text-dark);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ===== Scrollbar ===== */
+.a4-admin-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.a4-admin-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.a4-admin-content::-webkit-scrollbar-thumb {
+  background: var(--admin-border-medium);
+  border-radius: 6px;
+}
+
+.a4-admin-content::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-text-light);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .a4-admin-content-inner {
+    padding: 2rem;
+  }
+  
+  .a4-admin-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .a4-admin-content h1 {
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 768px) {
+  .a4-admin-layout {
+    flex-direction: column;
+  }
+  
+  .a4-admin-content-inner {
+    padding: 1.5rem;
+  }
+  
+  .a4-admin-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .a4-admin-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .a4-admin-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .a4-admin-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
 
-  .a4-admin-content {
-    margin-left: 0;
-
-    padding: 20px;
+@media (max-width: 480px) {
+  .a4-admin-content-inner {
+    padding: 1rem;
+  }
+  
+  .a4-admin-card {
+    padding: 1.2rem;
+  }
+  
+  .a4-admin-stat-card {
+    padding: 1.2rem;
+  }
+  
+  .a4-admin-stat-info p {
+    font-size: 1.6rem;
   }
 }

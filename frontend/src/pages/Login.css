@@ -1,181 +1,371 @@
-/* ==================================
-   PAGE
-================================== */
+/* ============================================
+   Production-Grade Login Page - Light Theme
+   ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+:root {
+  --login-bg-primary: #FAF8F5;
+  --login-bg-secondary: #F5F1EB;
+  --login-bg-white: #FFFFFF;
+  --login-bg-card: #FFFDF9;
+  
+  --login-text-dark: #1A1815;
+  --login-text-charcoal: #2C2A27;
+  --login-text-body: #5C5852;
+  --login-text-muted: #8B8579;
+  --login-text-light: #B0A89C;
+  
+  --login-accent-blue: #2E5A9E;
+  --login-accent-blue-light: #4A90D9;
+  --login-accent-blue-pale: rgba(46, 90, 158, 0.06);
+  --login-accent-blue-medium: rgba(46, 90, 158, 0.1);
+  --login-accent-gold: #C9A050;
+  --login-accent-gold-light: #D4AF37;
+  --login-accent-red: #DC3545;
+  --login-accent-red-pale: rgba(220, 53, 69, 0.06);
+  
+  --login-border-light: #E5DFD7;
+  --login-border-medium: #D9D1C7;
+  --login-border-card: #EBE5DB;
+  
+  --login-shadow-xs: 0 1px 2px rgba(26, 24, 21, 0.03);
+  --login-shadow-sm: 0 2px 8px rgba(26, 24, 21, 0.05);
+  --login-shadow-md: 0 8px 24px rgba(26, 24, 21, 0.07);
+  --login-shadow-lg: 0 16px 40px rgba(26, 24, 21, 0.1);
+  --login-shadow-xl: 0 24px 60px rgba(26, 24, 21, 0.12);
+  
+  --login-ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --login-duration-fast: 0.25s;
+  --login-duration-normal: 0.4s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Main Page ===== */
 .a4-login-page {
+  position: relative;
   min-height: 100vh;
-
   display: flex;
-
-  justify-content: center;
-
   align-items: center;
-
-  padding: 24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f8fafc,
-      #ffffff
-    );
+  justify-content: center;
+  background: linear-gradient(135deg, var(--login-bg-white) 0%, var(--login-bg-primary) 50%, var(--login-bg-secondary) 100%);
+  overflow: hidden;
+  padding: 2rem;
 }
 
-/* ==================================
-   CARD
-================================== */
+/* ===== Background Orbs ===== */
+.a4-login-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 
-.a4-login-card {
+.a4-login-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+.a4-login-bg-orb-1 {
+  width: 400px;
+  height: 400px;
+  top: -10%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(74, 144, 217, 0.08) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.a4-login-bg-orb-2 {
+  width: 350px;
+  height: 350px;
+  bottom: -5%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(201, 160, 80, 0.06) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+
+.a4-login-bg-orb-3 {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  left: 50%;
+  background: radial-gradient(circle, rgba(46, 90, 158, 0.04) 0%, transparent 70%);
+  animation-delay: -8s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -15px) scale(1.05); }
+  66% { transform: translate(-15px, 15px) scale(0.95); }
+}
+
+/* ===== Container ===== */
+.a4-login-container {
+  position: relative;
+  z-index: 2;
   width: 100%;
-
-  max-width: 450px;
-
-  background: white;
-
-  border-radius: 32px;
-
-  padding: 45px;
-
-  border: 1px solid #e2e8f0;
-
-  box-shadow:
-    0 20px 50px rgba(15,23,42,.08);
+  max-width: 440px;
 }
 
-/* ==================================
-   HEADER
-================================== */
+/* ===== Card ===== */
+.a4-login-card {
+  background: var(--login-bg-card);
+  border-radius: 24px;
+  padding: 3rem;
+  border: 1px solid var(--login-border-card);
+  box-shadow: var(--login-shadow-lg);
+  animation: cardSlideUp 0.6s var(--login-ease-out) forwards;
+}
 
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Brand ===== */
+.a4-login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.a4-login-brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--login-accent-blue-pale);
+  color: var(--login-accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.a4-login-brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--login-text-dark);
+  letter-spacing: -0.02em;
+}
+
+/* ===== Header ===== */
 .a4-login-header {
   text-align: center;
-
-  margin-bottom: 35px;
+  margin-bottom: 2rem;
 }
 
 .a4-login-title {
-  font-size: 2.5rem;
-
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
   font-weight: 800;
-
-  color: #111827;
-
-  margin-bottom: 10px;
+  color: var(--login-text-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .a4-login-subtitle {
-  color: #64748b;
-
-  line-height: 1.7;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--login-text-muted);
+  line-height: 1.5;
 }
 
-/* ==================================
-   ERROR
-================================== */
-
+/* ===== Error Message ===== */
 .a4-login-error {
-  background: #fef2f2;
-
-  border: 1px solid #fecaca;
-
-  color: #dc2626;
-
-  padding: 14px;
-
-  border-radius: 14px;
-
-  margin-bottom: 20px;
-
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--login-accent-red-pale);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  color: var(--login-accent-red);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  animation: shakeError 0.4s ease-in-out;
 }
 
-/* ==================================
-   FORM
-================================== */
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
 
+.a4-login-error svg {
+  flex-shrink: 0;
+}
+
+/* ===== Form ===== */
 .a4-login-form {
   display: flex;
-
   flex-direction: column;
-
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .a4-login-field {
   display: flex;
-
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .a4-login-field label {
-  margin-bottom: 8px;
-
-  font-size: 14px;
-
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-
-  color: #334155;
+  font-size: 0.82rem;
+  color: var(--login-text-charcoal);
+  letter-spacing: 0.02em;
 }
 
-.a4-login-field input {
-  padding: 15px 18px;
-
-  border-radius: 14px;
-
-  border: 1px solid #e2e8f0;
-
-  font-size: 15px;
-
-  transition: .3s;
+/* ===== Input Wrapper ===== */
+.a4-login-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.a4-login-field input:focus {
+.a4-login-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--login-text-light);
+  pointer-events: none;
+  transition: color var(--login-duration-fast);
+}
+
+.a4-login-input-wrapper input {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--login-text-dark);
+  background: var(--login-bg-white);
+  border: 1.5px solid var(--login-border-light);
+  border-radius: 12px;
   outline: none;
-
-  border-color: #111827;
-
-  box-shadow:
-    0 0 0 4px rgba(17,24,39,.05);
+  transition: all var(--login-duration-fast) var(--login-ease-out);
 }
 
-/* ==================================
-   BUTTON
-================================== */
+.a4-login-input-wrapper input:focus {
+  border-color: var(--login-accent-blue-light);
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.1);
+}
 
-.a4-login-btn {
-  margin-top: 10px;
+.a4-login-input-wrapper input:focus ~ .a4-login-input-icon {
+  color: var(--login-accent-blue);
+}
 
+.a4-login-input-wrapper input::placeholder {
+  color: var(--login-text-light);
+}
+
+/* Password Toggle */
+.a4-login-password-toggle {
+  position: absolute;
+  right: 0.8rem;
+  background: none;
   border: none;
-
-  padding: 16px;
-
-  border-radius: 14px;
-
-  background: #111827;
-
-  color: white;
-
-  font-weight: 700;
-
   cursor: pointer;
-
-  transition: .3s;
+  color: var(--login-text-light);
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  transition: color var(--login-duration-fast);
 }
 
-.a4-login-btn:hover {
+.a4-login-password-toggle:hover {
+  color: var(--login-text-muted);
+}
+
+/* ===== Submit Button ===== */
+.a4-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  background: var(--login-accent-blue);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--login-duration-fast) var(--login-ease-out);
+  box-shadow: 0 8px 25px rgba(46, 90, 158, 0.2);
+  margin-top: 0.5rem;
+}
+
+.a4-login-btn:hover:not(:disabled) {
+  background: var(--login-accent-blue-light);
   transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(46, 90, 158, 0.3);
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
+.a4-login-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
 
-@media (max-width: 768px) {
+.a4-login-btn-loading {
+  background: var(--login-accent-blue-light);
+}
 
-  .a4-login-card {
-    padding: 30px;
+.a4-login-btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: btnSpin 0.6s linear infinite;
+}
+
+@keyframes btnSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .a4-login-page {
+    padding: 1rem;
   }
-
+  
+  .a4-login-card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+  
   .a4-login-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
+  }
+  
+  .a4-login-brand {
+    margin-bottom: 2rem;
+  }
+  
+  .a4-login-brand-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .a4-login-brand-text {
+    font-size: 1.2rem;
   }
 }

@@ -24,19 +24,39 @@
 // export default AdminLayout;
 
 
+// import AdminSidebar from "./AdminSidebar";
+// import "./AdminLayout.css";
+
+// function AdminLayout({ children }) {
+//   return (
+//     <div className="a4-admin-layout">
+
+//       <AdminSidebar />
+
+//       <main className="a4-admin-content">
+//         {children}
+//       </main>
+
+//     </div>
+//   );
+// }
+
+// export default AdminLayout;
+
+
 import AdminSidebar from "./AdminSidebar";
 import "./AdminLayout.css";
 
 function AdminLayout({ children }) {
   return (
     <div className="a4-admin-layout">
-
       <AdminSidebar />
 
       <main className="a4-admin-content">
-        {children}
+        <div className="a4-admin-content-inner">
+          {children}
+        </div>
       </main>
-
     </div>
   );
 }

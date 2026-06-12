@@ -1,125 +1,273 @@
-/* ==================================
-   FOOTER
-================================== */
+/* ===== Ultra Premium Light Theme - Footer ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+:root {
+  --footer-cream: #FAF8F5;
+  --footer-ivory: #F5F1EB;
+  --footer-warm-white: #FFFDF9;
+  --footer-soft-gold: #C9A96E;
+  --footer-deep-gold: #B8944F;
+  --footer-dark: #1A1815;
+  --footer-charcoal: #2C2A27;
+  --footer-taupe: #8B8579;
+  --footer-sand: #E8E1D5;
+  --footer-light-border: #E5DFD7;
+  --footer-shadow-sm: 0 1px 2px rgba(26, 24, 21, 0.04);
+  --footer-shadow-md: 0 4px 20px rgba(26, 24, 21, 0.06);
+  --footer-shadow-lg: 0 20px 50px rgba(26, 24, 21, 0.08);
+  --footer-radius-sm: 10px;
+  --footer-radius-md: 16px;
+  --footer-radius-lg: 24px;
+  --footer-radius-xl: 32px;
+  --footer-transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
 .a4-footer {
-  background: #0f172a;
-
-  color: white;
-
-  padding-top: 80px;
+  background: linear-gradient(180deg, #FAF7F2 0%, #F3EEE6 50%, #EBE5DB 100%);
+  border-top: 1px solid var(--footer-light-border);
+  position: relative;
+  overflow: hidden;
 }
 
-/* ==================================
-   CONTAINER
-================================== */
+/* Subtle decorative top border */
+.a4-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 800px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--footer-soft-gold), transparent);
+  opacity: 0.5;
+}
 
 .a4-footer-container {
-  max-width: 1400px;
-
+  max-width: 1280px;
   margin: 0 auto;
-
-  padding: 0 24px 60px;
-
+  padding: 5rem 2.5rem 3.5rem;
   display: grid;
-
-  grid-template-columns:
-    2fr 1fr 1fr 1fr;
-
-  gap: 60px;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
 }
 
-/* ==================================
-   BRAND
-================================== */
+/* ===== Brand Section ===== */
+.a4-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
 
-.a4-footer-logo {
-  font-size: 2rem;
+.a4-footer-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: fit-content;
+  text-decoration: none;
+  transition: var(--footer-transition);
+}
 
-  font-weight: 800;
+.a4-footer-logo-link:hover {
+  transform: translateY(-2px);
+}
 
-  margin-bottom: 20px;
+.a4-footer-logo-image {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--footer-radius-md);
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(26, 24, 21, 0.08);
+  border: 2px solid rgba(201, 169, 110, 0.15);
+  transition: var(--footer-transition);
+}
+
+.a4-footer-logo-link:hover .a4-footer-logo-image {
+  box-shadow: 0 8px 25px rgba(201, 169, 110, 0.22);
+  border-color: rgba(201, 169, 110, 0.4);
+  transform: scale(1.05);
+}
+
+.a4-footer-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--footer-dark);
+  letter-spacing: -0.4px;
+  transition: var(--footer-transition);
+}
+
+.a4-footer-logo-link:hover .a4-footer-logo-text {
+  color: var(--footer-deep-gold);
 }
 
 .a4-footer-description {
-  color: rgba(255,255,255,.7);
-
-  line-height: 1.9;
-
-  max-width: 400px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--footer-taupe);
+  max-width: 340px;
+  margin: 0;
 }
 
-/* ==================================
-   COLUMN
-================================== */
+/* ===== Footer Columns ===== */
+.a4-footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
 
 .a4-footer-column h4 {
-  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--footer-dark);
+  margin: 0 0 0.6rem 0;
+  position: relative;
+}
 
-  margin-bottom: 24px;
-
-  color: white;
+.a4-footer-column h4::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--footer-soft-gold);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  opacity: 0.6;
 }
 
 .a4-footer-column a,
 .a4-footer-column p {
-  display: block;
-
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--footer-taupe);
   text-decoration: none;
+  transition: var(--footer-transition);
+  padding: 0.15rem 0;
+  display: inline-block;
+  width: fit-content;
+  position: relative;
+  border-bottom: 1.5px solid transparent;
+}
 
-  color: rgba(255,255,255,.7);
-
-  margin-bottom: 14px;
-
-  transition: .3s;
+.a4-footer-column a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--footer-soft-gold), rgba(201, 169, 110, 0.3));
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 2px;
 }
 
 .a4-footer-column a:hover {
-  color: white;
+  color: var(--footer-dark);
+  transform: translateX(4px);
 }
 
-/* ==================================
-   BOTTOM
-================================== */
+.a4-footer-column a:hover::after {
+  width: 100%;
+}
 
+.a4-footer-column p {
+  cursor: default;
+  margin: 0;
+}
+
+/* ===== Bottom Bar ===== */
 .a4-footer-bottom {
-  border-top:
-    1px solid rgba(255,255,255,.08);
-
-  padding: 25px;
-
+  border-top: 1px solid rgba(229, 223, 215, 0.7);
+  padding: 1.8rem 2.5rem;
   text-align: center;
+  background: rgba(255, 253, 249, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .a4-footer-bottom p {
-  color: rgba(255,255,255,.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--footer-taupe);
+  letter-spacing: 0.3px;
+  margin: 0;
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
-
-@media (max-width: 992px) {
-
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
   .a4-footer-container {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    padding: 4rem 2rem 2.5rem;
+  }
+  
+  .a4-footer-brand {
+    grid-column: 1 / -1;
+    max-width: 500px;
   }
 }
 
 @media (max-width: 768px) {
+  .a4-footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 3rem 1.5rem 2rem;
+  }
+  
+  .a4-footer-logo-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .a4-footer-logo-text {
+    font-size: 1.45rem;
+  }
+  
+  .a4-footer-description {
+    font-size: 0.85rem;
+  }
+  
+  .a4-footer-bottom {
+    padding: 1.4rem 1.5rem;
+  }
+}
 
+@media (max-width: 500px) {
   .a4-footer-container {
     grid-template-columns: 1fr;
-
-    gap: 40px;
+    gap: 2.2rem;
+    padding: 2.5rem 1.2rem 1.8rem;
   }
-
-  .a4-footer {
-    text-align: center;
+  
+  .a4-footer-brand {
+    grid-column: 1;
   }
-
-  .a4-footer-description {
-    margin: auto;
+  
+  .a4-footer-logo-image {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .a4-footer-logo-text {
+    font-size: 1.3rem;
+  }
+  
+  .a4-footer-column h4 {
+    font-size: 0.75rem;
+  }
+  
+  .a4-footer-column a,
+  .a4-footer-column p {
+    font-size: 0.85rem;
+  }
+  
+  .a4-footer-bottom p {
+    font-size: 0.76rem;
   }
 }

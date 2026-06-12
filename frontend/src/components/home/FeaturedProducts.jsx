@@ -819,7 +819,361 @@
 
 
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./FeaturedProducts.css";
+
+// function FeaturedProducts() {
+//   const [products, setProducts] = useState([]);
+//   const [hoveredProduct, setHoveredProduct] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     loadProducts();
+//   }, []);
+
+//   const loadProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products/featured");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent / 100);
+//     }
+//     return null;
+//   };
+
+//   const handleAddToCart = (productId) => {
+//     navigate(`/products/${productId}`);
+//   };
+
+//   return (
+//     <section className="fp__wrapper">
+//       <div className="fp__bgSubtle"></div>
+//       <div className="fp__bgGradient"></div>
+
+//       <div className="fp__container">
+//         {/* Header Section */}
+//         <div className="fp__header">
+//           <div className="fp__headerMarker">
+//             <span className="fp__markerLine"></span>
+//             <span className="fp__markerText">PREMIUM COLLECTION</span>
+//           </div>
+          
+//           <h2 className="fp__headline">
+//             Naturally sourced,
+//             <br />
+//             <span className="fp__headlineAccent">delivered with care</span>
+//           </h2>
+          
+//           <p className="fp__subhead">
+//             Discover our handpicked selection of organic, chemical-free products 
+//             sourced directly from trusted farms. Each item is carefully curated 
+//             for your wellness journey.
+//           </p>
+//         </div>
+
+//         {/* Products Grid */}
+//         <div className="fp__grid">
+//           {products.map((product, index) => {
+//             const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//             const hasDiscount = product.discountPercent && product.discountPercent > 0;
+            
+//             return (
+//               <div
+//                 key={product.id}
+//                 className={`fp__card ${hoveredProduct === product.id ? 'fp__cardHovered' : ''}`}
+//                 onMouseEnter={() => setHoveredProduct(product.id)}
+//                 onMouseLeave={() => setHoveredProduct(null)}
+//                 style={{ animationDelay: `${index * 0.08}s` }}
+//               >
+//                 {/* Image Section - Clickable */}
+//                 <div 
+//                   className="fp__media"
+//                   onClick={() => handleAddToCart(product.id)}
+//                   style={{ cursor: 'pointer' }}
+//                 >
+//                   <div className="fp__imageWrapper">
+//                     <img
+//                       // src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.image}`}
+//                        src={`http://localhost:5000${product.image}`}
+//                       // alt={product.title}
+//                       className="fp__image"
+//                       loading="lazy"
+//                     />
+//                     <div className="fp__imageBackdrop"></div>
+//                   </div>
+                  
+//                   {hasDiscount && (
+//                     <div className="fp__discountBadge">
+//                       <span>{product.discountPercent}% OFF</span>
+//                     </div>
+//                   )}
+                  
+//                   {product.featured && !hasDiscount && (
+//                     <div className="fp__featuredBadge">
+//                       <span>Featured</span>
+//                     </div>
+//                   )}
+//                 </div>
+
+//                 {/* Product Details */}
+//                 <div className="fp__details">
+//                   <div 
+//                     className="fp__category"
+//                     onClick={() => handleAddToCart(product.id)}
+//                     style={{ cursor: 'pointer' }}
+//                   >
+//                     {product.category}
+//                   </div>
+                  
+//                   <h3 
+//                     className="fp__title"
+//                     onClick={() => handleAddToCart(product.id)}
+//                     style={{ cursor: 'pointer' }}
+//                   >
+//                     {product.title}
+//                   </h3>
+                  
+//                   <p className="fp__description">{product.description}</p>
+                  
+//                   <div className="fp__pricing">
+//                     {hasDiscount ? (
+//                       <>
+//                         <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                         <span className="fp__priceOriginal">₹{product.price}</span>
+//                         <span className="fp__priceSave">Save {product.discountPercent}%</span>
+//                       </>
+//                     ) : (
+//                       <span className="fp__priceCurrent">₹{product.price}</span>
+//                     )}
+//                   </div>
+                  
+//                   <button 
+//                     className="fp__actionBtn"
+//                     onClick={() => handleAddToCart(product.id)}
+//                   >
+//                     View Product
+//                   </button>
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </div>
+
+//         {/* Footer Actions */}
+//         <div className="fp__footer">
+//           <Link to="/products" className="fp__viewAllBtn">
+//             Explore Complete Collection
+//             <span className="fp__arrowIcon">→</span>
+//           </Link>
+//         </div>
+
+//         {/* Quality Assurance */}
+//         <div className="fp__qualitySection">
+//           <div className="fp__qualityLine"></div>
+//           <div className="fp__qualityBadges">
+//             <div className="fp__qualityBadge">Certified Organic</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Chemical Free</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Lab Tested</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Fresh Stock</div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default FeaturedProducts;
+
+
+
+// import { useEffect, useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./FeaturedProducts.css";
+
+// function FeaturedProducts() {
+//   const [products, setProducts] = useState([]);
+//   const [hoveredProduct, setHoveredProduct] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     loadProducts();
+//   }, []);
+
+//   const loadProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products/featured");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent / 100);
+//     }
+//     return null;
+//   };
+
+//   const handleAddToCart = (productId) => {
+//     navigate(`/products/${productId}`);
+//   };
+
+//   return (
+//     <section className="fp__wrapper">
+//       <div className="fp__bgSubtle"></div>
+//       <div className="fp__bgGradient"></div>
+
+//       <div className="fp__container">
+//         {/* Header Section */}
+//         <div className="fp__header">
+//           <div className="fp__headerMarker">
+//             <span className="fp__markerLine"></span>
+//             <span className="fp__markerText">PREMIUM COLLECTION</span>
+//           </div>
+          
+//           <h2 className="fp__headline">
+//             Naturally sourced,
+//             <br />
+//             <span className="fp__headlineAccent">delivered with care</span>
+//           </h2>
+          
+//           <p className="fp__subhead">
+//             Discover our handpicked selection of organic, chemical-free products 
+//             sourced directly from trusted farms. Each item is carefully curated 
+//             for your wellness journey.
+//           </p>
+//         </div>
+
+//         {/* Products Grid */}
+//         <div className="fp__grid">
+//           {products.map((product, index) => {
+//             const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//             const hasDiscount = product.discountPercent && product.discountPercent > 0;
+            
+//             return (
+//               <div
+//                 key={product.id}
+//                 className={`fp__card ${hoveredProduct === product.id ? 'fp__cardHovered' : ''}`}
+//                 onMouseEnter={() => setHoveredProduct(product.id)}
+//                 onMouseLeave={() => setHoveredProduct(null)}
+//                 style={{ animationDelay: `${index * 0.08}s` }}
+//               >
+//                 {/* Image Section - Clickable */}
+//                 <div 
+//                   className="fp__media"
+//                   onClick={() => handleAddToCart(product.id)}
+//                   style={{ cursor: 'pointer' }}
+//                 >
+//                   <div className="fp__imageWrapper">
+//                     <img
+//                       src={`http://localhost:5000${product.image}`}
+//                       alt={product.title}
+//                       className="fp__image"
+//                       loading="lazy"
+//                     />
+//                     <div className="fp__imageBackdrop"></div>
+//                   </div>
+                  
+//                   {hasDiscount && (
+//                     <div className="fp__discountBadge">
+//                       <span>{product.discountPercent}% OFF</span>
+//                     </div>
+//                   )}
+                  
+//                   {product.featured && !hasDiscount && (
+//                     <div className="fp__featuredBadge">
+//                       <span>Featured</span>
+//                     </div>
+//                   )}
+//                 </div>
+
+//                 {/* Product Details */}
+//                 <div className="fp__details">
+//                   <div 
+//                     className="fp__category"
+//                     onClick={() => handleAddToCart(product.id)}
+//                     style={{ cursor: 'pointer' }}
+//                   >
+//                     {product.category}
+//                   </div>
+                  
+//                   <h3 
+//                     className="fp__title"
+//                     onClick={() => handleAddToCart(product.id)}
+//                     style={{ cursor: 'pointer' }}
+//                   >
+//                     {product.title}
+//                   </h3>
+                  
+//                   <p className="fp__description">{product.description}</p>
+                  
+//                   <div className="fp__pricing">
+//                     {hasDiscount ? (
+//                       <>
+//                         <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                         <span className="fp__priceOriginal">₹{product.price}</span>
+//                         <span className="fp__priceSave">Save {product.discountPercent}%</span>
+//                       </>
+//                     ) : (
+//                       <span className="fp__priceCurrent">₹{product.price}</span>
+//                     )}
+//                   </div>
+                  
+//                   <button 
+//                     className="fp__actionBtn"
+//                     onClick={() => handleAddToCart(product.id)}
+//                   >
+//                     View Product
+//                   </button>
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </div>
+
+//         {/* Footer Actions */}
+//         <div className="fp__footer">
+//           <Link to="/products" className="fp__viewAllBtn">
+//             Explore Complete Collection
+//             <span className="fp__arrowIcon">→</span>
+//           </Link>
+//         </div>
+
+//         {/* Quality Assurance */}
+//         <div className="fp__qualitySection">
+//           <div className="fp__qualityLine"></div>
+//           <div className="fp__qualityBadges">
+//             <div className="fp__qualityBadge">Certified Organic</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Chemical Free</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Lab Tested</div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">Fresh Stock</div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default FeaturedProducts;
+
+
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./FeaturedProducts.css";
@@ -827,7 +1181,9 @@ import "./FeaturedProducts.css";
 function FeaturedProducts() {
   const [products, setProducts] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
+  const marqueeRef = useRef(null);
 
   useEffect(() => {
     loadProducts();
@@ -849,9 +1205,12 @@ function FeaturedProducts() {
     return null;
   };
 
-  const handleAddToCart = (productId) => {
+  const handleViewProduct = (productId) => {
     navigate(`/products/${productId}`);
   };
+
+  // Duplicate products for seamless marquee
+  const marqueeProducts = [...products, ...products];
 
   return (
     <section className="fp__wrapper">
@@ -879,93 +1238,105 @@ function FeaturedProducts() {
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="fp__grid">
-          {products.map((product, index) => {
-            const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
-            const hasDiscount = product.discountPercent && product.discountPercent > 0;
-            
-            return (
-              <div
-                key={product.id}
-                className={`fp__card ${hoveredProduct === product.id ? 'fp__cardHovered' : ''}`}
-                onMouseEnter={() => setHoveredProduct(product.id)}
-                onMouseLeave={() => setHoveredProduct(null)}
-                style={{ animationDelay: `${index * 0.08}s` }}
-              >
-                {/* Image Section - Clickable */}
-                <div 
-                  className="fp__media"
-                  onClick={() => handleAddToCart(product.id)}
-                  style={{ cursor: 'pointer' }}
+        {/* Marquee Products */}
+        <div 
+          className="fp__marqueeWrapper"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div 
+            ref={marqueeRef}
+            className={`fp__marqueeTrack ${isPaused ? 'fp__marqueePaused' : ''}`}
+          >
+            {marqueeProducts.map((product, index) => {
+              const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+              const hasDiscount = product.discountPercent && product.discountPercent > 0;
+              
+              return (
+                <div
+                  key={`${product.id}-${index}`}
+                  className={`fp__card ${hoveredProduct === `${product.id}-${index}` ? 'fp__cardHovered' : ''}`}
+                  onMouseEnter={() => setHoveredProduct(`${product.id}-${index}`)}
+                  onMouseLeave={() => setHoveredProduct(null)}
                 >
-                  <div className="fp__imageWrapper">
-                    <img
-                      // src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.image}`}
-                       src={`http://localhost:5000${product.image}`}
-                      // alt={product.title}
-                      className="fp__image"
-                      loading="lazy"
-                    />
-                    <div className="fp__imageBackdrop"></div>
-                  </div>
-                  
-                  {hasDiscount && (
-                    <div className="fp__discountBadge">
-                      <span>{product.discountPercent}% OFF</span>
-                    </div>
-                  )}
-                  
-                  {product.featured && !hasDiscount && (
-                    <div className="fp__featuredBadge">
-                      <span>Featured</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Product Details */}
-                <div className="fp__details">
+                  {/* Image Section */}
                   <div 
-                    className="fp__category"
-                    onClick={() => handleAddToCart(product.id)}
-                    style={{ cursor: 'pointer' }}
+                    className="fp__media"
+                    onClick={() => handleViewProduct(product.id)}
                   >
-                    {product.category}
-                  </div>
-                  
-                  <h3 
-                    className="fp__title"
-                    onClick={() => handleAddToCart(product.id)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {product.title}
-                  </h3>
-                  
-                  <p className="fp__description">{product.description}</p>
-                  
-                  <div className="fp__pricing">
-                    {hasDiscount ? (
-                      <>
-                        <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
-                        <span className="fp__priceOriginal">₹{product.price}</span>
-                        <span className="fp__priceSave">Save {product.discountPercent}%</span>
-                      </>
-                    ) : (
-                      <span className="fp__priceCurrent">₹{product.price}</span>
+                    <div className="fp__imageWrapper">
+                      <img
+                        src={`http://localhost:5000${product.image}`}
+                        alt={product.title}
+                        className="fp__image"
+                        loading="lazy"
+                      />
+                      <div className="fp__imageBackdrop"></div>
+                    </div>
+                    
+                    {hasDiscount && (
+                      <div className="fp__discountBadge">
+                        <span>{product.discountPercent}% OFF</span>
+                      </div>
+                    )}
+                    
+                    {product.featured && !hasDiscount && (
+                      <div className="fp__featuredBadge">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
+                        </svg>
+                        <span>Featured</span>
+                      </div>
                     )}
                   </div>
-                  
-                  <button 
-                    className="fp__actionBtn"
-                    onClick={() => handleAddToCart(product.id)}
-                  >
-                    View Product
-                  </button>
+
+                  {/* Product Details */}
+                  <div className="fp__details">
+                    <div 
+                      className="fp__category"
+                      onClick={() => handleViewProduct(product.id)}
+                    >
+                      {product.category}
+                    </div>
+                    
+                    <h3 
+                      className="fp__title"
+                      onClick={() => handleViewProduct(product.id)}
+                    >
+                      {product.title}
+                    </h3>
+                    
+                    <p className="fp__description">{product.description}</p>
+                    
+                    <div className="fp__pricing">
+                      {hasDiscount ? (
+                        <>
+                          <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
+                          <span className="fp__priceOriginal">₹{product.price}</span>
+                          <span className="fp__priceSave">Save {product.discountPercent}%</span>
+                        </>
+                      ) : (
+                        <span className="fp__priceCurrent">₹{product.price}</span>
+                      )}
+                    </div>
+                    
+                    <button 
+                      className="fp__actionBtn"
+                      onClick={() => handleViewProduct(product.id)}
+                    >
+                      View Product
+                      <span className="fp__btnArrow">→</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+
+        {/* Gradient Fade Edges */}
+        <div className="fp__marqueeFadeLeft"></div>
+        <div className="fp__marqueeFadeRight"></div>
 
         {/* Footer Actions */}
         <div className="fp__footer">
@@ -979,13 +1350,33 @@ function FeaturedProducts() {
         <div className="fp__qualitySection">
           <div className="fp__qualityLine"></div>
           <div className="fp__qualityBadges">
-            <div className="fp__qualityBadge">Certified Organic</div>
+            <div className="fp__qualityBadge">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+              </svg>
+              Certified Organic
+            </div>
             <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">Chemical Free</div>
+            <div className="fp__qualityBadge">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+              </svg>
+              Chemical Free
+            </div>
             <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">Lab Tested</div>
+            <div className="fp__qualityBadge">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+              </svg>
+              Lab Tested
+            </div>
             <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">Fresh Stock</div>
+            <div className="fp__qualityBadge">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+              </svg>
+              Fresh Stock
+            </div>
           </div>
         </div>
       </div>
