@@ -1570,13 +1570,15 @@ function Hero() {
         <div 
           className="hero-bg-image"
           style={{
-            backgroundImage: `url(http://localhost:5000${slide.image})`,
+            backgroundImage: `url(https://a4agroup.eu${slide.image})`,
             transform: `scale(1.05) translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)`
           }}
         />
+
+
         <div className="hero-bg-image-next"
           style={{
-            backgroundImage: `url(http://localhost:5000${slides[(current + 1) % slides.length].image})`,
+            backgroundImage: `url(https://a4agroup.eu${slides[(current + 1) % slides.length].image})`,
             opacity: isAnimating ? 1 : 0
           }}
         />
