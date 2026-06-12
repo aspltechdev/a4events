@@ -63,9 +63,9 @@
 }
 
 .logo-image {
-  width: 56px;
+  width: 156px;
   height: 56px;
-  border-radius: var(--nav-radius-md);
+  /* border-radius: var(--nav-radius-md); */
   object-fit: cover;
   box-shadow: 0 4px 15px rgba(26, 24, 21, 0.08);
   border: 2px solid rgba(201, 169, 110, 0.15);
