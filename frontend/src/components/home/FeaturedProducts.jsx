@@ -155,7 +155,7 @@
 // //             )}
 
 // //             <h3>{product.title}</h3>
-// //             <p>₹{product.price}</p>
+// //             <p>€{product.price}</p>
 // //           </div>
 // //         ))}
 // //       </div>
@@ -232,7 +232,7 @@
 
 // //                 <div className="a4-event-footer">
 // //                   <span className="a4-event-price">
-// //                     ₹{product.price}
+// //                     €{product.price}
 // //                   </span>
 
 // //                   <button className="a4-event-btn">
@@ -329,7 +329,7 @@
 // //                 <div className="a4-product-footer">
 
 // //                   <span className="a4-product-price">
-// //                     ₹{product.price}
+// //                     €{product.price}
 // //                   </span>
 
 // //                   <button className="a4-product-btn">
@@ -449,7 +449,7 @@
 // //                 </div>
                 
 // //                 <div className="product-pricing">
-// //                   <span className="price-current">₹{product.price}</span>
+// //                   <span className="price-current">€{product.price}</span>
 // //                   <span className="price-unit">INR</span>
 // //                 </div>
                 
@@ -604,12 +604,12 @@
 // //                   <div className="product-pricing">
 // //                     {hasDiscount ? (
 // //                       <>
-// //                         <span className="price-current">₹{Math.round(discountedPrice)}</span>
-// //                         <span className="price-original">₹{product.price}</span>
+// //                         <span className="price-current">€{Math.round(discountedPrice)}</span>
+// //                         <span className="price-original">€{product.price}</span>
 // //                         <span className="price-save">Save {product.discountPercent}%</span>
 // //                       </>
 // //                     ) : (
-// //                       <span className="price-current">₹{product.price}</span>
+// //                       <span className="price-current">€{product.price}</span>
 // //                     )}
 // //                   </div>
                   
@@ -770,12 +770,12 @@
 //                   <div className="fp__pricing">
 //                     {hasDiscount ? (
 //                       <>
-//                         <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
-//                         <span className="fp__priceOriginal">₹{product.price}</span>
+//                         <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
+//                         <span className="fp__priceOriginal">€{product.price}</span>
 //                         <span className="fp__priceSave">Save {product.discountPercent}%</span>
 //                       </>
 //                     ) : (
-//                       <span className="fp__priceCurrent">₹{product.price}</span>
+//                       <span className="fp__priceCurrent">€{product.price}</span>
 //                     )}
 //                   </div>
                   
@@ -946,12 +946,12 @@
 //                   <div className="fp__pricing">
 //                     {hasDiscount ? (
 //                       <>
-//                         <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
-//                         <span className="fp__priceOriginal">₹{product.price}</span>
+//                         <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
+//                         <span className="fp__priceOriginal">€{product.price}</span>
 //                         <span className="fp__priceSave">Save {product.discountPercent}%</span>
 //                       </>
 //                     ) : (
-//                       <span className="fp__priceCurrent">₹{product.price}</span>
+//                       <span className="fp__priceCurrent">€{product.price}</span>
 //                     )}
 //                   </div>
                   
@@ -1123,12 +1123,12 @@
 //                   <div className="fp__pricing">
 //                     {hasDiscount ? (
 //                       <>
-//                         <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
-//                         <span className="fp__priceOriginal">₹{product.price}</span>
+//                         <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
+//                         <span className="fp__priceOriginal">€{product.price}</span>
 //                         <span className="fp__priceSave">Save {product.discountPercent}%</span>
 //                       </>
 //                     ) : (
-//                       <span className="fp__priceCurrent">₹{product.price}</span>
+//                       <span className="fp__priceCurrent">€{product.price}</span>
 //                     )}
 //                   </div>
                   
@@ -1311,12 +1311,12 @@ function FeaturedProducts() {
                     <div className="fp__pricing">
                       {hasDiscount ? (
                         <>
-                          <span className="fp__priceCurrent">₹{Math.round(discountedPrice)}</span>
-                          <span className="fp__priceOriginal">₹{product.price}</span>
+                          <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
+                          <span className="fp__priceOriginal">€{product.price}</span>
                           <span className="fp__priceSave">Save {product.discountPercent}%</span>
                         </>
                       ) : (
-                        <span className="fp__priceCurrent">₹{product.price}</span>
+                        <span className="fp__priceCurrent">€{product.price}</span>
                       )}
                     </div>
                     

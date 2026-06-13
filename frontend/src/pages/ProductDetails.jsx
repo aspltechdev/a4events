@@ -21,7 +21,7 @@
 // // // // // //     <div>
 // // // // // //       <h1>{product.title}</h1>
 // // // // // //       <p>{product.description}</p>
-// // // // // //       <p>₹{product.price}</p>
+// // // // // //       <p>€{product.price}</p>
 
 // // // // // //       {product.image && (
 // // // // // //         <img
@@ -53,7 +53,7 @@
 
 // // // // //     <p>{product.description}</p>
 
-// // // // //     <h2>₹{product.price}</h2>
+// // // // //     <h2>€{product.price}</h2>
 
 // // // // //     <button>
 // // // // //       Enquire Now
@@ -109,7 +109,7 @@
 
 // // // // //       <p>{product.description}</p>
 
-// // // // //       <h2>₹{product.price}</h2>
+// // // // //       <h2>€{product.price}</h2>
 // // // // // {/* 
 // // // // //       <button>
 // // // // //         Enquire Now
@@ -187,7 +187,7 @@
 // // // // //             </p>
 
 // // // // //             <div className="a4-product-price">
-// // // // //               ₹{product.price}
+// // // // //               €{product.price}
 // // // // //             </div>
 
 // // // // //           </div>
@@ -328,7 +328,7 @@
 // // // //             </h1>
 
 // // // //             <div className="a4-product-price">
-// // // //               ₹{product.price}
+// // // //               €{product.price}
 // // // //             </div>
 
 // // // //             <p className="a4-product-description">
@@ -514,7 +514,7 @@
 // // //             </h1>
 
 // // //             <div className="a4-product-price">
-// // //               ₹{product.price}
+// // //               €{product.price}
 // // //             </div>
 
 // // //             <p className="a4-product-description">
@@ -718,7 +718,7 @@
 // // //             </h1>
 
 // // //             <div className="a4-product-price">
-// // //               ₹{product.price}
+// // //               €{product.price}
 // // //             </div>
 
 // // //             <p className="a4-product-description">
@@ -904,13 +904,13 @@
 // // //             <div className="a4-product-price-box">
 
 // // //               <span className="a4-product-final-price">
-// // //                 ₹{discountedPrice.toFixed(2)}
+// // //                 €{discountedPrice.toFixed(2)}
 // // //               </span>
 
 // // //               {product.discountPercent > 0 && (
 // // //                 <>
 // // //                   <span className="a4-product-old-price">
-// // //                     ₹{product.price}
+// // //                     €{product.price}
 // // //                   </span>
 
 // // //                   <span className="a4-product-discount">
@@ -1146,10 +1146,10 @@
 // //               <h1 className="prdd__title">{product.title}</h1>
               
 // //               <div className="prdd__pricing">
-// //                 <span className="prdd__priceCurrent">₹{Math.round(discountedPrice)}</span>
+// //                 <span className="prdd__priceCurrent">€{Math.round(discountedPrice)}</span>
 // //                 {hasDiscount && (
 // //                   <>
-// //                     <span className="prdd__priceOriginal">₹{product.price}</span>
+// //                     <span className="prdd__priceOriginal">€{product.price}</span>
 // //                     <span className="prdd__saveBadge">Save {product.discountPercent}%</span>
 // //                   </>
 // //                 )}
@@ -1346,9 +1346,9 @@
               
 // //               <div className="pdt__priceWrapper">
 // //                 <div className="pdt__priceBox">
-// //                   <span className="pdt__priceCurrent">₹{Math.round(discountedPrice)}</span>
+// //                   <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
 // //                   {hasDiscount && (
-// //                     <span className="pdt__priceOriginal">₹{product.price}</span>
+// //                     <span className="pdt__priceOriginal">€{product.price}</span>
 // //                   )}
 // //                 </div>
 // //                 {hasDiscount && (
@@ -1552,9 +1552,9 @@
               
 // //               <div className="pdt__priceWrapper">
 // //                 <div className="pdt__priceBox">
-// //                   <span className="pdt__priceCurrent">₹{Math.round(discountedPrice)}</span>
+// //                   <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
 // //                   {hasDiscount && (
-// //                     <span className="pdt__priceOriginal">₹{product.price}</span>
+// //                     <span className="pdt__priceOriginal">€{product.price}</span>
 // //                   )}
 // //                 </div>
 // //                 {hasDiscount && (
@@ -1769,9 +1769,9 @@
               
 //               <div className="pdt__priceWrapper">
 //                 <div className="pdt__priceBox">
-//                   <span className="pdt__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                   <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
 //                   {hasDiscount && (
-//                     <span className="pdt__priceOriginal">₹{product.price}</span>
+//                     <span className="pdt__priceOriginal">€{product.price}</span>
 //                   )}
 //                 </div>
 //                 {hasDiscount && (
@@ -2024,9 +2024,9 @@ function ProductDetails() {
               
               <div className="pdt__priceWrapper">
                 <div className="pdt__priceBox">
-                  <span className="pdt__priceCurrent">₹{Math.round(discountedPrice)}</span>
+                  <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
                   {hasDiscount && (
-                    <span className="pdt__priceOriginal">₹{product.price}</span>
+                    <span className="pdt__priceOriginal">€{product.price}</span>
                   )}
                 </div>
                 {hasDiscount && (

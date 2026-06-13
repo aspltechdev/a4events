@@ -1225,7 +1225,7 @@ function EditProduct() {
             <div className="a4-edit-group">
 
               <label>
-                Price (₹)
+                Price (€)
               </label>
 
               <input

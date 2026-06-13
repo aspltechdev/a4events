@@ -667,7 +667,7 @@
 
 //           <div className="a4-form-grid">
 //             <div className="a4-form-group">
-//               <label>Price (₹)</label>
+//               <label>Price (€)</label>
 
 //               <input
 //                 type="number"
@@ -937,7 +937,7 @@ function AddProduct() {
               {/* Price + Discount */}
               <div className="aap-form-row">
                 <div className="aap-form-group">
-                  <label>Price (₹)</label>
+                  <label>Price (€)</label>
                   <div className="aap-input-wrapper">
                     <svg className="aap-input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
                       <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5"/>

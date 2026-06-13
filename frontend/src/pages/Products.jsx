@@ -60,7 +60,7 @@
 
 //           <h3>{product.title}</h3>
 
-//           <p>₹{product.price}</p>
+//           <p>€{product.price}</p>
 
 //           <Link to={`/products/${product.id}`}>
 //             View Details
@@ -154,7 +154,7 @@
 //                 <div className="a4-products-page-footer">
 
 //                   <span className="a4-products-page-price">
-//                     ₹{product.price}
+//                     €{product.price}
 //                   </span>
 
 //                   <Link
@@ -311,7 +311,7 @@
 //                           <div className="product-price-box">
 
 //                             <span className="discounted-price">
-//                               ₹
+//                               €
 //                               {discountedPrice.toFixed(
 //                                 0
 //                               )}
@@ -320,7 +320,7 @@
 //                             {product.discountPercent >
 //                               0 && (
 //                               <span className="original-price">
-//                                 ₹
+//                                 €
 //                                 {
 //                                   product.price
 //                                 }
@@ -500,9 +500,9 @@
 //                             </p>
                             
 //                             <div className="prd__pricing">
-//                               <span className="prd__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                               <span className="prd__priceCurrent">€{Math.round(discountedPrice)}</span>
 //                               {hasDiscount && (
-//                                 <span className="prd__priceOriginal">₹{product.price}</span>
+//                                 <span className="prd__priceOriginal">€{product.price}</span>
 //                               )}
 //                             </div>
                             
@@ -680,9 +680,9 @@
 //                             </p>
                             
 //                             <div className="prd__pricing">
-//                               <span className="prd__priceCurrent">₹{Math.round(discountedPrice)}</span>
+//                               <span className="prd__priceCurrent">€{Math.round(discountedPrice)}</span>
 //                               {hasDiscount && (
-//                                 <span className="prd__priceOriginal">₹{product.price}</span>
+//                                 <span className="prd__priceOriginal">€{product.price}</span>
 //                               )}
 //                             </div>
                             
@@ -863,9 +863,9 @@ function Products() {
                             </p>
                             
                             <div className="prd__pricing">
-                              <span className="prd__priceCurrent">₹{Math.round(discountedPrice)}</span>
+                              <span className="prd__priceCurrent">€{Math.round(discountedPrice)}</span>
                               {hasDiscount && (
-                                <span className="prd__priceOriginal">₹{product.price}</span>
+                                <span className="prd__priceOriginal">€{product.price}</span>
                               )}
                             </div>
                             

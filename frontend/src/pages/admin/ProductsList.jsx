@@ -266,7 +266,7 @@
 //                 <h3>{product.title}</h3>
 
 //                 <div className="a4-product-price">
-//                   ₹{product.price}
+//                   €{product.price}
 //                 </div>
 
 //                 <div className="a4-product-actions">
@@ -443,13 +443,13 @@
 //                   <div className="a4-product-pricing">
 
 //                     <span className="a4-final-price">
-//                       ₹{discountedPrice.toFixed(2)}
+//                       €{discountedPrice.toFixed(2)}
 //                     </span>
 
 //                     {product.discountPercent >
 //                       0 && (
 //                       <span className="a4-old-price">
-//                         ₹{product.price}
+//                         €{product.price}
 //                       </span>
 //                     )}
 
@@ -643,9 +643,9 @@ function ProductsList() {
                     <h3 className="apl-title">{product.title}</h3>
                     
                     <div className="apl-pricing">
-                      <span className="apl-price-current">₹{discountedPrice.toFixed(0)}</span>
+                      <span className="apl-price-current">€{discountedPrice.toFixed(0)}</span>
                       {product.discountPercent > 0 && (
-                        <span className="apl-price-original">₹{product.price}</span>
+                        <span className="apl-price-original">€{product.price}</span>
                       )}
                     </div>
 
