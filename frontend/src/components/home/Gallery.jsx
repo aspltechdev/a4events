@@ -423,6 +423,143 @@
 // export default Gallery;
 
 
+// import { useEffect, useState } from "react";
+// import api from "../../services/api";
+// import "./Gallery.css";
+
+// function Gallery() {
+//   const [images, setImages] = useState([]);
+//   const [selectedImage, setSelectedImage] = useState(null);
+//   const [hoveredIndex, setHoveredIndex] = useState(null);
+
+//   useEffect(() => {
+//     loadGallery();
+//   }, []);
+
+//   const loadGallery = async () => {
+//     try {
+//       const { data } = await api.get("/gallery");
+//       setImages(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const openLightbox = (image) => {
+//     setSelectedImage(image);
+//     document.body.style.overflow = 'hidden';
+//   };
+
+//   const closeLightbox = () => {
+//     setSelectedImage(null);
+//     document.body.style.overflow = 'auto';
+//   };
+
+//   return (
+//     <>
+//       <section className="gallery-premium">
+//         {/* Background Elements */}
+//         <div className="gallery-bg-subtle"></div>
+//         <div className="gallery-bg-gradient"></div>
+
+//         <div className="gallery-container">
+//           {/* Header */}
+//           <div className="gallery-header">
+//             <div className="gallery-badge">
+//               <span className="gallery-badge-line"></span>
+//               <span className="gallery-badge-text">VISUAL STORYTELLING</span>
+//             </div>
+//             <h2 className="gallery-title">
+//               Moments that create
+//               <span className="gallery-title-accent"> lasting memories</span>
+//             </h2>
+//             <p className="gallery-description">
+//               Explore highlights from concerts, festivals, celebrations, and workshops — 
+//               captured through our lens.
+//             </p>
+//           </div>
+
+//           {/* Gallery Grid */}
+//           <div className="gallery-grid">
+//             {images.map((item, index) => (
+//               <div 
+//                 key={item.id} 
+//                 className={`gallery-item ${hoveredIndex === index ? 'gallery-item-hovered' : ''}`}
+//                 onClick={() => openLightbox(item)}
+//                 onMouseEnter={() => setHoveredIndex(index)}
+//                 onMouseLeave={() => setHoveredIndex(null)}
+//                 style={{ animationDelay: `${index * 0.06}s` }}
+//               >
+//                 <div className="gallery-image-wrapper">
+//                   <img
+//                     src={`https://a4agroup.eu${item.image}`}
+//                     alt={item.title || "Gallery image"}
+//                     className="gallery-image"
+//                     loading="lazy"
+//                   />
+//                   <div className="gallery-overlay">
+//                     <div className="gallery-overlay-content">
+//                       <div className="gallery-plus-icon">
+//                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+//                           <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+//                         </svg>
+//                       </div>
+//                       <p className="gallery-caption">{item.title || "Event Moment"}</p>
+//                       <span className="gallery-view-text">Click to view</span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* Empty State */}
+//           {images.length === 0 && (
+//             <div className="gallery-empty">
+//               <div className="gallery-empty-content">
+//                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+//                   <rect x="4" y="8" width="40" height="32" rx="4" stroke="currentColor" strokeWidth="1.5"/>
+//                   <circle cx="16" cy="20" r="4" stroke="currentColor" strokeWidth="1.5"/>
+//                   <path d="M44 32l-12-12-8 8-6-6-14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+//                 </svg>
+//                 <h3>No Gallery Images</h3>
+//                 <p>Check back soon for visual highlights from our events.</p>
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       </section>
+
+//       {/* Lightbox Modal */}
+//       {selectedImage && (
+//         <div className="gallery-lightbox" onClick={closeLightbox}>
+//           <div className="gallery-lightbox-backdrop"></div>
+//           <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
+//             <button className="gallery-lightbox-close" onClick={closeLightbox}>
+//               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+//                 <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//               </svg>
+//             </button>
+//             <img
+//               src={`https://a4agroup.eu${selectedImage.image}`}
+//               alt={selectedImage.title || "Gallery"}
+//               className="gallery-lightbox-image"
+//             />
+//             {selectedImage.title && (
+//               <div className="gallery-lightbox-caption">
+//                 <p>{selectedImage.title}</p>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+// export default Gallery;
+
+
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import "./Gallery.css";
@@ -431,10 +568,24 @@ function Gallery() {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     loadGallery();
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.querySelector(".gallery-premium");
+    if (section) observer.observe(section);
+    return () => observer.disconnect();
+  }, [images]);
 
   const loadGallery = async () => {
     try {
@@ -447,48 +598,69 @@ function Gallery() {
 
   const openLightbox = (image) => {
     setSelectedImage(image);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   };
 
   return (
     <>
-      <section className="gallery-premium">
-        {/* Background Elements */}
-        <div className="gallery-bg-subtle"></div>
-        <div className="gallery-bg-gradient"></div>
+      <section className={`gallery-premium ${isVisible ? "gallery-visible" : ""}`}>
+        {/* Atmospheric Depth */}
+        <div className="gallery-atmosphere" aria-hidden="true">
+          <div className="gallery-glow gallery-glow--teal" />
+          <div className="gallery-glow gallery-glow--blue" />
+          <div className="gallery-glow gallery-glow--emerald" />
+          <div className="gallery-mesh" />
+          <div className="gallery-grain" />
+          <div className="gallery-vignette" />
+        </div>
+
+        {/* Floating Orbs */}
+        <div className="gallery-orbs" aria-hidden="true">
+          <div className="gallery-orb gallery-orb--primary" />
+          <div className="gallery-orb gallery-orb--secondary" />
+        </div>
 
         <div className="gallery-container">
           {/* Header */}
           <div className="gallery-header">
-            <div className="gallery-badge">
-              <span className="gallery-badge-line"></span>
-              <span className="gallery-badge-text">VISUAL STORYTELLING</span>
+            <div className="gallery-thread" />
+            <div className="gallery-header-content">
+              <div className="gallery-whisper">
+                <span className="gallery-whisper-pulse" />
+                <span>Visual Storytelling</span>
+              </div>
+
+              <h2 className="gallery-headline">
+                <span className="gallery-headline-line">Moments that create</span>
+                <span className="gallery-headline-line gallery-headline-radiance">
+                  lasting memories.
+                </span>
+              </h2>
+
+              <p className="gallery-prose">
+                Explore highlights from concerts, festivals, celebrations, and 
+                workshops — captured through our lens, preserved for eternity.
+              </p>
             </div>
-            <h2 className="gallery-title">
-              Moments that create
-              <span className="gallery-title-accent"> lasting memories</span>
-            </h2>
-            <p className="gallery-description">
-              Explore highlights from concerts, festivals, celebrations, and workshops — 
-              captured through our lens.
-            </p>
           </div>
 
           {/* Gallery Grid */}
           <div className="gallery-grid">
             {images.map((item, index) => (
-              <div 
-                key={item.id} 
-                className={`gallery-item ${hoveredIndex === index ? 'gallery-item-hovered' : ''}`}
+              <div
+                key={item.id}
+                className={`gallery-item ${
+                  hoveredIndex === index ? "gallery-item-hovered" : ""
+                }`}
                 onClick={() => openLightbox(item)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                style={{ animationDelay: `${index * 0.06}s` }}
+                style={{ "--item-index": index }}
               >
                 <div className="gallery-image-wrapper">
                   <img
@@ -497,18 +669,23 @@ function Gallery() {
                     className="gallery-image"
                     loading="lazy"
                   />
+                  <div className="gallery-image-veil" />
+
+                  {/* Overlay */}
                   <div className="gallery-overlay">
+                    <div className="gallery-overlay-shine" />
                     <div className="gallery-overlay-content">
-                      <div className="gallery-plus-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                      </div>
-                      <p className="gallery-caption">{item.title || "Event Moment"}</p>
-                      <span className="gallery-view-text">Click to view</span>
+                      <div className="gallery-overlay-line" />
+                      <p className="gallery-caption">
+                        {item.title || "Event Moment"}
+                      </p>
+                      <span className="gallery-view-text">View full image</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Card Edge Glow */}
+                <div className="gallery-item-edge" aria-hidden="true" />
               </div>
             ))}
           </div>
@@ -517,13 +694,12 @@ function Gallery() {
           {images.length === 0 && (
             <div className="gallery-empty">
               <div className="gallery-empty-content">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="4" y="8" width="40" height="32" rx="4" stroke="currentColor" strokeWidth="1.5"/>
-                  <circle cx="16" cy="20" r="4" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M44 32l-12-12-8 8-6-6-14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <h3>No Gallery Images</h3>
-                <p>Check back soon for visual highlights from our events.</p>
+                <div className="gallery-empty-thread" />
+                <h3 className="gallery-empty-title">No Gallery Images</h3>
+                <p className="gallery-empty-text">
+                  Visual highlights from our events are being curated. 
+                  Return soon to witness the moments.
+                </p>
               </div>
             </div>
           )}
@@ -533,20 +709,24 @@ function Gallery() {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div className="gallery-lightbox" onClick={closeLightbox}>
-          <div className="gallery-lightbox-backdrop"></div>
+          <div className="gallery-lightbox-backdrop" />
           <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
             <button className="gallery-lightbox-close" onClick={closeLightbox}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <span className="gallery-lightbox-close-line gallery-lightbox-close-line--one" />
+              <span className="gallery-lightbox-close-line gallery-lightbox-close-line--two" />
             </button>
-            <img
-              src={`https://a4agroup.eu${selectedImage.image}`}
-              alt={selectedImage.title || "Gallery"}
-              className="gallery-lightbox-image"
-            />
+
+            <div className="gallery-lightbox-image-wrap">
+              <img
+                src={`https://a4agroup.eu${selectedImage.image}`}
+                alt={selectedImage.title || "Gallery"}
+                className="gallery-lightbox-image"
+              />
+            </div>
+
             {selectedImage.title && (
               <div className="gallery-lightbox-caption">
+                <div className="gallery-lightbox-caption-line" />
                 <p>{selectedImage.title}</p>
               </div>
             )}

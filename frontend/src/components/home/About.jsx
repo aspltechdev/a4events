@@ -1,55 +1,384 @@
+
+// // import "./About.css";
+
 // // function About() {
 // //   return (
-// //     <section
-// //       style={{
-// //         padding: '80px 20px',
-// //         textAlign: 'center'
-// //       }}
-// //     >
-// //       <h2>About A4 Events</h2>
+// //     <section className="about-premium">
+// //       {/* Background Elements */}
+// //       <div className="about-bg-orbs">
+// //         <div className="about-orb about-orb-1"></div>
+// //         <div className="about-orb about-orb-2"></div>
+// //         <div className="about-orb about-orb-3"></div>
+// //       </div>
+      
+// //       <div className="about-grid-pattern"></div>
 
-// //       <p>
-// //         A4 Events specializes in
-// //         concerts, DJ nights,
-// //         festivals, public parties,
-// //         sound systems, lighting,
-// //         LED walls and complete
-// //         event production.
-// //       </p>
+// //       <div className="about-container">
+// //         {/* HEADER */}
+// //         <div className="about-header">
+// //           <div className="about-header-badge">
+// //             <span className="about-badge-icon">
+// //               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+// //                 <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2"/>
+// //                 <path d="M8 3v5l3 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+// //               </svg>
+// //             </span>
+// //             <span className="about-badge-text">Indo–German Business Group</span>
+// //           </div>
+
+// //           <h1 className="about-title">
+// //             A4A Anagrams UG
+// //           </h1>
+
+// //           <div className="about-title-underline"></div>
+
+// //           <p className="about-subtitle">
+// //             A Germany-based Indo-German enterprise operating across 
+// //             events, education programs, premium health products, and 
+// //             cross-border M&A & investment advisory under the Indo-German Free Trade framework.
+// //           </p>
+// //         </div>
+
+// //         {/* CORE FOCUS */}
+// //         <div className="about-grid">
+// //           <div className="about-card about-card-events">
+// //             <div className="about-card-icon">
+// //               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+// //                 <path d="M14 4l4 8 9 1.5-6.5 6 1.5 9-8-4.5-8 4.5L7.5 19.5 1 13.5l9-1.5 4-8z" fill="currentColor"/>
+// //               </svg>
+// //             </div>
+// //             <div className="about-card-number">01</div>
+// //             <h3>Events & Experiences</h3>
+// //             <p>
+// //               Large-scale public events, festivals, concerts, and cultural programs 
+// //               delivering premium entertainment experiences across Germany.
+// //             </p>
+// //             <div className="about-card-accent"></div>
+// //           </div>
+
+// //           <div className="about-card about-card-education">
+// //             <div className="about-card-icon">
+// //               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+// //                 <path d="M5 6h18v14H5z" stroke="currentColor" strokeWidth="1.5"/>
+// //                 <path d="M5 10h18" stroke="currentColor" strokeWidth="1.5"/>
+// //                 <path d="M14 6v14" stroke="currentColor" strokeWidth="1.5"/>
+// //               </svg>
+// //             </div>
+// //             <div className="about-card-number">02</div>
+// //             <h3>Student & UG Programs</h3>
+// //             <p>
+// //               Educational and internship opportunities in Germany with exposure 
+// //               to real business, engineering, and global markets.
+// //             </p>
+// //             <div className="about-card-accent"></div>
+// //           </div>
+
+// //           <div className="about-card about-card-health">
+// //             <div className="about-card-icon">
+// //               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+// //                 <path d="M14 4c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10z" stroke="currentColor" strokeWidth="1.5"/>
+// //                 <path d="M14 10v8M10 14h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+// //               </svg>
+// //             </div>
+// //             <div className="about-card-number">03</div>
+// //             <h3>Health & Lifestyle Products</h3>
+// //             <p>
+// //               Natural and millet-based healthy food products focused on wellness, 
+// //               sustainability, and modern nutrition for conscious living.
+// //             </p>
+// //             <div className="about-card-accent"></div>
+// //           </div>
+
+// //           <div className="about-card about-card-trade">
+// //             <div className="about-card-icon">
+// //               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+// //                 <path d="M4 14h20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+// //                 <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.5"/>
+// //                 <path d="M14 4v20M14 4c-3 3-3 17 0 20M14 4c3 3 3 17 0 20" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+// //               </svg>
+// //             </div>
+// //             <div className="about-card-number">04</div>
+// //             <h3>M&A & Indo-German Trade</h3>
+// //             <p>
+// //               Cross-border mergers, acquisitions, and JV structuring using Indo-German 
+// //               trade frameworks for Mittelstand companies.
+// //             </p>
+// //             <div className="about-card-accent"></div>
+// //           </div>
+// //         </div>
+
+// //         {/* STATS ROW */}
+// //         <div className="about-stats">
+// //           <div className="about-stat-item">
+// //             <span className="about-stat-value">DE</span>
+// //             <span className="about-stat-label">German Precision</span>
+// //           </div>
+// //           <div className="about-stat-divider"></div>
+// //           <div className="about-stat-item">
+// //             <span className="about-stat-value">IN</span>
+// //             <span className="about-stat-label">Indian Execution</span>
+// //           </div>
+// //           <div className="about-stat-divider"></div>
+// //           <div className="about-stat-item">
+// //             <span className="about-stat-value">4</span>
+// //             <span className="about-stat-label">Core Verticals</span>
+// //           </div>
+// //           <div className="about-stat-divider"></div>
+// //           <div className="about-stat-item">
+// //             <span className="about-stat-value">∞</span>
+// //             <span className="about-stat-label">Global Reach</span>
+// //           </div>
+// //         </div>
+
+// //         {/* FOOTER STRIP */}
+// //         <div className="about-footer">
+// //           <div className="about-footer-icon">
+// //             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+// //               <path d="M10 2l2.5 5 5.5.5-4 3.5 1 5.5-5-3-5 3 1-5.5-4-3.5 5.5-.5L10 2z" fill="currentColor"/>
+// //             </svg>
+// //           </div>
+// //           <p>
+// //             Built on <strong>German engineering precision</strong> + <strong>Indian execution strength</strong>
+// //           </p>
+// //         </div>
+// //       </div>
 // //     </section>
 // //   );
 // // }
 
-// export default About;
+// // export default About;
 
+
+// import { useEffect, useRef, useState } from "react";
 // import "./About.css";
+
 // function About() {
+//   const sectionRef = useRef(null);
+//   const [scrollProgress, setScrollProgress] = useState(0);
+//   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true);
+//         }
+//       },
+//       { threshold: 0.15 }
+//     );
+
+//     if (sectionRef.current) {
+//       observer.observe(sectionRef.current);
+//     }
+
+//     return () => observer.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         const progress = Math.max(
+//           0,
+//           Math.min(1, 1 - rect.bottom / (rect.height * 1.8))
+//         );
+//         setScrollProgress(progress);
+//       }
+//     };
+
+//     const handleMouseMove = (e) => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         setMousePosition({
+//           x: (e.clientX - rect.left) / rect.width,
+//           y: (e.clientY - rect.top) / rect.height,
+//         });
+//       }
+//     };
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+//     handleScroll();
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//       window.removeEventListener("mousemove", handleMouseMove);
+//     };
+//   }, []);
+
+//   const pillars = [
+//     {
+//       number: "01",
+//       title: "Authentic Provisions",
+//       description:
+//         "Handpicked organic groceries, fruits, and specialty flowers. Pure, unadulterated quality from soil to shelf — now on European soil.",
+//       accent: "provisions",
+//     },
+//     {
+//       number: "02",
+//       title: "Indo Events",
+//       description:
+//         "Vibrant cultural experiences connecting global communities. Festivals, concerts, and immersive celebrations that cure homesickness.",
+//       accent: "events",
+//     },
+//     {
+//       number: "03",
+//       title: "EduConsulting",
+//       description:
+//         "Premium academic and research pathways for ambitious scholars. World-class education opportunities without borders or barriers.",
+//       accent: "education",
+//     },
+//     {
+//       number: "04",
+//       title: "Business Expansion",
+//       description:
+//         "Bridging market gaps for entrepreneurs entering Europe. M&A, trade advisory, and cross-border growth under Indo-German frameworks.",
+//       accent: "trade",
+//     },
+//   ];
+
 //   return (
-//     <section className="a4-about-section">
-//       <div className="a4-about-container">
+//     <section
+//       ref={sectionRef}
+//       className={`about-premium ${isVisible ? "about-visible" : ""}`}
+//       style={{
+//         "--scroll-progress": scrollProgress,
+//         "--mouse-x": mousePosition.x,
+//         "--mouse-y": mousePosition.y,
+//       }}
+//     >
+//       {/* Atmospheric Background Layers */}
+//       <div className="about-atmosphere" aria-hidden="true">
+//         <div className="about-ambient-glow about-glow--warm" />
+//         <div className="about-ambient-glow about-glow--cool" />
+//         <div className="about-ambient-glow about-glow--earth" />
+//         <div className="about-mesh-gradient" />
+//         <div className="about-noise-texture" />
+//         <div className="about-vignette" />
+//       </div>
 
-//         <span className="a4-about-tag">
-//           REDEFINING EXPERIENCES
-//         </span>
+//       {/* Floating Orbs */}
+//       <div className="about-orbs" aria-hidden="true">
+//         <div className="about-orb about-orb--1" />
+//         <div className="about-orb about-orb--2" />
+//         <div className="about-orb about-orb--3" />
+//       </div>
 
-//         <h2 className="a4-about-title">
-//           Every Event Has A Story.
-//         </h2>
+//       <div className="about-container">
+//         {/* Heritage Statement */}
+//         <div className="about-heritage">
+//           <div className="about-line-animated" />
+//           <div className="about-heritage-content">
+//             <div className="about-eyebrow">
+//               <span className="about-eyebrow-dot" />
+//               <span>100-Year Legacy Ecosystem</span>
+//             </div>
 
-//         <p className="a4-about-description">
-//           At A4 Events, we believe great events create lasting memories.
-//           Whether it's a sold-out concert, an inspiring conference,
-//           a vibrant festival, or an exclusive networking experience,
-//           our platform helps people discover and access the events
-//           that matter most.
-//         </p>
+//             <h2 className="about-headline">
+//               <span className="about-headline-line">
+//                 From a village hut in Sirugudi,
+//               </span>
+//               <span className="about-headline-line about-headline-emphasis">
+//                 to a visionary global force.
+//               </span>
+//             </h2>
 
-//         <p className="a4-about-description">
-//           We bring together organizers, performers, brands, and
-//           audiences through a seamless booking experience, making
-//           every event more accessible, engaging, and unforgettable.
-//         </p>
+//             <p className="about-legacy-text">
+//               A4A Anagrams Group EU bridges deep-rooted Indian heritage with 
+//               European innovation. We bring premium organic quality to European 
+//               soil — eliminating borders, curing homesickness, and unlocking 
+//               limitless global opportunities.
+//             </p>
+//           </div>
+//         </div>
 
+//         {/* Core Pillars Grid */}
+//         <div className="about-pillars">
+//           <div className="about-pillars-header">
+//             <span className="about-section-label">Core Pillars</span>
+//             <div className="about-section-line" />
+//           </div>
+
+//           <div className="about-pillars-grid">
+//             {pillars.map((pillar, index) => (
+//               <div
+//                 key={pillar.number}
+//                 className={`about-pillar-card about-pillar-${pillar.accent}`}
+//                 style={{ "--card-index": index }}
+//               >
+//                 <div className="about-pillar-number">
+//                   <span>{pillar.number}</span>
+//                   <div className="about-pillar-number-line" />
+//                 </div>
+
+//                 <div className="about-pillar-body">
+//                   <h3 className="about-pillar-title">{pillar.title}</h3>
+//                   <p className="about-pillar-description">
+//                     {pillar.description}
+//                   </p>
+//                 </div>
+
+//                 <div className="about-pillar-glow" aria-hidden="true" />
+//                 <div className="about-pillar-border" aria-hidden="true" />
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Mission Statement */}
+//         <div className="about-mission">
+//           <div className="about-mission-card">
+//             <div className="about-mission-texture" />
+//             <div className="about-mission-content">
+//               <p className="about-mission-quote">
+//                 "We eliminate borders. We cure homesickness. We unlock 
+//                 limitless global opportunities."
+//               </p>
+//               <div className="about-mission-attribution">
+//                 <span className="about-mission-name">A4A Anagrams Group EU</span>
+//                 <span className="about-mission-subtitle">
+//                   German Engineering Precision × Indian Execution Strength
+//                 </span>
+//               </div>
+//             </div>
+//             <div className="about-mission-accent" />
+//           </div>
+//         </div>
+
+//         {/* Stats Strip */}
+//         <div className="about-metrics">
+//           <div className="about-metric">
+//             <span className="about-metric-value">
+//               <span className="about-metric-counter">100</span>
+//               <span className="about-metric-suffix">+</span>
+//             </span>
+//             <span className="about-metric-label">Years Legacy</span>
+//           </div>
+//           <div className="about-metric-divider" />
+//           <div className="about-metric">
+//             <span className="about-metric-value">
+//               <span className="about-metric-counter">4</span>
+//             </span>
+//             <span className="about-metric-label">Core Verticals</span>
+//           </div>
+//           <div className="about-metric-divider" />
+//           <div className="about-metric">
+//             <span className="about-metric-value">
+//               <span className="about-metric-counter">DE</span>
+//               <span className="about-metric-suffix">×</span>
+//               <span className="about-metric-counter">IN</span>
+//             </span>
+//             <span className="about-metric-label">Indo-German Bridge</span>
+//           </div>
+//           <div className="about-metric-divider" />
+//           <div className="about-metric">
+//             <span className="about-metric-value">
+//               <span className="about-metric-symbol">∞</span>
+//             </span>
+//             <span className="about-metric-label">Global Reach</span>
+//           </div>
+//         </div>
 //       </div>
 //     </section>
 //   );
@@ -58,165 +387,207 @@
 // export default About;
 
 
-
-
-
-
-
-
-
-
-
-
-
+// import { useEffect, useRef, useState } from "react";
 // import "./About.css";
 
 // function About() {
-//   const productCategories = [
-//     { name: "Millet Mix & Soups", count: 8 },
-//     { name: "Organics", count: 6 },
-//     { name: "Pulses", count: 5 },
-//     { name: "Oils", count: 4 },
-//     { name: "Rice", count: 4 },
-//     { name: "Snacks", count: 3 },
-//     { name: "Frozen Items", count: 2 },
-//     { name: "Fresh Items", count: 0 }
-//   ];
+//   const sectionRef = useRef(null);
+//   const [scrollProgress, setScrollProgress] = useState(0);
+//   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+//   const [isVisible, setIsVisible] = useState(false);
 
-//   const eventTypes = [
-//     { name: "Corporate Events", count: 150 },
-//     { name: "Music Festivals", count: 45 },
-//     { name: "Weddings & Celebrations", count: 200 },
-//     { name: "Product Launches", count: 35 },
-//     { name: "Workshops & Seminars", count: 80 }
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.12 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         const progress = Math.max(0, Math.min(1, 1 - rect.bottom / (rect.height * 1.6)));
+//         setScrollProgress(progress);
+//       }
+//     };
+
+//     const handleMouseMove = (e) => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         setMousePosition({
+//           x: (e.clientX - rect.left) / rect.width,
+//           y: (e.clientY - rect.top) / rect.height,
+//         });
+//       }
+//     };
+
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+//     handleScroll();
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//       window.removeEventListener("mousemove", handleMouseMove);
+//     };
+//   }, []);
+
+//   const pillars = [
+//     {
+//       accent: "provisions",
+//       title: "Authentic Provisions",
+//       description:
+//         "Handpicked organic groceries, fruits, and specialty flowers — pure, unadulterated quality from soil to shelf, now rooted in European soil.",
+//     },
+//     {
+//       accent: "events",
+//       title: "Indo Cultural Experiences",
+//       description:
+//         "Vibrant festivals, concerts, and immersive celebrations that connect global communities and dissolve the ache of homesickness.",
+//     },
+//     {
+//       accent: "education",
+//       title: "EduConsulting Pathways",
+//       description:
+//         "Premium academic and research opportunities for ambitious scholars — world-class education without borders or barriers.",
+//     },
+//     {
+//       accent: "trade",
+//       title: "Business Expansion",
+//       description:
+//         "Bridging market gaps for entrepreneurs entering Europe through M&A advisory and cross-border growth strategies.",
+//     },
 //   ];
 
 //   return (
-//     <section className="about-premium-light">
-//       {/* Background Elements */}
-//       <div className="bg-gradient-light"></div>
-//       <div className="bg-noise"></div>
-      
-//       {/* Subtle Accent Lines */}
-//       <div className="accent-lines-light">
-//         <div className="accent-line-light"></div>
-//         <div className="accent-line-light"></div>
+//     <section
+//       ref={sectionRef}
+//       className={`about-premium ${isVisible ? "about-visible" : ""}`}
+//       style={{
+//         "--scroll-progress": scrollProgress,
+//         "--mouse-x": mousePosition.x,
+//         "--mouse-y": mousePosition.y,
+//       }}
+//     >
+//       {/* Ambient Depth Layers */}
+//       <div className="about-atmosphere" aria-hidden="true">
+//         <div className="about-ambient-glow about-glow--warm" />
+//         <div className="about-ambient-glow about-glow--cool" />
+//         <div className="about-ambient-glow about-glow--earth" />
+//         <div className="about-mesh-gradient" />
+//         <div className="about-noise-veil" />
+//         <div className="about-vignette" />
 //       </div>
 
-//       <div className="container-premium-light">
-//         {/* Header Section */}
-//         <div className="header-premium-light">
-//           <div className="badge-premium-light">
-//             <span className="badge-dot-light"></span>
-//             <span className="badge-text-light">REDEFINING EXCELLENCE</span>
-//           </div>
-          
-//           <h1 className="title-premium-light">
-//             Where extraordinary events
-//             <br />
-//             <span className="title-accent-light">meet premium natural living</span>
-//           </h1>
-          
-//           <p className="description-premium-light">
-//             We're a dual-force enterprise — masterfully crafting unforgettable events 
-//             while delivering nature's finest products. From grand celebrations to daily 
-//             nourishment, we bring uncompromising quality to every experience.
-//           </p>
-//         </div>
+//       {/* Floating Glass Orbs */}
+//       <div className="about-orbs" aria-hidden="true">
+//         <div className="about-orb about-orb--primary" />
+//         <div className="about-orb about-orb--secondary" />
+//         <div className="about-orb about-orb--tertiary" />
+//       </div>
 
-//         {/* Two Column Layout */}
-//         <div className="two-column-grid">
-          
-//           {/* Events Column */}
-//           <div className="column-events">
-//             <div className="column-label-light">
-//               <span className="label-number">01</span>
-//               <span className="label-line"></span>
-//               <span className="label-text">EVENTS</span>
+//       <div className="about-container">
+//         {/* Heritage Origin Story */}
+//         <div className="about-origin">
+//           <div className="about-thread" />
+//           <div className="about-origin-content">
+//             <div className="about-whisper">
+//               <span className="about-whisper-pulse" />
+//               <span>A Century of Legacy</span>
 //             </div>
-            
-//             <h3 className="column-heading">Crafting moments that last forever</h3>
-            
-//             <p className="column-paragraph">
-//               From intimate gatherings to large-scale productions, we bring visions to life 
-//               with precision, creativity, and flawless execution. Every event is a unique 
-//               story waiting to be told.
+
+//             <h2 className="about-headline">
+//               <span className="about-headline-line">
+//                 Born in a village hut in Sirugudi,
+//               </span>
+//               <span className="about-headline-line about-headline-radiance">
+//                 risen as a visionary global force.
+//               </span>
+//             </h2>
+
+//             <p className="about-prose">
+//               A4A Anagrams Group EU bridges the soul of deep-rooted Indian 
+//               heritage with the precision of European innovation. We bring 
+//               premium organic quality to European soil — dissolving borders, 
+//               healing homesickness, and unlocking limitless global opportunities.
 //             </p>
-
-//             <div className="metrics-grid">
-//               <div className="metric-block">
-//                 <div className="metric-value">500+</div>
-//                 <div className="metric-label">Events Delivered</div>
-//               </div>
-//               <div className="metric-block">
-//                 <div className="metric-value">98%</div>
-//                 <div className="metric-label">Client Retention</div>
-//               </div>
-//               <div className="metric-block">
-//                 <div className="metric-value">50K+</div>
-//                 <div className="metric-label">Attendees Served</div>
-//               </div>
-//             </div>
-
-          
-//           </div>
-
-//           {/* Products Column */}
-//           <div className="column-products">
-//             <div className="column-label-light">
-//               <span className="label-number">02</span>
-//               <span className="label-line"></span>
-//               <span className="label-text">PRODUCTS</span>
-//             </div>
-            
-//             <h3 className="column-heading">Pure, natural, and thoughtfully sourced</h3>
-            
-//             <p className="column-paragraph">
-//               From farm to table, our premium range of organic products brings nature's 
-//               finest ingredients to your kitchen. No compromises, no additives — just 
-//               pure goodness.
-//             </p>
-
-//             <div className="metrics-grid">
-//               <div className="metric-block">
-//                 <div className="metric-value">50+</div>
-//                 <div className="metric-label">Partner Farms</div>
-//               </div>
-//               <div className="metric-block">
-//                 <div className="metric-value">100%</div>
-//                 <div className="metric-label">Chemical Free</div>
-//               </div>
-//               <div className="metric-block">
-//                 <div className="metric-value">24h</div>
-//                 <div className="metric-label">Farm to Door</div>
-//               </div>
-//             </div>
-
-          
-
-         
 //           </div>
 //         </div>
 
-//         {/* Bottom Trust Section */}
-//         <div className="trust-section-light">
-//           <div className="trust-line"></div>
-//           <div className="trust-badges-light">
-//             <div className="trust-item-light">
-//               <span>Certified Organic</span>
+//         {/* Core Pillars — Typographic Cards */}
+//         <div className="about-pillars">
+//           <div className="about-pillars-header">
+//             <span className="about-section-label">What We Nurture</span>
+//             <div className="about-section-thread" />
+//           </div>
+
+//           <div className="about-pillars-grid">
+//             {pillars.map((pillar, index) => (
+//               <div
+//                 key={pillar.accent}
+//                 className={`about-pillar-card about-pillar-${pillar.accent}`}
+//                 style={{ "--card-index": index }}
+//               >
+//                 <div className="about-pillar-inner">
+//                   <div className="about-pillar-top">
+//                     <div className="about-pillar-accent-line" />
+//                     <h3 className="about-pillar-title">{pillar.title}</h3>
+//                   </div>
+//                   <p className="about-pillar-description">{pillar.description}</p>
+//                 </div>
+
+//                 <div className="about-pillar-aura" aria-hidden="true" />
+//                 <div className="about-pillar-edge" aria-hidden="true" />
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Mission Statement */}
+//         <div className="about-mission">
+//           <div className="about-mission-card">
+//             <div className="about-mission-veil" />
+//             <div className="about-mission-content">
+//               <p className="about-mission-quote">
+//                 "We eliminate borders. We cure homesickness. We unlock 
+//                 limitless global opportunities."
+//               </p>
+//               <div className="about-mission-attribution">
+//                 <span className="about-mission-name">A4A Anagrams Group EU</span>
+//                 <span className="about-mission-subtitle">
+//                   German Precision · Indian Soul · Global Vision
+//                 </span>
+//               </div>
 //             </div>
-//             <div className="trust-dot"></div>
-//             <div className="trust-item-light">
-//               <span>Sustainable Practices</span>
-//             </div>
-//             <div className="trust-dot"></div>
-//             <div className="trust-item-light">
-//               <span>Premium Quality</span>
-//             </div>
-//             <div className="trust-dot"></div>
-//             <div className="trust-item-light">
-//               <span>Eco-Friendly Packaging</span>
-//             </div>
+//             <div className="about-mission-radiance" />
+//           </div>
+//         </div>
+
+//         {/* Essence Strip */}
+//         <div className="about-essence">
+//           <div className="about-essence-item">
+//             <span className="about-essence-word">Heritage</span>
+//             <span className="about-essence-subtle">Century-old roots</span>
+//           </div>
+//           <div className="about-essence-separator" />
+//           <div className="about-essence-item">
+//             <span className="about-essence-word">Precision</span>
+//             <span className="about-essence-subtle">German engineering</span>
+//           </div>
+//           <div className="about-essence-separator" />
+//           <div className="about-essence-item">
+//             <span className="about-essence-word">Execution</span>
+//             <span className="about-essence-subtle">Indian strength</span>
+//           </div>
+//           <div className="about-essence-separator" />
+//           <div className="about-essence-item">
+//             <span className="about-essence-word about-essence-infinite">Infinite</span>
+//             <span className="about-essence-subtle">Global reach</span>
 //           </div>
 //         </div>
 //       </div>
@@ -227,149 +598,218 @@
 // export default About;
 
 
+import { useEffect, useRef, useState } from "react";
 import "./About.css";
 
 function About() {
+  const sectionRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.12 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, 1 - rect.bottom / (rect.height * 1.6)));
+        setScrollProgress(progress);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: (e.clientX - rect.left) / rect.width,
+          y: (e.clientY - rect.top) / rect.height,
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  const pillars = [
+    {
+      accent: "provisions",
+      title: "Authentic Provisions",
+      description:
+        "Handpicked organic groceries, fruits, and specialty flowers — pure, unadulterated quality from soil to shelf, now rooted in European soil.",
+    },
+    {
+      accent: "events",
+      title: "Indo Cultural Experiences",
+      description:
+        "Vibrant festivals, concerts, and immersive celebrations that connect global communities and dissolve the ache of homesickness.",
+    },
+    {
+      accent: "education",
+      title: "EduConsulting Pathways",
+      description:
+        "Premium academic and research opportunities for ambitious scholars — world-class education without borders or barriers.",
+    },
+    {
+      accent: "trade",
+      title: "Business Expansion",
+      description:
+        "Bridging market gaps for entrepreneurs entering Europe through M&A advisory and cross-border growth strategies.",
+    },
+  ];
+
   return (
-    <section className="about-premium-light">
-      {/* Background Elements */}
-      <div className="about-bg-gradient-light"></div>
-      <div className="about-bg-pattern"></div>
-      
-      {/* Ambient Accents */}
-      <div className="about-ambient-light-elements">
-        <div className="about-ambient-orb about-orb-1"></div>
-        <div className="about-ambient-orb about-orb-2"></div>
+    <section
+      ref={sectionRef}
+      className={`about-premium ${isVisible ? "about-visible" : ""}`}
+      style={{
+        "--scroll-progress": scrollProgress,
+        "--mouse-x": mousePosition.x,
+        "--mouse-y": mousePosition.y,
+      }}
+    >
+      {/* Ambient Depth Layers */}
+      <div className="about-atmosphere" aria-hidden="true">
+        <div className="about-ambient-glow about-glow--teal" />
+        <div className="about-ambient-glow about-glow--blue" />
+        <div className="about-ambient-glow about-glow--emerald" />
+        <div className="about-mesh-gradient" />
+        <div className="about-noise-veil" />
+        <div className="about-vignette" />
       </div>
 
-      <div className="about-container-light">
-        {/* Header Section */}
-        <div className="about-header-light">
-          <div className="about-badge-light">
-            <span className="about-badge-dot-light"></span>
-            <span className="about-badge-text-light">REDEFINING EXCELLENCE</span>
-          </div>
-          
-          <h1 className="about-title-light">
-            Where extraordinary events
-            <br />
-            <span className="about-title-accent-light">meet premium natural living</span>
-          </h1>
-          
-          <p className="about-description-light">
-            We're a dual-force enterprise — masterfully crafting unforgettable events 
-            while delivering nature's finest products. From grand celebrations to daily 
-            nourishment, we bring uncompromising quality to every experience.
-          </p>
-        </div>
+      {/* Floating Glass Orbs */}
+      <div className="about-orbs" aria-hidden="true">
+        <div className="about-orb about-orb--primary" />
+        <div className="about-orb about-orb--secondary" />
+        <div className="about-orb about-orb--tertiary" />
+      </div>
 
-        {/* Two Column Layout */}
-        <div className="about-two-column-light">
-          
-          {/* Events Column */}
-          <div className="about-column-light about-column-events-light">
-            <div className="about-column-icon-wrapper">
-              <div className="about-column-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M16 4L20 10L27 11L22 16L23 23L16 19L9 23L10 16L5 11L12 10L16 4Z" fill="currentColor"/>
-                </svg>
-              </div>
+      <div className="about-container">
+        {/* Heritage Origin Story */}
+        <div className="about-origin">
+          <div className="about-thread" />
+          <div className="about-origin-content">
+            <div className="about-whisper">
+              <span className="about-whisper-pulse" />
+              <span>A Century of Legacy</span>
             </div>
-            
-            <div className="about-column-label-light">
-              <span className="about-label-number-light">01</span>
-              <span className="about-label-line-light"></span>
-              <span className="about-label-text-light">EVENTS</span>
-            </div>
-            
-            <h3 className="about-column-heading-light">Crafting moments that last forever</h3>
-            
-            <p className="about-column-paragraph-light">
-              From intimate gatherings to large-scale productions, we bring visions to life 
-              with precision, creativity, and flawless execution. Every event is a unique 
-              story waiting to be told.
+
+            <h2 className="about-headline">
+              <span className="about-headline-line">
+                Born in a village hut in Sirugudi,
+              </span>
+              <span className="about-headline-line about-headline-radiance">
+                risen as a visionary global force.
+              </span>
+            </h2>
+
+            <p className="about-prose">
+              A4A Anagrams Group EU bridges the soul of deep-rooted Indian 
+              heritage with the precision of European innovation. We bring 
+              premium organic quality to European soil — dissolving borders, 
+              healing homesickness, and unlocking limitless global opportunities.
             </p>
-
-            <div className="about-metrics-grid-light">
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">500+</div>
-                <div className="about-metric-label-light">Events Delivered</div>
-              </div>
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">98%</div>
-                <div className="about-metric-label-light">Client Satisfaction</div>
-              </div>
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">50K+</div>
-                <div className="about-metric-label-light">Happy Attendees</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Products Column */}
-          <div className="about-column-light about-column-products-light">
-            <div className="about-column-icon-wrapper">
-              <div className="about-column-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M16 4C16 4 8 8 8 16C8 24 16 28 16 28C16 28 24 24 24 16C24 8 16 4 16 4Z" fill="currentColor"/>
-                  <circle cx="16" cy="16" r="3" fill="white"/>
-                </svg>
-              </div>
-            </div>
-            
-            <div className="about-column-label-light">
-              <span className="about-label-number-light">02</span>
-              <span className="about-label-line-light"></span>
-              <span className="about-label-text-light">PRODUCTS</span>
-            </div>
-            
-            <h3 className="about-column-heading-light">Pure, natural, and thoughtfully sourced</h3>
-            
-            <p className="about-column-paragraph-light">
-              From farm to table, our premium range of organic products brings nature's 
-              finest ingredients to your kitchen. No compromises, no additives — just 
-              pure goodness.
-            </p>
-
-            <div className="about-metrics-grid-light">
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">50+</div>
-                <div className="about-metric-label-light">Partner Farms</div>
-              </div>
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">100%</div>
-                <div className="about-metric-label-light">Chemical Free</div>
-              </div>
-              <div className="about-metric-block-light">
-                <div className="about-metric-value-light">24h</div>
-                <div className="about-metric-label-light">Farm to Door</div>
-              </div>
-            </div>
           </div>
         </div>
 
-        {/* Bottom Trust Section */}
-        <div className="about-trust-section-light">
-          <div className="about-trust-line-light"></div>
-          <div className="about-trust-badges-light">
-            <div className="about-trust-item-light">
-              <span className="about-trust-icon-light">✦</span>
-              <span>Certified Organic</span>
+        {/* Core Pillars — White-Blend Cards */}
+        <div className="about-pillars">
+          <div className="about-pillars-header">
+            <span className="about-section-label">What We Nurture</span>
+            <div className="about-section-thread" />
+          </div>
+
+          <div className="about-pillars-grid">
+            {pillars.map((pillar, index) => (
+              <div
+                key={pillar.accent}
+                className={`about-pillar-card about-pillar-${pillar.accent}`}
+                style={{ "--card-index": index }}
+              >
+                {/* Card Shine */}
+                <div className="about-pillar-shine" aria-hidden="true" />
+
+                <div className="about-pillar-inner">
+                  <div className="about-pillar-top">
+                    <div className="about-pillar-accent-line" />
+                    <h3 className="about-pillar-title">{pillar.title}</h3>
+                  </div>
+                  <p className="about-pillar-description">{pillar.description}</p>
+                  
+                  <div className="about-pillar-action">
+                    <span>Learn more</span>
+                    <span className="about-pillar-arrow">→</span>
+                  </div>
+                </div>
+
+                <div className="about-pillar-aura" aria-hidden="true" />
+                <div className="about-pillar-edge" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mission Statement */}
+        <div className="about-mission">
+          <div className="about-mission-card">
+            <div className="about-mission-shine" aria-hidden="true" />
+            <div className="about-mission-veil" />
+            <div className="about-mission-content">
+              <p className="about-mission-quote">
+                "We eliminate borders. We cure homesickness. We unlock 
+                limitless global opportunities."
+              </p>
+              <div className="about-mission-attribution">
+                <span className="about-mission-name">A4A Anagrams Group EU</span>
+                <span className="about-mission-subtitle">
+                  German Precision · Indian Soul · Global Vision
+                </span>
+              </div>
             </div>
-            <div className="about-trust-divider-light"></div>
-            <div className="about-trust-item-light">
-              <span className="about-trust-icon-light">✦</span>
-              <span>Sustainable Practices</span>
+            <div className="about-mission-radiance" />
+          </div>
+        </div>
+
+        {/* Essence Strip */}
+        <div className="about-essence">
+          <div className="about-essence-thread" />
+          <div className="about-essence-items">
+            <div className="about-essence-item">
+              <span className="about-essence-word">Heritage</span>
+              <span className="about-essence-subtle">Century-old roots</span>
             </div>
-            <div className="about-trust-divider-light"></div>
-            <div className="about-trust-item-light">
-              <span className="about-trust-icon-light">✦</span>
-              <span>Premium Quality</span>
+            <div className="about-essence-separator" />
+            <div className="about-essence-item">
+              <span className="about-essence-word">Precision</span>
+              <span className="about-essence-subtle">German engineering</span>
             </div>
-            <div className="about-trust-divider-light"></div>
-            <div className="about-trust-item-light">
-              <span className="about-trust-icon-light">✦</span>
-              <span>Eco-Friendly Packaging</span>
+            <div className="about-essence-separator" />
+            <div className="about-essence-item">
+              <span className="about-essence-word">Execution</span>
+              <span className="about-essence-subtle">Indian strength</span>
+            </div>
+            <div className="about-essence-separator" />
+            <div className="about-essence-item">
+              <span className="about-essence-word about-essence-radiant">Infinite</span>
+              <span className="about-essence-subtle">Global reach</span>
             </div>
           </div>
         </div>

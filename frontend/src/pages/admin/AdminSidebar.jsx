@@ -368,7 +368,7 @@ function AdminSidebar() {
             </svg>
           </div>
           <div className="a4-admin-logo-text">
-            <h2>A4 Events</h2>
+            <h2>A4A Groups</h2>
             <span>Admin Panel</span>
           </div>
         </div>

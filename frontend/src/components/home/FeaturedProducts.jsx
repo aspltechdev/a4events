@@ -1173,6 +1173,793 @@
 // export default FeaturedProducts;
 
 
+// import { useEffect, useState, useRef } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./FeaturedProducts.css";
+
+// function FeaturedProducts() {
+//   const [products, setProducts] = useState([]);
+//   const [hoveredProduct, setHoveredProduct] = useState(null);
+//   const [isPaused, setIsPaused] = useState(false);
+//   const navigate = useNavigate();
+//   const marqueeRef = useRef(null);
+
+//   useEffect(() => {
+//     loadProducts();
+//   }, []);
+
+//   const loadProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products/featured");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent / 100);
+//     }
+//     return null;
+//   };
+
+//   const handleViewProduct = (productId) => {
+//     navigate(`/products/${productId}`);
+//   };
+
+//   // Duplicate products for seamless marquee
+//   const marqueeProducts = [...products, ...products];
+
+//   return (
+//     <section className="fp__wrapper">
+//       <div className="fp__bgSubtle"></div>
+//       <div className="fp__bgGradient"></div>
+
+//       <div className="fp__container">
+//         {/* Header Section */}
+//         <div className="fp__header">
+//           <div className="fp__headerMarker">
+//             <span className="fp__markerLine"></span>
+//             <span className="fp__markerText">PREMIUM COLLECTION</span>
+//           </div>
+          
+//           <h2 className="fp__headline">
+//             Naturally sourced,
+//             <br />
+//             <span className="fp__headlineAccent">delivered with care</span>
+//           </h2>
+          
+//           <p className="fp__subhead">
+//             Discover our handpicked selection of organic, chemical-free products 
+//             sourced directly from trusted farms. Each item is carefully curated 
+//             for your wellness journey.
+//           </p>
+//         </div>
+
+//         {/* Marquee Products */}
+//         <div 
+//           className="fp__marqueeWrapper"
+//           onMouseEnter={() => setIsPaused(true)}
+//           onMouseLeave={() => setIsPaused(false)}
+//         >
+//           <div 
+//             ref={marqueeRef}
+//             className={`fp__marqueeTrack ${isPaused ? 'fp__marqueePaused' : ''}`}
+//           >
+//             {marqueeProducts.map((product, index) => {
+//               const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//               const hasDiscount = product.discountPercent && product.discountPercent > 0;
+              
+//               return (
+//                 <div
+//                   key={`${product.id}-${index}`}
+//                   className={`fp__card ${hoveredProduct === `${product.id}-${index}` ? 'fp__cardHovered' : ''}`}
+//                   onMouseEnter={() => setHoveredProduct(`${product.id}-${index}`)}
+//                   onMouseLeave={() => setHoveredProduct(null)}
+//                 >
+//                   {/* Image Section */}
+//                   <div 
+//                     className="fp__media"
+//                     onClick={() => handleViewProduct(product.id)}
+//                   >
+//                     <div className="fp__imageWrapper">
+//                       <img
+//                         src={`https://a4agroup.eu${product.image}`}
+//                         alt={product.title}
+//                         className="fp__image"
+//                         loading="lazy"
+//                       />
+//                       <div className="fp__imageBackdrop"></div>
+//                     </div>
+                    
+//                     {hasDiscount && (
+//                       <div className="fp__discountBadge">
+//                         <span>{product.discountPercent}% OFF</span>
+//                       </div>
+//                     )}
+                    
+//                     {product.featured && !hasDiscount && (
+//                       <div className="fp__featuredBadge">
+//                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+//                           <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
+//                         </svg>
+//                         <span>Featured</span>
+//                       </div>
+//                     )}
+//                   </div>
+
+//                   {/* Product Details */}
+//                   <div className="fp__details">
+//                     <div 
+//                       className="fp__category"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       {product.category}
+//                     </div>
+                    
+//                     <h3 
+//                       className="fp__title"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       {product.title}
+//                     </h3>
+                    
+//                     <p className="fp__description">{product.description}</p>
+                    
+//                     <div className="fp__pricing">
+//                       {hasDiscount ? (
+//                         <>
+//                           <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
+//                           <span className="fp__priceOriginal">€{product.price}</span>
+//                           <span className="fp__priceSave">Save {product.discountPercent}%</span>
+//                         </>
+//                       ) : (
+//                         <span className="fp__priceCurrent">€{product.price}</span>
+//                       )}
+//                     </div>
+                    
+//                     <button 
+//                       className="fp__actionBtn"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       View Product
+//                       <span className="fp__btnArrow">→</span>
+//                     </button>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </div>
+
+//         {/* Gradient Fade Edges */}
+//         <div className="fp__marqueeFadeLeft"></div>
+//         <div className="fp__marqueeFadeRight"></div>
+
+//         {/* Footer Actions */}
+//         <div className="fp__footer">
+//           <Link to="/products" className="fp__viewAllBtn">
+//             Explore Complete Collection
+//             <span className="fp__arrowIcon">→</span>
+//           </Link>
+//         </div>
+
+//         {/* Quality Assurance */}
+//         <div className="fp__qualitySection">
+//           <div className="fp__qualityLine"></div>
+//           <div className="fp__qualityBadges">
+//             <div className="fp__qualityBadge">
+//               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                 <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+//               </svg>
+//               Certified Organic
+//             </div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">
+//               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                 <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+//               </svg>
+//               Chemical Free
+//             </div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">
+//               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                 <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+//               </svg>
+//               Lab Tested
+//             </div>
+//             <div className="fp__qualitySeparator"></div>
+//             <div className="fp__qualityBadge">
+//               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                 <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+//               </svg>
+//               Fresh Stock
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default FeaturedProducts;
+
+
+// import { useEffect, useState, useRef } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./FeaturedProducts.css";
+
+// function FeaturedProducts() {
+//   const [products, setProducts] = useState([]);
+//   const [hoveredProduct, setHoveredProduct] = useState(null);
+//   const [isPaused, setIsPaused] = useState(false);
+//   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+//   const [isVisible, setIsVisible] = useState(false);
+//   const navigate = useNavigate();
+//   const sectionRef = useRef(null);
+//   const marqueeRef = useRef(null);
+
+//   useEffect(() => {
+//     loadProducts();
+//   }, []);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.15 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const handleMouseMove = (e) => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         setMousePosition({
+//           x: (e.clientX - rect.left) / rect.width,
+//           y: (e.clientY - rect.top) / rect.height,
+//         });
+//       }
+//     };
+
+//     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+//     return () => window.removeEventListener("mousemove", handleMouseMove);
+//   }, []);
+
+//   const loadProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products/featured");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent) / 100;
+//     }
+//     return null;
+//   };
+
+//   const handleViewProduct = (productId) => {
+//     navigate(`/products/${productId}`);
+//   };
+
+//   const marqueeProducts = [...products, ...products];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className={`fp-premium ${isVisible ? "fp-visible" : ""}`}
+//       style={{
+//         "--mouse-x": mousePosition.x,
+//         "--mouse-y": mousePosition.y,
+//       }}
+//     >
+//       {/* Atmospheric Depth */}
+//       <div className="fp-atmosphere" aria-hidden="true">
+//         <div className="fp-glow fp-glow--earth" />
+//         <div className="fp-glow fp-glow--warm" />
+//         <div className="fp-glow fp-glow--fresh" />
+//         <div className="fp-mesh" />
+//         <div className="fp-grain" />
+//         <div className="fp-vignette" />
+//       </div>
+
+//       {/* Floating Glass Orbs */}
+//       <div className="fp-orbs" aria-hidden="true">
+//         <div className="fp-orb fp-orb--large" />
+//         <div className="fp-orb fp-orb--medium" />
+//         <div className="fp-orb fp-orb--small" />
+//       </div>
+
+//       <div className="fp-container">
+//         {/* Header */}
+//         <div className="fp-header">
+//           <div className="fp-thread" />
+//           <div className="fp-header-content">
+//             <div className="fp-whisper">
+//               <span className="fp-whisper-pulse" />
+//               <span>Curated with intention</span>
+//             </div>
+
+//             <h2 className="fp-headline">
+//               <span className="fp-headline-line">Naturally sourced,</span>
+//               <span className="fp-headline-line fp-headline-radiance">
+//                 delivered with care.
+//               </span>
+//             </h2>
+
+//             <p className="fp-prose">
+//               Handpicked organic, chemical-free provisions sourced directly 
+//               from trusted farms. Each product carries the purity of its origin 
+//               — curated intentionally for your wellness journey.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Marquee Carousel */}
+//         <div
+//           className="fp-marquee-stage"
+//           onMouseEnter={() => setIsPaused(true)}
+//           onMouseLeave={() => setIsPaused(false)}
+//         >
+//           <div
+//             ref={marqueeRef}
+//             className={`fp-marquee-track ${isPaused ? "fp-marquee-paused" : ""}`}
+//           >
+//             {marqueeProducts.map((product, index) => {
+//               const discountedPrice = calculateDiscountedPrice(
+//                 product.price,
+//                 product.discountPercent
+//               );
+//               const hasDiscount =
+//                 product.discountPercent && product.discountPercent > 0;
+
+//               return (
+//                 <div
+//                   key={`${product.id}-${index}`}
+//                   className={`fp-card ${
+//                     hoveredProduct === `${product.id}-${index}`
+//                       ? "fp-card-hovered"
+//                       : ""
+//                   }`}
+//                   onMouseEnter={() =>
+//                     setHoveredProduct(`${product.id}-${index}`)
+//                   }
+//                   onMouseLeave={() => setHoveredProduct(null)}
+//                 >
+//                   {/* Card Atmosphere */}
+//                   <div className="fp-card-atmosphere" aria-hidden="true">
+//                     <div className="fp-card-glow" />
+//                     <div className="fp-card-noise" />
+//                   </div>
+
+//                   {/* Image */}
+//                   <div
+//                     className="fp-card-media"
+//                     onClick={() => handleViewProduct(product.id)}
+//                   >
+//                     <div className="fp-card-image-wrap">
+//                       <img
+//                         src={`https://a4agroup.eu${product.image}`}
+//                         alt={product.title}
+//                         className="fp-card-image"
+//                         loading="lazy"
+//                       />
+//                       <div className="fp-card-image-veil" />
+//                     </div>
+
+//                     {hasDiscount && (
+//                       <div className="fp-card-badge">
+//                         <span className="fp-badge-text">
+//                           {product.discountPercent}% off
+//                         </span>
+//                       </div>
+//                     )}
+
+//                     {product.featured && !hasDiscount && (
+//                       <div className="fp-card-badge fp-card-badge-featured">
+//                         <span className="fp-badge-text">Featured</span>
+//                       </div>
+//                     )}
+//                   </div>
+
+//                   {/* Details */}
+//                   <div className="fp-card-details">
+//                     <div
+//                       className="fp-card-category"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       <span className="fp-category-line" />
+//                       {product.category}
+//                     </div>
+
+//                     <h3
+//                       className="fp-card-title"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       {product.title}
+//                     </h3>
+
+//                     <p className="fp-card-description">
+//                       {product.description}
+//                     </p>
+
+//                     <div className="fp-card-pricing">
+//                       {hasDiscount ? (
+//                         <>
+//                           <span className="fp-price-current">
+//                             €{Math.round(discountedPrice)}
+//                           </span>
+//                           <span className="fp-price-original">
+//                             €{product.price}
+//                           </span>
+//                           <span className="fp-price-save">
+//                             Save {product.discountPercent}%
+//                           </span>
+//                         </>
+//                       ) : (
+//                         <span className="fp-price-current">
+//                           €{product.price}
+//                         </span>
+//                       )}
+//                     </div>
+
+//                     <button
+//                       className="fp-card-action"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       <span>Discover</span>
+//                       <span className="fp-action-arrow">→</span>
+//                     </button>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           {/* Fade Edges */}
+//           <div className="fp-marquee-fade fp-marquee-fade-left" />
+//           <div className="fp-marquee-fade fp-marquee-fade-right" />
+//         </div>
+
+//         {/* Footer */}
+//         <div className="fp-footer">
+//           <Link to="/products" className="fp-footer-link">
+//             <span>Explore the complete collection</span>
+//             <span className="fp-footer-arrow">→</span>
+//           </Link>
+//         </div>
+
+//         {/* Essence Strip */}
+//         <div className="fp-essence">
+//           <div className="fp-essence-thread" />
+//           <div className="fp-essence-items">
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Organic</span>
+//               <span className="fp-essence-subtle">Certified purity</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Pure</span>
+//               <span className="fp-essence-subtle">Chemical free</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Tested</span>
+//               <span className="fp-essence-subtle">Lab verified</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Fresh</span>
+//               <span className="fp-essence-subtle">Direct from farm</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default FeaturedProducts;
+
+
+
+// import { useEffect, useState, useRef } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./FeaturedProducts.css";
+
+// function FeaturedProducts() {
+//   const [products, setProducts] = useState([]);
+//   const [hoveredProduct, setHoveredProduct] = useState(null);
+//   const [isPaused, setIsPaused] = useState(false);
+//   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+//   const [isVisible, setIsVisible] = useState(false);
+//   const navigate = useNavigate();
+//   const sectionRef = useRef(null);
+//   const marqueeRef = useRef(null);
+
+//   useEffect(() => {
+//     loadProducts();
+//   }, []);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.15 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const handleMouseMove = (e) => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         setMousePosition({
+//           x: (e.clientX - rect.left) / rect.width,
+//           y: (e.clientY - rect.top) / rect.height,
+//         });
+//       }
+//     };
+
+//     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+//     return () => window.removeEventListener("mousemove", handleMouseMove);
+//   }, []);
+
+//   const loadProducts = async () => {
+//     try {
+//       const { data } = await api.get("/products/featured");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent) / 100;
+//     }
+//     return null;
+//   };
+
+//   const handleViewProduct = (productId) => {
+//     navigate(`/products/${productId}`);
+//   };
+
+//   const marqueeProducts = [...products, ...products];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className={`fp-premium ${isVisible ? "fp-visible" : ""}`}
+//       style={{
+//         "--mouse-x": mousePosition.x,
+//         "--mouse-y": mousePosition.y,
+//       }}
+//     >
+//       {/* Ambient Atmosphere */}
+//       <div className="fp-atmosphere" aria-hidden="true">
+//         <div className="fp-glow fp-glow--warm" />
+//         <div className="fp-glow fp-glow--fresh" />
+//         <div className="fp-glow fp-glow--sky" />
+//         <div className="fp-mesh" />
+//         <div className="fp-grain" />
+//       </div>
+
+//       {/* Floating Glass Orbs */}
+//       <div className="fp-orbs" aria-hidden="true">
+//         <div className="fp-orb fp-orb--large" />
+//         <div className="fp-orb fp-orb--medium" />
+//         <div className="fp-orb fp-orb--small" />
+//       </div>
+
+//       <div className="fp-container">
+//         {/* Header */}
+//         <div className="fp-header">
+//           <div className="fp-thread" />
+//           <div className="fp-header-content">
+//             <div className="fp-whisper">
+//               <span className="fp-whisper-pulse" />
+//               <span>Curated with intention</span>
+//             </div>
+
+//             <h2 className="fp-headline">
+//               <span className="fp-headline-line">Naturally sourced,</span>
+//               <span className="fp-headline-line fp-headline-radiance">
+//                 delivered with care.
+//               </span>
+//             </h2>
+
+//             <p className="fp-prose">
+//               Handpicked organic, chemical-free provisions sourced directly 
+//               from trusted farms. Each product carries the purity of its origin 
+//               — curated intentionally for your wellness journey.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Marquee Carousel */}
+//         <div
+//           className="fp-marquee-stage"
+//           onMouseEnter={() => setIsPaused(true)}
+//           onMouseLeave={() => setIsPaused(false)}
+//         >
+//           <div
+//             ref={marqueeRef}
+//             className={`fp-marquee-track ${isPaused ? "fp-marquee-paused" : ""}`}
+//           >
+//             {marqueeProducts.map((product, index) => {
+//               const discountedPrice = calculateDiscountedPrice(
+//                 product.price,
+//                 product.discountPercent
+//               );
+//               const hasDiscount =
+//                 product.discountPercent && product.discountPercent > 0;
+
+//               return (
+//                 <div
+//                   key={`${product.id}-${index}`}
+//                   className={`fp-card ${
+//                     hoveredProduct === `${product.id}-${index}`
+//                       ? "fp-card-hovered"
+//                       : ""
+//                   }`}
+//                   onMouseEnter={() =>
+//                     setHoveredProduct(`${product.id}-${index}`)
+//                   }
+//                   onMouseLeave={() => setHoveredProduct(null)}
+//                 >
+//                   {/* Card Atmosphere */}
+//                   <div className="fp-card-atmosphere" aria-hidden="true">
+//                     <div className="fp-card-glow" />
+//                   </div>
+
+//                   {/* Image */}
+//                   <div
+//                     className="fp-card-media"
+//                     onClick={() => handleViewProduct(product.id)}
+//                   >
+//                     <div className="fp-card-image-wrap">
+//                       <img
+//                         src={`https://a4agroup.eu${product.image}`}
+//                         alt={product.title}
+//                         className="fp-card-image"
+//                         loading="lazy"
+//                       />
+//                       <div className="fp-card-image-veil" />
+//                     </div>
+
+//                     {hasDiscount && (
+//                       <div className="fp-card-badge">
+//                         <span className="fp-badge-text">
+//                           {product.discountPercent}% off
+//                         </span>
+//                       </div>
+//                     )}
+
+//                     {product.featured && !hasDiscount && (
+//                       <div className="fp-card-badge fp-card-badge-featured">
+//                         <span className="fp-badge-text">Featured</span>
+//                       </div>
+//                     )}
+//                   </div>
+
+//                   {/* Details */}
+//                   <div className="fp-card-details">
+//                     <div
+//                       className="fp-card-category"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       <span className="fp-category-line" />
+//                       {product.category}
+//                     </div>
+
+//                     <h3
+//                       className="fp-card-title"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       {product.title}
+//                     </h3>
+
+//                     <p className="fp-card-description">
+//                       {product.description}
+//                     </p>
+
+//                     <div className="fp-card-pricing">
+//                       {hasDiscount ? (
+//                         <>
+//                           <span className="fp-price-current">
+//                             €{Math.round(discountedPrice)}
+//                           </span>
+//                           <span className="fp-price-original">
+//                             €{product.price}
+//                           </span>
+//                           <span className="fp-price-save">
+//                             Save {product.discountPercent}%
+//                           </span>
+//                         </>
+//                       ) : (
+//                         <span className="fp-price-current">
+//                           €{product.price}
+//                         </span>
+//                       )}
+//                     </div>
+
+//                     <button
+//                       className="fp-card-action"
+//                       onClick={() => handleViewProduct(product.id)}
+//                     >
+//                       <span>Discover</span>
+//                       <span className="fp-action-arrow">→</span>
+//                     </button>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           {/* Fade Edges */}
+//           <div className="fp-marquee-fade fp-marquee-fade-left" />
+//           <div className="fp-marquee-fade fp-marquee-fade-right" />
+//         </div>
+
+//         {/* Footer */}
+//         <div className="fp-footer">
+//           <Link to="/products" className="fp-footer-link">
+//             <span>Explore the complete collection</span>
+//             <span className="fp-footer-arrow">→</span>
+//           </Link>
+//         </div>
+
+//         {/* Essence Strip */}
+//         <div className="fp-essence">
+//           <div className="fp-essence-thread" />
+//           <div className="fp-essence-items">
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Organic</span>
+//               <span className="fp-essence-subtle">Certified purity</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Pure</span>
+//               <span className="fp-essence-subtle">Chemical free</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Tested</span>
+//               <span className="fp-essence-subtle">Lab verified</span>
+//             </div>
+//             <div className="fp-essence-separator" />
+//             <div className="fp-essence-item">
+//               <span className="fp-essence-word">Fresh</span>
+//               <span className="fp-essence-subtle">Direct from farm</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default FeaturedProducts;
+
+
+
+
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
@@ -1182,11 +1969,41 @@ function FeaturedProducts() {
   const [products, setProducts] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+  const sectionRef = useRef(null);
   const marqueeRef = useRef(null);
 
   useEffect(() => {
     loadProducts();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: (e.clientX - rect.left) / rect.width,
+          y: (e.clientY - rect.top) / rect.height,
+        });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const loadProducts = async () => {
@@ -1200,7 +2017,7 @@ function FeaturedProducts() {
 
   const calculateDiscountedPrice = (price, discountPercent) => {
     if (discountPercent && discountPercent > 0) {
-      return price - (price * discountPercent / 100);
+      return price - (price * discountPercent) / 100;
     }
     return null;
   };
@@ -1209,173 +2026,215 @@ function FeaturedProducts() {
     navigate(`/products/${productId}`);
   };
 
-  // Duplicate products for seamless marquee
   const marqueeProducts = [...products, ...products];
 
   return (
-    <section className="fp__wrapper">
-      <div className="fp__bgSubtle"></div>
-      <div className="fp__bgGradient"></div>
+    <section
+      ref={sectionRef}
+      className={`fp-premium ${isVisible ? "fp-visible" : ""}`}
+      style={{
+        "--mouse-x": mousePosition.x,
+        "--mouse-y": mousePosition.y,
+      }}
+    >
+      {/* Ambient Atmosphere */}
+      <div className="fp-atmosphere" aria-hidden="true">
+        <div className="fp-glow fp-glow--teal" />
+        <div className="fp-glow fp-glow--blue" />
+        <div className="fp-glow fp-glow--emerald" />
+        <div className="fp-mesh" />
+        <div className="fp-grain" />
+        <div className="fp-vignette" />
+      </div>
 
-      <div className="fp__container">
-        {/* Header Section */}
-        <div className="fp__header">
-          <div className="fp__headerMarker">
-            <span className="fp__markerLine"></span>
-            <span className="fp__markerText">PREMIUM COLLECTION</span>
+      {/* Floating Glass Orbs */}
+      <div className="fp-orbs" aria-hidden="true">
+        <div className="fp-orb fp-orb--primary" />
+        <div className="fp-orb fp-orb--secondary" />
+        <div className="fp-orb fp-orb--tertiary" />
+      </div>
+
+      <div className="fp-container">
+        {/* Header */}
+        <div className="fp-header">
+          <div className="fp-thread" />
+          <div className="fp-header-content">
+            <div className="fp-whisper">
+              <span className="fp-whisper-pulse" />
+              <span>Curated with intention</span>
+            </div>
+
+            <h2 className="fp-headline">
+              <span className="fp-headline-line">Naturally sourced,</span>
+              <span className="fp-headline-line fp-headline-radiance">
+                delivered with care.
+              </span>
+            </h2>
+
+            <p className="fp-prose">
+              Handpicked organic, chemical-free provisions sourced directly 
+              from trusted farms. Each product carries the purity of its origin 
+              — curated intentionally for your wellness journey.
+            </p>
           </div>
-          
-          <h2 className="fp__headline">
-            Naturally sourced,
-            <br />
-            <span className="fp__headlineAccent">delivered with care</span>
-          </h2>
-          
-          <p className="fp__subhead">
-            Discover our handpicked selection of organic, chemical-free products 
-            sourced directly from trusted farms. Each item is carefully curated 
-            for your wellness journey.
-          </p>
         </div>
 
-        {/* Marquee Products */}
-        <div 
-          className="fp__marqueeWrapper"
+        {/* Marquee Carousel */}
+        <div
+          className="fp-marquee-stage"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div 
+          <div
             ref={marqueeRef}
-            className={`fp__marqueeTrack ${isPaused ? 'fp__marqueePaused' : ''}`}
+            className={`fp-marquee-track ${isPaused ? "fp-marquee-paused" : ""}`}
           >
             {marqueeProducts.map((product, index) => {
-              const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
-              const hasDiscount = product.discountPercent && product.discountPercent > 0;
-              
+              const discountedPrice = calculateDiscountedPrice(
+                product.price,
+                product.discountPercent
+              );
+              const hasDiscount =
+                product.discountPercent && product.discountPercent > 0;
+
               return (
                 <div
                   key={`${product.id}-${index}`}
-                  className={`fp__card ${hoveredProduct === `${product.id}-${index}` ? 'fp__cardHovered' : ''}`}
-                  onMouseEnter={() => setHoveredProduct(`${product.id}-${index}`)}
+                  className={`fp-card ${
+                    hoveredProduct === `${product.id}-${index}`
+                      ? "fp-card-hovered"
+                      : ""
+                  }`}
+                  onMouseEnter={() =>
+                    setHoveredProduct(`${product.id}-${index}`)
+                  }
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
-                  {/* Image Section */}
-                  <div 
-                    className="fp__media"
+                  {/* Card Shine */}
+                  <div className="fp-card-shine" aria-hidden="true" />
+
+                  {/* Image */}
+                  <div
+                    className="fp-card-media"
                     onClick={() => handleViewProduct(product.id)}
                   >
-                    <div className="fp__imageWrapper">
+                    <div className="fp-card-image-wrap">
                       <img
                         src={`https://a4agroup.eu${product.image}`}
                         alt={product.title}
-                        className="fp__image"
+                        className="fp-card-image"
                         loading="lazy"
                       />
-                      <div className="fp__imageBackdrop"></div>
+                      <div className="fp-card-image-veil" />
                     </div>
-                    
+
                     {hasDiscount && (
-                      <div className="fp__discountBadge">
-                        <span>{product.discountPercent}% OFF</span>
+                      <div className="fp-card-badge fp-card-badge-discount">
+                        <span className="fp-badge-text">
+                          {product.discountPercent}% off
+                        </span>
                       </div>
                     )}
-                    
+
                     {product.featured && !hasDiscount && (
-                      <div className="fp__featuredBadge">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
-                        </svg>
-                        <span>Featured</span>
+                      <div className="fp-card-badge fp-card-badge-featured">
+                        <span className="fp-badge-text">Featured</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Product Details */}
-                  <div className="fp__details">
-                    <div 
-                      className="fp__category"
+                  {/* Details */}
+                  <div className="fp-card-details">
+                    <div
+                      className="fp-card-category"
                       onClick={() => handleViewProduct(product.id)}
                     >
+                      <span className="fp-category-line" />
                       {product.category}
                     </div>
-                    
-                    <h3 
-                      className="fp__title"
+
+                    <h3
+                      className="fp-card-title"
                       onClick={() => handleViewProduct(product.id)}
                     >
                       {product.title}
                     </h3>
-                    
-                    <p className="fp__description">{product.description}</p>
-                    
-                    <div className="fp__pricing">
+
+                    <p className="fp-card-description">
+                      {product.description}
+                    </p>
+
+                    <div className="fp-card-pricing">
                       {hasDiscount ? (
                         <>
-                          <span className="fp__priceCurrent">€{Math.round(discountedPrice)}</span>
-                          <span className="fp__priceOriginal">€{product.price}</span>
-                          <span className="fp__priceSave">Save {product.discountPercent}%</span>
+                          <span className="fp-price-current">
+                            €{Math.round(discountedPrice)}
+                          </span>
+                          <span className="fp-price-original">
+                            €{product.price}
+                          </span>
+                          <span className="fp-price-save">
+                            Save {product.discountPercent}%
+                          </span>
                         </>
                       ) : (
-                        <span className="fp__priceCurrent">€{product.price}</span>
+                        <span className="fp-price-current">
+                          €{product.price}
+                        </span>
                       )}
                     </div>
-                    
-                    <button 
-                      className="fp__actionBtn"
+
+                    <button
+                      className="fp-card-action"
                       onClick={() => handleViewProduct(product.id)}
                     >
-                      View Product
-                      <span className="fp__btnArrow">→</span>
+                      <span>Discover</span>
+                      <span className="fp-action-arrow">→</span>
                     </button>
                   </div>
+
+                  {/* Card Edge Glow */}
+                  <div className="fp-card-edge" aria-hidden="true" />
                 </div>
               );
             })}
           </div>
+
+          {/* Fade Edges */}
+          <div className="fp-marquee-fade fp-marquee-fade-left" />
+          <div className="fp-marquee-fade fp-marquee-fade-right" />
         </div>
 
-        {/* Gradient Fade Edges */}
-        <div className="fp__marqueeFadeLeft"></div>
-        <div className="fp__marqueeFadeRight"></div>
-
-        {/* Footer Actions */}
-        <div className="fp__footer">
-          <Link to="/products" className="fp__viewAllBtn">
-            Explore Complete Collection
-            <span className="fp__arrowIcon">→</span>
+        {/* Footer */}
+        <div className="fp-footer">
+          <Link to="/products" className="fp-footer-link">
+            <span>Explore the complete collection</span>
+            <span className="fp-footer-arrow">→</span>
           </Link>
         </div>
 
-        {/* Quality Assurance */}
-        <div className="fp__qualitySection">
-          <div className="fp__qualityLine"></div>
-          <div className="fp__qualityBadges">
-            <div className="fp__qualityBadge">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
-              </svg>
-              Certified Organic
+        {/* Essence Strip */}
+        <div className="fp-essence">
+          <div className="fp-essence-thread" />
+          <div className="fp-essence-items">
+            <div className="fp-essence-item">
+              <span className="fp-essence-word">Organic</span>
+              <span className="fp-essence-subtle">Certified purity</span>
             </div>
-            <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
-              </svg>
-              Chemical Free
+            <div className="fp-essence-separator" />
+            <div className="fp-essence-item">
+              <span className="fp-essence-word">Pure</span>
+              <span className="fp-essence-subtle">Chemical free</span>
             </div>
-            <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
-              </svg>
-              Lab Tested
+            <div className="fp-essence-separator" />
+            <div className="fp-essence-item">
+              <span className="fp-essence-word">Tested</span>
+              <span className="fp-essence-subtle">Lab verified</span>
             </div>
-            <div className="fp__qualitySeparator"></div>
-            <div className="fp__qualityBadge">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
-              </svg>
-              Fresh Stock
+            <div className="fp-essence-separator" />
+            <div className="fp-essence-item">
+              <span className="fp-essence-word">Fresh</span>
+              <span className="fp-essence-subtle">Direct from farm</span>
             </div>
           </div>
         </div>

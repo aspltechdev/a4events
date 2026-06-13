@@ -1879,21 +1879,285 @@
 
 // export default ProductDetails;
 
+// import { useEffect, useState } from "react";
+// import { useParams, Link } from "react-router-dom";
+// import api from "../services/api";
+// import StoreMap from "../components/StoreMap";
+// import PublicLayout from "../layouts/PublicLayout";
+// import "./ProductDetails.css";
+
+// function ProductDetails() {
+//   const { id } = useParams();
+//   const [product, setProduct] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     loadProduct();
+//   }, [id]);
+
+//   const loadProduct = async () => {
+//     setLoading(true);
+//     try {
+//       const { data } = await api.get(`/products/${id}`);
+//       setProduct(data);
+//     } catch (error) {
+//       console.error(error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const stores = [
+//     {
+//       name: "Spicelands",
+//       address: "Frankfurt, Germany",
+//       lat: 50.1109,
+//       lng: 8.6821,
+//     },
+//     {
+//       name: "Jaffna Basar Frankfurt",
+//       address: "Frankfurt, Germany",
+//       lat: 50.115,
+//       lng: 8.69,
+//     },
+//     {
+//       name: "Kabil Kiosk",
+//       address: "Frankfurt, Germany",
+//       lat: 50.103,
+//       lng: 8.675,
+//     },
+//     {
+//       name: "Transfood",
+//       address: "Frankfurt, Germany",
+//       lat: 50.099,
+//       lng: 8.701,
+//     },
+//   ];
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && discountPercent > 0) {
+//       return price - (price * discountPercent / 100);
+//     }
+//     return price;
+//   };
+
+//   if (loading) {
+//     return (
+//       <PublicLayout>
+//         <div className="pdt__loading">
+//           <div className="pdt__loadingContent">
+//             <div className="pdt__loadingSpinner"></div>
+//             <p>Loading product details...</p>
+//           </div>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   if (!product) {
+//     return (
+//       <PublicLayout>
+//         <div className="pdt__notFound">
+//           <div className="pdt__notFoundContent">
+//             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+//               <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5"/>
+//               <path d="M24 16v12M24 32v0" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+//             </svg>
+//             <h2>Product Not Found</h2>
+//             <p>The product you're looking for doesn't exist or has been removed.</p>
+//             <Link to="/products" className="pdt__notFoundLink">Browse Products →</Link>
+//           </div>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//   const hasDiscount = product.discountPercent && product.discountPercent > 0;
+
+//   return (
+//     <PublicLayout>
+//       <section className="pdt__wrapper">
+//         <div className="pdt__bgSubtle"></div>
+//         <div className="pdt__bgGradient"></div>
+
+//         <div className="pdt__container">
+//           {/* Back Navigation */}
+//           <Link to="/products" className="pdt__backLink">
+//             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+//               <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+//             </svg>
+//             Back to Products
+//           </Link>
+
+//           {/* Product Grid */}
+//           <div className="pdt__grid">
+//             {/* Image Section */}
+//             <div className="pdt__imageSection">
+//               <div className="pdt__imageCard">
+//                 <img
+//                   src={`https://a4agroup.eu${product.image}`}
+//                   alt={product.title}
+//                   className="pdt__image"
+//                 />
+//                 {hasDiscount && (
+//                   <div className="pdt__discountPill">
+//                     <span>{product.discountPercent}% OFF</span>
+//                   </div>
+//                 )}
+//                 {product.featured && !hasDiscount && (
+//                   <div className="pdt__featuredPill">
+//                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                       <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
+//                     </svg>
+//                     <span>Featured</span>
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* Info Section */}
+//             <div className="pdt__infoSection">
+//               <div className="pdt__categoryBadge">{product.category}</div>
+              
+//               <h1 className="pdt__title">{product.title}</h1>
+              
+//               <div className="pdt__priceWrapper">
+//                 <div className="pdt__priceBox">
+//                   <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
+//                   {hasDiscount && (
+//                     <span className="pdt__priceOriginal">€{product.price}</span>
+//                   )}
+//                 </div>
+//                 {hasDiscount && (
+//                   <div className="pdt__saveText">
+//                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//                       <path d="M7 1L9 5.5L13.5 6.5L10 10L11 14.5L7 12L3 14.5L4 10L0.5 6.5L5 5.5L7 1Z" fill="currentColor"/>
+//                     </svg>
+//                     Save {product.discountPercent}%
+//                   </div>
+//                 )}
+//               </div>
+              
+//               <p className="pdt__description">{product.description}</p>
+              
+//               <div className="pdt__features">
+//                 <div className="pdt__feature">
+//                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//                     <path d="M7 1L9 5.5L13.5 6.5L10 10L11 14.5L7 12L3 14.5L4 10L0.5 6.5L5 5.5L7 1Z" fill="currentColor"/>
+//                   </svg>
+//                   Premium Quality
+//                 </div>
+//                 <div className="pdt__feature">
+//                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//                     <path d="M4 7l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+//                     <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
+//                   </svg>
+//                   100% Organic
+//                 </div>
+//                 <div className="pdt__feature">
+//                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//                     <path d="M2 4h10M5 4V2h4v2M4 7h6M4 10h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+//                     <rect x="1.5" y="4" width="11" height="8.5" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
+//                   </svg>
+//                   Lab Tested
+//                 </div>
+//                 <div className="pdt__feature">
+//                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//                     <path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+//                     <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
+//                   </svg>
+//                   Chemical Free
+//                 </div>
+//               </div>
+              
+//               <button className="pdt__enquireBtn">
+//                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+//                   <path d="M15 3H3a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2z" stroke="currentColor" strokeWidth="1.5"/>
+//                   <path d="M2 5l7 5 7-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+//                 </svg>
+//                 Enquire Now
+//               </button>
+//             </div>
+//           </div>
+
+//           {/* Store Availability Section */}
+//           <div className="pdt__storeSection">
+//             <div className="pdt__sectionHeader">
+//               <div className="pdt__sectionLine"></div>
+//               <span className="pdt__sectionLabel">AVAILABLE AT</span>
+//             </div>
+//             <h2 className="pdt__sectionTitle">Our Store Locations</h2>
+            
+//             <div className="pdt__storeGrid">
+//               {stores.map((store, index) => (
+//                 <div key={index} className="pdt__storeCard">
+//                   <div className="pdt__storeCardInner">
+//                     <div className="pdt__storeIcon">
+//                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+//                         <path d="M10 2C7.24 2 5 4.24 5 7c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" strokeWidth="1.5"/>
+//                         <circle cx="10" cy="7" r="2" stroke="currentColor" strokeWidth="1.5"/>
+//                       </svg>
+//                     </div>
+//                     <div className="pdt__storeInfo">
+//                       <h4 className="pdt__storeName">{store.name}</h4>
+//                       <p className="pdt__storeAddress">{store.address}</p>
+//                     </div>
+//                     <div className="pdt__storeStock">
+//                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+//                         <path d="M2 6l2.5 2.5L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+//                       </svg>
+//                       In Stock
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Map Section */}
+//           <div className="pdt__mapSection">
+//             <div className="pdt__sectionHeader">
+//               <div className="pdt__sectionLine"></div>
+//               <span className="pdt__sectionLabel">FIND US</span>
+//             </div>
+//             <h2 className="pdt__sectionTitle">Store Locations Map</h2>
+//             <div className="pdt__mapWrapper">
+//               <StoreMap stores={stores} />
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </PublicLayout>
+//   );
+// }
+
+// export default ProductDetails;
+
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import StoreMap from "../components/StoreMap";
 import PublicLayout from "../layouts/PublicLayout";
 import "./ProductDetails.css";
+import logo1 from "../assets/logo1.jpeg";
 
 function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     loadProduct();
   }, [id]);
+
+  useEffect(() => {
+    if (!loading && product) {
+      setTimeout(() => setIsVisible(true), 100);
+    }
+  }, [loading, product]);
 
   const loadProduct = async () => {
     setLoading(true);
@@ -1913,30 +2177,34 @@ function ProductDetails() {
       address: "Frankfurt, Germany",
       lat: 50.1109,
       lng: 8.6821,
+      logo: "https://a4agroup.eu/uploads/store-spicelands.png",
     },
     {
-      name: "Jaffna Basar Frankfurt",
+      name: "Jaffna Basar",
       address: "Frankfurt, Germany",
       lat: 50.115,
       lng: 8.69,
+      logo: "https://a4agroup.eu/uploads/store-jaffna.png",
     },
     {
       name: "Kabil Kiosk",
       address: "Frankfurt, Germany",
       lat: 50.103,
       lng: 8.675,
+      logo: "https://a4agroup.eu/uploads/store-kabil.png",
     },
     {
       name: "Transfood",
       address: "Frankfurt, Germany",
       lat: 50.099,
       lng: 8.701,
+      logo: "https://a4agroup.eu/uploads/store-transfood.png",
     },
   ];
 
   const calculateDiscountedPrice = (price, discountPercent) => {
     if (discountPercent && discountPercent > 0) {
-      return price - (price * discountPercent / 100);
+      return price - (price * discountPercent) / 100;
     }
     return price;
   };
@@ -1944,11 +2212,9 @@ function ProductDetails() {
   if (loading) {
     return (
       <PublicLayout>
-        <div className="pdt__loading">
-          <div className="pdt__loadingContent">
-            <div className="pdt__loadingSpinner"></div>
-            <p>Loading product details...</p>
-          </div>
+        <div className="pdt-loading">
+          <div className="pdt-loading-spinner" />
+          <p>Loading product details...</p>
         </div>
       </PublicLayout>
     );
@@ -1957,15 +2223,15 @@ function ProductDetails() {
   if (!product) {
     return (
       <PublicLayout>
-        <div className="pdt__notFound">
-          <div className="pdt__notFoundContent">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M24 16v12M24 32v0" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+        <div className="pdt-error">
+          <div className="pdt-error-content">
+            <div className="pdt-error-thread" />
             <h2>Product Not Found</h2>
             <p>The product you're looking for doesn't exist or has been removed.</p>
-            <Link to="/products" className="pdt__notFoundLink">Browse Products →</Link>
+            <Link to="/products" className="pdt-error-btn">
+              <span>Browse Products</span>
+              <span>→</span>
+            </Link>
           </div>
         </div>
       </PublicLayout>
@@ -1977,157 +2243,209 @@ function ProductDetails() {
 
   return (
     <PublicLayout>
-      <section className="pdt__wrapper">
-        <div className="pdt__bgSubtle"></div>
-        <div className="pdt__bgGradient"></div>
+      <div className={`pdt-page ${isVisible ? "pdt-visible" : ""}`}>
+        {/* Top Navigation */}
+        <div className="pdt-top-nav">
+          <div className="pdt-top-nav-inner">
+            <button onClick={() => navigate(-1)} className="pdt-nav-back">
+              <span>←</span>
+              <span>Back</span>
+            </button>
+            <Link to="/products" className="pdt-nav-all">
+              <span>All Products</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
 
-        <div className="pdt__container">
-          {/* Back Navigation */}
-          <Link to="/products" className="pdt__backLink">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Back to Products
-          </Link>
-
-          {/* Product Grid */}
-          <div className="pdt__grid">
-            {/* Image Section */}
-            <div className="pdt__imageSection">
-              <div className="pdt__imageCard">
+        {/* Main Content */}
+        <div className="pdt-container">
+          {/* Product Hero */}
+          <div className="pdt-hero">
+            {/* Image Column */}
+            <div className="pdt-hero-image-col">
+              <div className="pdt-image-frame">
                 <img
                   src={`https://a4agroup.eu${product.image}`}
                   alt={product.title}
-                  className="pdt__image"
+                  className="pdt-image"
                 />
+                <div className="pdt-image-overlay" />
                 {hasDiscount && (
-                  <div className="pdt__discountPill">
+                  <div className="pdt-badge pdt-badge-sale">
                     <span>{product.discountPercent}% OFF</span>
                   </div>
                 )}
                 {product.featured && !hasDiscount && (
-                  <div className="pdt__featuredPill">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M6 0L7.5 4.5L12 4.5L8.25 7.5L9.75 12L6 9L2.25 12L3.75 7.5L0 4.5L4.5 4.5L6 0Z" fill="currentColor"/>
-                    </svg>
+                  <div className="pdt-badge pdt-badge-featured">
                     <span>Featured</span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Info Section */}
-            <div className="pdt__infoSection">
-              <div className="pdt__categoryBadge">{product.category}</div>
-              
-              <h1 className="pdt__title">{product.title}</h1>
-              
-              <div className="pdt__priceWrapper">
-                <div className="pdt__priceBox">
-                  <span className="pdt__priceCurrent">€{Math.round(discountedPrice)}</span>
-                  {hasDiscount && (
-                    <span className="pdt__priceOriginal">€{product.price}</span>
-                  )}
-                </div>
-                {hasDiscount && (
-                  <div className="pdt__saveText">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M7 1L9 5.5L13.5 6.5L10 10L11 14.5L7 12L3 14.5L4 10L0.5 6.5L5 5.5L7 1Z" fill="currentColor"/>
-                    </svg>
-                    Save {product.discountPercent}%
+            {/* Info Column */}
+            <div className="pdt-hero-info-col">
+              <div className="pdt-info-card">
+                <div className="pdt-info-card-inner">
+                  <div className="pdt-category-row">
+                    <span className="pdt-category-tag">{product.category}</span>
                   </div>
-                )}
+
+                  <h1 className="pdt-title">{product.title}</h1>
+
+                  <p className="pdt-description">{product.description}</p>
+
+                  <div className="pdt-price-block">
+                    <span className="pdt-price-current">€{Math.round(discountedPrice)}</span>
+                    {hasDiscount && (
+                      <>
+                        <span className="pdt-price-original">€{product.price}</span>
+                        <span className="pdt-price-save">Save {product.discountPercent}%</span>
+                      </>
+                    )}
+                  </div>
+
+                  <div className="pdt-qualities">
+                    <div className="pdt-quality-item">
+                      <span className="pdt-quality-dot pdt-q-green" />
+                      <span>Certified Organic</span>
+                    </div>
+                    <div className="pdt-quality-item">
+                      <span className="pdt-quality-dot pdt-q-teal" />
+                      <span>Chemical Free</span>
+                    </div>
+                    <div className="pdt-quality-item">
+                      <span className="pdt-quality-dot pdt-q-blue" />
+                      <span>Lab Tested</span>
+                    </div>
+                    <div className="pdt-quality-item">
+                      <span className="pdt-quality-dot pdt-q-amber" />
+                      <span>Premium Quality</span>
+                    </div>
+                  </div>
+
+                  <button className="pdt-enquire-btn">
+                    <span>Enquire About This Product</span>
+                    <span>→</span>
+                  </button>
+                </div>
               </div>
-              
-              <p className="pdt__description">{product.description}</p>
-              
-              <div className="pdt__features">
-                <div className="pdt__feature">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M7 1L9 5.5L13.5 6.5L10 10L11 14.5L7 12L3 14.5L4 10L0.5 6.5L5 5.5L7 1Z" fill="currentColor"/>
-                  </svg>
-                  Premium Quality
+            </div>
+          </div>
+
+          {/* Product Details Section */}
+          <div className="pdt-section">
+            <div className="pdt-section-card">
+              <div className="pdt-section-head">
+                <div className="pdt-section-thread" />
+                <span className="pdt-section-eyebrow">Product Information</span>
+              </div>
+              <h2 className="pdt-section-title">Details</h2>
+
+              <div className="pdt-specs-grid">
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Category</span>
+                  <span className="pdt-spec-value">{product.category}</span>
                 </div>
-                <div className="pdt__feature">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M4 7l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
-                  </svg>
-                  100% Organic
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Price</span>
+                  <span className="pdt-spec-value">
+                    €{Math.round(discountedPrice)}
+                    {hasDiscount && (
+                      <span className="pdt-spec-original"> (was €{product.price})</span>
+                    )}
+                  </span>
                 </div>
-                <div className="pdt__feature">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 4h10M5 4V2h4v2M4 7h6M4 10h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                    <rect x="1.5" y="4" width="11" height="8.5" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
-                  </svg>
-                  Lab Tested
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Quality Standard</span>
+                  <span className="pdt-spec-value">Premium Organic</span>
                 </div>
-                <div className="pdt__feature">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                    <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
-                  </svg>
-                  Chemical Free
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Source</span>
+                  <span className="pdt-spec-value">Certified Farm Partners</span>
+                </div>
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Processing</span>
+                  <span className="pdt-spec-value">Chemical Free</span>
+                </div>
+                <div className="pdt-spec-item">
+                  <span className="pdt-spec-label">Testing</span>
+                  <span className="pdt-spec-value">Laboratory Verified</span>
                 </div>
               </div>
-              
-              <button className="pdt__enquireBtn">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M15 3H3a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2z" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M2 5l7 5 7-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Enquire Now
-              </button>
             </div>
           </div>
 
           {/* Store Availability Section */}
-          <div className="pdt__storeSection">
-            <div className="pdt__sectionHeader">
-              <div className="pdt__sectionLine"></div>
-              <span className="pdt__sectionLabel">AVAILABLE AT</span>
-            </div>
-            <h2 className="pdt__sectionTitle">Our Store Locations</h2>
-            
-            <div className="pdt__storeGrid">
-              {stores.map((store, index) => (
-                <div key={index} className="pdt__storeCard">
-                  <div className="pdt__storeCardInner">
-                    <div className="pdt__storeIcon">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 2C7.24 2 5 4.24 5 7c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" strokeWidth="1.5"/>
-                        <circle cx="10" cy="7" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      </svg>
+          <div className="pdt-section">
+            <div className="pdt-section-card">
+              <div className="pdt-section-head">
+                <div className="pdt-section-thread pdt-thread-blue" />
+                <span className="pdt-section-eyebrow">Where to Find</span>
+              </div>
+              <h2 className="pdt-section-title">Available At</h2>
+              <p className="pdt-section-sub">Find this product at our partner stores across Germany</p>
+
+              <div className="pdt-stores-grid">
+                {stores.map((store, index) => (
+                  <div key={index} className="pdt-store-card">
+                    <div className="pdt-store-logo-wrap">
+                      <img
+                        src={store.logo}
+                        alt={store.name}
+                        className="pdt-store-logo"
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                      <div className="pdt-store-logo-fallback">
+                        <span>{store.name.charAt(0)}</span>
+                      </div>
                     </div>
-                    <div className="pdt__storeInfo">
-                      <h4 className="pdt__storeName">{store.name}</h4>
-                      <p className="pdt__storeAddress">{store.address}</p>
-                    </div>
-                    <div className="pdt__storeStock">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6l2.5 2.5L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      In Stock
+                    <div className="pdt-store-info">
+                      <h4 className="pdt-store-name">{store.name}</h4>
+                      <p className="pdt-store-address">{store.address}</p>
+                      <span className="pdt-store-stock">
+                        <span className="pdt-store-stock-dot" />
+                        In Stock
+                      </span>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Map Section */}
-          <div className="pdt__mapSection">
-            <div className="pdt__sectionHeader">
-              <div className="pdt__sectionLine"></div>
-              <span className="pdt__sectionLabel">FIND US</span>
+          <div className="pdt-section">
+            <div className="pdt-section-card">
+              <div className="pdt-section-head">
+                <div className="pdt-section-thread pdt-thread-emerald" />
+                <span className="pdt-section-eyebrow">Store Locations</span>
+              </div>
+              <h2 className="pdt-section-title">Find Us on Map</h2>
+              <div className="pdt-map-frame">
+                <StoreMap stores={stores} />
+              </div>
             </div>
-            <h2 className="pdt__sectionTitle">Store Locations Map</h2>
-            <div className="pdt__mapWrapper">
-              <StoreMap stores={stores} />
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="pdt-bottom">
+            <div className="pdt-bottom-card">
+              <div className="pdt-bottom-text">
+                <h3 className="pdt-bottom-title">Interested in this product?</h3>
+                <p className="pdt-bottom-sub">Reach out to us for bulk orders, inquiries, or store availability near you.</p>
+              </div>
+              <button className="pdt-bottom-btn">
+                <span>Enquire Now</span>
+                <span>→</span>
+              </button>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </PublicLayout>
   );
 }
