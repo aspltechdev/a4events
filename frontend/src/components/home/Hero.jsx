@@ -1483,6 +1483,7 @@ function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const heroRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL;
 
   useEffect(() => {
     loadSlides();
