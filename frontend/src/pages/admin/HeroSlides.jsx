@@ -664,7 +664,7 @@ function HeroSlides() {
                 {/* Image */}
                 <div className="ahs-card-image">
                   <img
-                    src={`http://localhost:5000${slide.image}`}
+                    src={`https://a4agroup.eu${slide.image}`}
                     alt={slide.title}
                     className="ahs-image"
                   />

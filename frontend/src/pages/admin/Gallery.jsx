@@ -576,7 +576,7 @@ function Gallery() {
                 {/* Image */}
                 <div className="gal-card-image">
                   <img
-                    src={`http://localhost:5000${item.image}`}
+                    src={`https://a4agroup.eu${item.image}`}
                     alt={item.title || "Gallery image"}
                     className="gal-image"
                   />

@@ -616,7 +616,7 @@ function ProductsList() {
                   {/* Image */}
                   <div className="apl-card-image">
                     <img
-                      src={`http://localhost:5000${product.image}`}
+                      src={`https://a4agroup.eu${product.image}`}
                       alt={product.title}
                       className="apl-image"
                     />

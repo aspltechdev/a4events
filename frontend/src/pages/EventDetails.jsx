@@ -1359,7 +1359,7 @@ function EventDetails() {
         <div 
           className="evdt__hero"
           style={{
-            backgroundImage: `url(http://localhost:5000${event.bannerImage})`,
+            backgroundImage: `url(https://a4agroup.eu${event.bannerImage})`,
           }}
         >
           <div className="evdt__heroOverlay"></div>

@@ -233,7 +233,7 @@ function EditGallery() {
                     ? URL.createObjectURL(
                         file
                       )
-                    : `http://localhost:5000${formData.image}`
+                    : `https://a4agroup.eu${formData.image}`
                 }
                 alt={
                   formData.title

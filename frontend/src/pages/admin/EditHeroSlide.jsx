@@ -1150,7 +1150,7 @@ function EditHeroSlide() {
         eventId: data.eventId || "",
       });
       if (data.image) {
-        setPreview(`http://localhost:5000${data.image}`);
+        setPreview(`https://a4agroup.eu${data.image}`);
       }
     } catch (error) {
       console.error(error);

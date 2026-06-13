@@ -1291,7 +1291,7 @@ function EditEvent() {
                         className="ee-preview-remove"
                         onClick={() => {
                           setFile(null);
-                          setPreview(formData.bannerImage ? `http://localhost:5000${formData.bannerImage}` : null);
+                          setPreview(formData.bannerImage ? `https://a4agroup.eu${formData.bannerImage}` : null);
                         }}
                       >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

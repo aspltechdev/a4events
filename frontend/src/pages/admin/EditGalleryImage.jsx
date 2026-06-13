@@ -418,7 +418,7 @@ function EditGalleryImage() {
       const { data } = await api.get(`/gallery/${id}`);
       setFormData(data);
       if (data.image) {
-        setPreview(`http://localhost:5000${data.image}`);
+        setPreview(`https://a4agroup.eu${data.image}`);
       }
     } catch (error) {
       console.error(error);
@@ -479,7 +479,7 @@ function EditGalleryImage() {
   const previewImage = file
     ? URL.createObjectURL(file)
     : formData.image
-    ? `http://localhost:5000${formData.image}`
+    ? `https://a4agroup.eu${formData.image}`
     : null;
 
   if (loading) {
@@ -563,7 +563,7 @@ function EditGalleryImage() {
                       className="egi-preview-remove"
                       onClick={() => {
                         setFile(null);
-                        setPreview(formData.image ? `http://localhost:5000${formData.image}` : null);
+                        setPreview(formData.image ? `https://a4agroup.eu${formData.image}` : null);
                       }}
                     >
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

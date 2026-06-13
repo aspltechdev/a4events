@@ -492,7 +492,7 @@ function Gallery() {
               >
                 <div className="gallery-image-wrapper">
                   <img
-                    src={`http://localhost:5000${item.image}`}
+                    src={`https://a4agroup.eu${item.image}`}
                     alt={item.title || "Gallery image"}
                     className="gallery-image"
                     loading="lazy"
@@ -541,7 +541,7 @@ function Gallery() {
               </svg>
             </button>
             <img
-              src={`http://localhost:5000${selectedImage.image}`}
+              src={`https://a4agroup.eu${selectedImage.image}`}
               alt={selectedImage.title || "Gallery"}
               className="gallery-lightbox-image"
             />

@@ -904,7 +904,7 @@ function UpcomingEvents() {
                     <div className="ue__imageWrapper">
                       {event.bannerImage && (
                         <img
-                          src={`http://localhost:5000${event.bannerImage}`}
+                          src={`https://a4agroup.eu${event.bannerImage}`}
                           alt={event.title}
                           className="ue__image"
                           loading="lazy"

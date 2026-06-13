@@ -1996,7 +1996,7 @@ function ProductDetails() {
             <div className="pdt__imageSection">
               <div className="pdt__imageCard">
                 <img
-                  src={`http://localhost:5000${product.image}`}
+                  src={`https://a4agroup.eu${product.image}`}
                   alt={product.title}
                   className="pdt__image"
                 />

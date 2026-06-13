@@ -1299,7 +1299,7 @@ function EditProduct() {
                 </label>
 
                 <img
-                  src={`http://localhost:5000${formData.image}`}
+                  src={`https://a4agroup.eu${formData.image}`}
                   alt="Current Product"
                   className="a4-product-preview"
                 />

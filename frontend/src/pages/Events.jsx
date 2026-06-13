@@ -860,7 +860,7 @@ function Events() {
                 <div className="ev__cardImage">
                   {event.bannerImage && (
                     <img
-                      src={`http://localhost:5000${event.bannerImage}`}
+                      src={`https://a4agroup.eu${event.bannerImage}`}
                       alt={event.title}
                       className="ev__image"
                     />
