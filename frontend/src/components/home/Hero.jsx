@@ -2895,7 +2895,7 @@ function Hero() {
             orientation === "portrait" ? "image-portrait" : "image-landscape"
           }`}
           style={{
-            backgroundImage: `url(${IMAGE_BASE}${slide.image})`,
+            backgroundImage: `url(https://a4agroup.eu${slide.image})`,
             transform: `translate(${parallaxX}px, ${parallaxY}px) scale(1.05)`,
           }}
         />
