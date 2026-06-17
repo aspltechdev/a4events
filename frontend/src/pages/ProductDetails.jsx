@@ -2141,6 +2141,9 @@ import StoreMap from "../components/StoreMap";
 import PublicLayout from "../layouts/PublicLayout";
 import "./ProductDetails.css";
 import logo1 from "../assets/logo1.jpeg";
+import logo2 from "../assets/logo2.jpeg";
+import logo3 from "../assets/logo3.jpeg";
+import logo4 from "../assets/logo4.jpeg";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -2177,28 +2180,28 @@ function ProductDetails() {
       address: "Frankfurt, Germany",
       lat: 50.1109,
       lng: 8.6821,
-      logo: "https://a4agroup.eu/uploads/store-spicelands.png",
+      logo: logo4,
     },
     {
       name: "Jaffna Basar",
       address: "Frankfurt, Germany",
       lat: 50.115,
       lng: 8.69,
-      logo: "https://a4agroup.eu/uploads/store-jaffna.png",
+      logo: logo3,
     },
     {
       name: "Kabil Kiosk",
       address: "Frankfurt, Germany",
       lat: 50.103,
       lng: 8.675,
-      logo: "https://a4agroup.eu/uploads/store-kabil.png",
+      logo:logo2,
     },
     {
       name: "Transfood",
       address: "Frankfurt, Germany",
       lat: 50.099,
       lng: 8.701,
-      logo: "https://a4agroup.eu/uploads/store-transfood.png",
+      logo: logo1,
     },
   ];
 
@@ -2399,9 +2402,9 @@ function ProductDetails() {
                           e.target.style.display = "none";
                         }}
                       />
-                      <div className="pdt-store-logo-fallback">
+                      {/* <div className="pdt-store-logo-fallback">
                         <span>{store.name.charAt(0)}</span>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="pdt-store-info">
                       <h4 className="pdt-store-name">{store.name}</h4>
