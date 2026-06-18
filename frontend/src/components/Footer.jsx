@@ -141,8 +141,8 @@ function Footer() {
             <nav className="ft-links">
               <Link to="/products" className="ft-link">Authentic Provisions</Link>
               <Link to="/events" className="ft-link">Indo Experiences</Link>
-              <Link to="/about" className="ft-link">EduConsulting</Link>
-              <Link to="/about" className="ft-link">Business Expansion</Link>
+              <Link to="/events" className="ft-link">EduConsulting</Link>
+              <Link to="/products" className="ft-link">Business Expansion</Link>
             </nav>
           </div>
 
