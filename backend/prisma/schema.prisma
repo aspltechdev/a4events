@@ -28,9 +28,23 @@ model Product {
   category    String?
   discountPercent Int? @default(0)
 
+  ingredients ProductIngredient[]
+
   heroSlides  HeroSlide[]
 
   createdAt   DateTime @default(now())
+}
+
+model ProductIngredient {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+  description String?
+  image       String?
+
+  productId   Int
+
+  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Event {
