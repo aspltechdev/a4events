@@ -1,5 +1,5 @@
 /* ============================================================
-   EVENTS PAGE — CENTERED HERO + FIXED-SIZE FEATURED CARDS
+   EVENTS PAGE — ALL FIXED-SIZE CARDS
    White-blend cards. Blue-green palette. Production grade.
    ============================================================ */
 
@@ -236,18 +236,21 @@
   color: #2dd4bf; background: rgba(20,184,166,0.15);
 }
 
-/* ----- GRID (Upcoming/Past Events) ----- */
+/* ----- GRID (Upcoming/Past Events - Centered with auto-fill) ----- */
 .ev-grid { 
   display: grid; 
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 1.5rem; 
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
+  gap: 1.5rem;
+  justify-content: center;
 }
 
-/* ----- CARD LINK (Grid Cards) ----- */
+/* ----- CARD LINK (Grid Cards - FIXED SIZE) ----- */
 .ev-card-link { 
   text-decoration: none; 
   display: block;
-  height: 100%;
+  width: 100%;
+  max-width: 450px;
+  justify-self: center;
 }
 
 /* ----- CARD LINK (Featured Marquee - FIXED SIZE) ----- */
@@ -278,26 +281,6 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 20px 50px rgba(20,184,166,0.1), 0 4px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(20,184,166,0.06) inset;
 }
 
-/* Large Card (Featured Marquee - FIXED) */
-.ev-card-large {
-  height: 100%;
-}
-
-.ev-card-large .ev-card-image-wrap { 
-  height: 240px;
-  min-height: 240px;
-  max-height: 240px;
-}
-
-.ev-card-large .ev-card-details { 
-  padding: 1.5rem;
-  flex: 1;
-}
-
-.ev-card-large .ev-card-title { 
-  font-size: 1.15rem;
-}
-
 .ev-card-shine {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 55%, transparent 100%);
@@ -308,10 +291,22 @@
 
 .ev-card-media { position: relative; z-index: 1; overflow: hidden; }
 
+/* Fixed Image Height for ALL cards */
 .ev-card-image-wrap {
-  position: relative; width: 100%; height: 220px;
-  min-height: 220px; max-height: 220px;
-  overflow: hidden; background: #f1f5f9;
+  position: relative; 
+  width: 100%; 
+  height: 220px;
+  min-height: 220px; 
+  max-height: 220px;
+  overflow: hidden; 
+  background: #f1f5f9;
+}
+
+/* Large Card (Featured Marquee) */
+.ev-card-large .ev-card-image-wrap { 
+  height: 240px;
+  min-height: 240px;
+  max-height: 240px;
 }
 
 .ev-card-image {
@@ -357,9 +352,18 @@
   color: #0d9488;
 }
 
+/* Fixed Details Section */
 .ev-card-details {
-  position: relative; z-index: 1; padding: 1.4rem;
-  display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
+  position: relative; z-index: 1; 
+  padding: 1.4rem;
+  display: flex; flex-direction: column; 
+  gap: 0.5rem; 
+  flex: 1;
+  min-height: 0;
+}
+
+.ev-card-large .ev-card-details { 
+  padding: 1.5rem;
 }
 
 .ev-card-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
@@ -375,19 +379,28 @@
 .ev-card-title {
   font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; color: #0f1724;
   line-height: 1.25; transition: color 0.3s ease; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+.ev-card-large .ev-card-title { 
+  font-size: 1.15rem;
 }
 
 .ev-card:hover .ev-card-title { color: #0d9488; }
 
 .ev-card-description {
   font-size: 0.85rem; line-height: 1.55; color: rgba(15,23,36,0.5);
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; 
+  flex: 1;
+  min-height: 0;
 }
 
 .ev-card-action {
   display: inline-flex; align-items: center; gap: 0.5rem;
   color: rgba(15,23,36,0.5); font-size: 0.85rem; font-weight: 500;
-  transition: all 0.35s var(--ease-premium); letter-spacing: 0.02em; margin-top: 0.3rem;
+  transition: all 0.35s var(--ease-premium); letter-spacing: 0.02em; 
+  margin-top: auto;
+  padding-top: 0.3rem;
 }
 
 .ev-card:hover .ev-card-action { color: #0d9488; gap: 0.7rem; }
@@ -424,7 +437,10 @@
 
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
-  .ev-grid { grid-template-columns: repeat(2, 1fr); }
+  .ev-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
+  }
+  .ev-card-link { max-width: 400px; }
   .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
   .ev-card-large .ev-card-image-wrap { height: 220px; min-height: 220px; max-height: 220px; }
   .ev-card-link-large { width: 340px; min-width: 340px; max-width: 340px; }
@@ -433,7 +449,11 @@
 @media (max-width: 768px) {
   .ev-premium { padding: 5rem 0 4rem; }
   .ev-container { gap: 3.5rem; padding: 0 4%; }
-  .ev-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .ev-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 1.25rem; 
+  }
+  .ev-card-link { max-width: 400px; }
   .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
   .ev-card-large .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
   .ev-card-link-large { width: 300px; min-width: 300px; max-width: 300px; }
@@ -444,10 +464,16 @@
 }
 
 @media (max-width: 480px) {
+  .ev-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .ev-card-link { max-width: 100%; }
   .ev-card-details { padding: 1.2rem; }
   .ev-card-large .ev-card-details { padding: 1.2rem; }
   .ev-prose { font-size: 0.95rem; }
   .ev-toggle-tab { padding: 0.55rem 1rem; font-size: 0.8rem; }
-  .ev-card-image-wrap { height: 180px; min-height: 180px; max-height: 180px; }
-  .ev-card-link-large { width: 280px; min-width: 280px; max-width: 280px; }
+  .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
+  .ev-card-link-large { width: 300px; min-width: 300px; max-width: 300px; }
+  .ev-card-title { font-size: 1rem; }
+  .ev-card-large .ev-card-title { font-size: 1.05rem; }
 }
