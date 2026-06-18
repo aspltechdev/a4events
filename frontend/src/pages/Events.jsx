@@ -2189,11 +2189,11 @@ function Events() {
                   </div>
                 </div>
                 <a
-                  href="mailto:contact.a4aimpex@gmail.com"
+                  href="mailto:contact.events@a4agroups.eu"
                   className="ev-cta-btn"
                 >
                   <Mail size={16} strokeWidth={1.6} />
-                  <span>contact.a4aimpex@gmail.com</span>
+                  <span>contact.events@a4agroups.eu</span>
                   <span className="ev-cta-arrow">→</span>
                 </a>
               </div>

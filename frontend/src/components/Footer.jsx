@@ -120,7 +120,9 @@ function Footer() {
             </p>
 
             <span className="ft-tagline">
-              From Frankfurt to the world
+             A4AAnagrams UG
+
+
             </span>
             <span className="ft-tagline ">Frankfurt am main
               Germany</span>

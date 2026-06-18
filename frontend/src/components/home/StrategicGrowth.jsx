@@ -196,38 +196,8 @@ function StrategicGrowth() {
           </div>
         </div>
 
-        {/* Section 3: UG Programs - Left Content, Right Cards */}
-        <div className="sg-row">
-          <div className="sg-row-content">
-            <div className="sg-row-label">Education Pathways</div>
-            <h3 className="sg-row-title">
-              German UG Programs & career guidance
-            </h3>
-            <p className="sg-row-text">
-              We provide comprehensive guidance for students seeking undergraduate 
-              education in Germany — from university selection and application 
-              support to internship placements and career pathway development 
-              with leading German companies.
-            </p>
-            <div className="sg-row-accent" />
-          </div>
-          <div className="sg-row-cards">
-            {ugPrograms.map((item, index) => (
-              <div
-                key={item.title}
-                className="sg-card"
-                style={{ "--card-index": index }}
-              >
-                <div className="sg-card-icon">{item.icon}</div>
-                <h4 className="sg-card-title">{item.title}</h4>
-                <p className="sg-card-text">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Roadmap Strip */}
-        <div className="sg-roadmap">
+             <div className="sg-roadmap">
           <div className="sg-roadmap-thread" />
           <div className="sg-roadmap-steps">
             <div className="sg-step">
@@ -261,6 +231,72 @@ function StrategicGrowth() {
             </div>
           </div>
         </div>
+
+        {/* Section 3: UG Programs - Left Content, Right Cards */}
+        <div className="sg-row">
+          <div className="sg-row-content">
+            <div className="sg-row-label">Education Pathways</div>
+            <h3 className="sg-row-title">
+              German UG Programs & career guidance
+            </h3>
+            <p className="sg-row-text">
+              We provide comprehensive guidance for students seeking undergraduate 
+              education in Germany — from university selection and application 
+              support to internship placements and career pathway development 
+              with leading German companies.
+            </p>
+            <div className="sg-row-accent" />
+          </div>
+          <div className="sg-row-cards">
+            {ugPrograms.map((item, index) => (
+              <div
+                key={item.title}
+                className="sg-card"
+                style={{ "--card-index": index }}
+              >
+                <div className="sg-card-icon">{item.icon}</div>
+                <h4 className="sg-card-title">{item.title}</h4>
+                <p className="sg-card-text">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Roadmap Strip */}
+        {/* <div className="sg-roadmap">
+          <div className="sg-roadmap-thread" />
+          <div className="sg-roadmap-steps">
+            <div className="sg-step">
+              <span className="sg-step-number">01</span>
+              <span className="sg-step-label">Partnership Formation</span>
+            </div>
+            <div className="sg-step-arrow">→</div>
+            <div className="sg-step">
+              <span className="sg-step-number">02</span>
+              <span className="sg-step-label">Target Identification</span>
+            </div>
+            <div className="sg-step-arrow">→</div>
+            <div className="sg-step">
+              <span className="sg-step-number">03</span>
+              <span className="sg-step-label">Due Diligence</span>
+            </div>
+            <div className="sg-step-arrow">→</div>
+            <div className="sg-step">
+              <span className="sg-step-number">04</span>
+              <span className="sg-step-label">Deal Structuring</span>
+            </div>
+            <div className="sg-step-arrow">→</div>
+            <div className="sg-step">
+              <span className="sg-step-number">05</span>
+              <span className="sg-step-label">Acquisition & Integration</span>
+            </div>
+            <div className="sg-step-arrow">→</div>
+            <div className="sg-step">
+              <span className="sg-step-number">06</span>
+              <span className="sg-step-label">Growth & Expansion</span>
+            </div>
+          </div>
+        </div> */}
       </div>
     </section>
   );

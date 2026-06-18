@@ -2864,7 +2864,7 @@ function Hero() {
   const getBadgeText = () => {
     if (slide.slideType === "product") return "New Collection";
     if (slide.slideType === "event") return "Featured Event";
-    return "Since 1924";
+    return "Since 1926";
   };
 
   return (
