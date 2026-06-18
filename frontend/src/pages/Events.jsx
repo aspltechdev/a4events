@@ -999,6 +999,280 @@
 
 // export default Events;
 
+// import { useEffect, useState, useRef } from "react";
+// import { Link } from "react-router-dom";
+// import api from "../services/api";
+// import PublicLayout from "../layouts/PublicLayout";
+// import "./Events.css";
+
+// function Events() {
+//   const [events, setEvents] = useState([]);
+//   const [isVisible, setIsVisible] = useState(false);
+//   const [isPaused, setIsPaused] = useState(false);
+//   const [activeTab, setActiveTab] = useState("upcoming");
+//   const sectionRef = useRef(null);
+
+//   useEffect(() => {
+//     fetchEvents();
+//   }, []);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.05 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, [events]);
+
+//   const fetchEvents = async () => {
+//     try {
+//       const { data } = await api.get("/events");
+//       setEvents(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const today = new Date();
+
+//   const featuredEvents = events.filter((event) => event.featured);
+//   const upcomingEvents = events.filter(
+//     (event) => !event.featured && new Date(event.eventDate) >= today
+//   );
+//   const pastEvents = events.filter(
+//     (event) => new Date(event.eventDate) < today
+//   );
+
+//   const formatDate = (dateString) => {
+//     const date = new Date(dateString);
+//     return date.toLocaleDateString("en-US", {
+//       day: "numeric",
+//       month: "long",
+//       year: "numeric",
+//     });
+//   };
+
+//   const formatTime = (dateString) => {
+//     const date = new Date(dateString);
+//     return date.toLocaleTimeString("en-US", {
+//       hour: "2-digit",
+//       minute: "2-digit",
+//       hour12: true,
+//     });
+//   };
+
+//   const formatMonth = (dateString) => {
+//     const date = new Date(dateString);
+//     return date.toLocaleDateString("en-US", { month: "short" });
+//   };
+
+//   const formatDay = (dateString) => {
+//     const date = new Date(dateString);
+//     return date.getDate();
+//   };
+
+//   const marqueeEvents = [...featuredEvents, ...featuredEvents];
+
+//   const renderEventCard = (event, index, isLarge = false) => (
+//     <Link
+//       key={`${event.id}-${index}`}
+//       to={`/events/${event.id}`}
+//       className={`ev-card-link ${isLarge ? "ev-card-link-large" : ""}`}
+//       style={{ "--card-index": index }}
+//     >
+//       <div className={`ev-card ${isLarge ? "ev-card-large" : ""}`}>
+//         <div className="ev-card-shine" aria-hidden="true" />
+//         <div className="ev-card-media">
+//           <div className="ev-card-image-wrap">
+//             {event.bannerImage && (
+//               <img
+//                 src={`https://a4agroup.eu${event.bannerImage}`}
+//                 alt={event.title}
+//                 className="ev-card-image"
+//                 loading="lazy"
+//               />
+//             )}
+//             <div className="ev-card-image-veil" />
+//           </div>
+//           <div className="ev-card-date">
+//             <span className="ev-date-month">{formatMonth(event.eventDate)}</span>
+//             <span className="ev-date-day">{formatDay(event.eventDate)}</span>
+//           </div>
+//           {event.featured && (
+//             <div className="ev-card-featured">
+//               <span>Featured</span>
+//             </div>
+//           )}
+//         </div>
+//         <div className="ev-card-details">
+//           <div className="ev-card-meta">
+//             <span className="ev-meta-item">
+//               <span className="ev-meta-dot" />
+//               {event.location || "Venue TBA"}
+//             </span>
+//             <span className="ev-meta-divider" />
+//             <span className="ev-meta-item">
+//               <span className="ev-meta-dot" />
+//               {formatDate(event.eventDate)}
+//             </span>
+//             <span className="ev-meta-divider" />
+//             <span className="ev-meta-item">
+//               <span className="ev-meta-dot" />
+//               {formatTime(event.eventDate)}
+//             </span>
+//           </div>
+//           <h3 className="ev-card-title">{event.title}</h3>
+//           <p className="ev-card-description">
+//             {event.description || "Join us for an unforgettable experience with amazing performances and networking opportunities."}
+//           </p>
+//           <div className="ev-card-action">
+//             <span>View Event Details</span>
+//             <span className="ev-action-arrow">→</span>
+//           </div>
+//         </div>
+//         <div className="ev-card-edge" aria-hidden="true" />
+//       </div>
+//     </Link>
+//   );
+
+//   const activeEvents = activeTab === "upcoming" ? upcomingEvents : pastEvents;
+
+//   return (
+//     <PublicLayout>
+//       <section
+//         ref={sectionRef}
+//         className={`ev-premium ${isVisible ? "ev-visible" : ""}`}
+//       >
+//         {/* Atmospheric Depth */}
+//         <div className="ev-atmosphere" aria-hidden="true">
+//           <div className="ev-glow ev-glow--teal" />
+//           <div className="ev-glow ev-glow--blue" />
+//           <div className="ev-glow ev-glow--emerald" />
+//           <div className="ev-mesh" />
+//           <div className="ev-grain" />
+//           <div className="ev-vignette" />
+//         </div>
+
+//         {/* Floating Orbs */}
+//         <div className="ev-orbs" aria-hidden="true">
+//           <div className="ev-orb ev-orb--primary" />
+//           <div className="ev-orb ev-orb--secondary" />
+//           <div className="ev-orb ev-orb--tertiary" />
+//         </div>
+
+//         <div className="ev-container">
+//           {/* Hero Header — Centered */}
+//           <div className="ev-hero">
+//             <div className="ev-hero-content">
+//               <div className="ev-whisper">
+//                 <span className="ev-whisper-line" />
+//                 <span>Discover Events</span>
+//                 <span className="ev-whisper-line" />
+//               </div>
+//               <h1 className="ev-headline">
+//                 <span className="ev-headline-line">Experiences worth</span>
+//                 <span className="ev-headline-line ev-headline-radiance">
+//                   remembering forever
+//                 </span>
+//               </h1>
+//               <p className="ev-prose">
+//                 Explore concerts, festivals, workshops, and unforgettable 
+//                 experiences happening around you. Book your spot today.
+//               </p>
+//             </div>
+//           </div>
+
+//           {/* Featured Events Marquee */}
+//           {featuredEvents.length > 0 && (
+//             <div className="ev-featured-section">
+//               <div className="ev-featured-header">
+//                 <span className="ev-featured-label">Featured Events</span>
+//                 <p className="ev-featured-subtitle">
+//                   Handpicked premium experiences curated just for you
+//                 </p>
+//               </div>
+//               <div
+//                 className="ev-marquee-stage"
+//                 onMouseEnter={() => setIsPaused(true)}
+//                 onMouseLeave={() => setIsPaused(false)}
+//               >
+//                 <div className={`ev-marquee-track ${isPaused ? "ev-marquee-paused" : ""}`}>
+//                   {marqueeEvents.map((event, index) => renderEventCard(event, index, true))}
+//                 </div>
+//                 <div className="ev-marquee-fade ev-marquee-fade-left" />
+//                 <div className="ev-marquee-fade ev-marquee-fade-right" />
+//               </div>
+//             </div>
+//           )}
+
+//           {/* Toggle Section */}
+//           <div className="ev-toggle-section">
+//             <div className="ev-toggle-header">
+//               <div className="ev-toggle-tabs">
+//                 <button
+//                   className={`ev-toggle-tab ${activeTab === "upcoming" ? "ev-toggle-active" : ""}`}
+//                   onClick={() => setActiveTab("upcoming")}
+//                 >
+//                   <span>Upcoming Events</span>
+//                   <span className="ev-toggle-count">{upcomingEvents.length}</span>
+//                 </button>
+//                 <button
+//                   className={`ev-toggle-tab ${activeTab === "past" ? "ev-toggle-active" : ""}`}
+//                   onClick={() => setActiveTab("past")}
+//                 >
+//                   <span>Past Events</span>
+//                   <span className="ev-toggle-count">{pastEvents.length}</span>
+//                 </button>
+//               </div>
+//             </div>
+
+//             {/* Events Grid */}
+//             <div className="ev-grid">
+//               {activeEvents.length > 0 ? (
+//                 activeEvents.map((event, index) => renderEventCard(event, index))
+//               ) : (
+//                 <div className="ev-empty-grid">
+//                   <div className="ev-empty-content">
+//                     <div className="ev-empty-thread" />
+//                     <h3 className="ev-empty-title">
+//                       {activeTab === "upcoming" ? "No upcoming events" : "No past events"}
+//                     </h3>
+//                     <p className="ev-empty-text">
+//                       {activeTab === "upcoming"
+//                         ? "New experiences are being curated. Check back soon for something extraordinary."
+//                         : "Memorable moments from past events will appear here."}
+//                     </p>
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+//           </div>
+
+//           {/* Global Empty State */}
+//           {events.length === 0 && (
+//             <div className="ev-empty">
+//               <div className="ev-empty-content">
+//                 <div className="ev-empty-thread" />
+//                 <h3 className="ev-empty-title">No Events Available</h3>
+//                 <p className="ev-empty-text">
+//                   Check back later for upcoming events.
+//                 </p>
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       </section>
+//     </PublicLayout>
+//   );
+// }
+
+// export default Events;
+
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
@@ -1038,16 +1312,28 @@ function Events() {
   };
 
   const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
 
+  // Featured events - regardless of date
   const featuredEvents = events.filter((event) => event.featured);
-  const upcomingEvents = events.filter(
-    (event) => !event.featured && new Date(event.eventDate) >= today
-  );
-  const pastEvents = events.filter(
-    (event) => new Date(event.eventDate) < today
-  );
+
+  // Upcoming events - ALL events (including featured) with date >= today
+  const upcomingEvents = events.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate >= today;
+  });
+
+  // Past events - ALL events with date < today
+  const pastEvents = events.filter((event) => {
+    if (!event.eventDate) return false;
+    const eventDate = new Date(event.eventDate);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate < today;
+  });
 
   const formatDate = (dateString) => {
+    if (!dateString) return "Date TBA";
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       day: "numeric",
@@ -1057,6 +1343,7 @@ function Events() {
   };
 
   const formatTime = (dateString) => {
+    if (!dateString) return "Time TBA";
     const date = new Date(dateString);
     return date.toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -1066,20 +1353,25 @@ function Events() {
   };
 
   const formatMonth = (dateString) => {
+    if (!dateString) return "TBA";
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", { month: "short" });
   };
 
   const formatDay = (dateString) => {
+    if (!dateString) return "??";
     const date = new Date(dateString);
     return date.getDate();
   };
 
-  const marqueeEvents = [...featuredEvents, ...featuredEvents];
+  // Duplicate featured events for marquee (only if there are featured events)
+  const marqueeEvents = featuredEvents.length > 0 
+    ? [...featuredEvents, ...featuredEvents] 
+    : [];
 
   const renderEventCard = (event, index, isLarge = false) => (
     <Link
-      key={`${event.id}-${index}`}
+      key={`${event.id}-${isLarge ? 'featured-' : ''}${index}`}
       to={`/events/${event.id}`}
       className={`ev-card-link ${isLarge ? "ev-card-link-large" : ""}`}
       style={{ "--card-index": index }}
@@ -1139,6 +1431,7 @@ function Events() {
     </Link>
   );
 
+  // Determine which events to show in the grid based on active tab
   const activeEvents = activeTab === "upcoming" ? upcomingEvents : pastEvents;
 
   return (
