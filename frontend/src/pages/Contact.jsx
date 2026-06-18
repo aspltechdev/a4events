@@ -630,7 +630,7 @@ function Contact() {
                 <div className="ct-info-inner">
                   <div className="ct-info-thread" />
                   <h3 className="ct-info-label">Email</h3>
-                  <p className="ct-info-value">info@a4events.com</p>
+                  <p className="ct-info-value">info.impex@a4agroup.eu</p>
                 </div>
               </div>
 
@@ -639,7 +639,8 @@ function Contact() {
                 <div className="ct-info-inner">
                   <div className="ct-info-thread ct-info-thread-blue" />
                   <h3 className="ct-info-label">Location</h3>
-                  <p className="ct-info-value">Germany</p>
+                  <p className="ct-info-value">Frankfurt Germany</p>
+                      <p className="ct-info-value">Sirugudi India</p>
                 </div>
               </div>
 

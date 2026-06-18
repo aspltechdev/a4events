@@ -715,3 +715,127 @@
     font-size: 0.95rem;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== PILLAR ICON ===== */
+.about-pillar-icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  transition: all 0.45s var(--ease-premium);
+  z-index: 1;
+}
+
+.about-pillar-icon-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  transition: all 0.45s var(--ease-premium);
+}
+
+/* Provisions - Leaf (Teal/Green) */
+.about-pillar-provisions .about-pillar-icon {
+  background: rgba(20, 184, 166, 0.08);
+  color: #14b8a6;
+}
+
+.about-pillar-provisions .about-pillar-icon-ring {
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.about-pillar-provisions:hover .about-pillar-icon {
+  background: rgba(20, 184, 166, 0.15);
+  color: #0d9488;
+  transform: scale(1.08);
+}
+
+.about-pillar-provisions:hover .about-pillar-icon-ring {
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.1);
+}
+
+/* Events - Globe (Blue/Gold) */
+.about-pillar-events .about-pillar-icon {
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+}
+
+.about-pillar-events .about-pillar-icon-ring {
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.about-pillar-events:hover .about-pillar-icon {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+  transform: scale(1.08);
+}
+
+.about-pillar-events:hover .about-pillar-icon-ring {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+/* Education - Graduation Cap (Emerald/Green) */
+.about-pillar-education .about-pillar-icon {
+  background: rgba(16, 185, 129, 0.08);
+  color: #10b981;
+}
+
+.about-pillar-education .about-pillar-icon-ring {
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.about-pillar-education:hover .about-pillar-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  transform: scale(1.08);
+}
+
+.about-pillar-education:hover .about-pillar-icon-ring {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+/* Trade - Handshake (Rose/Pink) */
+.about-pillar-trade .about-pillar-icon {
+  background: rgba(196, 112, 138, 0.08);
+  color: #c4708a;
+}
+
+.about-pillar-trade .about-pillar-icon-ring {
+  border-color: rgba(196, 112, 138, 0.15);
+}
+
+.about-pillar-trade:hover .about-pillar-icon {
+  background: rgba(196, 112, 138, 0.15);
+  color: #b0556e;
+  transform: scale(1.08);
+}
+
+.about-pillar-trade:hover .about-pillar-icon-ring {
+  border-color: rgba(196, 112, 138, 0.35);
+  box-shadow: 0 0 20px rgba(196, 112, 138, 0.1);
+}
+
+/* Remove old action/link styles */
+.about-pillar-action,
+.about-pillar-arrow {
+  display: none;
+}

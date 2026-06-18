@@ -23,6 +23,7 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 80px;
 }
 
 .pdt-top-nav-inner {
@@ -38,9 +39,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.719);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(12, 12, 12, 0.75);
   padding: 0.4rem 0.85rem;
   border-radius: 8px;
   font-size: 0.82rem;
@@ -136,15 +137,15 @@
 }
 
 .pdt-badge-sale {
-  background: rgba(220, 38, 38, 0.15);
+  background: rgba(220, 38, 38, 0.945);
   border: 1px solid rgba(220, 38, 38, 0.25);
-  color: #fca5a5;
+  color: #f6f6f6;
 }
 
 .pdt-badge-featured {
-  background: rgba(16, 185, 129, 0.12);
+  background: rgb(10, 232, 43);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  color: #6ee7b7;
+  color: #ffffff;
 }
 
 /* ----- INFO CARD — WHITE BLEND ----- */

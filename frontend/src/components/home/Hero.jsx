@@ -2880,8 +2880,8 @@ function Hero() {
     >
       {/* Ambient background */}
       <div className="hero-bg" aria-hidden="true">
-        <div className="hero-bg-orb hero-bg-orb--teal" />
-        <div className="hero-bg-orb hero-bg-orb--blue" />
+        {/* <div className="hero-bg-orb hero-bg-orb--teal" />
+        <div className="hero-bg-orb hero-bg-orb--blue" /> */}
         <div className="hero-bg-orb hero-bg-orb--emerald" />
         <div className="hero-bg-grid" />
         <div className="hero-bg-grain" />
@@ -2913,11 +2913,11 @@ function Hero() {
 
         <div className="hero-media-gradient" />
 
-        <div className="hero-accents" aria-hidden="true">
+        {/* <div className="hero-accents" aria-hidden="true">
           <div className="hero-accent hero-accent--1" />
           <div className="hero-accent hero-accent--2" />
           <div className="hero-accent hero-accent--3" />
-        </div>
+        </div> */}
       </div>
 
       {/* Content Container */}
@@ -2969,7 +2969,7 @@ function Hero() {
           </div>
 
           {/* Heritage Stats */}
-          <div className="hero-stats">
+          {/* <div className="hero-stats">
             <div className="hero-stat">
               <span className="hero-stat-value">Century</span>
               <span className="hero-stat-label">Of Legacy</span>
@@ -2984,7 +2984,7 @@ function Hero() {
               <span className="hero-stat-value">Indian</span>
               <span className="hero-stat-label">Soul</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

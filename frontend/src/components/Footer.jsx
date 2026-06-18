@@ -81,7 +81,7 @@
 // export default Footer;
 
 import { Link } from "react-router-dom";
-import logo from "../assets/logo123.jpeg";
+import logo from "../assets/logo12.png";
 import "./Footer.css";
 
 function Footer() {
@@ -114,14 +114,16 @@ function Footer() {
             </Link>
 
             <p className="ft-brand-description">
-              A century-old legacy ecosystem bridging deep-rooted Indian 
-              heritage with European innovation. Premium organic quality 
+              A century-old legacy ecosystem bridging deep-rooted Indian
+              heritage with European innovation. Premium organic quality
               delivered to European soil.
             </p>
 
             <span className="ft-tagline">
-              Heritage-driven, future-focused
+              From Frankfurt to the world
             </span>
+            <span className="ft-tagline ">Frankfurt am main
+              Germany</span>
           </div>
 
           {/* Navigate */}
@@ -138,11 +140,18 @@ function Footer() {
           {/* Core Pillars */}
           <div className="ft-column">
             <h4 className="ft-column-title">Core Pillars</h4>
-            <nav className="ft-links">
+            {/* <nav className="ft-links">
               <Link to="/products" className="ft-link">Authentic Provisions</Link>
               <Link to="/events" className="ft-link">Indo Experiences</Link>
               <Link to="/events" className="ft-link">EduConsulting</Link>
               <Link to="/products" className="ft-link">Business Expansion</Link>
+            </nav> */}
+
+            <nav className="ft-links">
+              <Link to="/products" className="ft-link">Organic Products</Link>
+              <Link to="/events" className="ft-link">Concerts & Festivals</Link>
+              <Link to="/products" className="ft-link">Millet Mix & Snacks</Link>
+              <Link to="/events" className="ft-link">Workshops & Conferences</Link>
             </nav>
           </div>
 

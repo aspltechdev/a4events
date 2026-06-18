@@ -12,6 +12,7 @@ import ContactCTA from "../components/home/ContactCTA";
 import FeaturedProducts from "../components/home/FeaturedProducts";
 import Gallery from "../components/home/Gallery";
 import Hero from "../components/home/Hero";
+import StrategicGrowth from "../components/home/StrategicGrowth";
 import Testimonials from "../components/home/Testimonials";
 import UpcomingEvents from "../components/home/UpcomingEvents";
 import WhyChooseUs from "../components/home/WhyChooseUs";
@@ -32,7 +33,8 @@ function Home() {
 <FeaturedProducts/>
 <UpcomingEvents/>
 <WhyChooseUs/>
-<ContactCTA/>
+{/* <ContactCTA/> */}
+<StrategicGrowth/>
 <Gallery/>
 <Testimonials/>
     </PublicLayout>

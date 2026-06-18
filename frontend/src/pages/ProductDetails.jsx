@@ -2174,36 +2174,67 @@ function ProductDetails() {
     }
   };
 
+  // const stores = [
+  //   {
+  //     name: "Spicelands",
+  //     address: "Frankfurt, Germany",
+  //     lat: 50.1109,
+  //     lng: 8.6821,
+  //     logo: logo4,
+  //   },
+  //   {
+  //     name: "Jaffna Basar",
+  //     address: "Frankfurt, Germany",
+  //     lat: 50.115,
+  //     lng: 8.69,
+  //     logo: logo3,
+  //   },
+  //   {
+  //     name: "Kabil Kiosk",
+  //     address: "Frankfurt, Germany",
+  //     lat: 50.103,
+  //     lng: 8.675,
+  //     logo:logo2,
+  //   },
+  //   {
+  //     name: "Transfood Düsseldorf",
+  //     address: "Frankfurt, Germany",
+  //     lat: 50.099,
+  //     lng: 8.701,
+  //     logo: logo1,
+  //   },
+  // ];
+
   const stores = [
-    {
-      name: "Spicelands",
-      address: "Frankfurt, Germany",
-      lat: 50.1109,
-      lng: 8.6821,
-      logo: logo4,
-    },
-    {
-      name: "Jaffna Basar",
-      address: "Frankfurt, Germany",
-      lat: 50.115,
-      lng: 8.69,
-      logo: logo3,
-    },
-    {
-      name: "Kabil Kiosk",
-      address: "Frankfurt, Germany",
-      lat: 50.103,
-      lng: 8.675,
-      logo:logo2,
-    },
-    {
-      name: "Transfood",
-      address: "Frankfurt, Germany",
-      lat: 50.099,
-      lng: 8.701,
-      logo: logo1,
-    },
-  ];
+  {
+    name: "Spicelands",
+    address: "Kaiserstraße 60, 60329 Frankfurt am Main, Germany",
+    lat: 50.1088,
+    lng: 8.6698,
+    logo: logo4,
+  },
+  {
+    name: "Jaffna Basar",
+    address: "Kaiserstraße 49, 60329 Frankfurt am Main, Germany",
+    lat: 50.1086,
+    lng: 8.6695,
+    logo: logo3,
+  },
+  {
+    name: "Kabil Kiosk",
+    address: "60327 Frankfurt am Main, Germany",
+    lat: 50.1049,
+    lng: 8.6518,
+    logo: logo2,
+  },
+  {
+    name: "Transfood  Düsseldorf",
+    address: "Weg 40, 65451 Kelsterbach, Germany",
+    lat: 50.0607,
+    lng: 8.5297,
+    logo: logo1,
+  },
+];
 
   const calculateDiscountedPrice = (price, discountPercent) => {
     if (discountPercent && discountPercent > 0) {

@@ -726,3 +726,135 @@
     font-size: 0.9rem;
   }
 }
+
+
+
+/* ===== CARD BADGES ===== */
+.fp-card-badge {
+  position: absolute;
+  top: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 100px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 5;
+  transition: all 0.35s var(--ease-premium);
+  width: fit-content;
+  max-width: max-content;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Discount Badge - Right side, white with red accent, FIXED SIZE */
+.fp-card-badge-discount {
+  right: 0.9rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(239, 68, 68, 0.15) inset;
+  min-width: unset;
+  max-width: fit-content;
+  width: auto;
+}
+
+.fp-card-badge-discount .fp-badge-icon {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.fp-card-badge-discount .fp-badge-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a1815;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Featured Badge - Left side, white with teal accent, FIXED SIZE */
+.fp-card-badge-featured {
+  left: 0.9rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(20, 184, 166, 0.15) inset;
+  min-width: unset;
+  max-width: fit-content;
+  width: auto;
+}
+
+.fp-card-badge-featured .fp-badge-icon {
+  color: #14b8a6;
+  flex-shrink: 0;
+}
+
+.fp-card-badge-featured .fp-badge-text {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #1a1815;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Hover effect on badges */
+.fp-card-hovered .fp-card-badge-discount {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(239, 68, 68, 0.25) inset;
+}
+
+.fp-card-hovered .fp-card-badge-featured {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(20, 184, 166, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(20, 184, 166, 0.25) inset;
+}
+
+
+
+
+/* Save badge - White pill, FIXED SIZE */
+/* ===== PRICING ===== */
+.fp-card-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.fp-price-current {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #07cb3b;
+  letter-spacing: -0.02em;
+}
+
+/* Original price - DARKER and more visible */
+.fp-price-original {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(12, 178, 48, 0.65);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Save badge - White pill with red accent, FIXED SIZE */
+.fp-price-save {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: fit-content;
+  max-width: max-content;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}

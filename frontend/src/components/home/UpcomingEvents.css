@@ -1,11 +1,10 @@
 /* ============================================================
-   UPCOMING EVENTS — WHITE-BLEND CARDS PREMIUM
-   Glass-morphism white cards on deep navy. Production grade.
+   UPCOMING EVENTS — PREMIUM PRODUCTION
+   White-blend cards. Blue-green palette. Marquee carousel.
    ============================================================ */
 
 :root {
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ----- SECTION ----- */
@@ -14,8 +13,9 @@
   width: 100%;
   overflow: hidden;
   background: #0b1120;
-  padding: 8rem 0 6rem;
+  padding: 7rem 0 6rem;
   isolation: isolate;
+  min-height: 100vh;
 }
 
 /* ----- ATMOSPHERE ----- */
@@ -29,8 +29,8 @@
 .ue-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(160px);
-  opacity: 0.15;
+  filter: blur(150px);
+  opacity: 0.12;
   will-change: transform;
   animation: ueGlowBreath 22s infinite alternate var(--ease-premium);
 }
@@ -41,9 +41,8 @@
   max-width: 750px;
   max-height: 750px;
   background: radial-gradient(circle at 30% 30%, #14b8a6, #0f766e);
-  top: -10%;
+  top: -8%;
   left: -10%;
-  opacity: 0.14;
 }
 
 .ue-glow--blue {
@@ -52,35 +51,34 @@
   max-width: 650px;
   max-height: 650px;
   background: radial-gradient(circle at 70% 55%, #3b82f6, #1e40af);
-  bottom: -15%;
+  bottom: -12%;
   right: -8%;
   animation-delay: -7s;
   animation-duration: 26s;
-  opacity: 0.12;
 }
 
 .ue-glow--emerald {
-  width: 42vw;
-  height: 42vw;
+  width: 40vw;
+  height: 40vw;
   max-width: 500px;
   max-height: 500px;
   background: radial-gradient(circle at 50% 50%, #10b981, #065f46);
-  top: 50%;
-  left: 50%;
+  top: 45%;
+  left: 55%;
   transform: translate(-50%, -50%);
   animation-delay: -14s;
   animation-duration: 30s;
-  opacity: 0.08;
+  opacity: 0.06;
 }
 
 @keyframes ueGlowBreath {
   0% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.08;
+    opacity: 0.06;
   }
   100% {
-    transform: translate(3%, -4%) scale(1.18);
-    opacity: 0.2;
+    transform: translate(3%, -4%) scale(1.16);
+    opacity: 0.17;
   }
 }
 
@@ -88,16 +86,15 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse at 20% 70%, rgba(20, 184, 166, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.02) 0%, transparent 50%);
+    radial-gradient(ellipse at 25% 75%, rgba(20, 184, 166, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 25%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
 }
 
 .ue-grain {
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .ue-vignette {
@@ -117,34 +114,34 @@
 .ue-orb {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.025);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   animation: ueOrbFloat 17s infinite alternate var(--ease-premium);
 }
 
 .ue-orb--primary {
-  width: 260px;
-  height: 260px;
-  top: 10%;
-  right: 6%;
+  width: 240px;
+  height: 240px;
+  top: 15%;
+  right: 5%;
 }
 
 .ue-orb--secondary {
-  width: 170px;
-  height: 170px;
-  bottom: 14%;
-  left: 5%;
-  animation-delay: -5s;
+  width: 150px;
+  height: 150px;
+  bottom: 20%;
+  left: 4%;
+  animation-delay: -6s;
   animation-duration: 21s;
 }
 
 .ue-orb--tertiary {
-  width: 110px;
-  height: 110px;
-  top: 58%;
-  left: 44%;
+  width: 100px;
+  height: 100px;
+  top: 55%;
+  left: 48%;
   animation-delay: -11s;
   animation-duration: 14s;
 }
@@ -152,11 +149,11 @@
 @keyframes ueOrbFloat {
   0% {
     transform: translateY(0px) scale(1);
-    opacity: 0.35;
+    opacity: 0.3;
   }
   100% {
-    transform: translateY(-32px) scale(1.1);
-    opacity: 0.65;
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.6;
   }
 }
 
@@ -176,7 +173,7 @@
 .ue-header {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  align-items: center;
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.9s var(--ease-premium), transform 0.9s var(--ease-premium);
@@ -189,22 +186,25 @@
 }
 
 .ue-thread {
-  width: 45px;
-  height: 1.5px;
-  background: linear-gradient(90deg, rgba(20, 184, 166, 0.55), transparent);
-  transform-origin: left;
-  animation: ueThreadReveal 1.3s var(--ease-premium) forwards;
+  width: 40px;
+  height: 1px;
+  background: rgba(20, 184, 166, 0.3);
+  margin-bottom: 2rem;
 }
 
-@keyframes ueThreadReveal {
-  0% { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
+.ue-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+  max-width: 650px;
 }
 
 .ue-whisper {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -213,27 +213,31 @@
 }
 
 .ue-whisper-pulse {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #14b8a6;
-  box-shadow: 0 0 14px rgba(20, 184, 166, 0.5);
-  animation: uePulse 3s infinite;
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.5);
+  animation: whisperPulse 2.5s infinite;
 }
 
-@keyframes uePulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(20, 184, 166, 0.35); }
-  50% { box-shadow: 0 0 24px rgba(20, 184, 166, 0.85); }
+@keyframes whisperPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(20, 184, 166, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.9);
+  }
 }
 
 .ue-headline {
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.03em;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .ue-headline-line {
@@ -251,7 +255,7 @@
   font-size: 1.05rem;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.5);
-  max-width: 580px;
+  max-width: 520px;
   font-weight: 400;
 }
 
@@ -259,7 +263,16 @@
 .ue-marquee-stage {
   position: relative;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.ue-visible .ue-marquee-stage {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
 }
 
 .ue-marquee-track {
@@ -274,8 +287,12 @@
 }
 
 @keyframes ueMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .ue-marquee-fade {
@@ -297,11 +314,11 @@
   background: linear-gradient(270deg, #0b1120 0%, transparent 100%);
 }
 
-/* ----- EVENT CARDS — WHITE BLEND ----- */
+/* ===== CARDS - WHITE DESIGN ===== */
 .ue-card {
   position: relative;
-  width: 350px;
   flex-shrink: 0;
+  width: 360px;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -309,92 +326,55 @@
   border-radius: 18px;
   overflow: hidden;
   transition: all 0.55s var(--ease-premium);
-  box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 8px 24px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(20, 184, 166, 0.04) inset;
-  opacity: 0;
-  transform: translateY(30px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(20, 184, 166, 0.03) inset;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.ue-visible .ue-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium), border-color 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium), background 0.5s var(--ease-premium);
-}
-
-.ue-visible .ue-card:nth-child(1) { transition-delay: 0.3s; }
-.ue-visible .ue-card:nth-child(2) { transition-delay: 0.38s; }
-.ue-visible .ue-card:nth-child(3) { transition-delay: 0.46s; }
-.ue-visible .ue-card:nth-child(4) { transition-delay: 0.54s; }
-.ue-visible .ue-card:nth-child(5) { transition-delay: 0.62s; }
-.ue-visible .ue-card:nth-child(6) { transition-delay: 0.7s; }
-
-.ue-card-hovered {
+.ue-card:hover {
   background: rgba(255, 255, 255, 0.98);
-  border-color: rgba(20, 184, 166, 0.3);
-  transform: translateY(-12px);
-  box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 16px 48px rgba(20, 184, 166, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(20, 184, 166, 0.08) inset;
+  border-color: rgba(20, 184, 166, 0.25);
+  transform: translateY(-8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(20, 184, 166, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(20, 184, 166, 0.06) inset;
 }
 
 .ue-card-past {
-  opacity: 0.7;
-  background: rgba(255, 255, 255, 0.8);
+  opacity: 0.75;
 }
 
-/* Card Shine */
+.ue-card-past:hover {
+  opacity: 0.9;
+}
+
 .ue-card-shine {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.3) 45%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0.3) 55%,
-    transparent 100%
-  );
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.3) 45%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 100%);
   opacity: 0;
   transition: opacity 0.6s var(--ease-premium);
 }
 
-.ue-card-hovered .ue-card-shine {
+.ue-card:hover .ue-card-shine {
   opacity: 1;
-}
-
-/* Card Edge Glow */
-.ue-card-edge {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 0;
-  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0) inset;
-  transition: box-shadow 0.5s var(--ease-premium);
-}
-
-.ue-card-hovered .ue-card-edge {
-  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.2) inset;
 }
 
 /* Card Media */
 .ue-card-media {
   position: relative;
   z-index: 1;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .ue-card-image-wrap {
   position: relative;
   width: 100%;
   height: 220px;
+  min-height: 220px;
+  max-height: 220px;
   overflow: hidden;
   background: #f1f5f9;
 }
@@ -406,7 +386,7 @@
   transition: transform 0.7s var(--ease-premium);
 }
 
-.ue-card-hovered .ue-card-image {
+.ue-card:hover .ue-card-image {
   transform: scale(1.06);
 }
 
@@ -417,80 +397,128 @@
   pointer-events: none;
 }
 
-/* Date Panel */
+/* ===== DATE PANEL - White, highly visible ===== */
 .ue-card-date {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 2;
+  bottom: 0.9rem;
+  left: 0.9rem;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0.5rem 0.8rem;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(20, 184, 166, 0.15);
   border-radius: 12px;
-  padding: 0.55rem 0.75rem;
-  min-width: 52px;
+  min-width: 55px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.35s var(--ease-premium);
+}
+
+.ue-card:hover .ue-card-date {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .ue-date-month {
   font-size: 0.6rem;
   font-weight: 600;
+  color: #0d9488;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #0d9488;
   line-height: 1;
 }
 
 .ue-date-day {
   font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
   color: #0f1724;
   line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 
-/* Featured Tag */
+/* ===== FEATURED BADGE - Teal accent ===== */
 .ue-card-featured {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 2;
-  background: rgba(20, 184, 166, 0.12);
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem;
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(20, 184, 166, 0.2);
-  padding: 0.35rem 0.8rem;
   border-radius: 100px;
+  width: fit-content;
+  max-width: max-content;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ue-card:hover .ue-card-featured {
+  background: rgba(20, 184, 166, 0.18);
+  transform: translateY(-2px);
 }
 
 .ue-card-featured span {
   font-size: 0.6rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
   color: #0d9488;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* ===== PAST EVENT BADGE ===== */
+.ue-card-past-badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.8rem;
+  background: rgba(139, 133, 121, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 133, 121, 0.2);
+  border-radius: 100px;
+  width: fit-content;
+  max-width: max-content;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ue-card-past-badge span {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #158f2e;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 /* Card Details */
 .ue-card-details {
   position: relative;
   z-index: 1;
-  padding: 1.4rem 1.5rem;
+  padding: 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  background: rgba(255, 255, 255, 0.4);
+  flex: 1;
+  gap: 0.5rem;
 }
 
+/* ===== META TEXT ===== */
 .ue-card-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin-bottom: 0.3rem;
 }
 
 .ue-meta-item {
@@ -508,6 +536,7 @@
   height: 4px;
   border-radius: 50%;
   background: rgba(20, 184, 166, 0.5);
+  flex-shrink: 0;
 }
 
 .ue-meta-divider {
@@ -515,50 +544,58 @@
   height: 3px;
   border-radius: 50%;
   background: rgba(15, 23, 36, 0.2);
+  flex-shrink: 0;
 }
 
+/* ===== CARD TITLE - Dark on white ===== */
 .ue-card-title {
   font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
   color: #0f1724;
-  cursor: pointer;
+  letter-spacing: -0.02em;
   line-height: 1.25;
+  cursor: pointer;
   transition: color 0.3s ease;
+  margin: 0;
 }
 
-.ue-card-hovered .ue-card-title {
+.ue-card-title:hover {
   color: #0d9488;
 }
 
+/* ===== CARD DESCRIPTION ===== */
 .ue-card-description {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   line-height: 1.55;
   color: rgba(15, 23, 36, 0.5);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex: 1;
+  margin: 0;
 }
 
+/* ===== ACTION BUTTON ===== */
 .ue-card-action {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
-  border: none;
   color: rgba(15, 23, 36, 0.5);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  cursor: pointer;
-  padding: 0;
-  width: fit-content;
-  transition: all 0.35s var(--ease-premium);
   letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-premium);
   margin-top: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  width: fit-content;
 }
 
-.ue-card-hovered .ue-card-action {
+.ue-card:hover .ue-card-action {
   color: #0d9488;
   gap: 0.7rem;
 }
@@ -567,24 +604,39 @@
   transition: transform 0.35s var(--ease-premium);
 }
 
-.ue-card-hovered .ue-action-arrow {
+.ue-card:hover .ue-action-arrow {
   transform: translateX(4px);
+}
+
+/* Card Edge Glow */
+.ue-card-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0) inset;
+  transition: box-shadow 0.5s var(--ease-premium);
+}
+
+.ue-card:hover .ue-card-edge {
+  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.15) inset;
 }
 
 /* ----- EMPTY STATE ----- */
 .ue-empty {
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding: 4rem 0;
   opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+  transform: translateY(35px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
 }
 
 .ue-visible .ue-empty {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.5s;
+  transition-delay: 0.3s;
 }
 
 .ue-empty-content {
@@ -598,20 +650,22 @@
 .ue-empty-thread {
   width: 40px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .ue-empty-title {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .ue-empty-text {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.35);
-  max-width: 360px;
+  max-width: 380px;
+  margin: 0;
 }
 
 /* ----- FOOTER ----- */
@@ -619,39 +673,39 @@
   display: flex;
   justify-content: center;
   opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
 }
 
 .ue-visible .ue-footer {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.8s;
+  transition-delay: 0.5s;
 }
 
 .ue-footer-link {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.8rem 2rem;
+  padding: 0.85rem 2rem;
+  background: rgba(20, 184, 166, 0.08);
+  border: 1px solid rgba(20, 184, 166, 0.2);
   border-radius: 100px;
+  color: #2dd4bf;
   font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: all 0.4s var(--ease-premium);
+  text-decoration: none;
+  font-family: inherit;
 }
 
 .ue-footer-link:hover {
-  color: #2dd4bf;
+  background: rgba(20, 184, 166, 0.15);
   border-color: rgba(20, 184, 166, 0.35);
-  background: rgba(255, 255, 255, 0.08);
-  gap: 0.8rem;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
 }
 
 .ue-footer-arrow {
@@ -668,60 +722,72 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
 }
 
 .ue-visible .ue-essence {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.95s;
+  transition-delay: 0.6s;
 }
 
 .ue-essence-thread {
-  width: 60px;
+  width: 40px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.35), transparent);
+  background: rgba(20, 184, 166, 0.2);
 }
 
 .ue-essence-items {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ue-essence-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .ue-essence-word {
   font-size: 1.1rem;
   font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.78);
 }
 
 .ue-essence-subtle {
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   font-weight: 500;
 }
 
 .ue-essence-separator {
   width: 1px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.1);
+  height: 30px;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) {
+  .ue-card {
+    width: 320px;
+  }
+
+  .ue-card-image-wrap {
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+  }
+}
+
 @media (max-width: 768px) {
   .ue-premium {
     padding: 5rem 0 4rem;
@@ -737,46 +803,57 @@
   }
 
   .ue-card-image-wrap {
-    height: 190px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
   }
 
   .ue-headline {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+  }
+
+  .ue-marquee-fade {
+    width: 60px;
   }
 
   .ue-essence-items {
     gap: 1.2rem;
-    flex-wrap: wrap;
-    justify-content: center;
   }
 
   .ue-essence-separator {
     display: none;
   }
-
-  .ue-essence-item {
-    min-width: 35%;
-  }
-
-  .ue-marquee-fade {
-    width: 80px;
-  }
 }
 
 @media (max-width: 480px) {
-  .ue-card {
-    width: 270px;
+  .ue-premium {
+    padding: 4rem 0 3rem;
   }
 
-  .ue-card-image-wrap {
-    height: 170px;
+  .ue-card {
+    width: 280px;
   }
 
   .ue-card-details {
-    padding: 1.2rem;
+    padding: 1.1rem;
+  }
+
+  .ue-card-image-wrap {
+    height: 180px;
+    min-height: 180px;
+    max-height: 180px;
   }
 
   .ue-prose {
     font-size: 0.9rem;
+  }
+
+  .ue-card-title {
+    font-size: 1rem;
+  }
+
+  .ue-essence-items {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 }

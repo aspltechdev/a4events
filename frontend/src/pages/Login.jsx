@@ -298,7 +298,7 @@ function Login() {
                 <path d="M14 2L17.5 10L26 11L19.5 17L21 26L14 21.5L7 26L8.5 17L2 11L10.5 10L14 2Z" fill="currentColor"/>
               </svg>
             </div>
-            <span className="a4-login-brand-text">A4A Events</span>
+            <span className="a4-login-brand-text">A4A Groups</span>
           </div>
 
           {/* Header */}
