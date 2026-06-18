@@ -764,3 +764,105 @@
     height: 240px;
   }
 }
+
+
+
+/* ===== GOLD THREAD ===== */
+.pdt-thread-gold {
+  background: #d4af37 !important;
+}
+
+/* ===== INGREDIENTS SECTION ===== */
+.pdt-ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.pdt-ingredient-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.35s var(--ease-premium);
+}
+
+.pdt-ingredient-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 175, 55, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.08);
+}
+
+.pdt-ingredient-image-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: #1a2235;
+}
+
+.pdt-ingredient-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-premium);
+}
+
+.pdt-ingredient-card:hover .pdt-ingredient-image {
+  transform: scale(1.05);
+}
+
+.pdt-ingredient-info {
+  padding: 1rem 1.2rem;
+}
+
+.pdt-ingredient-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.pdt-ingredient-description {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .pdt-ingredients-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .pdt-ingredient-image-wrap {
+    height: 140px;
+  }
+
+  .pdt-ingredient-info {
+    padding: 0.8rem;
+  }
+
+  .pdt-ingredient-name {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdt-ingredients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .pdt-ingredient-image-wrap {
+    height: 120px;
+  }
+}

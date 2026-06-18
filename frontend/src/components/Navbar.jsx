@@ -67,7 +67,10 @@ function Navbar() {
     { path: "/", label: "Home" },
     { path: "/events", label: "Events" },
     { path: "/products", label: "Products" },
+    { path: "/education", label: "Education" },
+     { path: "/business", label: "Business" },
     { path: "/contact", label: "Contact" },
+       
   ];
 
   return (

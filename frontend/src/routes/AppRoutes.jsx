@@ -28,6 +28,8 @@ import Gallery from '../pages/admin/Gallery';
 import EditTestimonial from '../pages/admin/EditTestimonial';
 import AddTestimonial from '../pages/admin/AddTestimonial';
 import Testimonials from '../pages/admin/Testimonials';
+import Business from '../pages/Business';
+import Education from '../pages/Education';
 
 
 
@@ -39,6 +41,8 @@ function AppRoutes() {
       <Route path="/events" element={<Events />} />
       <Route path="/login" element={<Login />} />
       <Route path="/contact" element={<Contact />} />
+         <Route path="/business" element={<Business />} />
+          <Route path="/education" element={<Education/>} />
    
       <Route path="/products/:id" element={<ProductDetails />} />
 <Route path="/events/:id" element={<EventDetails />} />
