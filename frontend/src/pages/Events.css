@@ -1,5 +1,5 @@
 /* ============================================================
-   EVENTS PAGE — CENTERED HERO + LARGE CARDS PREMIUM
+   EVENTS PAGE — CENTERED HERO + FIXED-SIZE FEATURED CARDS
    White-blend cards. Blue-green palette. Production grade.
    ============================================================ */
 
@@ -236,12 +236,31 @@
   color: #2dd4bf; background: rgba(20,184,166,0.15);
 }
 
-/* ----- GRID ----- */
-.ev-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+/* ----- GRID (Upcoming/Past Events) ----- */
+.ev-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1.5rem; 
+}
 
-/* ----- CARDS ----- */
-.ev-card-link { text-decoration: none; display: block; }
+/* ----- CARD LINK (Grid Cards) ----- */
+.ev-card-link { 
+  text-decoration: none; 
+  display: block;
+  height: 100%;
+}
 
+/* ----- CARD LINK (Featured Marquee - FIXED SIZE) ----- */
+.ev-card-link-large {
+  flex-shrink: 0;
+  width: 380px;
+  min-width: 380px;
+  max-width: 380px;
+  text-decoration: none;
+  display: block;
+}
+
+/* ----- CARDS (Shared Styles) ----- */
 .ev-card {
   position: relative;
   background: rgba(255,255,255,0.92);
@@ -259,10 +278,25 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 20px 50px rgba(20,184,166,0.1), 0 4px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(20,184,166,0.06) inset;
 }
 
-/* Large Card (Marquee) */
-.ev-card-large .ev-card-image-wrap { height: 260px; }
-.ev-card-large .ev-card-details { padding: 1.6rem 1.5rem; }
-.ev-card-large .ev-card-title { font-size: 1.2rem; }
+/* Large Card (Featured Marquee - FIXED) */
+.ev-card-large {
+  height: 100%;
+}
+
+.ev-card-large .ev-card-image-wrap { 
+  height: 240px;
+  min-height: 240px;
+  max-height: 240px;
+}
+
+.ev-card-large .ev-card-details { 
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.ev-card-large .ev-card-title { 
+  font-size: 1.15rem;
+}
 
 .ev-card-shine {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -275,7 +309,9 @@
 .ev-card-media { position: relative; z-index: 1; overflow: hidden; }
 
 .ev-card-image-wrap {
-  position: relative; width: 100%; height: 240px; overflow: hidden; background: #f1f5f9;
+  position: relative; width: 100%; height: 220px;
+  min-height: 220px; max-height: 220px;
+  overflow: hidden; background: #f1f5f9;
 }
 
 .ev-card-image {
@@ -322,8 +358,8 @@
 }
 
 .ev-card-details {
-  position: relative; z-index: 1; padding: 1.5rem;
-  display: flex; flex-direction: column; gap: 0.6rem; flex: 1;
+  position: relative; z-index: 1; padding: 1.4rem;
+  display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
 }
 
 .ev-card-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
@@ -337,7 +373,7 @@
 .ev-meta-divider { width: 3px; height: 3px; border-radius: 50%; background: rgba(15,23,36,0.2); }
 
 .ev-card-title {
-  font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; color: #0f1724;
+  font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; color: #0f1724;
   line-height: 1.25; transition: color 0.3s ease; margin: 0;
 }
 
@@ -389,16 +425,18 @@
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
   .ev-grid { grid-template-columns: repeat(2, 1fr); }
-  .ev-card-image-wrap { height: 210px; }
-  .ev-card-large .ev-card-image-wrap { height: 230px; }
+  .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
+  .ev-card-large .ev-card-image-wrap { height: 220px; min-height: 220px; max-height: 220px; }
+  .ev-card-link-large { width: 340px; min-width: 340px; max-width: 340px; }
 }
 
 @media (max-width: 768px) {
   .ev-premium { padding: 5rem 0 4rem; }
   .ev-container { gap: 3.5rem; padding: 0 4%; }
   .ev-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .ev-card-image-wrap { height: 200px; }
-  .ev-card-large .ev-card-image-wrap { height: 210px; }
+  .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
+  .ev-card-large .ev-card-image-wrap { height: 200px; min-height: 200px; max-height: 200px; }
+  .ev-card-link-large { width: 300px; min-width: 300px; max-width: 300px; }
   .ev-headline { font-size: clamp(2.2rem, 5vw, 3rem); }
   .ev-toggle-tabs { width: 100%; }
   .ev-toggle-tab { flex: 1; justify-content: center; padding: 0.65rem 1.2rem; }
@@ -407,8 +445,9 @@
 
 @media (max-width: 480px) {
   .ev-card-details { padding: 1.2rem; }
-  .ev-card-large .ev-card-details { padding: 1.3rem 1.2rem; }
+  .ev-card-large .ev-card-details { padding: 1.2rem; }
   .ev-prose { font-size: 0.95rem; }
   .ev-toggle-tab { padding: 0.55rem 1rem; font-size: 0.8rem; }
-  .ev-card-image-wrap { height: 180px; }
+  .ev-card-image-wrap { height: 180px; min-height: 180px; max-height: 180px; }
+  .ev-card-link-large { width: 280px; min-width: 280px; max-width: 280px; }
 }
