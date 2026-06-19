@@ -81,7 +81,7 @@
 // export default Footer;
 
 import { Link } from "react-router-dom";
-import logo from "../assets/logo12.png";
+import logo from "../assets/logo11.png";
 import "./Footer.css";
 
 function Footer() {
