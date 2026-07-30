@@ -1,859 +1,515 @@
 /* ============================================================
-   UPCOMING EVENTS — PREMIUM PRODUCTION
-   White-blend cards. Blue-green palette. Marquee carousel.
+   UPCOMING EVENTS — COMPACT CARDS
+   Clean. Modern. Matches Featured Products.
    ============================================================ */
 
-:root {
-  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 /* ----- SECTION ----- */
-.ue-premium {
+.ue-compact {
   position: relative;
-  width: 100%;
-  overflow: hidden;
+  padding: 3rem 0;
   background: #0b1120;
-  padding: 7rem 0 6rem;
+  overflow: hidden;
   isolation: isolate;
-  min-height: 100vh;
 }
 
-/* ----- ATMOSPHERE ----- */
-.ue-atmosphere {
+/* ----- BACKGROUND ----- */
+.ue-bg-compact {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
 }
 
-.ue-glow {
+.ue-glow-compact {
   position: absolute;
   border-radius: 50%;
-  filter: blur(150px);
-  opacity: 0.12;
-  will-change: transform;
-  animation: ueGlowBreath 22s infinite alternate var(--ease-premium);
-}
-
-.ue-glow--teal {
-  width: 55vw;
-  height: 55vw;
-  max-width: 750px;
-  max-height: 750px;
-  background: radial-gradient(circle at 30% 30%, #14b8a6, #0f766e);
-  top: -8%;
-  left: -10%;
-}
-
-.ue-glow--blue {
-  width: 50vw;
-  height: 50vw;
-  max-width: 650px;
-  max-height: 650px;
-  background: radial-gradient(circle at 70% 55%, #3b82f6, #1e40af);
-  bottom: -12%;
-  right: -8%;
-  animation-delay: -7s;
-  animation-duration: 26s;
-}
-
-.ue-glow--emerald {
-  width: 40vw;
-  height: 40vw;
-  max-width: 500px;
-  max-height: 500px;
-  background: radial-gradient(circle at 50% 50%, #10b981, #065f46);
-  top: 45%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  animation-delay: -14s;
-  animation-duration: 30s;
+  filter: blur(120px);
   opacity: 0.06;
 }
 
-@keyframes ueGlowBreath {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.06;
-  }
-  100% {
-    transform: translate(3%, -4%) scale(1.16);
-    opacity: 0.17;
-  }
+.ue-glow-compact--teal {
+  width: 40vw;
+  height: 40vw;
+  max-width: 400px;
+  max-height: 400px;
+  background: radial-gradient(circle, #14b8a6, transparent);
+  top: -20%;
+  right: -10%;
 }
 
-.ue-mesh {
+.ue-glow-compact--blue {
+  width: 35vw;
+  height: 35vw;
+  max-width: 350px;
+  max-height: 350px;
+  background: radial-gradient(circle, #3b82f6, transparent);
+  bottom: -20%;
+  left: -10%;
+  opacity: 0.04;
+}
+
+.ue-grain-compact {
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(ellipse at 25% 75%, rgba(20, 184, 166, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse at 75% 25%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
-}
-
-.ue-grain {
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
-  opacity: 0.45;
-}
-
-.ue-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 25%, rgba(11, 17, 32, 0.65) 100%);
-}
-
-/* ----- FLOATING ORBS ----- */
-.ue-orbs {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ue-orb {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.025);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  animation: ueOrbFloat 17s infinite alternate var(--ease-premium);
-}
-
-.ue-orb--primary {
-  width: 240px;
-  height: 240px;
-  top: 15%;
-  right: 5%;
-}
-
-.ue-orb--secondary {
-  width: 150px;
-  height: 150px;
-  bottom: 20%;
-  left: 4%;
-  animation-delay: -6s;
-  animation-duration: 21s;
-}
-
-.ue-orb--tertiary {
-  width: 100px;
-  height: 100px;
-  top: 55%;
-  left: 48%;
-  animation-delay: -11s;
-  animation-duration: 14s;
-}
-
-@keyframes ueOrbFloat {
-  0% {
-    transform: translateY(0px) scale(1);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-30px) scale(1.1);
-    opacity: 0.6;
-  }
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.5;
 }
 
 /* ----- CONTAINER ----- */
-.ue-container {
+.ue-container-compact {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   max-width: 1340px;
   margin: 0 auto;
   padding: 0 5%;
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
 }
 
 /* ----- HEADER ----- */
-.ue-header {
+.ue-header-compact {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s var(--ease-premium), transform 0.9s var(--ease-premium);
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.ue-visible .ue-header {
+.ue-visible .ue-header-compact {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.1s;
 }
 
-.ue-thread {
-  width: 40px;
-  height: 1px;
-  background: rgba(20, 184, 166, 0.3);
-  margin-bottom: 2rem;
-}
-
-.ue-header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.2rem;
-  max-width: 650px;
-}
-
-.ue-whisper {
+.ue-tag-compact {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  gap: 0.4rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
-  color: rgba(20, 184, 166, 0.6);
+  letter-spacing: 0.12em;
+  color: rgba(20, 184, 166, 0.5);
 }
 
-.ue-whisper-pulse {
-  width: 6px;
-  height: 6px;
+.ue-tag-dot {
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #14b8a6;
-  box-shadow: 0 0 12px rgba(20, 184, 166, 0.5);
-  animation: whisperPulse 2.5s infinite;
+  animation: dotPulse 2s infinite;
 }
 
-@keyframes whisperPulse {
-  0%, 100% {
-    box-shadow: 0 0 8px rgba(20, 184, 166, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(20, 184, 166, 0.9);
-  }
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
-.ue-headline {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+.ue-title-compact {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-.ue-headline-line {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.ue-headline-radiance {
-  background: linear-gradient(135deg, #14b8a6 0%, #3b82f6 50%, #10b981 100%);
+.ue-title-highlight {
+  background: linear-gradient(135deg, #14b8a6, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.ue-prose {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 520px;
-  font-weight: 400;
-}
-
-/* ----- MARQUEE STAGE ----- */
-.ue-marquee-stage {
+/* ----- MARQUEE ----- */
+.ue-marquee-compact {
   position: relative;
   overflow: hidden;
   padding: 0.5rem 0;
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
 }
 
-.ue-visible .ue-marquee-stage {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
-}
-
-.ue-marquee-track {
+.ue-track-compact {
   display: flex;
-  gap: 1.5rem;
-  animation: ueMarquee 50s linear infinite;
+  gap: 1rem;
+  animation: marqueeScroll 45s linear infinite;
   width: max-content;
 }
 
-.ue-marquee-paused {
+.ue-paused {
   animation-play-state: paused;
 }
 
-@keyframes ueMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.ue-marquee-fade {
+/* ----- FADE EDGES ----- */
+.ue-fade-compact {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 140px;
+  width: 80px;
   z-index: 5;
   pointer-events: none;
 }
 
-.ue-marquee-fade-left {
+.ue-fade-left {
   left: 0;
   background: linear-gradient(90deg, #0b1120 0%, transparent 100%);
 }
 
-.ue-marquee-fade-right {
+.ue-fade-right {
   right: 0;
   background: linear-gradient(270deg, #0b1120 0%, transparent 100%);
 }
 
-/* ===== CARDS - WHITE DESIGN ===== */
-.ue-card {
-  position: relative;
+/* ============================================================
+   COMPACT CARDS
+   ============================================================ */
+
+.ue-card-compact {
+  width: 220px;
   flex-shrink: 0;
-  width: 360px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 18px;
-  overflow: hidden;
-  transition: all 0.55s var(--ease-premium);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(20, 184, 166, 0.03) inset;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.ue-card:hover {
-  background: rgba(255, 255, 255, 0.98);
-  border-color: rgba(20, 184, 166, 0.25);
-  transform: translateY(-8px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(20, 184, 166, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(20, 184, 166, 0.06) inset;
-}
-
-.ue-card-past {
-  opacity: 0.75;
-}
-
-.ue-card-past:hover {
-  opacity: 0.9;
-}
-
-.ue-card-shine {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.3) 45%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.6s var(--ease-premium);
-}
-
-.ue-card:hover .ue-card-shine {
-  opacity: 1;
-}
-
-/* Card Media */
-.ue-card-media {
-  position: relative;
-  z-index: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
 }
 
-.ue-card-image-wrap {
+.ue-visible .ue-card-compact {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ue-visible .ue-card-compact:nth-child(1) { transition-delay: 0.15s; }
+.ue-visible .ue-card-compact:nth-child(2) { transition-delay: 0.2s; }
+.ue-visible .ue-card-compact:nth-child(3) { transition-delay: 0.25s; }
+.ue-visible .ue-card-compact:nth-child(4) { transition-delay: 0.3s; }
+.ue-visible .ue-card-compact:nth-child(5) { transition-delay: 0.35s; }
+.ue-visible .ue-card-compact:nth-child(6) { transition-delay: 0.4s; }
+
+.ue-card-hovered {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(20, 184, 166, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ----- CARD IMAGE ----- */
+.ue-card-image-compact {
   position: relative;
-  width: 100%;
-  height: 220px;
-  min-height: 220px;
-  max-height: 220px;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  background: #f1f5f9;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.ue-card-image {
+.ue-card-image-compact img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s var(--ease-premium);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ue-card:hover .ue-card-image {
-  transform: scale(1.06);
+.ue-card-hovered .ue-card-image-compact img {
+  transform: scale(1.05);
 }
 
-.ue-card-image-veil {
+/* ----- DATE BADGE ----- */
+.ue-date-badge {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(255, 255, 255, 0.3) 100%);
-  pointer-events: none;
-}
-
-/* ===== DATE PANEL - White, highly visible ===== */
-.ue-card-date {
-  position: absolute;
-  bottom: 0.9rem;
-  left: 0.9rem;
-  z-index: 5;
+  bottom: 0.5rem;
+  left: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem 0.8rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(20, 184, 166, 0.15);
-  border-radius: 12px;
-  min-width: 55px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.35s var(--ease-premium);
-}
-
-.ue-card:hover .ue-card-date {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  min-width: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ue-date-month {
-  font-size: 0.6rem;
+  font-size: 0.45rem;
   font-weight: 600;
   color: #0d9488;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   line-height: 1;
 }
 
 .ue-date-day {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #0f1724;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-/* ===== FEATURED BADGE - Teal accent ===== */
-.ue-card-featured {
+/* ----- FEATURED BADGE ----- */
+.ue-featured-badge {
   position: absolute;
-  top: 0.9rem;
-  left: 0.9rem;
-  z-index: 5;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 22px;
+  height: 22px;
+  background: rgba(20, 184, 166, 0.15);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #14b8a6;
+  font-size: 0.6rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ----- CARD BODY ----- */
+.ue-card-body-compact {
+  padding: 0.75rem 0.75rem 0.75rem;
+}
+
+.ue-card-meta-compact {
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.35rem 0.8rem;
-  background: rgb(255, 255, 255);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(20, 184, 166, 0.2);
-  border-radius: 100px;
-  width: fit-content;
-  max-width: max-content;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.ue-card:hover .ue-card-featured {
-  background: rgba(20, 184, 166, 0.18);
-  transform: translateY(-2px);
-}
-
-.ue-card-featured span {
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: #0d9488;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-/* ===== PAST EVENT BADGE ===== */
-.ue-card-past-badge {
-  position: absolute;
-  top: 0.9rem;
-  right: 0.9rem;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  padding: 0.35rem 0.8rem;
-  background: rgba(139, 133, 121, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(139, 133, 121, 0.2);
-  border-radius: 100px;
-  width: fit-content;
-  max-width: max-content;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.ue-card-past-badge span {
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: #158f2e;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-/* Card Details */
-.ue-card-details {
-  position: relative;
-  z-index: 1;
-  padding: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 0.5rem;
-}
-
-/* ===== META TEXT ===== */
-.ue-card-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.3rem;
-}
-
-.ue-meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: rgba(15, 23, 36, 0.5);
+  margin-bottom: 0.2rem;
   letter-spacing: 0.02em;
 }
 
-.ue-meta-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(20, 184, 166, 0.5);
-  flex-shrink: 0;
+.ue-meta-sep {
+  color: rgba(255, 255, 255, 0.1);
 }
 
-.ue-meta-divider {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(15, 23, 36, 0.2);
-  flex-shrink: 0;
-}
-
-/* ===== CARD TITLE - Dark on white ===== */
-.ue-card-title {
-  font-size: 1.15rem;
+.ue-card-title-compact {
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #0f1724;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  margin: 0;
-}
-
-.ue-card-title:hover {
-  color: #0d9488;
-}
-
-/* ===== CARD DESCRIPTION ===== */
-.ue-card-description {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: rgba(15, 23, 36, 0.5);
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex: 1;
-  margin: 0;
+  min-height: 2.1rem;
 }
 
-/* ===== ACTION BUTTON ===== */
-.ue-card-action {
-  display: inline-flex;
+/* ----- CARD FOOTER ----- */
+.ue-card-footer-compact {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  gap: 0.5rem;
-  color: rgba(15, 23, 36, 0.5);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+}
+
+/* ----- VIEW BUTTON ----- */
+.ue-view-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: all 0.35s var(--ease-premium);
-  margin-top: 0.3rem;
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.ue-card:hover .ue-card-action {
-  color: #0d9488;
-  gap: 0.7rem;
+.ue-view-btn svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s ease;
 }
 
-.ue-action-arrow {
-  transition: transform 0.35s var(--ease-premium);
+.ue-card-hovered .ue-view-btn {
+  background: rgba(20, 184, 166, 0.1);
+  border-color: rgba(20, 184, 166, 0.2);
+  color: #14b8a6;
 }
 
-.ue-card:hover .ue-action-arrow {
-  transform: translateX(4px);
-}
-
-/* Card Edge Glow */
-.ue-card-edge {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 0;
-  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0) inset;
-  transition: box-shadow 0.5s var(--ease-premium);
-}
-
-.ue-card:hover .ue-card-edge {
-  box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.15) inset;
+.ue-card-hovered .ue-view-btn svg {
+  transform: translateX(2px);
 }
 
 /* ----- EMPTY STATE ----- */
-.ue-empty {
-  display: flex;
-  justify-content: center;
-  padding: 4rem 0;
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
-}
-
-.ue-visible .ue-empty {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
-}
-
-.ue-empty-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.ue-empty-compact {
   text-align: center;
-  gap: 1rem;
-}
-
-.ue-empty-thread {
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.ue-empty-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.ue-empty-text {
+  padding: 3rem 0;
+  color: rgba(255, 255, 255, 0.3);
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.35);
-  max-width: 380px;
-  margin: 0;
 }
 
-/* ----- FOOTER ----- */
-.ue-footer {
-  display: flex;
-  justify-content: center;
+/* ----- FOOTER LINK ----- */
+.ue-footer-compact {
+  text-align: center;
+  margin-top: 2rem;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.ue-visible .ue-footer {
+.ue-visible .ue-footer-compact {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.5s;
+  transition-delay: 0.7s;
 }
 
-.ue-footer-link {
+.ue-link-compact {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 2rem;
-  background: rgba(20, 184, 166, 0.08);
-  border: 1px solid rgba(20, 184, 166, 0.2);
-  border-radius: 100px;
-  color: #2dd4bf;
-  font-size: 0.9rem;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all 0.4s var(--ease-premium);
   text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: transparent;
+  cursor: pointer;
   font-family: inherit;
 }
 
-.ue-footer-link:hover {
-  background: rgba(20, 184, 166, 0.15);
-  border-color: rgba(20, 184, 166, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
+.ue-link-compact svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
 }
 
-.ue-footer-arrow {
-  transition: transform 0.35s var(--ease-premium);
+.ue-link-compact:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.ue-footer-link:hover .ue-footer-arrow {
-  transform: translateX(4px);
+.ue-link-compact:hover svg {
+  transform: translateX(3px);
 }
 
-/* ----- ESSENCE STRIP ----- */
-.ue-essence {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
-}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 
-.ue-visible .ue-essence {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.6s;
-}
-
-.ue-essence-thread {
-  width: 40px;
-  height: 1px;
-  background: rgba(20, 184, 166, 0.2);
-}
-
-.ue-essence-items {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.ue-essence-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-.ue-essence-word {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: -0.02em;
-}
-
-.ue-essence-subtle {
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-}
-
-.ue-essence-separator {
-  width: 1px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
-  .ue-card {
-    width: 320px;
+  .ue-card-compact {
+    width: 200px;
   }
-
-  .ue-card-image-wrap {
-    height: 200px;
-    min-height: 200px;
-    max-height: 200px;
+  
+  .ue-fade-compact {
+    width: 60px;
   }
 }
 
 @media (max-width: 768px) {
-  .ue-premium {
-    padding: 5rem 0 4rem;
+  .ue-compact {
+    padding: 2.5rem 0;
   }
-
-  .ue-container {
-    gap: 3.5rem;
-    padding: 0 4%;
+  
+  .ue-card-compact {
+    width: 180px;
   }
-
-  .ue-card {
-    width: 300px;
+  
+  .ue-title-compact {
+    font-size: 1.4rem;
   }
-
-  .ue-card-image-wrap {
-    height: 200px;
-    min-height: 200px;
-    max-height: 200px;
+  
+  .ue-card-title-compact {
+    font-size: 0.75rem;
+    min-height: 1.8rem;
   }
-
-  .ue-headline {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-  }
-
-  .ue-marquee-fade {
-    width: 60px;
-  }
-
-  .ue-essence-items {
-    gap: 1.2rem;
-  }
-
-  .ue-essence-separator {
-    display: none;
+  
+  .ue-fade-compact {
+    width: 40px;
   }
 }
 
 @media (max-width: 480px) {
-  .ue-premium {
-    padding: 4rem 0 3rem;
+  .ue-compact {
+    padding: 2rem 0;
   }
-
-  .ue-card {
-    width: 280px;
+  
+  .ue-card-compact {
+    width: 160px;
   }
-
-  .ue-card-details {
-    padding: 1.1rem;
+  
+  .ue-container-compact {
+    padding: 0 3%;
   }
-
-  .ue-card-image-wrap {
-    height: 180px;
-    min-height: 180px;
-    max-height: 180px;
+  
+  .ue-title-compact {
+    font-size: 1.2rem;
   }
-
-  .ue-prose {
-    font-size: 0.9rem;
+  
+  .ue-tag-compact {
+    font-size: 0.5rem;
   }
-
-  .ue-card-title {
-    font-size: 1rem;
+  
+  .ue-card-body-compact {
+    padding: 0.5rem;
   }
-
-  .ue-essence-items {
-    flex-direction: column;
-    gap: 0.8rem;
+  
+  .ue-card-title-compact {
+    font-size: 0.65rem;
+    min-height: 1.6rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  .ue-card-meta-compact {
+    font-size: 0.45rem;
+  }
+  
+  .ue-date-badge {
+    min-width: 32px;
+    padding: 0.2rem 0.4rem;
+    bottom: 0.35rem;
+    left: 0.35rem;
+  }
+  
+  .ue-date-month {
+    font-size: 0.4rem;
+  }
+  
+  .ue-date-day {
+    font-size: 0.85rem;
+  }
+  
+  .ue-featured-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.5rem;
+    top: 0.35rem;
+    right: 0.35rem;
+  }
+  
+  .ue-view-btn {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .ue-view-btn svg {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .ue-fade-compact {
+    width: 30px;
+  }
+  
+  .ue-link-compact {
+    font-size: 0.7rem;
+    padding: 0.3rem 1rem;
   }
 }

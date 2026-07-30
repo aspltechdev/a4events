@@ -432,11 +432,176 @@
 // export default Testimonials;
 
 
+// import { useEffect, useState, useRef } from "react";
+// import "./Testimonials.css";
+
+// function Testimonials() {
+//   const [isVisible, setIsVisible] = useState(false);
+//   const sectionRef = useRef(null);
+
+//   const testimonials = [
+//     {
+//       name: "Rahul Kumar",
+//       role: "Event Enthusiast",
+//       review: "Booking tickets was incredibly simple. The event experience exceeded all expectations and everything was perfectly organized.",
+//     },
+//     {
+//       name: "Priya Sharma",
+//       role: "Frequent Attendee",
+//       review: "A fantastic platform for discovering new events. I found amazing experiences that I would have otherwise missed.",
+//     },
+//     {
+//       name: "Arjun Singh",
+//       role: "Verified Buyer",
+//       review: "From booking to event day, everything was seamless. One of the best event platforms I've used.",
+//     },
+//     {
+//       name: "Meera Nair",
+//       role: "Product Lover",
+//       review: "The organic products are exceptional. Fresh, pure, and delivered on time. Highly recommend their millet mixes.",
+//     },
+//     {
+//       name: "Vikram Reddy",
+//       role: "Regular Customer",
+//       review: "Love their organic rice and pulses. Quality is consistent and pricing is reasonable. Will continue buying.",
+//     },
+//     {
+//       name: "Anjali Desai",
+//       role: "Health Conscious",
+//       review: "Finally found authentic organic products. The cold pressed oils and millet snacks are now my daily essentials.",
+//     },
+//   ];
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.1 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className={`tm-premium ${isVisible ? "tm-visible" : ""}`}
+//     >
+//       {/* Atmospheric Depth */}
+//       <div className="tm-atmosphere" aria-hidden="true">
+//         <div className="tm-glow tm-glow--teal" />
+//         <div className="tm-glow tm-glow--blue" />
+//         <div className="tm-glow tm-glow--emerald" />
+//         <div className="tm-mesh" />
+//         <div className="tm-grain" />
+//         <div className="tm-vignette" />
+//       </div>
+
+//       {/* Floating Orbs */}
+//       <div className="tm-orbs" aria-hidden="true">
+//         <div className="tm-orb tm-orb--primary" />
+//         <div className="tm-orb tm-orb--secondary" />
+//       </div>
+
+//       <div className="tm-container">
+//         {/* Header */}
+//         <div className="tm-header">
+//           <div className="tm-thread" />
+//           <div className="tm-header-content">
+//             <div className="tm-whisper">
+//               <span className="tm-whisper-pulse" />
+//               <span>What our community says</span>
+//             </div>
+
+//             <h2 className="tm-headline">
+//               <span className="tm-headline-line">Trusted by thousands for</span>
+//               <span className="tm-headline-line tm-headline-radiance">
+//                 events & organic living.
+//               </span>
+//             </h2>
+
+//             <p className="tm-prose">
+//               Hear what our community has to say about their experiences 
+//               discovering events and enjoying premium organic products 
+//               through our platform.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Testimonials Grid */}
+//         <div className="tm-grid">
+//           {testimonials.map((testimonial, index) => (
+//             <div
+//               key={index}
+//               className="tm-card"
+//               style={{ "--card-index": index }}
+//             >
+//               {/* Card Shine */}
+//               <div className="tm-card-shine" aria-hidden="true" />
+
+//               {/* Quote Mark */}
+//               <div className="tm-quote">
+//                 <span className="tm-quote-mark">"</span>
+//               </div>
+
+//               {/* Review Text */}
+//               <p className="tm-review">{testimonial.review}</p>
+
+//               {/* Divider */}
+//               <div className="tm-divider" />
+
+//               {/* User Info */}
+//               <div className="tm-user">
+//                 <div className="tm-user-avatar">
+//                   <span>{testimonial.name.charAt(0)}</span>
+//                 </div>
+//                 <div className="tm-user-details">
+//                   <span className="tm-user-name">{testimonial.name}</span>
+//                   <span className="tm-user-role">{testimonial.role}</span>
+//                 </div>
+//               </div>
+
+//               {/* Card Edge Glow */}
+//               <div className="tm-card-edge" aria-hidden="true" />
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Essence Strip */}
+//         <div className="tm-essence">
+//           <div className="tm-essence-thread" />
+//           <div className="tm-essence-items">
+//             <div className="tm-essence-item">
+//               <span className="tm-essence-word">Trusted</span>
+//               <span className="tm-essence-subtle">By thousands</span>
+//             </div>
+//             <div className="tm-essence-separator" />
+//             <div className="tm-essence-item">
+//               <span className="tm-essence-word">Verified</span>
+//               <span className="tm-essence-subtle">Real reviews</span>
+//             </div>
+//             <div className="tm-essence-separator" />
+//             <div className="tm-essence-item">
+//               <span className="tm-essence-word">Consistent</span>
+//               <span className="tm-essence-subtle">Quality always</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Testimonials;
+
 import { useEffect, useState, useRef } from "react";
 import "./Testimonials.css";
 
 function Testimonials() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef(null);
 
   const testimonials = [
@@ -463,7 +628,7 @@ function Testimonials() {
     {
       name: "Vikram Reddy",
       role: "Regular Customer",
-      review: "Love their organic rice and pulses. Quality is consistent and pricing is reasonable. Will continue buying.",
+      review: "Love their organic rice and pulses. Quality is consistent and pricing is reasonable.",
     },
     {
       name: "Anjali Desai",
@@ -484,110 +649,88 @@ function Testimonials() {
     return () => observer.disconnect();
   }, []);
 
+  const marqueeTestimonials = testimonials.length > 0 ? [...testimonials, ...testimonials, ...testimonials] : [];
+
   return (
     <section
       ref={sectionRef}
-      className={`tm-premium ${isVisible ? "tm-visible" : ""}`}
+      className={`tm-compact ${isVisible ? "tm-visible" : ""}`}
     >
-      {/* Atmospheric Depth */}
-      <div className="tm-atmosphere" aria-hidden="true">
-        <div className="tm-glow tm-glow--teal" />
-        <div className="tm-glow tm-glow--blue" />
-        <div className="tm-glow tm-glow--emerald" />
-        <div className="tm-mesh" />
-        <div className="tm-grain" />
-        <div className="tm-vignette" />
+      {/* Background */}
+      <div className="tm-bg-compact" aria-hidden="true">
+        <div className="tm-glow-compact tm-glow-compact--teal" />
+        <div className="tm-glow-compact tm-glow-compact--blue" />
+        <div className="tm-grain-compact" />
       </div>
 
-      {/* Floating Orbs */}
-      <div className="tm-orbs" aria-hidden="true">
-        <div className="tm-orb tm-orb--primary" />
-        <div className="tm-orb tm-orb--secondary" />
-      </div>
-
-      <div className="tm-container">
-        {/* Header */}
-        <div className="tm-header">
-          <div className="tm-thread" />
-          <div className="tm-header-content">
-            <div className="tm-whisper">
-              <span className="tm-whisper-pulse" />
-              <span>What our community says</span>
+      <div className="tm-container-compact">
+        {/* Header - Left/Right Layout */}
+        <div className="tm-header-compact">
+          <div className="tm-header-left">
+            <div className="tm-tag-compact">
+              <span className="tm-tag-dot" />
+              <span>Testimonials</span>
             </div>
-
-            <h2 className="tm-headline">
-              <span className="tm-headline-line">Trusted by thousands for</span>
-              <span className="tm-headline-line tm-headline-radiance">
-                events & organic living.
-              </span>
+            <h2 className="tm-title-compact">
+              <span className="tm-title-line">Trusted by thousands</span>
+              <span className="tm-title-line tm-title-highlight">for events & organic living</span>
             </h2>
-
-            <p className="tm-prose">
-              Hear what our community has to say about their experiences 
-              discovering events and enjoying premium organic products 
-              through our platform.
+          </div>
+          <div className="tm-header-right">
+            <p className="tm-subtitle-compact">
+              Hear what our community says about their experiences discovering events and enjoying premium organic products
             </p>
+            <div className="tm-stats-compact">
+              <span className="tm-stat-item">
+                <span className="tm-stat-number">4.8</span>
+                <span className="tm-stat-label">★ Rating</span>
+              </span>
+              <span className="tm-stat-divider" />
+              <span className="tm-stat-item">
+                <span className="tm-stat-number">500+</span>
+                <span className="tm-stat-label">Reviews</span>
+              </span>
+              <span className="tm-stat-divider" />
+              <span className="tm-stat-item">
+                <span className="tm-stat-number">✓</span>
+                <span className="tm-stat-label">Verified</span>
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="tm-grid">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="tm-card"
-              style={{ "--card-index": index }}
-            >
-              {/* Card Shine */}
-              <div className="tm-card-shine" aria-hidden="true" />
-
-              {/* Quote Mark */}
-              <div className="tm-quote">
-                <span className="tm-quote-mark">"</span>
-              </div>
-
-              {/* Review Text */}
-              <p className="tm-review">{testimonial.review}</p>
-
-              {/* Divider */}
-              <div className="tm-divider" />
-
-              {/* User Info */}
-              <div className="tm-user">
-                <div className="tm-user-avatar">
-                  <span>{testimonial.name.charAt(0)}</span>
-                </div>
-                <div className="tm-user-details">
-                  <span className="tm-user-name">{testimonial.name}</span>
-                  <span className="tm-user-role">{testimonial.role}</span>
+        {/* Marquee Carousel */}
+        <div
+          className="tm-marquee-compact"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className={`tm-track-compact ${isPaused ? "tm-paused" : ""}`}>
+            {marqueeTestimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="tm-card-compact"
+              >
+                <div className="tm-card-content">
+                  <div className="tm-quote-compact">"</div>
+                  <p className="tm-review-compact">{testimonial.review}</p>
+                  <div className="tm-user-compact">
+                    <div className="tm-avatar-compact">
+                      <span>{testimonial.name.charAt(0)}</span>
+                    </div>
+                    <div className="tm-user-info-compact">
+                      <span className="tm-name-compact">{testimonial.name}</span>
+                      <span className="tm-role-compact">{testimonial.role}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* Card Edge Glow */}
-              <div className="tm-card-edge" aria-hidden="true" />
-            </div>
-          ))}
-        </div>
-
-        {/* Essence Strip */}
-        <div className="tm-essence">
-          <div className="tm-essence-thread" />
-          <div className="tm-essence-items">
-            <div className="tm-essence-item">
-              <span className="tm-essence-word">Trusted</span>
-              <span className="tm-essence-subtle">By thousands</span>
-            </div>
-            <div className="tm-essence-separator" />
-            <div className="tm-essence-item">
-              <span className="tm-essence-word">Verified</span>
-              <span className="tm-essence-subtle">Real reviews</span>
-            </div>
-            <div className="tm-essence-separator" />
-            <div className="tm-essence-item">
-              <span className="tm-essence-word">Consistent</span>
-              <span className="tm-essence-subtle">Quality always</span>
-            </div>
+            ))}
           </div>
+
+          {/* Fade Edges */}
+          <div className="tm-fade-compact tm-fade-left" />
+          <div className="tm-fade-compact tm-fade-right" />
         </div>
       </div>
     </section>

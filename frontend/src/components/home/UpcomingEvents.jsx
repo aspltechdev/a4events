@@ -1660,6 +1660,334 @@
 // export default UpcomingEvents;
 
 
+// import { useEffect, useState, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
+// import api from "../../services/api";
+// import "./UpcomingEvents.css";
+
+// function UpcomingEvents() {
+//   const [events, setEvents] = useState([]);
+//   const [hoveredEvent, setHoveredEvent] = useState(null);
+//   const [isPaused, setIsPaused] = useState(false);
+//   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+//   const [isVisible, setIsVisible] = useState(false);
+//   const navigate = useNavigate();
+//   const sectionRef = useRef(null);
+
+//   useEffect(() => {
+//     loadEvents();
+//   }, []);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.12 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const handleMouseMove = (e) => {
+//       if (sectionRef.current) {
+//         const rect = sectionRef.current.getBoundingClientRect();
+//         setMousePosition({
+//           x: (e.clientX - rect.left) / rect.width,
+//           y: (e.clientY - rect.top) / rect.height,
+//         });
+//       }
+//     };
+
+//     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+//     return () => window.removeEventListener("mousemove", handleMouseMove);
+//   }, []);
+
+//   const loadEvents = async () => {
+//     try {
+//       const { data } = await api.get("/events");
+//       const today = new Date();
+//       today.setHours(0, 0, 0, 0);
+//       const upcomingEvents = data
+//         .filter((event) => {
+//           const eventDate = new Date(event.eventDate);
+//           eventDate.setHours(0, 0, 0, 0);
+//           return eventDate >= today;
+//         })
+//         .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
+//         .slice(0, 6);
+//       setEvents(upcomingEvents);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const formatDate = (dateString) => {
+//     if (!dateString)
+//       return { month: "TBA", day: "--", year: "", formatted: "Date TBA" };
+//     const date = new Date(dateString);
+//     return {
+//       month: date.toLocaleDateString("en-US", { month: "short" }),
+//       day: date.getDate(),
+//       year: date.getFullYear(),
+//       formatted: date.toLocaleDateString("en-US", {
+//         month: "long",
+//         day: "numeric",
+//         year: "numeric",
+//       }),
+//     };
+//   };
+
+//   const formatTime = (dateString) => {
+//     if (!dateString) return "Time TBA";
+//     const date = new Date(dateString);
+//     return date.toLocaleTimeString("en-US", {
+//       hour: "2-digit",
+//       minute: "2-digit",
+//       hour12: true,
+//     });
+//   };
+
+//   const isPastEvent = (dateString) => {
+//     if (!dateString) return false;
+//     const eventDate = new Date(dateString);
+//     eventDate.setHours(0, 0, 0, 0);
+//     const today = new Date();
+//     today.setHours(0, 0, 0, 0);
+//     return eventDate < today;
+//   };
+
+//   const handleViewEvent = (eventId) => {
+//     navigate(`/events/${eventId}`);
+//   };
+
+//   const marqueeEvents = events.length > 0 ? [...events, ...events] : [];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className={`ue-premium ${isVisible ? "ue-visible" : ""}`}
+//       style={{
+//         "--mouse-x": mousePosition.x,
+//         "--mouse-y": mousePosition.y,
+//       }}
+//     >
+//       {/* Atmospheric Depth Layers */}
+//       <div className="ue-atmosphere" aria-hidden="true">
+//         <div className="ue-glow ue-glow--teal" />
+//         <div className="ue-glow ue-glow--blue" />
+//         <div className="ue-glow ue-glow--emerald" />
+//         <div className="ue-mesh" />
+//         <div className="ue-grain" />
+//         <div className="ue-vignette" />
+//       </div>
+
+//       {/* Floating Glass Orbs */}
+//       <div className="ue-orbs" aria-hidden="true">
+//         <div className="ue-orb ue-orb--primary" />
+//         <div className="ue-orb ue-orb--secondary" />
+//         <div className="ue-orb ue-orb--tertiary" />
+//       </div>
+
+//       <div className="ue-container">
+//         {/* Header */}
+//         <div className="ue-header">
+//           <div className="ue-thread" />
+//           <div className="ue-header-content">
+//             <div className="ue-whisper">
+//               <span className="ue-whisper-pulse" />
+//               <span>Experiences ahead</span>
+//             </div>
+
+//             <h2 className="ue-headline">
+//               <span className="ue-headline-line">Moments worth</span>
+//               <span className="ue-headline-line ue-headline-radiance">
+//                 looking forward to.
+//               </span>
+//             </h2>
+
+//             <p className="ue-prose">
+//               Curated concerts, festivals, workshops, and gatherings — each one 
+//               an experience designed to inspire, connect, and elevate your world.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Marquee Carousel */}
+//         <div
+//           className="ue-marquee-stage"
+//           onMouseEnter={() => setIsPaused(true)}
+//           onMouseLeave={() => setIsPaused(false)}
+//         >
+//           <div
+//             className={`ue-marquee-track ${isPaused ? "ue-marquee-paused" : ""}`}
+//           >
+//             {marqueeEvents.map((event, index) => {
+//               const dateObj = formatDate(event.eventDate);
+//               const isPast = isPastEvent(event.eventDate);
+//               const timeFormatted = formatTime(event.eventDate);
+
+//               return (
+//                 <div
+//                   key={`${event.id}-${index}`}
+//                   className={`ue-card ${
+//                     hoveredEvent === `${event.id}-${index}`
+//                       ? "ue-card-hovered"
+//                       : ""
+//                   } ${isPast ? "ue-card-past" : ""}`}
+//                   onMouseEnter={() =>
+//                     setHoveredEvent(`${event.id}-${index}`)
+//                   }
+//                   onMouseLeave={() => setHoveredEvent(null)}
+//                 >
+//                   {/* Card Shine */}
+//                   <div className="ue-card-shine" aria-hidden="true" />
+
+//                   {/* Image */}
+//                   <div
+//                     className="ue-card-media"
+//                     onClick={() => handleViewEvent(event.id)}
+//                   >
+//                     <div className="ue-card-image-wrap">
+//                       {event.bannerImage && (
+//                         <img
+//                           src={`https://a4agroup.eu${event.bannerImage}`}
+//                           alt={event.title}
+//                           className="ue-card-image"
+//                           loading="lazy"
+//                         />
+//                       )}
+//                       <div className="ue-card-image-veil" />
+//                     </div>
+
+//                     {/* Date Panel - White background for visibility */}
+//                     <div className="ue-card-date">
+//                       <span className="ue-date-month">{dateObj.month}</span>
+//                       <span className="ue-date-day">{dateObj.day}</span>
+//                     </div>
+
+//                     {/* Featured Tag - White badge, clearly visible */}
+//                     {event.featured && (
+//                       <div className="ue-card-featured">
+//                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="ue-featured-icon">
+//                           <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
+//                         </svg>
+//                         <span>Featured</span>
+//                       </div>
+//                     )}
+
+//                     {/* Past Event Tag */}
+//                     {isPast && (
+//                       <div className="ue-card-past-badge">
+//                         <span>Past Event</span>
+//                       </div>
+//                     )}
+//                   </div>
+
+//                   {/* Details */}
+//                   <div className="ue-card-details">
+//                     <div className="ue-card-meta">
+//                       <span className="ue-meta-item">
+//                         <span className="ue-meta-dot" />
+//                         {event.location || "Venue TBA"}
+//                       </span>
+//                       <span className="ue-meta-divider" />
+//                       <span className="ue-meta-item">
+//                         <span className="ue-meta-dot" />
+//                         {timeFormatted}
+//                       </span>
+//                     </div>
+
+//                     <h3
+//                       className="ue-card-title"
+//                       onClick={() => handleViewEvent(event.id)}
+//                     >
+//                       {event.title}
+//                     </h3>
+
+//                     <p className="ue-card-description">{event.description}</p>
+
+//                     <button
+//                       className="ue-card-action"
+//                       onClick={() => handleViewEvent(event.id)}
+//                     >
+//                       <span>{isPast ? "View Recap" : "View Event"}</span>
+//                       <span className="ue-action-arrow">→</span>
+//                     </button>
+//                   </div>
+
+//                   {/* Card Edge Glow */}
+//                   <div className="ue-card-edge" aria-hidden="true" />
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           {/* Fade Edges */}
+//           <div className="ue-marquee-fade ue-marquee-fade-left" />
+//           <div className="ue-marquee-fade ue-marquee-fade-right" />
+//         </div>
+
+//         {/* Empty State */}
+//         {events.length === 0 && (
+//           <div className="ue-empty">
+//             <div className="ue-empty-content">
+//               <div className="ue-empty-thread" />
+//               <h3 className="ue-empty-title">No upcoming events</h3>
+//               <p className="ue-empty-text">
+//                 New experiences are being curated. Return soon for something
+//                 extraordinary.
+//               </p>
+//             </div>
+//           </div>
+//         )}
+
+//         {/* Footer */}
+//         <div className="ue-footer">
+//           <button
+//             className="ue-footer-link"
+//             onClick={() => navigate("/events")}
+//           >
+//             <span>Explore all events</span>
+//             <span className="ue-footer-arrow">→</span>
+//           </button>
+//         </div>
+
+//         {/* Essence Strip */}
+//         <div className="ue-essence">
+//           <div className="ue-essence-thread" />
+//           <div className="ue-essence-items">
+//             <div className="ue-essence-item">
+//               <span className="ue-essence-word">Curated</span>
+//               <span className="ue-essence-subtle">Handpicked experiences</span>
+//             </div>
+//             <div className="ue-essence-separator" />
+//             <div className="ue-essence-item">
+//               <span className="ue-essence-word">Verified</span>
+//               <span className="ue-essence-subtle">Trusted organizers</span>
+//             </div>
+//             <div className="ue-essence-separator" />
+//             <div className="ue-essence-item">
+//               <span className="ue-essence-word">Secure</span>
+//               <span className="ue-essence-subtle">Protected booking</span>
+//             </div>
+//             <div className="ue-essence-separator" />
+//             <div className="ue-essence-item">
+//               <span className="ue-essence-word">Guaranteed</span>
+//               <span className="ue-essence-subtle">Best value always</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default UpcomingEvents;
+
+
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
@@ -1669,7 +1997,6 @@ function UpcomingEvents() {
   const [events, setEvents] = useState([]);
   const [hoveredEvent, setHoveredEvent] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
   const sectionRef = useRef(null);
@@ -1683,26 +2010,11 @@ function UpcomingEvents() {
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.12 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: (e.clientX - rect.left) / rect.width,
-          y: (e.clientY - rect.top) / rect.height,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const loadEvents = async () => {
@@ -1717,7 +2029,7 @@ function UpcomingEvents() {
           return eventDate >= today;
         })
         .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
-        .slice(0, 6);
+        .slice(0, 8);
       setEvents(upcomingEvents);
     } catch (error) {
       console.error(error);
@@ -1725,38 +2037,22 @@ function UpcomingEvents() {
   };
 
   const formatDate = (dateString) => {
-    if (!dateString)
-      return { month: "TBA", day: "--", year: "", formatted: "Date TBA" };
+    if (!dateString) return { month: "TBA", day: "--" };
     const date = new Date(dateString);
     return {
       month: date.toLocaleDateString("en-US", { month: "short" }),
       day: date.getDate(),
-      year: date.getFullYear(),
-      formatted: date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }),
     };
   };
 
   const formatTime = (dateString) => {
-    if (!dateString) return "Time TBA";
+    if (!dateString) return "TBA";
     const date = new Date(dateString);
     return date.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
     });
-  };
-
-  const isPastEvent = (dateString) => {
-    if (!dateString) return false;
-    const eventDate = new Date(dateString);
-    eventDate.setHours(0, 0, 0, 0);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return eventDate < today;
   };
 
   const handleViewEvent = (eventId) => {
@@ -1768,217 +2064,112 @@ function UpcomingEvents() {
   return (
     <section
       ref={sectionRef}
-      className={`ue-premium ${isVisible ? "ue-visible" : ""}`}
-      style={{
-        "--mouse-x": mousePosition.x,
-        "--mouse-y": mousePosition.y,
-      }}
+      className={`ue-compact ${isVisible ? "ue-visible" : ""}`}
     >
-      {/* Atmospheric Depth Layers */}
-      <div className="ue-atmosphere" aria-hidden="true">
-        <div className="ue-glow ue-glow--teal" />
-        <div className="ue-glow ue-glow--blue" />
-        <div className="ue-glow ue-glow--emerald" />
-        <div className="ue-mesh" />
-        <div className="ue-grain" />
-        <div className="ue-vignette" />
+      {/* Background */}
+      <div className="ue-bg-compact" aria-hidden="true">
+        <div className="ue-glow-compact ue-glow-compact--teal" />
+        <div className="ue-glow-compact ue-glow-compact--blue" />
+        <div className="ue-grain-compact" />
       </div>
 
-      {/* Floating Glass Orbs */}
-      <div className="ue-orbs" aria-hidden="true">
-        <div className="ue-orb ue-orb--primary" />
-        <div className="ue-orb ue-orb--secondary" />
-        <div className="ue-orb ue-orb--tertiary" />
-      </div>
-
-      <div className="ue-container">
-        {/* Header */}
-        <div className="ue-header">
-          <div className="ue-thread" />
-          <div className="ue-header-content">
-            <div className="ue-whisper">
-              <span className="ue-whisper-pulse" />
-              <span>Experiences ahead</span>
-            </div>
-
-            <h2 className="ue-headline">
-              <span className="ue-headline-line">Moments worth</span>
-              <span className="ue-headline-line ue-headline-radiance">
-                looking forward to.
-              </span>
-            </h2>
-
-            <p className="ue-prose">
-              Curated concerts, festivals, workshops, and gatherings — each one 
-              an experience designed to inspire, connect, and elevate your world.
-            </p>
+      <div className="ue-container-compact">
+        {/* Header - Minimal */}
+        <div className="ue-header-compact">
+          <div className="ue-tag-compact">
+            <span className="ue-tag-dot" />
+            <span>Upcoming Experiences</span>
           </div>
+          <h2 className="ue-title-compact">
+            Events worth <span className="ue-title-highlight">looking forward to</span>
+          </h2>
         </div>
 
-        {/* Marquee Carousel */}
+        {/* Marquee */}
         <div
-          className="ue-marquee-stage"
+          className="ue-marquee-compact"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div
-            className={`ue-marquee-track ${isPaused ? "ue-marquee-paused" : ""}`}
-          >
+          <div className={`ue-track-compact ${isPaused ? "ue-paused" : ""}`}>
             {marqueeEvents.map((event, index) => {
               const dateObj = formatDate(event.eventDate);
-              const isPast = isPastEvent(event.eventDate);
               const timeFormatted = formatTime(event.eventDate);
 
               return (
                 <div
                   key={`${event.id}-${index}`}
-                  className={`ue-card ${
-                    hoveredEvent === `${event.id}-${index}`
-                      ? "ue-card-hovered"
-                      : ""
-                  } ${isPast ? "ue-card-past" : ""}`}
-                  onMouseEnter={() =>
-                    setHoveredEvent(`${event.id}-${index}`)
-                  }
+                  className={`ue-card-compact ${
+                    hoveredEvent === `${event.id}-${index}` ? "ue-card-hovered" : ""
+                  }`}
+                  onMouseEnter={() => setHoveredEvent(`${event.id}-${index}`)}
                   onMouseLeave={() => setHoveredEvent(null)}
+                  onClick={() => handleViewEvent(event.id)}
                 >
-                  {/* Card Shine */}
-                  <div className="ue-card-shine" aria-hidden="true" />
-
-                  {/* Image */}
-                  <div
-                    className="ue-card-media"
-                    onClick={() => handleViewEvent(event.id)}
-                  >
-                    <div className="ue-card-image-wrap">
-                      {event.bannerImage && (
-                        <img
-                          src={`https://a4agroup.eu${event.bannerImage}`}
-                          alt={event.title}
-                          className="ue-card-image"
-                          loading="lazy"
-                        />
-                      )}
-                      <div className="ue-card-image-veil" />
-                    </div>
-
-                    {/* Date Panel - White background for visibility */}
-                    <div className="ue-card-date">
+                  <div className="ue-card-image-compact">
+                    <img
+                      src={`https://a4agroup.eu${event.bannerImage}`}
+                      alt={event.title}
+                      loading="lazy"
+                    />
+                    
+                    {/* Date Badge */}
+                    <div className="ue-date-badge">
                       <span className="ue-date-month">{dateObj.month}</span>
                       <span className="ue-date-day">{dateObj.day}</span>
                     </div>
 
-                    {/* Featured Tag - White badge, clearly visible */}
+                    {/* Featured Badge */}
                     {event.featured && (
-                      <div className="ue-card-featured">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="ue-featured-icon">
-                          <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
-                        </svg>
-                        <span>Featured</span>
-                      </div>
-                    )}
-
-                    {/* Past Event Tag */}
-                    {isPast && (
-                      <div className="ue-card-past-badge">
-                        <span>Past Event</span>
-                      </div>
+                      <div className="ue-featured-badge">✦</div>
                     )}
                   </div>
 
-                  {/* Details */}
-                  <div className="ue-card-details">
-                    <div className="ue-card-meta">
-                      <span className="ue-meta-item">
-                        <span className="ue-meta-dot" />
-                        {event.location || "Venue TBA"}
-                      </span>
-                      <span className="ue-meta-divider" />
-                      <span className="ue-meta-item">
-                        <span className="ue-meta-dot" />
-                        {timeFormatted}
-                      </span>
+                  <div className="ue-card-body-compact">
+                    <div className="ue-card-meta-compact">
+                      <span>{event.location || "Venue TBA"}</span>
+                      <span className="ue-meta-sep">•</span>
+                      <span>{timeFormatted}</span>
                     </div>
-
-                    <h3
-                      className="ue-card-title"
-                      onClick={() => handleViewEvent(event.id)}
-                    >
-                      {event.title}
-                    </h3>
-
-                    <p className="ue-card-description">{event.description}</p>
-
-                    <button
-                      className="ue-card-action"
-                      onClick={() => handleViewEvent(event.id)}
-                    >
-                      <span>{isPast ? "View Recap" : "View Event"}</span>
-                      <span className="ue-action-arrow">→</span>
-                    </button>
+                    
+                    <h3 className="ue-card-title-compact">{event.title}</h3>
+                    
+                    <div className="ue-card-footer-compact">
+                      <button className="ue-view-btn" aria-label="View event">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-
-                  {/* Card Edge Glow */}
-                  <div className="ue-card-edge" aria-hidden="true" />
                 </div>
               );
             })}
           </div>
 
-          {/* Fade Edges */}
-          <div className="ue-marquee-fade ue-marquee-fade-left" />
-          <div className="ue-marquee-fade ue-marquee-fade-right" />
+          {/* Fade edges */}
+          <div className="ue-fade-compact ue-fade-left" />
+          <div className="ue-fade-compact ue-fade-right" />
         </div>
 
         {/* Empty State */}
         {events.length === 0 && (
-          <div className="ue-empty">
-            <div className="ue-empty-content">
-              <div className="ue-empty-thread" />
-              <h3 className="ue-empty-title">No upcoming events</h3>
-              <p className="ue-empty-text">
-                New experiences are being curated. Return soon for something
-                extraordinary.
-              </p>
-            </div>
+          <div className="ue-empty-compact">
+            <p>No upcoming events at the moment</p>
           </div>
         )}
 
         {/* Footer */}
-        <div className="ue-footer">
+        <div className="ue-footer-compact">
           <button
-            className="ue-footer-link"
+            className="ue-link-compact"
             onClick={() => navigate("/events")}
           >
-            <span>Explore all events</span>
-            <span className="ue-footer-arrow">→</span>
+            <span>View All Events</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </button>
-        </div>
-
-        {/* Essence Strip */}
-        <div className="ue-essence">
-          <div className="ue-essence-thread" />
-          <div className="ue-essence-items">
-            <div className="ue-essence-item">
-              <span className="ue-essence-word">Curated</span>
-              <span className="ue-essence-subtle">Handpicked experiences</span>
-            </div>
-            <div className="ue-essence-separator" />
-            <div className="ue-essence-item">
-              <span className="ue-essence-word">Verified</span>
-              <span className="ue-essence-subtle">Trusted organizers</span>
-            </div>
-            <div className="ue-essence-separator" />
-            <div className="ue-essence-item">
-              <span className="ue-essence-word">Secure</span>
-              <span className="ue-essence-subtle">Protected booking</span>
-            </div>
-            <div className="ue-essence-separator" />
-            <div className="ue-essence-item">
-              <span className="ue-essence-word">Guaranteed</span>
-              <span className="ue-essence-subtle">Best value always</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
