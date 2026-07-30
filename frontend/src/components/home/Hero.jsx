@@ -3027,6 +3027,296 @@
 // export default Hero;
 
 
+// import { useEffect, useState, useRef, useCallback } from "react";
+// import { Link } from "react-router-dom";
+// import api from "../../services/api";
+// import "./Hero.css";
+
+// function Hero() {
+//   const [slides, setSlides] = useState([]);
+//   const [current, setCurrent] = useState(0);
+//   const [isAnimating, setIsAnimating] = useState(false);
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [contentVisible, setContentVisible] = useState(false);
+//   const [imageOrientations, setImageOrientations] = useState({});
+
+//   const heroRef = useRef(null);
+//   const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL;
+
+//   useEffect(() => {
+//     loadSlides();
+//   }, []);
+
+//   useEffect(() => {
+//     if (isLoaded && slides.length) {
+//       setTimeout(() => setContentVisible(true), 400);
+//     }
+//   }, [isLoaded, slides]);
+
+//   useEffect(() => {
+//     if (!slides.length || isAnimating) return;
+//     const timer = setInterval(() => {
+//       handleSlideChange((current + 1) % slides.length);
+//     }, 7000);
+//     return () => clearInterval(timer);
+//   }, [slides, current, isAnimating]);
+
+//   const loadSlides = async () => {
+//     try {
+//       const { data } = await api.get("/hero-slides");
+//       const activeSlides = data
+//         .filter((slide) => slide.isActive)
+//         .sort((a, b) => a.order - b.order);
+//       setSlides(activeSlides);
+//       detectOrientations(activeSlides);
+//       setTimeout(() => setIsLoaded(true), 300);
+//     } catch (err) {
+//       console.error("Failed to load hero slides:", err);
+//     }
+//   };
+
+//   const detectOrientations = (slides) => {
+//     const orientations = {};
+//     slides.forEach((slide, index) => {
+//       const img = new Image();
+//       img.onload = () => {
+//         orientations[index] = img.width >= img.height ? "landscape" : "portrait";
+//         setImageOrientations((prev) => ({ ...prev, ...orientations }));
+//       };
+//       img.onerror = () => {
+//         orientations[index] = "landscape";
+//         setImageOrientations((prev) => ({ ...prev, ...orientations }));
+//       };
+//       img.src = `${IMAGE_BASE}${slide.image}`;
+//     });
+//   };
+
+//   const handleSlideChange = useCallback(
+//     (index) => {
+//       if (isAnimating || index === current) return;
+//       setIsAnimating(true);
+//       setContentVisible(false);
+//       setTimeout(() => {
+//         setCurrent(index);
+//         setTimeout(() => {
+//           setContentVisible(true);
+//           setTimeout(() => setIsAnimating(false), 200);
+//         }, 200);
+//       }, 600);
+//     },
+//     [isAnimating, current]
+//   );
+
+//   const handleProgressClick = (index) => {
+//     if (index === current || isAnimating) return;
+//     handleSlideChange(index);
+//   };
+
+//   if (!slides.length) {
+//     return (
+//       <section className="hero-modern hero-skeleton" aria-busy="true">
+//         <div className="hero-skeleton-container">
+//           <div className="skeleton-content">
+//             <div className="skeleton-chip" />
+//             <div className="skeleton-headline" />
+//             <div className="skeleton-subheadline" />
+//             <div className="skeleton-cta" />
+//           </div>
+//           <div className="skeleton-poster" />
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   const slide = slides[current];
+//   const nextSlide = slides[(current + 1) % slides.length];
+//   const orientation = imageOrientations[current] || "portrait";
+
+//   const getRedirectLink = () => {
+//     if (slide.slideType === "product" && slide.productId) return `/products/${slide.productId}`;
+//     if (slide.slideType === "event" && slide.eventId) return `/events/${slide.eventId}`;
+//     if (slide.buttonLink) return slide.buttonLink;
+//     return "/events";
+//   };
+
+//   const redirectLink = getRedirectLink();
+//   const isInternalLink = !redirectLink.startsWith("http");
+
+//   const getBadgeText = () => {
+//     if (slide.slideType === "product") return "New Collection";
+//     if (slide.slideType === "event") return "Featured Event";
+//     return "Since 1926";
+//   };
+
+//   const getCategoryIcon = () => {
+//     if (slide.slideType === "product") return "✦";
+//     if (slide.slideType === "event") return "◈";
+//     return "◆";
+//   };
+
+//   return (
+//     <section
+//       ref={heroRef}
+//       className={`hero-modern ${isLoaded ? "is-loaded" : ""}`}
+//       aria-label="Featured content"
+//     >
+//       {/* Background Effects */}
+//       <div className="hero-bg-effects" aria-hidden="true">
+//         <div className="hero-bg-glow hero-bg-glow--1" />
+//         <div className="hero-bg-glow hero-bg-glow--2" />
+//         <div className="hero-bg-grain" />
+//       </div>
+
+//       <div className="hero-modern-container">
+//         {/* LEFT CONTENT */}
+//         <div className="hero-content-section">
+//           <div className={`hero-content-inner ${contentVisible ? "content-enter" : "content-exit"}`}>
+//             {/* Category Badge */}
+//             <div className="hero-category-badge">
+//               <span className="hero-category-icon">{getCategoryIcon()}</span>
+//               <span className="hero-category-text">{getBadgeText()}</span>
+//             </div>
+
+//             {/* Title */}
+//             <h1 className="hero-main-title">
+//               <span className="hero-title-line">{slide.title}</span>
+//             </h1>
+
+//             {/* Description */}
+//             <p className="hero-description-modern">{slide.subtitle}</p>
+
+//             {/* CTA Buttons */}
+//             <div className="hero-actions-modern">
+//               {isInternalLink ? (
+//                 <Link to={redirectLink} className="hero-btn-modern hero-btn-modern--primary">
+//                   <span>{slide.buttonText || "Explore Now"}</span>
+//                   <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//                     <path d="M5 12h14M12 5l7 7-7 7" />
+//                   </svg>
+//                 </Link>
+//               ) : (
+//                 <a
+//                   href={redirectLink}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="hero-btn-modern hero-btn-modern--primary"
+//                 >
+//                   <span>{slide.buttonText || "Explore Now"}</span>
+//                   <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//                     <path d="M5 12h14M12 5l7 7-7 7" />
+//                   </svg>
+//                 </a>
+//               )}
+
+//               <Link to="/events" className="hero-btn-modern hero-btn-modern--secondary">
+//                 <span>View All</span>
+//               </Link>
+//             </div>
+
+//             {/* Stats / Info */}
+//             <div className="hero-info-strip">
+//               <div className="hero-info-item">
+//                 <span className="hero-info-number">100+</span>
+//                 <span className="hero-info-label">Years</span>
+//               </div>
+//               <div className="hero-info-divider" />
+//               <div className="hero-info-item">
+//                 <span className="hero-info-number">🇩🇪</span>
+//                 <span className="hero-info-label">Precision</span>
+//               </div>
+//               <div className="hero-info-divider" />
+//               <div className="hero-info-item">
+//                 <span className="hero-info-number">🇮🇳</span>
+//                 <span className="hero-info-label">Soul</span>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* RIGHT POSTER CARD */}
+//         <div className="hero-poster-section">
+//           <div className="hero-poster-card">
+//             <div className="hero-poster-image-wrapper">
+//               <div
+//                 className={`hero-poster-image ${isAnimating ? "poster-exit" : "poster-active"} ${
+//                   orientation === "portrait" ? "poster-portrait" : "poster-landscape"
+//                 }`}
+//                 style={{
+//                   backgroundImage: `url(${IMAGE_BASE}${slide.image})`,
+//                 }}
+//               />
+              
+//               {/* Next Poster (preloaded) */}
+//               <div
+//                 className={`hero-poster-image hero-poster-next ${isAnimating ? "poster-enter" : ""}`}
+//                 style={{
+//                   backgroundImage: `url(${IMAGE_BASE}${nextSlide.image})`,
+//                 }}
+//               />
+
+//               {/* Poster Overlay Effects */}
+//               <div className="hero-poster-overlay" />
+//               <div className="hero-poster-shine" />
+              
+//               {/* Poster Badge */}
+//               <div className="hero-poster-badge">
+//                 <span>{current + 1}</span>
+//                 <span>/{slides.length}</span>
+//               </div>
+//             </div>
+
+//             {/* Poster Footer Info */}
+//             <div className="hero-poster-footer">
+//               <div className="hero-poster-tags">
+//                 <span className="hero-poster-tag">✦ Premium</span>
+//                 <span className="hero-poster-tag">✦ Limited</span>
+//               </div>
+//               <div className="hero-poster-actions">
+//                 <button 
+//                   className="hero-poster-nav-btn" 
+//                   onClick={() => handleProgressClick((current - 1 + slides.length) % slides.length)}
+//                   aria-label="Previous slide"
+//                 >
+//                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                     <path d="M15 18l-6-6 6-6" />
+//                   </svg>
+//                 </button>
+//                 <button 
+//                   className="hero-poster-nav-btn" 
+//                   onClick={() => handleProgressClick((current + 1) % slides.length)}
+//                   aria-label="Next slide"
+//                 >
+//                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                     <path d="M9 18l6-6-6-6" />
+//                   </svg>
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Slide Navigation Dots */}
+//       <div className="hero-nav-modern" role="navigation" aria-label="Slide navigation">
+//         {slides.map((_, index) => (
+//           <button
+//             key={index}
+//             className={`hero-nav-dot-modern ${index === current ? "is-active" : ""}`}
+//             onClick={() => handleProgressClick(index)}
+//             aria-label={`Slide ${index + 1}`}
+//             aria-current={index === current ? "true" : "false"}
+//           >
+//             <span className="hero-nav-dot-modern-fill" />
+//           </button>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Hero;
+
+
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
@@ -3041,7 +3331,7 @@ function Hero() {
   const [imageOrientations, setImageOrientations] = useState({});
 
   const heroRef = useRef(null);
-  const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL;
+  const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL || "https://a4agroup.eu";
 
   useEffect(() => {
     loadSlides();
@@ -3075,6 +3365,16 @@ function Hero() {
     }
   };
 
+  // Helper function to get correct image URL
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "";
+    // Remove any leading slashes to avoid double slashes
+    const cleanPath = imagePath.startsWith("/") ? imagePath.slice(1) : imagePath;
+    // If IMAGE_BASE already ends with a slash, don't add another one
+    const base = IMAGE_BASE.endsWith("/") ? IMAGE_BASE.slice(0, -1) : IMAGE_BASE;
+    return `${base}/${cleanPath}`;
+  };
+
   const detectOrientations = (slides) => {
     const orientations = {};
     slides.forEach((slide, index) => {
@@ -3087,7 +3387,7 @@ function Hero() {
         orientations[index] = "landscape";
         setImageOrientations((prev) => ({ ...prev, ...orientations }));
       };
-      img.src = `${IMAGE_BASE}${slide.image}`;
+      img.src = getImageUrl(slide.image);
     });
   };
 
@@ -3242,7 +3542,7 @@ function Hero() {
                   orientation === "portrait" ? "poster-portrait" : "poster-landscape"
                 }`}
                 style={{
-                  backgroundImage: `url(${IMAGE_BASE}${slide.image})`,
+                  backgroundImage: `url(${getImageUrl(slide.image)})`,
                 }}
               />
               
@@ -3250,7 +3550,7 @@ function Hero() {
               <div
                 className={`hero-poster-image hero-poster-next ${isAnimating ? "poster-enter" : ""}`}
                 style={{
-                  backgroundImage: `url(${IMAGE_BASE}${nextSlide.image})`,
+                  backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
                 }}
               />
 
