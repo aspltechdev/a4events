@@ -3472,10 +3472,10 @@ function Hero() {
         <div className="hero-content-section">
           <div className={`hero-content-inner ${contentVisible ? "content-enter" : "content-exit"}`}>
             {/* Category Badge */}
-            <div className="hero-category-badge">
+            {/* <div className="hero-category-badge">
               <span className="hero-category-icon">{getCategoryIcon()}</span>
               <span className="hero-category-text">{getBadgeText()}</span>
-            </div>
+            </div> */}
 
             {/* Title */}
             <h1 className="hero-main-title">

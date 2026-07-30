@@ -34,7 +34,7 @@ function Home() {
 <UpcomingEvents/>
 <WhyChooseUs/>
 {/* <ContactCTA/> */}
-<StrategicGrowth/>
+{/* <StrategicGrowth/> */}
 <Gallery/>
 <Testimonials/>
     </PublicLayout>
