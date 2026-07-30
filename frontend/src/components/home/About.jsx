@@ -1586,6 +1586,183 @@
 // export default About;
 
 
+// import { useEffect, useRef, useState } from "react";
+// import { 
+//   Leaf, 
+//   Globe2, 
+//   GraduationCap, 
+//   Handshake 
+// } from "lucide-react";
+// import "./About.css";
+
+// function About() {
+//   const sectionRef = useRef(null);
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) setIsVisible(true);
+//       },
+//       { threshold: 0.15 }
+//     );
+
+//     if (sectionRef.current) observer.observe(sectionRef.current);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   const pillars = [
+//     {
+//       accent: "provisions",
+//       title: "Authentic Provisions",
+//       description:
+//         "Handpicked organic groceries, fruits, and specialty flowers — pure, unadulterated quality from soil to shelf, now rooted in European soil.",
+//       Icon: Leaf,
+//     },
+//     {
+//       accent: "events",
+//       title: "Indo Cultural Experiences",
+//       description:
+//         "Vibrant festivals, concerts, and immersive celebrations that connect global communities and dissolve the ache of homesickness.",
+//       Icon: Globe2,
+//     },
+//     {
+//       accent: "education",
+//       title: "EduConsulting Pathways",
+//       description:
+//         "Premium academic and research opportunities for ambitious scholars — world-class education without borders or barriers.",
+//       Icon: GraduationCap,
+//     },
+//     {
+//       accent: "trade",
+//       title: "Business Expansion",
+//       description:
+//         "Bridging market gaps for entrepreneurs entering Europe through M&A advisory and cross-border growth strategies.",
+//       Icon: Handshake,
+//     },
+//   ];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className={`about-premium ${isVisible ? "about-visible" : ""}`}
+//     >
+//       {/* Ambient Background */}
+//       <div className="about-atmosphere" aria-hidden="true">
+//         <div className="about-ambient-glow about-glow--teal" />
+//         <div className="about-ambient-glow about-glow--blue" />
+//         <div className="about-ambient-glow about-glow--emerald" />
+//         <div className="about-noise-veil" />
+//         <div className="about-vignette" />
+//       </div>
+
+//       <div className="about-container">
+//         {/* Heritage Origin Row */}
+//         <div className="about-origin">
+//           <div className="about-origin-content">
+//             <div className="about-whisper">
+//               <span className="about-whisper-pulse" />
+//               <span>A Century of Legacy</span>
+//             </div>
+
+//             <h2 className="about-headline">
+//               <span className="about-headline-line">
+//                 Born in a village hut in Sirugudi,
+//               </span>
+//               <span className="about-headline-line about-headline-radiance">
+//                 risen as a visionary global force.
+//               </span>
+//             </h2>
+
+//             <p className="about-prose">
+//               A4A Anagrams Group EU bridges the soul of deep-rooted Indian 
+//               heritage with the precision of European innovation. We bring 
+//               premium organic quality to European soil — dissolving borders, 
+//               healing homesickness, and unlocking limitless global opportunities.
+//             </p>
+//           </div>
+
+//           {/* <div className="about-stats">
+//             <div className="about-stat-item">
+//               <span className="about-stat-number">100+</span>
+//               <span className="about-stat-label">Years Legacy</span>
+//             </div>
+//             <div className="about-stat-item">
+//               <span className="about-stat-number">4</span>
+//               <span className="about-stat-label">Core Pillars</span>
+//             </div>
+//             <div className="about-stat-item">
+//               <span className="about-stat-number">EU</span>
+//               <span className="about-stat-label">Precision</span>
+//             </div>
+//           </div> */}
+//         </div>
+
+//         {/* Core Pillars Grid */}
+//         <div className="about-pillars">
+//           <div className="about-pillars-header">
+//             <span className="about-section-label">What We Nurture</span>
+//             <div className="about-section-thread" />
+//           </div>
+
+//           <div className="about-pillars-grid">
+//             {pillars.map(({ accent, title, description, Icon }) => (
+//               <div
+//                 key={accent}
+//                 className={`about-pillar-card about-pillar-${accent}`}
+//               >
+//                 <div className="about-pillar-inner">
+//                   <div className="about-pillar-icon">
+//                     <Icon size={20} strokeWidth={1.8} />
+//                   </div>
+//                   <div className="about-pillar-content">
+//                     <h3 className="about-pillar-title">{title}</h3>
+//                     <p className="about-pillar-description">{description}</p>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Mission & Essence Combined Strip */}
+//         <div className="about-mission-strip">
+//           <div className="about-mission-quote">
+//             <p>
+//               "We eliminate borders. We cure homesickness. We unlock 
+//               limitless global opportunities."
+//             </p>
+//           </div>
+          
+//           <div className="about-mission-brand">
+//             <div className="about-brand-info">
+//               <span className="about-brand-name">A4A Anagrams Group EU</span>
+//               <span className="about-brand-subtitle">
+//                 German Precision · Indian Soul · Global Vision
+//               </span>
+//             </div>
+            
+//             <div className="about-essence-tags">
+//               <span className="about-essence-tag">Heritage</span>
+//               <span className="about-essence-dot" />
+//               <span className="about-essence-tag">Precision</span>
+//               <span className="about-essence-dot" />
+//               <span className="about-essence-tag">Execution</span>
+//               <span className="about-essence-dot" />
+//               <span className="about-essence-tag about-essence-tag--accent">Infinite</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default About;
+
+
+
+
 import { useEffect, useRef, useState } from "react";
 import { 
   Leaf, 
@@ -1663,6 +1840,8 @@ function About() {
             <div className="about-whisper">
               <span className="about-whisper-pulse" />
               <span>A Century of Legacy</span>
+              {/* Since 1926 Badge */}
+              <span className="about-legacy-badge">Since 1926</span>
             </div>
 
             <h2 className="about-headline">
@@ -1681,21 +1860,6 @@ function About() {
               healing homesickness, and unlocking limitless global opportunities.
             </p>
           </div>
-
-          {/* <div className="about-stats">
-            <div className="about-stat-item">
-              <span className="about-stat-number">100+</span>
-              <span className="about-stat-label">Years Legacy</span>
-            </div>
-            <div className="about-stat-item">
-              <span className="about-stat-number">4</span>
-              <span className="about-stat-label">Core Pillars</span>
-            </div>
-            <div className="about-stat-item">
-              <span className="about-stat-number">EU</span>
-              <span className="about-stat-label">Precision</span>
-            </div>
-          </div> */}
         </div>
 
         {/* Core Pillars Grid */}
