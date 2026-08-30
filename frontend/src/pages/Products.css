@@ -823,3 +823,509 @@
     font-size: 0.72rem;
   }
 }
+
+
+/* Product Card Action Section */
+.prd-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: auto;
+}
+
+.prd-view-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.prd-view-details:hover {
+  color: #fff;
+}
+
+.prd-card-arrow {
+  transition: transform 0.2s ease;
+}
+
+.prd-view-details:hover .prd-card-arrow {
+  transform: translateX(4px);
+}
+
+/* Add to Cart Button */
+.prd-add-cart {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.prd-add-cart:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.prd-add-cart:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Quantity Controls */
+.prd-cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.prd-cart-quantity button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prd-cart-quantity button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.prd-cart-quantity button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.prd-cart-quantity span {
+  min-width: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+/* Make image and details clickable */
+.prd-card-image-link,
+.prd-card-details-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.prd-card-image-link {
+  display: block;
+  position: relative;
+}
+
+.prd-card-details-link {
+  flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   FLOWER POPUP
+   ===================================================== */
+
+.flower-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  animation: flowerPopupFadeIn 0.4s ease-out;
+  padding: 20px;
+}
+
+@keyframes flowerPopupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.flower-popup {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 32px;
+  max-width: 520px;
+  width: 100%;
+  padding: 48px 40px 40px;
+  position: relative;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  animation: flowerPopupSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+
+@keyframes flowerPopupSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.flower-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flower-popup-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.flower-popup-icon {
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
+  animation: flowerPopupPulse 2s ease-in-out infinite;
+}
+
+@keyframes flowerPopupPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.flower-popup-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2d8a6e;
+  margin-bottom: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.flower-popup h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.flower-popup p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0 0 32px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.flower-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.flower-popup-yes {
+  background: linear-gradient(135deg, #2d8a6e, #1e6b55);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.flower-popup-yes::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.flower-popup-yes:hover::before {
+  left: 100%;
+}
+
+.flower-popup-yes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(45, 138, 110, 0.4);
+}
+
+.flower-popup-yes:active {
+  transform: translateY(0);
+}
+
+.flower-popup-yes span:last-child {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.flower-popup-yes:hover span:last-child {
+  transform: translateX(4px);
+}
+
+.flower-popup-no {
+  background: transparent;
+  color: #666;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.flower-popup-no:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+  color: #333;
+  transform: translateY(-2px);
+}
+
+.flower-popup-no:active {
+  transform: translateY(0);
+}
+
+/* =====================================================
+   FLOWER BADGE
+   ===================================================== */
+
+.prd-badge-flower {
+  background: linear-gradient(135deg, #ff6b9d, #ff2e7d);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 640px) {
+  .flower-popup {
+    padding: 32px 24px 28px;
+    border-radius: 24px;
+  }
+
+  .flower-popup h2 {
+    font-size: 22px;
+  }
+
+  .flower-popup-icon {
+    font-size: 48px;
+  }
+
+  .flower-popup-yes,
+  .flower-popup-no {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .flower-popup-overlay {
+    padding: 16px;
+    align-items: flex-end;
+  }
+
+  .flower-popup {
+    animation: flowerPopupSlideUpMobile 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes flowerPopupSlideUpMobile {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .flower-popup {
+    padding: 24px 16px 20px;
+  }
+
+  .flower-popup h2 {
+    font-size: 19px;
+  }
+
+  .flower-popup p {
+    font-size: 14px;
+  }
+
+  .flower-popup-yes,
+  .flower-popup-no {
+    font-size: 13px;
+    padding: 12px 16px;
+  }
+}
+
+/* =====================================================
+   DARK MODE SUPPORT
+   ===================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .flower-popup {
+    background: linear-gradient(145deg, #1e1e2e, #2a2a3e);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
+
+  .flower-popup h2 {
+    color: #ffffff;
+  }
+
+  .flower-popup p {
+    color: #aaa;
+  }
+
+  .flower-popup-close {
+    color: #666;
+  }
+
+  .flower-popup-close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  .flower-popup-no {
+    color: #aaa;
+    border-color: #444;
+  }
+
+  .flower-popup-no:hover {
+    background: #333;
+    border-color: #555;
+    color: #fff;
+  }
+
+  .flower-popup-eyebrow {
+    color: #4a9e82;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,6 +30,10 @@ import AddTestimonial from '../pages/admin/AddTestimonial';
 import Testimonials from '../pages/admin/Testimonials';
 import Business from '../pages/Business';
 import Education from '../pages/Education';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
+import Payment from '../pages/Payment';
+import PaymentProofs from '../pages/admin/PaymentProofs';
 
 
 
@@ -43,6 +47,17 @@ function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
          <Route path="/business" element={<Business />} />
           <Route path="/education" element={<Education/>} />
+          <Route path="/cart" element={<Cart />} />
+
+<Route
+  path="/payment"
+  element={<Payment />}
+/>
+
+          <Route
+  path="/checkout"
+  element={<Checkout />}
+/>
    
       <Route path="/products/:id" element={<ProductDetails />} />
 <Route path="/events/:id" element={<EventDetails />} />
@@ -73,6 +88,15 @@ function AppRoutes() {
       <ProductsList />
     </ProtectedRoute>
   }
+/>
+
+
+<Route
+  path="/admin/payment-proofs"
+  element={
+   <ProtectedRoute>
+  <PaymentProofs />
+  </ProtectedRoute>}
 />
 
 <Route

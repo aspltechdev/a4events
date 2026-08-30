@@ -2834,7 +2834,387 @@
 
 // export default ProductDetails;
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import { useParams, Link, useNavigate } from "react-router-dom";
+// import api from "../services/api";
+// import StoreMap from "../components/StoreMap";
+// import PublicLayout from "../layouts/PublicLayout";
+// import "./ProductDetails.css";
+// import logo1 from "../assets/logo1.jpeg";
+// import logo2 from "../assets/logo2.jpeg";
+// import logo3 from "../assets/logo3.jpeg";
+// import logo4 from "../assets/logo4.jpeg";
+
+// function ProductDetails() {
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+//   const [product, setProduct] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     loadProduct();
+//   }, [id]);
+
+//   useEffect(() => {
+//     if (!loading && product) {
+//       setTimeout(() => setIsVisible(true), 100);
+//     }
+//   }, [loading, product]);
+
+//   const loadProduct = async () => {
+//     setLoading(true);
+//     try {
+//       const { data } = await api.get(`/products/${id}`);
+//       setProduct(data);
+//     } catch (error) {
+//       console.error(error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const stores = [
+//     {
+//       name: "Spicelands",
+//       address: "Kaiserstraße 60, 60329 Frankfurt am Main, Germany",
+//       lat: 50.1088,
+//       lng: 8.6698,
+//       logo: logo4,
+//     },
+//     {
+//       name: "Jaffna Basar",
+//       address: "Kaiserstraße 49, 60329 Frankfurt am Main, Germany",
+//       lat: 50.1086,
+//       lng: 8.6695,
+//       logo: logo3,
+//     },
+//     {
+//       name: "Kabil Kiosk",
+//       address: "60327 Frankfurt am Main, Germany",
+//       lat: 50.1049,
+//       lng: 8.6518,
+//       logo: logo2,
+//     },
+//     {
+//       name: "Transfood Düsseldorf",
+//       address: "Weg 40, 65451 Kelsterbach, Germany",
+//       lat: 50.0607,
+//       lng: 8.5297,
+//       logo: logo1,
+//     },
+//   ];
+
+//   const calculateDiscountedPrice = (price, discountPercent) => {
+//     if (discountPercent && Number(discountPercent) > 0) {
+//       return price - (price * Number(discountPercent)) / 100;
+//     }
+//     return price;
+//   };
+
+//   // Simplified: Only "Fresh Items - Seasonal Fruits & Flowers" shows "Fruits & Flowers", everything else shows "Ingredients"
+//   const getIngredientLabel = () => {
+//     if (!product) return "Ingredients";
+//     if (product.category === "Fresh Items - Seasonal Fruits & Flowers") return "Fruits & Flowers";
+//     return "Ingredients";
+//   };
+
+//   const getIngredientTitle = () => {
+//     if (!product) return "Key Ingredients";
+//     if (product.category === "Fresh Items - Seasonal Fruits & Flowers") return "Seasonal Fruits & Flowers";
+//     return "Key Ingredients";
+//   };
+
+//   const getIngredientSubtitle = () => {
+//     if (!product) return "Discover the wholesome ingredients in this product";
+//     if (product.category === "Fresh Items - Seasonal Fruits & Flowers") {
+//       return "Explore our seasonal collection of fresh fruits and flowers";
+//     }
+//     return "Discover the wholesome ingredients in this product";
+//   };
+
+//   if (loading) {
+//     return (
+//       <PublicLayout>
+//         <div className="pdt-loading">
+//           <div className="pdt-loading-spinner" />
+//           <p>Loading product details...</p>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   if (!product) {
+//     return (
+//       <PublicLayout>
+//         <div className="pdt-error">
+//           <div className="pdt-error-content">
+//             <div className="pdt-error-thread" />
+//             <h2>Product Not Found</h2>
+//             <p>The product you're looking for doesn't exist or has been removed.</p>
+//             <Link to="/products" className="pdt-error-btn">
+//               <span>Browse Products</span>
+//               <span>→</span>
+//             </Link>
+//           </div>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
+//   const hasDiscount = product.discountPercent && Number(product.discountPercent) > 0;
+//   const hasIngredients = product.ingredients && Array.isArray(product.ingredients) && product.ingredients.length > 0;
+
+//   return (
+//     <PublicLayout>
+//       <div className={`pdt-page ${isVisible ? "pdt-visible" : ""}`}>
+//         {/* Top Navigation */}
+//         <div className="pdt-top-nav">
+//           <div className="pdt-top-nav-inner">
+//             <button onClick={() => navigate(-1)} className="pdt-nav-back">
+//               <span>←</span>
+//               <span>Back</span>
+//             </button>
+//             <Link to="/products" className="pdt-nav-all">
+//               <span>All Products</span>
+//               <span>→</span>
+//             </Link>
+//           </div>
+//         </div>
+
+//         {/* Main Content */}
+//         <div className="pdt-container">
+//           {/* Product Hero */}
+//           <div className="pdt-hero">
+//             <div className="pdt-hero-image-col">
+//               <div className="pdt-image-frame">
+//                 <img
+//                   src={`https://a4agroup.eu${product.image}`}
+//                   alt={product.title}
+//                   className="pdt-image"
+//                 />
+//                 <div className="pdt-image-overlay" />
+//                 {hasDiscount && (
+//                   <div className="pdt-badge pdt-badge-sale">
+//                     <span>{product.discountPercent}% OFF</span>
+//                   </div>
+//                 )}
+//                 {product.featured && !hasDiscount && (
+//                   <div className="pdt-badge pdt-badge-featured">
+//                     <span>Featured</span>
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+
+//             <div className="pdt-hero-info-col">
+//               <div className="pdt-info-card">
+//                 <div className="pdt-info-card-inner">
+//                   <div className="pdt-category-row">
+//                     <span className="pdt-category-tag">{product.category}</span>
+//                   </div>
+//                   <h1 className="pdt-title">{product.title}</h1>
+//                   <p className="pdt-description">{product.description}</p>
+//                   <div className="pdt-price-block">
+//                     <span className="pdt-price-current">€{Math.round(discountedPrice)}</span>
+//                     {hasDiscount && (
+//                       <>
+//                         <span className="pdt-price-original">€{product.price}</span>
+//                         <span className="pdt-price-save">Save {product.discountPercent}%</span>
+//                       </>
+//                     )}
+//                   </div>
+//                   <div className="pdt-qualities">
+//                     <div className="pdt-quality-item">
+//                       <span className="pdt-quality-dot pdt-q-green" />
+//                       <span>Certified Organic</span>
+//                     </div>
+//                     <div className="pdt-quality-item">
+//                       <span className="pdt-quality-dot pdt-q-teal" />
+//                       <span>Chemical Free</span>
+//                     </div>
+//                     <div className="pdt-quality-item">
+//                       <span className="pdt-quality-dot pdt-q-blue" />
+//                       <span>Lab Tested</span>
+//                     </div>
+//                     <div className="pdt-quality-item">
+//                       <span className="pdt-quality-dot pdt-q-amber" />
+//                       <span>Premium Quality</span>
+//                     </div>
+//                   </div>
+//                   <button className="pdt-enquire-btn">
+//                     <span>Enquire About This Product</span>
+//                     <span>→</span>
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Product Details Section */}
+//           <div className="pdt-section">
+//             <div className="pdt-section-card">
+//               <div className="pdt-section-head">
+//                 <div className="pdt-section-thread" />
+//                 <span className="pdt-section-eyebrow">Product Information</span>
+//               </div>
+//               <h2 className="pdt-section-title">Details</h2>
+//               <div className="pdt-specs-grid">
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Category</span>
+//                   <span className="pdt-spec-value">{product.category}</span>
+//                 </div>
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Price</span>
+//                   <span className="pdt-spec-value">
+//                     €{Math.round(discountedPrice)}
+//                     {hasDiscount && (
+//                       <span className="pdt-spec-original"> (was €{product.price})</span>
+//                     )}
+//                   </span>
+//                 </div>
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Quality Standard</span>
+//                   <span className="pdt-spec-value">Premium Organic</span>
+//                 </div>
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Source</span>
+//                   <span className="pdt-spec-value">Certified Farm Partners</span>
+//                 </div>
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Processing</span>
+//                   <span className="pdt-spec-value">Chemical Free</span>
+//                 </div>
+//                 <div className="pdt-spec-item">
+//                   <span className="pdt-spec-label">Testing</span>
+//                   <span className="pdt-spec-value">Laboratory Verified</span>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Store Availability Section */}
+//           <div className="pdt-section">
+//             <div className="pdt-section-card">
+//               <div className="pdt-section-head">
+//                 <div className="pdt-section-thread pdt-thread-blue" />
+//                 <span className="pdt-section-eyebrow">Where to Find</span>
+//               </div>
+//               <h2 className="pdt-section-title">Available At</h2>
+//               <p className="pdt-section-sub">Find this product at our partner stores across Germany</p>
+//               <div className="pdt-stores-grid">
+//                 {stores.map((store, index) => (
+//                   <div key={index} className="pdt-store-card">
+//                     <div className="pdt-store-logo-wrap">
+//                       <img
+//                         src={store.logo}
+//                         alt={store.name}
+//                         className="pdt-store-logo"
+//                         onError={(e) => { e.target.style.display = "none"; }}
+//                       />
+//                     </div>
+//                     <div className="pdt-store-info">
+//                       <h4 className="pdt-store-name">{store.name}</h4>
+//                       <p className="pdt-store-address">{store.address}</p>
+//                       <span className="pdt-store-stock">
+//                         <span className="pdt-store-stock-dot" />
+//                         In Stock
+//                       </span>
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Map Section */}
+//           <div className="pdt-section">
+//             <div className="pdt-section-card">
+//               <div className="pdt-section-head">
+//                 <div className="pdt-section-thread pdt-thread-emerald" />
+//                 <span className="pdt-section-eyebrow">Store Locations</span>
+//               </div>
+//               <h2 className="pdt-section-title">Find Us on Map</h2>
+//               <div className="pdt-map-frame">
+//                 <StoreMap stores={stores} />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Ingredients / Types Section - Below Map */}
+//           {hasIngredients && (
+//             <div className="pdt-section">
+//               <div className="pdt-section-card">
+//                 <div className="pdt-section-head">
+//                   <div className="pdt-section-thread pdt-thread-gold" />
+//                   <span className="pdt-section-eyebrow">{getIngredientLabel()}</span>
+//                 </div>
+//                 <h2 className="pdt-section-title">{getIngredientTitle()}</h2>
+//                 <p className="pdt-section-sub">{getIngredientSubtitle()}</p>
+
+//                 <div className="pdt-ingredients-grid">
+//                   {product.ingredients.map((ingredient) => (
+//                     <div key={ingredient.id || Math.random()} className="pdt-ingredient-card">
+//                       {ingredient.image ? (
+//                         <div className="pdt-ingredient-image-wrap">
+//                           <img
+//                             src={`https://a4agroup.eu${ingredient.image}`}
+//                             alt={ingredient.title}
+//                             className="pdt-ingredient-image"
+//                             loading="lazy"
+//                             onError={(e) => {
+//                               e.target.style.display = "none";
+//                               e.target.parentElement.style.display = "none";
+//                             }}
+//                           />
+//                         </div>
+//                       ) : (
+//                         <div className="pdt-ingredient-image-wrap pdt-ingredient-placeholder">
+//                           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+//                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+//                             <circle cx="8.5" cy="8.5" r="1.5"/>
+//                             <polyline points="21 15 16 10 5 21"/>
+//                           </svg>
+//                         </div>
+//                       )}
+//                       <div className="pdt-ingredient-info">
+//                         <h4 className="pdt-ingredient-name">{ingredient.title}</h4>
+//                         {ingredient.description && (
+//                           <p className="pdt-ingredient-description">{ingredient.description}</p>
+//                         )}
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+//           )}
+
+//           {/* Bottom CTA */}
+//           <div className="pdt-bottom">
+//             <div className="pdt-bottom-card">
+//               <div className="pdt-bottom-text">
+//                 <h3 className="pdt-bottom-title">Interested in this product?</h3>
+//                 <p className="pdt-bottom-sub">Reach out to us for bulk orders, inquiries, or store availability near you.</p>
+//               </div>
+//               <button className="pdt-bottom-btn">
+//                 <span>Enquire Now</span>
+//                 <span>→</span>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </PublicLayout>
+//   );
+// }
+
+// export default ProductDetails;
+
+
+
+import { useEffect, useState, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import StoreMap from "../components/StoreMap";
@@ -2851,6 +3231,86 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  
+  // =====================================================
+  // CART STATE
+  // =====================================================
+  
+  const [cartItems, setCartItems] = useState({});
+  const [cartLoading, setCartLoading] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  // =====================================================
+  // SESSION
+  // =====================================================
+
+  const getSessionId = useCallback(() => {
+    let sessionId = localStorage.getItem("cartSessionId");
+
+    if (!sessionId) {
+      sessionId = "cart-" + Date.now() + "-" + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem("cartSessionId", sessionId);
+    }
+
+    return sessionId;
+  }, []);
+
+  // =====================================================
+  // FETCH CART
+  // =====================================================
+
+  const fetchCartItems = useCallback(async () => {
+    try {
+      const sessionId = getSessionId();
+      const { data } = await api.get(`/cart/${sessionId}`);
+
+      const quantities = {};
+      data.items?.forEach((item) => {
+        quantities[item.productId] = item.quantity;
+      });
+
+      setCartItems(quantities);
+      
+      // If this product is in cart, set the quantity
+      if (id && quantities[id]) {
+        setQuantity(quantities[id]);
+      }
+    } catch (error) {
+      if (error.response?.status === 404) {
+        setCartItems({});
+        return;
+      }
+      console.error("Failed to load cart:", error);
+    }
+  }, [getSessionId, id]);
+
+  // =====================================================
+  // LOAD CART ON PAGE LOAD
+  // =====================================================
+
+  useEffect(() => {
+    fetchCartItems();
+  }, [fetchCartItems]);
+
+  // =====================================================
+  // CART UPDATE LISTENER
+  // =====================================================
+
+  useEffect(() => {
+    const handleCartUpdated = () => {
+      fetchCartItems();
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdated);
+
+    return () => {
+      window.removeEventListener("cartUpdated", handleCartUpdated);
+    };
+  }, [fetchCartItems]);
+
+  // =====================================================
+  // LOAD PRODUCT
+  // =====================================================
 
   useEffect(() => {
     loadProduct();
@@ -2871,6 +3331,129 @@ function ProductDetails() {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // =====================================================
+  // CHECK IF PRODUCT IS FLOWER
+  // =====================================================
+
+  const isFlowerProduct = (product) => {
+    if (!product) return false;
+    const category = String(product.category || "").trim().toLowerCase();
+    return category.includes("flower") || 
+           category.includes("fresh items - seasonal fruits & flowers");
+  };
+
+  // =====================================================
+  // ADD TO CART
+  // =====================================================
+
+  const addToCart = async () => {
+    if (!product) return;
+    
+    try {
+      setCartLoading(true);
+      const sessionId = getSessionId();
+
+      const response = await api.post("/cart/add", {
+        sessionId,
+        productId: product.id,
+        quantity: quantity,
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        setCartItems((prev) => ({
+          ...prev,
+          [product.id]: (prev[product.id] || 0) + quantity,
+        }));
+        window.dispatchEvent(new Event("cartUpdated"));
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  // =====================================================
+  // UPDATE CART QUANTITY
+  // =====================================================
+
+  const updateCartQuantity = async (newQuantity) => {
+    if (!product) return;
+    
+    if (newQuantity < 1) {
+      await removeFromCart();
+      return;
+    }
+
+    try {
+      setCartLoading(true);
+      const sessionId = getSessionId();
+
+      await api.put(`/cart/${sessionId}/${product.id}`, {
+        quantity: newQuantity,
+      });
+
+      setCartItems((prev) => ({
+        ...prev,
+        [product.id]: newQuantity,
+      }));
+      setQuantity(newQuantity);
+      window.dispatchEvent(new Event("cartUpdated"));
+    } catch (error) {
+      console.error("Update cart error:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  // =====================================================
+  // REMOVE FROM CART
+  // =====================================================
+
+  const removeFromCart = async () => {
+    if (!product) return;
+    
+    try {
+      setCartLoading(true);
+      const sessionId = getSessionId();
+
+      await api.delete(`/cart/${sessionId}/${product.id}`);
+
+      setCartItems((prev) => {
+        const updated = { ...prev };
+        delete updated[product.id];
+        return updated;
+      });
+      setQuantity(1);
+      window.dispatchEvent(new Event("cartUpdated"));
+    } catch (error) {
+      console.error("Remove cart error:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  // =====================================================
+  // HANDLE QUANTITY CHANGE
+  // =====================================================
+
+  const handleQuantityChange = (e) => {
+    const val = parseInt(e.target.value);
+    if (val > 0) {
+      setQuantity(val);
+    }
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
     }
   };
 
@@ -2965,6 +3548,9 @@ function ProductDetails() {
   const discountedPrice = calculateDiscountedPrice(product.price, product.discountPercent);
   const hasDiscount = product.discountPercent && Number(product.discountPercent) > 0;
   const hasIngredients = product.ingredients && Array.isArray(product.ingredients) && product.ingredients.length > 0;
+  const isFlower = isFlowerProduct(product);
+  const isInCart = cartItems[product.id] > 0;
+  const cartQuantity = cartItems[product.id] || 0;
 
   return (
     <PublicLayout>
@@ -3005,6 +3591,11 @@ function ProductDetails() {
                     <span>Featured</span>
                   </div>
                 )}
+                {isFlower && (
+                  <div className="pdt-badge pdt-badge-flower">
+                    <span>🌸 Fresh Flower</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -3013,6 +3604,11 @@ function ProductDetails() {
                 <div className="pdt-info-card-inner">
                   <div className="pdt-category-row">
                     <span className="pdt-category-tag">{product.category}</span>
+                    {isFlower && (
+                      <span className="pdt-category-tag pdt-tag-flower">
+                        🌸 Seasonal
+                      </span>
+                    )}
                   </div>
                   <h1 className="pdt-title">{product.title}</h1>
                   <p className="pdt-description">{product.description}</p>
@@ -3025,6 +3621,92 @@ function ProductDetails() {
                       </>
                     )}
                   </div>
+                  
+                  {/* =========================================
+                      CART SECTION - ONLY FOR FLOWERS
+                  ========================================= */}
+                  
+                  {isFlower && (
+                    <div className="pdt-cart-section">
+                      {!isInCart ? (
+                        // Add to Cart
+                        <div className="pdt-cart-add">
+                          <div className="pdt-quantity-selector">
+                            <button
+                              type="button"
+                              onClick={decrementQuantity}
+                              disabled={quantity <= 1 || cartLoading}
+                              aria-label="Decrease quantity"
+                            >
+                              −
+                            </button>
+                            <input
+                              type="number"
+                              min="1"
+                              value={quantity}
+                              onChange={handleQuantityChange}
+                              disabled={cartLoading}
+                              aria-label="Quantity"
+                            />
+                            <button
+                              type="button"
+                              onClick={incrementQuantity}
+                              disabled={cartLoading}
+                              aria-label="Increase quantity"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <button
+                            type="button"
+                            className="pdt-add-cart-btn"
+                            onClick={addToCart}
+                            disabled={cartLoading}
+                          >
+                            {cartLoading ? "Adding..." : "Add to Cart"}
+                          </button>
+                        </div>
+                      ) : (
+                        // Update Cart
+                        <div className="pdt-cart-update">
+                          <div className="pdt-cart-status">
+                            <span className="pdt-cart-check">✓</span>
+                            <span>In Cart ({cartQuantity})</span>
+                          </div>
+                          <div className="pdt-cart-actions">
+                            <div className="pdt-quantity-selector">
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(cartQuantity - 1)}
+                                disabled={cartLoading || cartQuantity <= 1}
+                                aria-label="Decrease quantity"
+                              >
+                                −
+                              </button>
+                              <span className="pdt-quantity-display">{cartQuantity}</span>
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(cartQuantity + 1)}
+                                disabled={cartLoading}
+                                aria-label="Increase quantity"
+                              >
+                                +
+                              </button>
+                            </div>
+                            <button
+                              type="button"
+                              className="pdt-remove-cart-btn"
+                              onClick={removeFromCart}
+                              disabled={cartLoading}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="pdt-qualities">
                     <div className="pdt-quality-item">
                       <span className="pdt-quality-dot pdt-q-green" />
@@ -3090,6 +3772,12 @@ function ProductDetails() {
                   <span className="pdt-spec-label">Testing</span>
                   <span className="pdt-spec-value">Laboratory Verified</span>
                 </div>
+                {isFlower && (
+                  <div className="pdt-spec-item">
+                    <span className="pdt-spec-label">Type</span>
+                    <span className="pdt-spec-value">🌸 Seasonal Fresh Flower</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
