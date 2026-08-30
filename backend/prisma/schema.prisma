@@ -216,12 +216,20 @@ model Order {
 
   sessionId String?
 
+  // =====================================================
+  // CUSTOMER
+  // =====================================================
+
   firstName String
   lastName  String
 
   email       String
   countryCode String
   phone       String
+
+  // =====================================================
+  // DELIVERY ADDRESS
+  // =====================================================
 
   addressLine1 String
   addressLine2 String?
@@ -231,37 +239,90 @@ model Order {
   postalCode String
   country    String
 
+  // =====================================================
+  // BUSINESS DETAILS
+  // =====================================================
+
   companyName String?
   vatNumber   String?
 
+  // =====================================================
+  // DELIVERY
+  // =====================================================
+
   deliveryInstructions String?
+
+  deliveryCharge Float @default(0)
+
+  deliveryChargeRequired Boolean @default(false)
+
+  // =====================================================
+  // GDPR / DATA ACKNOWLEDGEMENT
+  // =====================================================
+
+  dataAcknowledgement Boolean @default(false)
+
+  // =====================================================
+  // ORDER ITEMS
+  // =====================================================
 
   items OrderItem[]
 
-  subtotal Float
-  discount Float @default(0)
-  total    Float
+  // =====================================================
+  // AMOUNTS
+  // =====================================================
 
-  status        String @default("PENDING")
+  subtotal Float
+
+  discount Float @default(0)
+
+  total Float
+
+  // =====================================================
+  // ORDER STATUS
+  // =====================================================
+
+  status String @default("PENDING")
+
   paymentStatus String @default("PENDING")
+
+  // =====================================================
+  // PAYMENT
+  // =====================================================
 
   paymentMethod String?
 
-  // Payment proof
-  paymentProof           String?
+  // =====================================================
+  // PAYMENT PROOF
+  // =====================================================
+
+  paymentProof String?
+
   paymentProofUploadedAt DateTime?
 
-  // PayPal - keep for future
+  // =====================================================
+  // PAYPAL
+  // Keep for future
+  // =====================================================
+
   paypalOrderId   String?
   paypalCaptureId String?
 
-  // Zoho Books
+  // =====================================================
+  // ZOHO BOOKS
+  // =====================================================
+
   zohoBooksId    String?
   zohoCustomerId String?
   zohoInvoiceId  String?
   zohoPaymentId  String?
 
+  // =====================================================
+  // TIMESTAMPS
+  // =====================================================
+
   createdAt DateTime @default(now())
+
   updatedAt DateTime @updatedAt
 }
 

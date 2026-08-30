@@ -892,3 +892,162 @@
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   GDPR / DATA CONSENT
+========================================= */
+
+.checkout-consent-section {
+  margin-top: 24px;
+}
+
+.checkout-consent {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.checkout-consent input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkout-consent-box {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #777;
+  border-radius: 4px;
+  background: #fff;
+  margin-top: 2px;
+  position: relative;
+}
+
+.checkout-consent input:checked + .checkout-consent-box {
+  background: #111;
+  border-color: #111;
+}
+
+.checkout-consent input:checked + .checkout-consent-box::after {
+  content: "✓";
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.checkout-consent-text {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #555;
+}
+
+.checkout-required {
+  color: #d33;
+  margin-left: 4px;
+}
+
+.checkout-privacy-link-wrapper {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.checkout-privacy-link {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.checkout-privacy-link:hover {
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   DELIVERY NOTICE
+========================================= */
+
+.checkout-delivery-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid #e1d6b8;
+  border-radius: 10px;
+  background: #fffaf0;
+}
+
+.checkout-delivery-notice-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.checkout-delivery-notice strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.checkout-delivery-notice p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #666;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .checkout-consent {
+    padding: 15px;
+  }
+
+  .checkout-consent-text {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .checkout-delivery-notice {
+    padding: 12px;
+  }
+
+}
