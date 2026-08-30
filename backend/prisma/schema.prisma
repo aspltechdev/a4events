@@ -17,34 +17,37 @@ model User {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   price       Float
   image       String?
 
-  featured    Boolean  @default(false)
+  featured Boolean @default(false)
 
-  category    String?
-  discountPercent Int? @default(0)
+  category        String?
+  discountPercent Int?    @default(0)
 
   ingredients ProductIngredient[]
 
-  heroSlides  HeroSlide[]
+  heroSlides HeroSlide[]
 
-  createdAt   DateTime @default(now())
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
 }
 
 model ProductIngredient {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   title       String
   description String?
   image       String?
 
-  productId   Int
+  productId Int
 
-  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Event {
@@ -176,6 +179,104 @@ model Testimonial {
   rating Int @default(5)
 
   image String?
+
+  createdAt DateTime @default(now())
+}
+
+model Cart {
+  id        Int    @id @default(autoincrement())
+  sessionId String @unique
+
+  items CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id Int @id @default(autoincrement())
+
+  cartId Int
+  cart   Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  quantity Int @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id          Int    @id @default(autoincrement())
+  orderNumber String @unique
+
+  sessionId String?
+
+  firstName String
+  lastName  String
+
+  email       String
+  countryCode String
+  phone       String
+
+  addressLine1 String
+  addressLine2 String?
+
+  city       String
+  state      String?
+  postalCode String
+  country    String
+
+  companyName String?
+  vatNumber   String?
+
+  deliveryInstructions String?
+
+  items OrderItem[]
+
+  subtotal Float
+  discount Float @default(0)
+  total    Float
+
+  status        String @default("PENDING")
+  paymentStatus String @default("PENDING")
+
+  paymentMethod String?
+
+  // Payment proof
+  paymentProof           String?
+  paymentProofUploadedAt DateTime?
+
+  // PayPal - keep for future
+  paypalOrderId   String?
+  paypalCaptureId String?
+
+  // Zoho Books
+  zohoBooksId    String?
+  zohoCustomerId String?
+  zohoInvoiceId  String?
+  zohoPaymentId  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id Int @id @default(autoincrement())
+
+  orderId Int
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  productTitle String
+  price        Float
+  quantity     Int
 
   createdAt DateTime @default(now())
 }
