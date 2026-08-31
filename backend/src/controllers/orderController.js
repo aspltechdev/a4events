@@ -4506,353 +4506,784 @@ const getOrderByNumber =
 // CUSTOMER - UPLOAD PAYMENT PROOF
 // =====================================================
 
-const uploadPaymentProof =
-  async (
-    req,
-    res
-  ) => {
+// const uploadPaymentProof =
+//   async (
+//     req,
+//     res
+//   ) => {
+
+//     try {
+
+//       const orderId =
+//         Number(
+//           req.params.id
+//         );
+
+
+//       // ===============================================
+//       // VALIDATE ORDER ID
+//       // ===============================================
+
+//       if (
+//         !Number.isInteger(orderId) ||
+//         orderId <= 0
+//       ) {
+
+//         return res.status(400).json({
+
+//           success: false,
+
+//           message:
+//             "Invalid order ID",
+
+//         });
+
+//       }
+
+
+//       // ===============================================
+//       // CHECK FILE
+//       // ===============================================
+
+//       if (!req.file) {
+
+//         return res.status(400).json({
+
+//           success: false,
+
+//           message:
+//             "Payment proof is required",
+
+//         });
+
+//       }
+
+
+//       // ===============================================
+//       // FIND ORDER
+//       // ===============================================
+
+//       const order =
+//         await prisma.order.findUnique({
+
+//           where: {
+//             id: orderId,
+//           },
+
+//           include: {
+
+//             items: true,
+
+//           },
+
+//         });
+
+
+//       if (!order) {
+
+//         return res.status(404).json({
+
+//           success: false,
+
+//           message:
+//             "Order not found",
+
+//         });
+
+//       }
+
+
+//       // ===============================================
+//       // CHECK PAYMENT STATUS
+//       // ===============================================
+
+//       if (
+//         order.paymentStatus ===
+//         "PAID"
+//       ) {
+
+//         return res.status(400).json({
+
+//           success: false,
+
+//           message:
+//             "This order has already been paid",
+
+//         });
+
+//       }
+
+
+//       if (
+//         order.paymentStatus ===
+//         "PROOF_SUBMITTED"
+//       ) {
+
+//         return res.status(400).json({
+
+//           success: false,
+
+//           message:
+//             "Payment proof has already been submitted",
+
+//         });
+
+//       }
+
+
+//       // ===============================================
+//       // PAYMENT PROOF URL
+//       // ===============================================
+
+//       const proofUrl =
+//         `/uploads/payment-proofs/${req.file.filename}`;
+
+
+//       // ===============================================
+//       // UPDATE ORDER
+//       // ===============================================
+
+//       const updatedOrder =
+//         await prisma.order.update({
+
+//           where: {
+//             id: order.id,
+//           },
+
+//           data: {
+
+//             paymentProof:
+//               proofUrl,
+
+//             paymentProofUploadedAt:
+//               new Date(),
+
+//             paymentMethod:
+//               "BANK_TRANSFER",
+
+//             paymentStatus:
+//               "PROOF_SUBMITTED",
+
+//           },
+
+//           include: {
+
+//             items: true,
+
+//           },
+
+//         });
+
+
+//       // ===============================================
+//       // CREATE ZOHO INVOICE
+//       // ===============================================
+
+//       let zohoResult =
+//         null;
+
+
+//       try {
+
+//         zohoResult =
+//           await createZohoInvoice(
+//             updatedOrder
+//           );
+
+
+//         // =============================================
+//         // SAVE ZOHO INFORMATION
+//         // =============================================
+
+//         await prisma.order.update({
+
+//           where: {
+//             id: order.id,
+//           },
+
+//           data: {
+
+//             zohoCustomerId:
+//               String(
+//                 zohoResult.customer
+//                   .contact_id
+//               ),
+
+//             zohoInvoiceId:
+//               String(
+//                 zohoResult.invoice
+//                   .invoice_id
+//               ),
+
+//           },
+
+//         });
+
+//       } catch (zohoError) {
+
+//         console.error(
+//           "ZOHO INVOICE ERROR:",
+//           zohoError.response?.data ||
+//           zohoError.message
+//         );
+
+
+//         // =============================================
+//         // PAYMENT PROOF IS ALREADY SAVED
+//         // =============================================
+
+//         const latestOrder =
+//           await prisma.order.findUnique({
+
+//             where: {
+//               id: order.id,
+//             },
+
+//             include: {
+
+//               items: true,
+
+//             },
+
+//           });
+
+
+//         return res.status(201).json({
+
+//           success: true,
+
+//           message:
+//             "Payment proof submitted successfully. Invoice generation is pending.",
+
+//           invoiceGenerated:
+//             false,
+
+//           verificationTime:
+//             "2–3 working days",
+
+//           order:
+//             latestOrder,
+
+//         });
+
+//       }
+
+
+//       // ===============================================
+//       // GET FINAL ORDER
+//       // ===============================================
+
+//       const finalOrder =
+//         await prisma.order.findUnique({
+
+//           where: {
+//             id: order.id,
+//           },
+
+//           include: {
+
+//             items: true,
+
+//           },
+
+//         });
+
+
+//       // ===============================================
+//       // SUCCESS
+//       // ===============================================
+
+//       return res.status(201).json({
+
+//         success: true,
+
+//         message:
+//           "Payment proof submitted successfully. Invoice generated.",
+
+//         invoiceGenerated:
+//           true,
+
+//         verificationTime:
+//           "2–3 working days",
+
+//         invoice: {
+
+//           id:
+//             zohoResult.invoice
+//               .invoice_id,
+
+//           number:
+//             zohoResult.invoice
+//               .invoice_number,
+
+//           status:
+//             zohoResult.invoice
+//               .status,
+
+//         },
+
+//         order:
+//           finalOrder,
+
+//       });
+
+//     } catch (error) {
+
+//       console.error(
+//         "PAYMENT PROOF ERROR:",
+//         error
+//       );
+
+
+//       return res.status(500).json({
+
+//         success: false,
+
+//         message:
+//           "Failed to submit payment proof",
+
+//         error:
+//           process.env.NODE_ENV === "development"
+//             ? error.message
+//             : undefined,
+
+//       });
+
+//     }
+
+//   };
+
+
+// =====================================================
+// CUSTOMER - UPLOAD PAYMENT PROOF
+// =====================================================
+
+const uploadPaymentProof = async (req, res) => {
+  try {
+    const orderId = Number(req.params.id);
+
+    // ===============================================
+    // VALIDATE ORDER ID
+    // ===============================================
+
+    if (!Number.isInteger(orderId) || orderId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid order ID",
+      });
+    }
+
+    // ===============================================
+    // CHECK FILE
+    // ===============================================
+
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Payment proof is required",
+      });
+    }
+
+    // ===============================================
+    // FIND ORDER
+    // ===============================================
+
+    const order = await prisma.order.findUnique({
+      where: {
+        id: orderId,
+      },
+
+      include: {
+        items: true,
+      },
+    });
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // ===============================================
+    // CHECK PAYMENT STATUS
+    // ===============================================
+
+    if (order.paymentStatus === "PAID") {
+      return res.status(400).json({
+        success: false,
+        message: "This order has already been paid",
+      });
+    }
+
+    if (order.paymentStatus === "PROOF_SUBMITTED") {
+      return res.status(400).json({
+        success: false,
+        message: "Payment proof has already been submitted",
+      });
+    }
+
+    // ===============================================
+    // PAYMENT PROOF URL
+    // ===============================================
+
+    const proofUrl =
+      `/uploads/payment-proofs/${req.file.filename}`;
+
+    console.log("========================================");
+    console.log("PAYMENT PROOF UPLOAD");
+    console.log("Order ID:", order.id);
+    console.log("Order Number:", order.orderNumber);
+    console.log("Proof:", proofUrl);
+    console.log("========================================");
+
+    // ===============================================
+    // SAVE PAYMENT PROOF FIRST
+    // ===============================================
+
+    const updatedOrder = await prisma.order.update({
+      where: {
+        id: order.id,
+      },
+
+      data: {
+        paymentProof: proofUrl,
+
+        paymentProofUploadedAt:
+          new Date(),
+
+        paymentMethod:
+          "BANK_TRANSFER",
+
+        paymentStatus:
+          "PROOF_SUBMITTED",
+      },
+
+      include: {
+        items: true,
+      },
+    });
+
+    console.log(
+      "Payment proof saved successfully"
+    );
+
+    // ===============================================
+    // GENERATE ZOHO INVOICE IMMEDIATELY
+    // ===============================================
+
+    let zohoResult;
 
     try {
+      console.log(
+        "Generating Zoho invoice..."
+      );
 
-      const orderId =
-        Number(
-          req.params.id
+      zohoResult =
+        await createZohoInvoice(
+          updatedOrder
         );
 
-
-      // ===============================================
-      // VALIDATE ORDER ID
-      // ===============================================
-
-      if (
-        !Number.isInteger(orderId) ||
-        orderId <= 0
-      ) {
-
-        return res.status(400).json({
-
-          success: false,
-
-          message:
-            "Invalid order ID",
-
-        });
-
-      }
-
-
-      // ===============================================
-      // CHECK FILE
-      // ===============================================
-
-      if (!req.file) {
-
-        return res.status(400).json({
-
-          success: false,
-
-          message:
-            "Payment proof is required",
-
-        });
-
-      }
-
-
-      // ===============================================
-      // FIND ORDER
-      // ===============================================
-
-      const order =
-        await prisma.order.findUnique({
-
-          where: {
-            id: orderId,
-          },
-
-          include: {
-
-            items: true,
-
-          },
-
-        });
-
-
-      if (!order) {
-
-        return res.status(404).json({
-
-          success: false,
-
-          message:
-            "Order not found",
-
-        });
-
-      }
-
-
-      // ===============================================
-      // CHECK PAYMENT STATUS
-      // ===============================================
-
-      if (
-        order.paymentStatus ===
-        "PAID"
-      ) {
-
-        return res.status(400).json({
-
-          success: false,
-
-          message:
-            "This order has already been paid",
-
-        });
-
-      }
-
-
-      if (
-        order.paymentStatus ===
-        "PROOF_SUBMITTED"
-      ) {
-
-        return res.status(400).json({
-
-          success: false,
-
-          message:
-            "Payment proof has already been submitted",
-
-        });
-
-      }
-
-
-      // ===============================================
-      // PAYMENT PROOF URL
-      // ===============================================
-
-      const proofUrl =
-        `/uploads/payment-proofs/${req.file.filename}`;
-
-
-      // ===============================================
-      // UPDATE ORDER
-      // ===============================================
-
-      const updatedOrder =
-        await prisma.order.update({
-
-          where: {
-            id: order.id,
-          },
-
-          data: {
-
-            paymentProof:
-              proofUrl,
-
-            paymentProofUploadedAt:
-              new Date(),
-
-            paymentMethod:
-              "BANK_TRANSFER",
-
-            paymentStatus:
-              "PROOF_SUBMITTED",
-
-          },
-
-          include: {
-
-            items: true,
-
-          },
-
-        });
-
-
-      // ===============================================
-      // CREATE ZOHO INVOICE
-      // ===============================================
-
-      let zohoResult =
-        null;
-
-
-      try {
-
-        zohoResult =
-          await createZohoInvoice(
-            updatedOrder
-          );
-
-
-        // =============================================
-        // SAVE ZOHO INFORMATION
-        // =============================================
-
-        await prisma.order.update({
-
-          where: {
-            id: order.id,
-          },
-
-          data: {
-
-            zohoCustomerId:
-              String(
-                zohoResult.customer
-                  .contact_id
-              ),
-
-            zohoInvoiceId:
-              String(
-                zohoResult.invoice
-                  .invoice_id
-              ),
-
-          },
-
-        });
-
-      } catch (zohoError) {
-
-        console.error(
-          "ZOHO INVOICE ERROR:",
-          zohoError.response?.data ||
-          zohoError.message
-        );
-
-
-        // =============================================
-        // PAYMENT PROOF IS ALREADY SAVED
-        // =============================================
-
-        const latestOrder =
-          await prisma.order.findUnique({
-
-            where: {
-              id: order.id,
-            },
-
-            include: {
-
-              items: true,
-
-            },
-
-          });
-
-
-        return res.status(201).json({
-
-          success: true,
-
-          message:
-            "Payment proof submitted successfully. Invoice generation is pending.",
-
-          invoiceGenerated:
-            false,
-
-          verificationTime:
-            "2–3 working days",
-
-          order:
-            latestOrder,
-
-        });
-
-      }
-
-
-      // ===============================================
-      // GET FINAL ORDER
-      // ===============================================
-
-      const finalOrder =
-        await prisma.order.findUnique({
-
-          where: {
-            id: order.id,
-          },
-
-          include: {
-
-            items: true,
-
-          },
-
-        });
-
-
-      // ===============================================
-      // SUCCESS
-      // ===============================================
-
-      return res.status(201).json({
-
-        success: true,
+      console.log(
+        "Zoho invoice response:",
+        JSON.stringify(
+          zohoResult,
+          null,
+          2
+        )
+      );
+
+    } catch (zohoError) {
+
+      console.error(
+        "========================================"
+      );
+
+      console.error(
+        "ZOHO INVOICE GENERATION FAILED"
+      );
+
+      console.error(
+        "Order:",
+        updatedOrder.orderNumber
+      );
+
+      console.error(
+        "Message:",
+        zohoError.message
+      );
+
+      console.error(
+        "Response:",
+        zohoError.response?.data
+      );
+
+      console.error(
+        "========================================"
+      );
+
+      /*
+       * IMPORTANT:
+       *
+       * Payment proof is already saved.
+       *
+       * But invoice generation was REQUIRED,
+       * so tell the frontend that invoice
+       * generation failed.
+       */
+
+      return res.status(502).json({
+        success: false,
 
         message:
-          "Payment proof submitted successfully. Invoice generated.",
+          "Payment proof was uploaded, but we could not generate the Zoho invoice. Please try again or contact support.",
 
         invoiceGenerated:
+          false,
+
+        paymentProofUploaded:
           true,
 
         verificationTime:
           "2–3 working days",
 
-        invoice: {
-
-          id:
-            zohoResult.invoice
-              .invoice_id,
-
-          number:
-            zohoResult.invoice
-              .invoice_number,
-
-          status:
-            zohoResult.invoice
-              .status,
-
-        },
-
-        order:
-          finalOrder,
-
-      });
-
-    } catch (error) {
-
-      console.error(
-        "PAYMENT PROOF ERROR:",
-        error
-      );
-
-
-      return res.status(500).json({
-
-        success: false,
-
-        message:
-          "Failed to submit payment proof",
+        order: updatedOrder,
 
         error:
           process.env.NODE_ENV === "development"
-            ? error.message
+            ? (
+                zohoError.response?.data ||
+                zohoError.message
+              )
             : undefined,
+      });
+    }
+
+    // ===============================================
+    // VALIDATE ZOHO RESPONSE
+    // ===============================================
+
+    if (
+      !zohoResult ||
+      !zohoResult.customer ||
+      !zohoResult.invoice
+    ) {
+
+      console.error(
+        "Invalid Zoho response:",
+        zohoResult
+      );
+
+      return res.status(502).json({
+        success: false,
+
+        message:
+          "Payment proof was uploaded, but Zoho returned an invalid invoice response.",
+
+        invoiceGenerated:
+          false,
+
+        paymentProofUploaded:
+          true,
+
+        order: updatedOrder,
+      });
+    }
+
+    // ===============================================
+    // EXTRACT ZOHO IDs
+    // ===============================================
+
+    const zohoCustomerId =
+      zohoResult.customer.contact_id;
+
+    const zohoInvoiceId =
+      zohoResult.invoice.invoice_id;
+
+    const zohoInvoiceNumber =
+      zohoResult.invoice.invoice_number;
+
+    // ===============================================
+    // VALIDATE IDs
+    // ===============================================
+
+    if (
+      !zohoCustomerId ||
+      !zohoInvoiceId
+    ) {
+
+      console.error(
+        "Zoho invoice/customer ID missing:",
+        zohoResult
+      );
+
+      return res.status(502).json({
+        success: false,
+
+        message:
+          "Zoho invoice was not created correctly because the required Zoho IDs were missing.",
+
+        invoiceGenerated:
+          false,
+
+        paymentProofUploaded:
+          true,
+
+        order: updatedOrder,
+      });
+    }
+
+    // ===============================================
+    // SAVE ZOHO INFORMATION
+    // ===============================================
+
+    const finalOrder =
+      await prisma.order.update({
+
+        where: {
+          id: order.id,
+        },
+
+        data: {
+
+          zohoCustomerId:
+            String(zohoCustomerId),
+
+          zohoInvoiceId:
+            String(zohoInvoiceId),
+
+          /*
+           * Keep these unchanged.
+           *
+           * Customer has only submitted
+           * payment proof.
+           *
+           * Admin still has to verify it.
+           */
+
+          paymentStatus:
+            "PROOF_SUBMITTED",
+
+          status:
+            "PENDING",
+        },
+
+        include: {
+
+          items: {
+            include: {
+              product: true,
+            },
+          },
+
+        },
 
       });
 
-    }
+    // ===============================================
+    // SUCCESS
+    // ===============================================
 
-  };
+    console.log(
+      "========================================"
+    );
 
+    console.log(
+      "ZOHO INVOICE GENERATED SUCCESSFULLY"
+    );
+
+    console.log(
+      "Order:",
+      finalOrder.orderNumber
+    );
+
+    console.log(
+      "Zoho Customer:",
+      zohoCustomerId
+    );
+
+    console.log(
+      "Zoho Invoice:",
+      zohoInvoiceId
+    );
+
+    console.log(
+      "Invoice Number:",
+      zohoInvoiceNumber
+    );
+
+    console.log(
+      "========================================"
+    );
+
+    return res.status(201).json({
+
+      success: true,
+
+      message:
+        "Payment proof submitted successfully. Zoho invoice generated and is pending payment verification.",
+
+      invoiceGenerated:
+        true,
+
+      paymentProofUploaded:
+        true,
+
+      verificationTime:
+        "2–3 working days",
+
+      invoice: {
+
+        id:
+          String(
+            zohoInvoiceId
+          ),
+
+        number:
+          zohoInvoiceNumber,
+
+        status:
+          zohoResult.invoice.status ||
+          "sent",
+
+      },
+
+      order:
+        finalOrder,
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "========================================"
+    );
+
+    console.error(
+      "PAYMENT PROOF ERROR:"
+    );
+
+    console.error(error);
+
+    console.error(
+      "========================================"
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      message:
+        "Failed to submit payment proof",
+
+      error:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : undefined,
+
+    });
+  }
+};
 
 // =====================================================
 // ADMIN - GET PAYMENT PROOF ORDERS
