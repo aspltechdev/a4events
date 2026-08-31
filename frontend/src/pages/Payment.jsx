@@ -1364,6 +1364,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import scanner from "../assets/scanner.jpeg";
 
 import PublicLayout from "../layouts/PublicLayout";
 import "./Payment.css";
@@ -1376,13 +1377,13 @@ const API_URL =
 // =====================================================
 
 const BANK_DETAILS = {
-  accountName: "A4A Anagrams Group",
+  accountName: "Naga Kumar Gangeswaran",
 
-  iban: "YOUR IBAN HERE",
+  iban: "DE75 2687 0024 0207 7303 00",
 
-  bic: "YOUR BIC / SWIFT HERE",
+  bic: "DEUTDEDB268",
 
-  bankName: "YOUR BANK NAME",
+  bankName: "Deutsche Bank",
 
   country: "Germany",
 };
@@ -1401,7 +1402,7 @@ const BANK_DETAILS = {
 //
 // =====================================================
 
-const QR_IMAGE = "/payment-qr.png";
+const QR_IMAGE = scanner;
 
 
 // =====================================================
