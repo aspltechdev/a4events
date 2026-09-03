@@ -1,4 +1,209 @@
+// // // const axios = require("axios");
+
+// // // const ZOHO_ACCOUNTS_URL =
+// // //   "https://accounts.zoho.eu";
+
+// // // const ZOHO_BOOKS_URL =
+// // //   "https://www.zohoapis.eu/books/v3";
+
+// // // const getAccessToken = async () => {
+// // //   const response =
+// // //     await axios.post(
+// // //       `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
+// // //       null,
+// // //       {
+// // //         params: {
+// // //           refresh_token:
+// // //             process.env.ZOHO_REFRESH_TOKEN,
+
+// // //           client_id:
+// // //             process.env.ZOHO_CLIENT_ID,
+
+// // //           client_secret:
+// // //             process.env.ZOHO_CLIENT_SECRET,
+
+// // //           grant_type:
+// // //             "refresh_token",
+// // //         },
+// // //       }
+// // //     );
+
+// // //   return response.data.access_token;
+// // // };
+
+// // // // =====================================================
+// // // // CREATE / FIND CUSTOMER
+// // // // =====================================================
+
+// // // const findOrCreateCustomer = async (
+// // //   order,
+// // //   accessToken
+// // // ) => {
+// // //   const headers = {
+// // //     Authorization:
+// // //       `Zoho-oauthtoken ${accessToken}`,
+// // //   };
+
+// // //   const params = {
+// // //     organization_id:
+// // //       process.env.ZOHO_ORGANIZATION_ID,
+// // //     email: order.email,
+// // //   };
+
+// // //   const existing =
+// // //     await axios.get(
+// // //       `${ZOHO_BOOKS_URL}/contacts`,
+// // //       {
+// // //         headers,
+// // //         params,
+// // //       }
+// // //     );
+
+// // //   const contacts =
+// // //     existing.data.contacts || [];
+
+// // //   if (contacts.length > 0) {
+// // //     return contacts[0];
+// // //   }
+
+// // //   const customerResponse =
+// // //     await axios.post(
+// // //       `${ZOHO_BOOKS_URL}/contacts`,
+// // //       {
+// // //         contact_name:
+// // //           `${order.firstName} ${order.lastName}`,
+
+// // //         contact_type:
+// // //           "customer",
+
+// // //         email:
+// // //           order.email,
+
+// // //         phone:
+// // //           `${order.countryCode} ${order.phone}`,
+
+// // //         billing_address: {
+// // //           address:
+// // //             order.addressLine1,
+
+// // //           street2:
+// // //             order.addressLine2 || "",
+
+// // //           city:
+// // //             order.city,
+
+// // //           state:
+// // //             order.state || "",
+
+// // //           zip:
+// // //             order.postalCode,
+
+// // //           country:
+// // //             order.country,
+// // //         },
+// // //       },
+// // //       {
+// // //         headers,
+
+// // //         params: {
+// // //           organization_id:
+// // //             process.env.ZOHO_ORGANIZATION_ID,
+// // //         },
+// // //       }
+// // //     );
+
+// // //   return customerResponse
+// // //     .data
+// // //     .contact;
+// // // };
+
+// // // // =====================================================
+// // // // CREATE INVOICE
+// // // // =====================================================
+
+// // // const createZohoInvoice = async (
+// // //   order
+// // // ) => {
+// // //   const accessToken =
+// // //     await getAccessToken();
+
+// // //   const customer =
+// // //     await findOrCreateCustomer(
+// // //       order,
+// // //       accessToken
+// // //     );
+
+// // //   const headers = {
+// // //     Authorization:
+// // //       `Zoho-oauthtoken ${accessToken}`,
+
+// // //     "Content-Type":
+// // //       "application/json",
+// // //   };
+
+// // //   const lineItems =
+// // //     order.items.map((item) => ({
+// // //       name:
+// // //         item.productTitle,
+
+// // //       description:
+// // //         item.productTitle,
+
+// // //       rate:
+// // //         Number(item.price),
+
+// // //       quantity:
+// // //         Number(item.quantity),
+// // //     }));
+
+// // //   const invoiceResponse =
+// // //     await axios.post(
+// // //       `${ZOHO_BOOKS_URL}/invoices`,
+// // //       {
+// // //         customer_id:
+// // //           customer.contact_id,
+
+// // //         reference_number:
+// // //           order.orderNumber,
+
+// // //         line_items:
+// // //           lineItems,
+
+// // //         notes:
+// // //           "Payment proof submitted by customer. Payment verification pending.",
+
+// // //         terms:
+// // //           "Payment verification takes 2–3 working days.",
+// // //       },
+// // //       {
+// // //         headers,
+
+// // //         params: {
+// // //           organization_id:
+// // //             process.env.ZOHO_ORGANIZATION_ID,
+// // //         },
+// // //       }
+// // //     );
+
+// // //   return {
+// // //     customer,
+// // //     invoice:
+// // //       invoiceResponse.data.invoice,
+// // //   };
+// // // };
+
+// // // module.exports = {
+// // //   getAccessToken,
+// // //   findOrCreateCustomer,
+// // //   createZohoInvoice,
+// // // };
+
+
 // // const axios = require("axios");
+
+// // // =====================================================
+// // // ZOHO CONFIG
+// // // =====================================================
 
 // // const ZOHO_ACCOUNTS_URL =
 // //   "https://accounts.zoho.eu";
@@ -6,143 +211,400 @@
 // // const ZOHO_BOOKS_URL =
 // //   "https://www.zohoapis.eu/books/v3";
 
-// // const getAccessToken = async () => {
-// //   const response =
-// //     await axios.post(
-// //       `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
-// //       null,
-// //       {
-// //         params: {
-// //           refresh_token:
-// //             process.env.ZOHO_REFRESH_TOKEN,
-
-// //           client_id:
-// //             process.env.ZOHO_CLIENT_ID,
-
-// //           client_secret:
-// //             process.env.ZOHO_CLIENT_SECRET,
-
-// //           grant_type:
-// //             "refresh_token",
-// //         },
-// //       }
-// //     );
-
-// //   return response.data.access_token;
-// // };
 
 // // // =====================================================
-// // // CREATE / FIND CUSTOMER
+// // // GET ACCESS TOKEN
+// // // =====================================================
+
+// // const getAccessToken = async () => {
+// //   try {
+// //     if (
+// //       !process.env.ZOHO_REFRESH_TOKEN ||
+// //       !process.env.ZOHO_CLIENT_ID ||
+// //       !process.env.ZOHO_CLIENT_SECRET
+// //     ) {
+// //       throw new Error(
+// //         "Zoho OAuth environment variables are missing"
+// //       );
+// //     }
+
+// //     const response =
+// //       await axios.post(
+// //         `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
+// //         null,
+// //         {
+// //           params: {
+// //             refresh_token:
+// //               process.env.ZOHO_REFRESH_TOKEN,
+
+// //             client_id:
+// //               process.env.ZOHO_CLIENT_ID,
+
+// //             client_secret:
+// //               process.env.ZOHO_CLIENT_SECRET,
+
+// //             grant_type:
+// //               "refresh_token",
+// //           },
+
+// //           timeout: 15000,
+// //         }
+// //       );
+
+// //     if (
+// //       !response.data ||
+// //       !response.data.access_token
+// //     ) {
+// //       console.error(
+// //         "ZOHO TOKEN RESPONSE:",
+// //         response.data
+// //       );
+
+// //       throw new Error(
+// //         "Zoho access token was not returned"
+// //       );
+// //     }
+
+// //     return response.data.access_token;
+
+// //   } catch (error) {
+
+// //     console.error(
+// //       "ZOHO ACCESS TOKEN ERROR:"
+// //     );
+
+// //     console.error(
+// //       error.response?.data ||
+// //       error.message
+// //     );
+
+// //     throw error;
+// //   }
+// // };
+
+
+// // // =====================================================
+// // // ZOHO HEADERS
+// // // =====================================================
+
+// // const getHeaders = (
+// //   accessToken
+// // ) => ({
+// //   Authorization:
+// //     `Zoho-oauthtoken ${accessToken}`,
+
+// //   "Content-Type":
+// //     "application/json",
+// // });
+
+
+// // // =====================================================
+// // // ZOHO ORGANIZATION ID
+// // // =====================================================
+
+// // const getOrganizationId = () => {
+
+// //   const organizationId =
+// //     process.env.ZOHO_ORGANIZATION_ID;
+
+// //   if (!organizationId) {
+
+// //     throw new Error(
+// //       "ZOHO_ORGANIZATION_ID is missing"
+// //     );
+
+// //   }
+
+// //   return organizationId;
+// // };
+
+
+// // // =====================================================
+// // // FIND CUSTOMER BY EMAIL
+// // // =====================================================
+
+// // const findCustomerByEmail = async (
+// //   order,
+// //   accessToken
+// // ) => {
+
+// //   const headers =
+// //     getHeaders(accessToken);
+
+// //   const organizationId =
+// //     getOrganizationId();
+
+// //   try {
+
+// //     const response =
+// //       await axios.get(
+// //         `${ZOHO_BOOKS_URL}/contacts`,
+// //         {
+// //           headers,
+
+// //           params: {
+// //             organization_id:
+// //               organizationId,
+
+// //             email:
+// //               order.email,
+// //           },
+
+// //           timeout: 15000,
+// //         }
+// //       );
+
+// //     const contacts =
+// //       response.data?.contacts || [];
+
+// //     if (
+// //       contacts.length > 0
+// //     ) {
+
+// //       console.log(
+// //         "Existing Zoho customer found:",
+// //         contacts[0].contact_id
+// //       );
+
+// //       return contacts[0];
+
+// //     }
+
+// //     return null;
+
+// //   } catch (error) {
+
+// //     console.error(
+// //       "ZOHO FIND CUSTOMER ERROR:"
+// //     );
+
+// //     console.error(
+// //       error.response?.data ||
+// //       error.message
+// //     );
+
+// //     throw error;
+// //   }
+// // };
+
+
+// // // =====================================================
+// // // CREATE CUSTOMER
+// // // =====================================================
+
+// // const createCustomer = async (
+// //   order,
+// //   accessToken
+// // ) => {
+
+// //   const headers =
+// //     getHeaders(accessToken);
+
+// //   const organizationId =
+// //     getOrganizationId();
+
+// //   const customerName =
+// //     `${order.firstName} ${order.lastName}`
+// //       .trim();
+
+// //   const customerData = {
+
+// //     contact_name:
+// //       customerName,
+
+// //     contact_type:
+// //       "customer",
+
+// //     email:
+// //       order.email,
+
+// //     phone:
+// //       `${order.countryCode || ""} ${order.phone || ""}`
+// //         .trim(),
+
+// //     billing_address: {
+
+// //       address:
+// //         order.addressLine1 || "",
+
+// //       street2:
+// //         order.addressLine2 || "",
+
+// //       city:
+// //         order.city || "",
+
+// //       state:
+// //         order.state || "",
+
+// //       zip:
+// //         order.postalCode || "",
+
+// //       country:
+// //         order.country || "",
+
+// //     },
+
+// //   };
+
+
+// //   // ===============================================
+// //   // COMPANY / VAT
+// //   // ===============================================
+
+// //   if (
+// //     order.companyName
+// //   ) {
+
+// //     customerData.company_name =
+// //       order.companyName;
+
+// //   }
+
+
+// //   if (
+// //     order.vatNumber
+// //   ) {
+
+// //     customerData.tax_reg_no =
+// //       order.vatNumber;
+
+// //   }
+
+
+// //   try {
+
+// //     console.log(
+// //       "Creating Zoho customer..."
+// //     );
+
+// //     const response =
+// //       await axios.post(
+// //         `${ZOHO_BOOKS_URL}/contacts`,
+// //         customerData,
+// //         {
+// //           headers,
+
+// //           params: {
+// //             organization_id:
+// //               organizationId,
+// //           },
+
+// //           timeout: 15000,
+// //         }
+// //       );
+
+// //     if (
+// //       !response.data?.contact
+// //     ) {
+
+// //       console.error(
+// //         "ZOHO CUSTOMER RESPONSE:",
+// //         response.data
+// //       );
+
+// //       throw new Error(
+// //         "Zoho customer was not created"
+// //       );
+
+// //     }
+
+// //     console.log(
+// //       "Zoho customer created:",
+// //       response.data.contact.contact_id
+// //     );
+
+// //     return response.data.contact;
+
+// //   } catch (error) {
+
+// //     console.error(
+// //       "ZOHO CREATE CUSTOMER ERROR:"
+// //     );
+
+// //     console.error(
+// //       error.response?.data ||
+// //       error.message
+// //     );
+
+// //     throw error;
+// //   }
+// // };
+
+
+// // // =====================================================
+// // // FIND OR CREATE CUSTOMER
 // // // =====================================================
 
 // // const findOrCreateCustomer = async (
 // //   order,
 // //   accessToken
 // // ) => {
-// //   const headers = {
-// //     Authorization:
-// //       `Zoho-oauthtoken ${accessToken}`,
-// //   };
-
-// //   const params = {
-// //     organization_id:
-// //       process.env.ZOHO_ORGANIZATION_ID,
-// //     email: order.email,
-// //   };
 
 // //   const existing =
-// //     await axios.get(
-// //       `${ZOHO_BOOKS_URL}/contacts`,
-// //       {
-// //         headers,
-// //         params,
-// //       }
-// //     );
-
-// //   const contacts =
-// //     existing.data.contacts || [];
-
-// //   if (contacts.length > 0) {
-// //     return contacts[0];
-// //   }
-
-// //   const customerResponse =
-// //     await axios.post(
-// //       `${ZOHO_BOOKS_URL}/contacts`,
-// //       {
-// //         contact_name:
-// //           `${order.firstName} ${order.lastName}`,
-
-// //         contact_type:
-// //           "customer",
-
-// //         email:
-// //           order.email,
-
-// //         phone:
-// //           `${order.countryCode} ${order.phone}`,
-
-// //         billing_address: {
-// //           address:
-// //             order.addressLine1,
-
-// //           street2:
-// //             order.addressLine2 || "",
-
-// //           city:
-// //             order.city,
-
-// //           state:
-// //             order.state || "",
-
-// //           zip:
-// //             order.postalCode,
-
-// //           country:
-// //             order.country,
-// //         },
-// //       },
-// //       {
-// //         headers,
-
-// //         params: {
-// //           organization_id:
-// //             process.env.ZOHO_ORGANIZATION_ID,
-// //         },
-// //       }
-// //     );
-
-// //   return customerResponse
-// //     .data
-// //     .contact;
-// // };
-
-// // // =====================================================
-// // // CREATE INVOICE
-// // // =====================================================
-
-// // const createZohoInvoice = async (
-// //   order
-// // ) => {
-// //   const accessToken =
-// //     await getAccessToken();
-
-// //   const customer =
-// //     await findOrCreateCustomer(
+// //     await findCustomerByEmail(
 // //       order,
 // //       accessToken
 // //     );
 
-// //   const headers = {
-// //     Authorization:
-// //       `Zoho-oauthtoken ${accessToken}`,
+// //   if (existing) {
+// //     return existing;
+// //   }
 
-// //     "Content-Type":
-// //       "application/json",
-// //   };
+// //   return await createCustomer(
+// //     order,
+// //     accessToken
+// //   );
+// // };
 
-// //   const lineItems =
-// //     order.items.map((item) => ({
+
+// // // =====================================================
+// // // BUILD INVOICE LINE ITEMS
+// // // =====================================================
+
+// // const buildInvoiceLineItems = (
+// //   order
+// // ) => {
+
+// //   const lineItems = [];
+
+// //   // ===============================================
+// //   // PRODUCTS
+// //   // ===============================================
+
+// //   for (
+// //     const item of order.items || []
+// //   ) {
+
+// //     const quantity =
+// //       Number(item.quantity);
+
+// //     const rate =
+// //       Number(item.price);
+
+// //     if (
+// //       !Number.isFinite(quantity) ||
+// //       quantity <= 0
+// //     ) {
+
+// //       throw new Error(
+// //         `Invalid quantity for ${item.productTitle}`
+// //       );
+
+// //     }
+
+// //     if (
+// //       !Number.isFinite(rate) ||
+// //       rate < 0
+// //     ) {
+
+// //       throw new Error(
+// //         `Invalid price for ${item.productTitle}`
+// //       );
+
+// //     }
+
+// //     lineItems.push({
+
 // //       name:
 // //         item.productTitle,
 
@@ -150,53 +612,336 @@
 // //         item.productTitle,
 
 // //       rate:
-// //         Number(item.price),
+// //         Number(rate.toFixed(2)),
 
-// //       quantity:
-// //         Number(item.quantity),
-// //     }));
+// //       quantity,
 
-// //   const invoiceResponse =
-// //     await axios.post(
-// //       `${ZOHO_BOOKS_URL}/invoices`,
-// //       {
-// //         customer_id:
-// //           customer.contact_id,
+// //     });
 
-// //         reference_number:
-// //           order.orderNumber,
+// //   }
 
-// //         line_items:
-// //           lineItems,
 
-// //         notes:
-// //           "Payment proof submitted by customer. Payment verification pending.",
+// //   // ===============================================
+// //   // DELIVERY CHARGE
+// //   // ===============================================
 
-// //         terms:
-// //           "Payment verification takes 2–3 working days.",
-// //       },
-// //       {
-// //         headers,
-
-// //         params: {
-// //           organization_id:
-// //             process.env.ZOHO_ORGANIZATION_ID,
-// //         },
-// //       }
+// //   const deliveryCharge =
+// //     Number(
+// //       order.deliveryCharge || 0
 // //     );
 
-// //   return {
-// //     customer,
-// //     invoice:
-// //       invoiceResponse.data.invoice,
-// //   };
+// //   if (
+// //     Number.isFinite(deliveryCharge) &&
+// //     deliveryCharge > 0
+// //   ) {
+
+// //     lineItems.push({
+
+// //       name:
+// //         "Delivery Charge",
+
+// //       description:
+// //         "Delivery charge",
+
+// //       rate:
+// //         Number(
+// //           deliveryCharge.toFixed(2)
+// //         ),
+
+// //       quantity:
+// //         1,
+
+// //     });
+
+// //   }
+
+
+// //   return lineItems;
 // // };
 
-// // module.exports = {
-// //   getAccessToken,
-// //   findOrCreateCustomer,
-// //   createZohoInvoice,
+
+// // // =====================================================
+// // // CREATE ZOHO INVOICE
+// // // =====================================================
+
+// // const createZohoInvoice = async (
+// //   order
+// // ) => {
+
+// //   try {
+
+// //     console.log(
+// //       "========================================"
+// //     );
+
+// //     console.log(
+// //       "CREATING ZOHO INVOICE"
+// //     );
+
+// //     console.log(
+// //       "Order:",
+// //       order.orderNumber
+// //     );
+
+// //     console.log(
+// //       "Customer:",
+// //       order.email
+// //     );
+
+// //     console.log(
+// //       "========================================"
+// //     );
+
+
+// //     // ===============================================
+// //     // ACCESS TOKEN
+// //     // ===============================================
+
+// //     const accessToken =
+// //       await getAccessToken();
+
+
+// //     // ===============================================
+// //     // CUSTOMER
+// //     // ===============================================
+
+// //     const customer =
+// //       await findOrCreateCustomer(
+// //         order,
+// //         accessToken
+// //       );
+
+
+// //     if (
+// //       !customer?.contact_id
+// //     ) {
+
+// //       throw new Error(
+// //         "Zoho customer ID was not returned"
+// //       );
+
+// //     }
+
+
+// //     // ===============================================
+// //     // HEADERS
+// //     // ===============================================
+
+// //     const headers =
+// //       getHeaders(accessToken);
+
+
+// //     const organizationId =
+// //       getOrganizationId();
+
+
+// //     // ===============================================
+// //     // LINE ITEMS
+// //     // ===============================================
+
+// //     const lineItems =
+// //       buildInvoiceLineItems(
+// //         order
+// //       );
+
+
+// //     if (
+// //       lineItems.length === 0
+// //     ) {
+
+// //       throw new Error(
+// //         "Cannot create Zoho invoice without line items"
+// //       );
+
+// //     }
+
+
+// //     // ===============================================
+// //     // INVOICE DATA
+// //     // ===============================================
+
+// //     const invoiceData = {
+
+// //       customer_id:
+// //         customer.contact_id,
+
+// //       reference_number:
+// //         order.orderNumber,
+
+// //       line_items:
+// //         lineItems,
+
+// //       notes:
+// //         [
+// //           "Payment proof submitted by customer.",
+// //           "Payment verification is pending.",
+// //           "Verification takes 2–3 working days.",
+// //         ].join(" "),
+
+// //       terms:
+// //         "Payment verification takes 2–3 working days.",
+
+// //     };
+
+
+// //     // ===============================================
+// //     // CREATE INVOICE
+// //     // ===============================================
+
+// //     console.log(
+// //       "Sending invoice request to Zoho..."
+// //     );
+
+// //     console.log(
+// //       "Invoice data:",
+// //       JSON.stringify(
+// //         invoiceData,
+// //         null,
+// //         2
+// //       )
+// //     );
+
+
+// //     const invoiceResponse =
+// //       await axios.post(
+
+// //         `${ZOHO_BOOKS_URL}/invoices`,
+
+// //         invoiceData,
+
+// //         {
+// //           headers,
+
+// //           params: {
+// //             organization_id:
+// //               organizationId,
+// //           },
+
+// //           timeout: 20000,
+// //         }
+
+// //       );
+
+
+// //     const invoice =
+// //       invoiceResponse.data?.invoice;
+
+
+// //     if (
+// //       !invoice ||
+// //       !invoice.invoice_id
+// //     ) {
+
+// //       console.error(
+// //         "INVALID ZOHO INVOICE RESPONSE:",
+// //         invoiceResponse.data
+// //       );
+
+// //       throw new Error(
+// //         "Zoho invoice was not created"
+// //       );
+
+// //     }
+
+
+// //     // ===============================================
+// //     // SUCCESS
+// //     // ===============================================
+
+// //     console.log(
+// //       "========================================"
+// //     );
+
+// //     console.log(
+// //       "ZOHO INVOICE CREATED"
+// //     );
+
+// //     console.log(
+// //       "Customer ID:",
+// //       customer.contact_id
+// //     );
+
+// //     console.log(
+// //       "Invoice ID:",
+// //       invoice.invoice_id
+// //     );
+
+// //     console.log(
+// //       "Invoice Number:",
+// //       invoice.invoice_number
+// //     );
+
+// //     console.log(
+// //       "Invoice Status:",
+// //       invoice.status
+// //     );
+
+// //     console.log(
+// //       "========================================"
+// //     );
+
+
+// //     return {
+
+// //       customer,
+
+// //       invoice,
+
+// //     };
+
+
+// //   } catch (error) {
+
+// //     console.error(
+// //       "========================================"
+// //     );
+
+// //     console.error(
+// //       "CREATE ZOHO INVOICE ERROR"
+// //     );
+
+// //     console.error(
+// //       "Order:",
+// //       order?.orderNumber
+// //     );
+
+// //     console.error(
+// //       "Message:",
+// //       error.message
+// //     );
+
+// //     console.error(
+// //       "Zoho Response:",
+// //       error.response?.data
+// //     );
+
+// //     console.error(
+// //       "========================================"
+// //     );
+
+// //     throw error;
+// //   }
 // // };
+
+
+// // // =====================================================
+// // // EXPORT
+// // // =====================================================
+
+// // module.exports = {
+
+// //   getAccessToken,
+
+// //   findCustomerByEmail,
+
+// //   createCustomer,
+
+// //   findOrCreateCustomer,
+
+// //   createZohoInvoice,
+
+// // };
+
 
 
 // const axios = require("axios");
@@ -228,28 +973,27 @@
 //       );
 //     }
 
-//     const response =
-//       await axios.post(
-//         `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
-//         null,
-//         {
-//           params: {
-//             refresh_token:
-//               process.env.ZOHO_REFRESH_TOKEN,
+//     const response = await axios.post(
+//       `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
+//       null,
+//       {
+//         params: {
+//           refresh_token:
+//             process.env.ZOHO_REFRESH_TOKEN,
 
-//             client_id:
-//               process.env.ZOHO_CLIENT_ID,
+//           client_id:
+//             process.env.ZOHO_CLIENT_ID,
 
-//             client_secret:
-//               process.env.ZOHO_CLIENT_SECRET,
+//           client_secret:
+//             process.env.ZOHO_CLIENT_SECRET,
 
-//             grant_type:
-//               "refresh_token",
-//           },
+//           grant_type:
+//             "refresh_token",
+//         },
 
-//           timeout: 15000,
-//         }
-//       );
+//         timeout: 15000,
+//       }
+//     );
 
 //     if (
 //       !response.data ||
@@ -265,9 +1009,17 @@
 //       );
 //     }
 
+//     console.log(
+//       "Zoho access token generated successfully"
+//     );
+
 //     return response.data.access_token;
 
 //   } catch (error) {
+
+//     console.error(
+//       "========================================"
+//     );
 
 //     console.error(
 //       "ZOHO ACCESS TOKEN ERROR:"
@@ -276,6 +1028,10 @@
 //     console.error(
 //       error.response?.data ||
 //       error.message
+//     );
+
+//     console.error(
+//       "========================================"
 //     );
 
 //     throw error;
@@ -404,13 +1160,13 @@
 //     getOrganizationId();
 
 //   const customerName =
-//     `${order.firstName} ${order.lastName}`
+//     `${order.firstName || ""} ${order.lastName || ""}`
 //       .trim();
 
 //   const customerData = {
 
 //     contact_name:
-//       customerName,
+//       customerName || order.email,
 
 //     contact_type:
 //       "customer",
@@ -448,7 +1204,7 @@
 
 
 //   // ===============================================
-//   // COMPANY / VAT
+//   // COMPANY
 //   // ===============================================
 
 //   if (
@@ -460,6 +1216,10 @@
 
 //   }
 
+
+//   // ===============================================
+//   // VAT
+//   // ===============================================
 
 //   if (
 //     order.vatNumber
@@ -568,7 +1328,7 @@
 //   const lineItems = [];
 
 //   // ===============================================
-//   // PRODUCTS
+//   // WEBSITE PRODUCTS
 //   // ===============================================
 
 //   for (
@@ -603,18 +1363,37 @@
 
 //     }
 
+
+//     // =============================================
+//     // IMPORTANT
+//     //
+//     // We intentionally DO NOT send:
+//     //
+//     // item_id
+//     //
+//     // This keeps the website product independent
+//     // from Zoho's purchase-only inventory items.
+//     // =============================================
+
 //     lineItems.push({
 
 //       name:
-//         item.productTitle,
+//         String(
+//           item.productTitle || "Website Product"
+//         ),
 
 //       description:
-//         item.productTitle,
+//         String(
+//           item.productTitle || "Website Product"
+//         ),
 
 //       rate:
-//         Number(rate.toFixed(2)),
+//         Number(
+//           rate.toFixed(2)
+//         ),
 
-//       quantity,
+//       quantity:
+//         quantity,
 
 //     });
 
@@ -785,7 +1564,7 @@
 
 
 //     // ===============================================
-//     // CREATE INVOICE
+//     // LOG WITHOUT SECRETS
 //     // ===============================================
 
 //     console.log(
@@ -793,22 +1572,33 @@
 //     );
 
 //     console.log(
-//       "Invoice data:",
+//       "Invoice customer:",
+//       customer.contact_id
+//     );
+
+//     console.log(
+//       "Invoice reference:",
+//       order.orderNumber
+//     );
+
+//     console.log(
+//       "Invoice line items:",
 //       JSON.stringify(
-//         invoiceData,
+//         lineItems,
 //         null,
 //         2
 //       )
 //     );
 
 
+//     // ===============================================
+//     // CREATE INVOICE
+//     // ===============================================
+
 //     const invoiceResponse =
 //       await axios.post(
-
 //         `${ZOHO_BOOKS_URL}/invoices`,
-
 //         invoiceData,
-
 //         {
 //           headers,
 
@@ -819,13 +1609,16 @@
 
 //           timeout: 20000,
 //         }
-
 //       );
 
 
 //     const invoice =
 //       invoiceResponse.data?.invoice;
 
+
+//     // ===============================================
+//     // VALIDATE RESPONSE
+//     // ===============================================
 
 //     if (
 //       !invoice ||
@@ -853,7 +1646,7 @@
 //     );
 
 //     console.log(
-//       "ZOHO INVOICE CREATED"
+//       "ZOHO INVOICE CREATED SUCCESSFULLY"
 //     );
 
 //     console.log(
@@ -910,10 +1703,42 @@
 //       error.message
 //     );
 
-//     console.error(
-//       "Zoho Response:",
-//       error.response?.data
-//     );
+//     // =============================================
+//     // FULL ZOHO ERROR
+//     // =============================================
+
+//     if (
+//       error.response
+//     ) {
+
+//       console.error(
+//         "Zoho HTTP Status:",
+//         error.response.status
+//       );
+
+//       console.error(
+//         "Zoho Response:",
+//         error.response.data
+//       );
+
+//       console.error(
+//         "Zoho Headers:",
+//         {
+//           "x-ratelimit-remaining":
+//             error.response.headers?.[
+//               "x-ratelimit-remaining"
+//             ],
+//         }
+//       );
+
+//     } else {
+
+//       console.error(
+//         "Zoho Response:",
+//         undefined
+//       );
+
+//     }
 
 //     console.error(
 //       "========================================"
@@ -943,7 +1768,6 @@
 // };
 
 
-
 const axios = require("axios");
 
 // =====================================================
@@ -963,42 +1787,51 @@ const ZOHO_BOOKS_URL =
 
 const getAccessToken = async () => {
   try {
+
     if (
       !process.env.ZOHO_REFRESH_TOKEN ||
       !process.env.ZOHO_CLIENT_ID ||
       !process.env.ZOHO_CLIENT_SECRET
     ) {
+
       throw new Error(
         "Zoho OAuth environment variables are missing"
       );
+
     }
 
-    const response = await axios.post(
-      `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
-      null,
-      {
-        params: {
-          refresh_token:
-            process.env.ZOHO_REFRESH_TOKEN,
+    const response =
+      await axios.post(
+        `${ZOHO_ACCOUNTS_URL}/oauth/v2/token`,
+        null,
+        {
+          params: {
 
-          client_id:
-            process.env.ZOHO_CLIENT_ID,
+            refresh_token:
+              process.env.ZOHO_REFRESH_TOKEN,
 
-          client_secret:
-            process.env.ZOHO_CLIENT_SECRET,
+            client_id:
+              process.env.ZOHO_CLIENT_ID,
 
-          grant_type:
-            "refresh_token",
-        },
+            client_secret:
+              process.env.ZOHO_CLIENT_SECRET,
 
-        timeout: 15000,
-      }
-    );
+            grant_type:
+              "refresh_token",
+
+          },
+
+          timeout: 15000,
+
+        }
+      );
+
 
     if (
       !response.data ||
       !response.data.access_token
     ) {
+
       console.error(
         "ZOHO TOKEN RESPONSE:",
         response.data
@@ -1007,13 +1840,17 @@ const getAccessToken = async () => {
       throw new Error(
         "Zoho access token was not returned"
       );
+
     }
+
 
     console.log(
       "Zoho access token generated successfully"
     );
 
+
     return response.data.access_token;
+
 
   } catch (error) {
 
@@ -1035,6 +1872,7 @@ const getAccessToken = async () => {
     );
 
     throw error;
+
   }
 };
 
@@ -1045,13 +1883,19 @@ const getAccessToken = async () => {
 
 const getHeaders = (
   accessToken
-) => ({
-  Authorization:
-    `Zoho-oauthtoken ${accessToken}`,
+) => {
 
-  "Content-Type":
-    "application/json",
-});
+  return {
+
+    Authorization:
+      `Zoho-oauthtoken ${accessToken}`,
+
+    "Content-Type":
+      "application/json",
+
+  };
+
+};
 
 
 // =====================================================
@@ -1063,6 +1907,7 @@ const getOrganizationId = () => {
   const organizationId =
     process.env.ZOHO_ORGANIZATION_ID;
 
+
   if (!organizationId) {
 
     throw new Error(
@@ -1071,7 +1916,9 @@ const getOrganizationId = () => {
 
   }
 
+
   return organizationId;
+
 };
 
 
@@ -1090,48 +1937,69 @@ const findCustomerByEmail = async (
   const organizationId =
     getOrganizationId();
 
+
   try {
+
+    console.log(
+      "Searching Zoho customer by email:",
+      order.email
+    );
+
 
     const response =
       await axios.get(
         `${ZOHO_BOOKS_URL}/contacts`,
         {
+
           headers,
 
           params: {
+
             organization_id:
               organizationId,
 
             email:
               order.email,
+
           },
 
           timeout: 15000,
+
         }
       );
 
+
     const contacts =
       response.data?.contacts || [];
+
 
     if (
       contacts.length > 0
     ) {
 
       console.log(
-        "Existing Zoho customer found:",
+        "Existing Zoho customer found by email:",
         contacts[0].contact_id
       );
+
 
       return contacts[0];
 
     }
 
+
+    console.log(
+      "No Zoho customer found by email"
+    );
+
+
     return null;
+
 
   } catch (error) {
 
     console.error(
-      "ZOHO FIND CUSTOMER ERROR:"
+      "ZOHO FIND CUSTOMER BY EMAIL ERROR:"
     );
 
     console.error(
@@ -1140,7 +2008,113 @@ const findCustomerByEmail = async (
     );
 
     throw error;
+
   }
+
+};
+
+
+// =====================================================
+// FIND CUSTOMER BY NAME
+// =====================================================
+
+const findCustomerByName = async (
+  order,
+  accessToken
+) => {
+
+  const headers =
+    getHeaders(accessToken);
+
+  const organizationId =
+    getOrganizationId();
+
+
+  const customerName =
+    `${order.firstName || ""} ${order.lastName || ""}`
+      .trim();
+
+
+  if (!customerName) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    console.log(
+      "Searching Zoho customer by name:",
+      customerName
+    );
+
+
+    const response =
+      await axios.get(
+        `${ZOHO_BOOKS_URL}/contacts`,
+        {
+
+          headers,
+
+          params: {
+
+            organization_id:
+              organizationId,
+
+            contact_name:
+              customerName,
+
+          },
+
+          timeout: 15000,
+
+        }
+      );
+
+
+    const contacts =
+      response.data?.contacts || [];
+
+
+    if (
+      contacts.length > 0
+    ) {
+
+      console.log(
+        "Existing Zoho customer found by name:",
+        contacts[0].contact_id
+      );
+
+
+      return contacts[0];
+
+    }
+
+
+    console.log(
+      "No Zoho customer found by name"
+    );
+
+
+    return null;
+
+
+  } catch (error) {
+
+    console.error(
+      "ZOHO FIND CUSTOMER BY NAME ERROR:"
+    );
+
+    console.error(
+      error.response?.data ||
+      error.message
+    );
+
+    throw error;
+
+  }
+
 };
 
 
@@ -1159,9 +2133,11 @@ const createCustomer = async (
   const organizationId =
     getOrganizationId();
 
+
   const customerName =
     `${order.firstName || ""} ${order.lastName || ""}`
       .trim();
+
 
   const customerData = {
 
@@ -1203,9 +2179,9 @@ const createCustomer = async (
   };
 
 
-  // ===============================================
+  // ===================================================
   // COMPANY
-  // ===============================================
+  // ===================================================
 
   if (
     order.companyName
@@ -1217,9 +2193,9 @@ const createCustomer = async (
   }
 
 
-  // ===============================================
+  // ===================================================
   // VAT
-  // ===============================================
+  // ===================================================
 
   if (
     order.vatNumber
@@ -1234,24 +2210,31 @@ const createCustomer = async (
   try {
 
     console.log(
-      "Creating Zoho customer..."
+      "Creating Zoho customer:",
+      customerName
     );
+
 
     const response =
       await axios.post(
         `${ZOHO_BOOKS_URL}/contacts`,
         customerData,
         {
+
           headers,
 
           params: {
+
             organization_id:
               organizationId,
+
           },
 
           timeout: 15000,
+
         }
       );
+
 
     if (
       !response.data?.contact
@@ -1262,18 +2245,22 @@ const createCustomer = async (
         response.data
       );
 
+
       throw new Error(
         "Zoho customer was not created"
       );
 
     }
 
+
     console.log(
       "Zoho customer created:",
       response.data.contact.contact_id
     );
 
+
     return response.data.contact;
+
 
   } catch (error) {
 
@@ -1286,8 +2273,11 @@ const createCustomer = async (
       error.message
     );
 
+
     throw error;
+
   }
+
 };
 
 
@@ -1300,20 +2290,60 @@ const findOrCreateCustomer = async (
   accessToken
 ) => {
 
-  const existing =
+  // ===================================================
+  // STEP 1 — SEARCH BY EMAIL
+  // ===================================================
+
+  const existingByEmail =
     await findCustomerByEmail(
       order,
       accessToken
     );
 
-  if (existing) {
-    return existing;
+
+  if (
+    existingByEmail
+  ) {
+
+    return existingByEmail;
+
   }
+
+
+  // ===================================================
+  // STEP 2 — SEARCH BY NAME
+  // ===================================================
+
+  const existingByName =
+    await findCustomerByName(
+      order,
+      accessToken
+    );
+
+
+  if (
+    existingByName
+  ) {
+
+    console.log(
+      "Using existing Zoho customer found by name"
+    );
+
+
+    return existingByName;
+
+  }
+
+
+  // ===================================================
+  // STEP 3 — CREATE CUSTOMER
+  // ===================================================
 
   return await createCustomer(
     order,
     accessToken
   );
+
 };
 
 
@@ -1327,9 +2357,10 @@ const buildInvoiceLineItems = (
 
   const lineItems = [];
 
-  // ===============================================
+
+  // ===================================================
   // WEBSITE PRODUCTS
-  // ===============================================
+  // ===================================================
 
   for (
     const item of order.items || []
@@ -1338,8 +2369,10 @@ const buildInvoiceLineItems = (
     const quantity =
       Number(item.quantity);
 
+
     const rate =
       Number(item.price);
+
 
     if (
       !Number.isFinite(quantity) ||
@@ -1351,6 +2384,7 @@ const buildInvoiceLineItems = (
       );
 
     }
+
 
     if (
       !Number.isFinite(rate) ||
@@ -1364,27 +2398,27 @@ const buildInvoiceLineItems = (
     }
 
 
-    // =============================================
+    // =================================================
     // IMPORTANT
     //
-    // We intentionally DO NOT send:
-    //
-    // item_id
+    // NO item_id is sent.
     //
     // This keeps the website product independent
-    // from Zoho's purchase-only inventory items.
-    // =============================================
+    // from existing Zoho purchase-only inventory items.
+    // =================================================
 
     lineItems.push({
 
       name:
         String(
-          item.productTitle || "Website Product"
+          item.productTitle ||
+          "Website Product"
         ),
 
       description:
         String(
-          item.productTitle || "Website Product"
+          item.productTitle ||
+          "Website Product"
         ),
 
       rate:
@@ -1400,14 +2434,15 @@ const buildInvoiceLineItems = (
   }
 
 
-  // ===============================================
+  // ===================================================
   // DELIVERY CHARGE
-  // ===============================================
+  // ===================================================
 
   const deliveryCharge =
     Number(
       order.deliveryCharge || 0
     );
+
 
   if (
     Number.isFinite(deliveryCharge) &&
@@ -1436,6 +2471,7 @@ const buildInvoiceLineItems = (
 
 
   return lineItems;
+
 };
 
 
@@ -1472,17 +2508,17 @@ const createZohoInvoice = async (
     );
 
 
-    // ===============================================
-    // ACCESS TOKEN
-    // ===============================================
+    // =================================================
+    // GET ACCESS TOKEN
+    // =================================================
 
     const accessToken =
       await getAccessToken();
 
 
-    // ===============================================
-    // CUSTOMER
-    // ===============================================
+    // =================================================
+    // FIND / CREATE CUSTOMER
+    // =================================================
 
     const customer =
       await findOrCreateCustomer(
@@ -1502,9 +2538,9 @@ const createZohoInvoice = async (
     }
 
 
-    // ===============================================
+    // =================================================
     // HEADERS
-    // ===============================================
+    // =================================================
 
     const headers =
       getHeaders(accessToken);
@@ -1514,9 +2550,9 @@ const createZohoInvoice = async (
       getOrganizationId();
 
 
-    // ===============================================
-    // LINE ITEMS
-    // ===============================================
+    // =================================================
+    // BUILD LINE ITEMS
+    // =================================================
 
     const lineItems =
       buildInvoiceLineItems(
@@ -1535,9 +2571,9 @@ const createZohoInvoice = async (
     }
 
 
-    // ===============================================
+    // =================================================
     // INVOICE DATA
-    // ===============================================
+    // =================================================
 
     const invoiceData = {
 
@@ -1563,26 +2599,29 @@ const createZohoInvoice = async (
     };
 
 
-    // ===============================================
-    // LOG WITHOUT SECRETS
-    // ===============================================
+    // =================================================
+    // LOG
+    // =================================================
 
     console.log(
       "Sending invoice request to Zoho..."
     );
 
+
     console.log(
-      "Invoice customer:",
+      "Customer ID:",
       customer.contact_id
     );
 
+
     console.log(
-      "Invoice reference:",
+      "Reference:",
       order.orderNumber
     );
 
+
     console.log(
-      "Invoice line items:",
+      "Line Items:",
       JSON.stringify(
         lineItems,
         null,
@@ -1591,24 +2630,32 @@ const createZohoInvoice = async (
     );
 
 
-    // ===============================================
+    // =================================================
     // CREATE INVOICE
-    // ===============================================
+    // =================================================
 
     const invoiceResponse =
       await axios.post(
+
         `${ZOHO_BOOKS_URL}/invoices`,
+
         invoiceData,
+
         {
+
           headers,
 
           params: {
+
             organization_id:
               organizationId,
+
           },
 
           timeout: 20000,
+
         }
+
       );
 
 
@@ -1616,9 +2663,9 @@ const createZohoInvoice = async (
       invoiceResponse.data?.invoice;
 
 
-    // ===============================================
+    // =================================================
     // VALIDATE RESPONSE
-    // ===============================================
+    // =================================================
 
     if (
       !invoice ||
@@ -1630,6 +2677,7 @@ const createZohoInvoice = async (
         invoiceResponse.data
       );
 
+
       throw new Error(
         "Zoho invoice was not created"
       );
@@ -1637,9 +2685,9 @@ const createZohoInvoice = async (
     }
 
 
-    // ===============================================
+    // =================================================
     // SUCCESS
-    // ===============================================
+    // =================================================
 
     console.log(
       "========================================"
@@ -1703,9 +2751,6 @@ const createZohoInvoice = async (
       error.message
     );
 
-    // =============================================
-    // FULL ZOHO ERROR
-    // =============================================
 
     if (
       error.response
@@ -1716,19 +2761,10 @@ const createZohoInvoice = async (
         error.response.status
       );
 
+
       console.error(
         "Zoho Response:",
         error.response.data
-      );
-
-      console.error(
-        "Zoho Headers:",
-        {
-          "x-ratelimit-remaining":
-            error.response.headers?.[
-              "x-ratelimit-remaining"
-            ],
-        }
       );
 
     } else {
@@ -1740,12 +2776,16 @@ const createZohoInvoice = async (
 
     }
 
+
     console.error(
       "========================================"
     );
 
+
     throw error;
+
   }
+
 };
 
 
@@ -1758,6 +2798,8 @@ module.exports = {
   getAccessToken,
 
   findCustomerByEmail,
+
+  findCustomerByName,
 
   createCustomer,
 
