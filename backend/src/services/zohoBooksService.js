@@ -4191,8 +4191,8 @@
 
 
 
-import axios from "axios";
-import dotenv from "dotenv";
+const axios = require("axios");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -4246,7 +4246,7 @@ function validateZohoConfig() {
 |
 */
 
-export async function getZohoAccessToken() {
+async function getZohoAccessToken() {
   validateZohoConfig();
 
   try {
@@ -4304,7 +4304,7 @@ function zohoHeaders(accessToken) {
 |--------------------------------------------------------------------------
 */
 
-export async function findCustomerByEmail(
+async function findCustomerByEmail(
   accessToken,
   email
 ) {
@@ -4366,7 +4366,7 @@ export async function findCustomerByEmail(
 |--------------------------------------------------------------------------
 */
 
-export async function findCustomerByName(
+async function findCustomerByName(
   accessToken,
   customerName
 ) {
@@ -4441,7 +4441,7 @@ export async function findCustomerByName(
 |
 */
 
-export async function createCustomer(
+async function createCustomer(
   accessToken,
   order
 ) {
@@ -4648,7 +4648,7 @@ export async function createCustomer(
 |--------------------------------------------------------------------------
 */
 
-export async function findOrCreateCustomer(
+async function findOrCreateCustomer(
   accessToken,
   order
 ) {
@@ -4707,7 +4707,7 @@ export async function findOrCreateCustomer(
 |
 */
 
-export async function findZohoItem(
+async function findZohoItem(
   accessToken,
   itemName
 ) {
@@ -4815,7 +4815,7 @@ export async function findZohoItem(
 |
 */
 
-export async function createZohoSalesItem(
+async function createZohoSalesItem(
   accessToken,
   productName,
   rate,
@@ -4931,7 +4931,7 @@ export async function createZohoSalesItem(
 |
 */
 
-export async function getOrCreateSalesItem(
+async function getOrCreateSalesItem(
   accessToken,
   productName,
   rate,
@@ -5000,7 +5000,7 @@ export async function getOrCreateSalesItem(
 |--------------------------------------------------------------------------
 */
 
-export async function buildInvoiceLineItems(
+async function buildInvoiceLineItems(
   accessToken,
   order
 ) {
@@ -5128,7 +5128,7 @@ function getOrderTotals(order) {
 |--------------------------------------------------------------------------
 */
 
-export async function createZohoInvoice(
+async function createZohoInvoice(
   order
 ) {
   console.log(
@@ -5442,7 +5442,7 @@ export async function createZohoInvoice(
 |--------------------------------------------------------------------------
 */
 
-export async function getZohoInvoice(
+async function getZohoInvoice(
   invoiceId
 ) {
   try {
@@ -5490,7 +5490,7 @@ export async function getZohoInvoice(
 |
 */
 
-export async function markZohoInvoiceAsSent(
+async function markZohoInvoiceAsSent(
   invoiceId
 ) {
   try {
@@ -5541,7 +5541,7 @@ export async function markZohoInvoiceAsSent(
 |--------------------------------------------------------------------------
 */
 
-export default {
+module.exports = {
   getZohoAccessToken,
 
   findCustomerByEmail,
