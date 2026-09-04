@@ -131,7 +131,7 @@
 //   }
 // };
 
-const prisma = require("../config/prisma");
+const prisma = require("../config/db");
 
 const uploadDocument = async (req, res) => {
   try {
