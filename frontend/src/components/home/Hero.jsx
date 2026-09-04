@@ -3789,20 +3789,7 @@ function Hero() {
               </svg>
             </Link>
 
-            <div className="hero-popup-features">
-              <div className="hero-popup-feature">
-                <span>🌿</span>
-                <span>Fresh Picked</span>
-              </div>
-              <div className="hero-popup-feature">
-                <span>🚚</span>
-                <span>Free Delivery</span>
-              </div>
-              <div className="hero-popup-feature">
-                <span>💐</span>
-                <span>Premium Quality</span>
-              </div>
-            </div>
+    
           </div>
         </div>
       )}
