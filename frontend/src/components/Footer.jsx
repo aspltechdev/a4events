@@ -250,8 +250,9 @@ function Footer() {
             <h4 className="ft-column-title-compact">Core Pillars</h4>
             <nav className="ft-links-compact">
               <Link to="/products" className="ft-link-compact">Organic Products</Link>
+                 <Link to="/products" className="ft-link-compact">Imported From India</Link>
               <Link to="/events" className="ft-link-compact">Concerts & Festivals</Link>
-              <Link to="/products" className="ft-link-compact">Millet Mix & Snacks</Link>
+           
               <Link to="/events" className="ft-link-compact">Workshops & Conferences</Link>
             </nav>
           </div>

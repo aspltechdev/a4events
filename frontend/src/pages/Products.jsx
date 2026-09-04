@@ -4739,7 +4739,7 @@ function Products() {
                 CART ONLY FOR FLOWERS
             ===================================== */}
 
-            {isFlower && (
+            {/* {isFlower && (
               <>
                 {!cartItems[product.id] ? (
                   <button
@@ -4794,7 +4794,79 @@ function Products() {
                   </div>
                 )}
               </>
-            )}
+            )} */}
+
+            {isFlower && (
+  <>
+    {/* OUT OF STOCK */}
+    {product.isActive === false ? (
+      <button
+        type="button"
+        className="prd-add-cart prd-add-cart-out-of-stock"
+        disabled
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        Out of Stock
+      </button>
+    ) : !cartItems[product.id] ? (
+      /* ADD TO CART */
+      <button
+        type="button"
+        className="prd-add-cart"
+        disabled={isLoading}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          addToCart(product.id);
+        }}
+      >
+        {isLoading ? "Adding..." : "Add to Cart"}
+      </button>
+    ) : (
+      /* QUANTITY */
+      <div
+        className="prd-cart-quantity"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        <button
+          type="button"
+          onClick={() =>
+            updateCartQuantity(
+              product.id,
+              cartItems[product.id] - 1
+            )
+          }
+          disabled={isLoading}
+          aria-label="Decrease quantity"
+        >
+          −
+        </button>
+
+        <span>{cartItems[product.id]}</span>
+
+        <button
+          type="button"
+          onClick={() =>
+            updateCartQuantity(
+              product.id,
+              cartItems[product.id] + 1
+            )
+          }
+          disabled={isLoading}
+          aria-label="Increase quantity"
+        >
+          +
+        </button>
+      </div>
+    )}
+  </>
+)}
           </div>
 
           <div className="prd-card-edge" aria-hidden="true" />

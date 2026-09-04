@@ -425,3 +425,47 @@
     justify-content: center;
   }
 }
+
+/* ================================
+   PRODUCT STATUS BADGES
+================================ */
+
+.apl-badge-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.apl-badge-active {
+  background: #e8f7ee;
+  color: #15803d;
+}
+
+.apl-badge-out {
+  background: #feecec;
+  color: #dc2626;
+}
+
+.apl-stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+/* Slightly fade the whole card when out of stock */
+
+.apl-card-out-of-stock .apl-image {
+  opacity: 0.65;
+}
+
+.apl-card-out-of-stock .apl-title {
+  opacity: 0.75;
+}

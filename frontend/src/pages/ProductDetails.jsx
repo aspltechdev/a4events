@@ -5158,6 +5158,7 @@ function ProductDetails() {
                   {/* Category Tags */}
                   <div className="pdt-category-row">
                     <span className="pdt-category-tag">{product.category}</span>
+                 
                     {/* {isFlower && (
                       <span className="pdt-category-tag pdt-tag-flower">
                         🌸 Seasonal
@@ -5168,6 +5169,8 @@ function ProductDetails() {
                         🌿 Fresh
                       </span>
                     )} */}
+
+
                   </div>
 
                   {/* Title */}
@@ -5192,7 +5195,7 @@ function ProductDetails() {
                       WITH FULL API INTEGRATION
                   ========================================= */}
 
-                  {isFlower && (
+                  {/* {isFlower && (
                     <div className="pdt-cart-section">
                       {!isInCart ? (
                         // Add to Cart
@@ -5271,7 +5274,136 @@ function ProductDetails() {
                         </div>
                       )}
                     </div>
-                  )}
+                  )} */}
+
+{/* =========================================
+    CART SECTION - ONLY FOR FLOWERS
+    WITH FULL API INTEGRATION
+========================================= */}
+
+{isFlower && (
+  <div className="pdt-cart-section">
+
+    {/* =====================================
+        OUT OF STOCK
+    ===================================== */}
+
+    {product.isActive === false ? (
+      <button
+        type="button"
+        className="pdt-add-cart-btn pdt-out-of-stock-btn"
+        disabled
+      >
+        Out of Stock
+      </button>
+    ) : !isInCart ? (
+
+      // Add to Cart
+      <div className="pdt-cart-add">
+
+        <div className="pdt-quantity-selector">
+          <button
+            type="button"
+            onClick={decrementQuantity}
+            disabled={quantity <= 1 || cartLoading}
+            aria-label="Decrease quantity"
+          >
+            −
+          </button>
+
+          <input
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={handleQuantityChange}
+            disabled={cartLoading}
+            aria-label="Quantity"
+          />
+
+          <button
+            type="button"
+            onClick={incrementQuantity}
+            disabled={cartLoading}
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
+
+        <button
+          type="button"
+          className="pdt-add-cart-btn"
+          onClick={addToCart}
+          disabled={cartLoading}
+        >
+          {cartLoading ? "Adding..." : "Add to Cart"}
+        </button>
+
+      </div>
+
+    ) : (
+
+      // Update Cart
+      <div className="pdt-cart-update">
+
+        <div className="pdt-cart-status">
+          <span className="pdt-cart-check">✓</span>
+          <span>In Cart ({cartQuantity})</span>
+        </div>
+
+        <div className="pdt-cart-actions">
+
+          <div className="pdt-quantity-selector">
+
+            <button
+              type="button"
+              onClick={() =>
+                updateCartQuantity(cartQuantity - 1)
+              }
+              disabled={
+                cartLoading ||
+                cartQuantity <= 1
+              }
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
+            <span className="pdt-quantity-display">
+              {cartQuantity}
+            </span>
+
+            <button
+              type="button"
+              onClick={() =>
+                updateCartQuantity(cartQuantity + 1)
+              }
+              disabled={cartLoading}
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+
+          </div>
+
+          <button
+            type="button"
+            className="pdt-remove-cart-btn"
+            onClick={removeFromCart}
+            disabled={cartLoading}
+          >
+            {cartLoading
+              ? "Removing..."
+              : "Remove"}
+          </button>
+
+        </div>
+
+      </div>
+    )}
+
+  </div>
+)}
 
                   {/* Quality Items */}
                   <div className="pdt-qualities">

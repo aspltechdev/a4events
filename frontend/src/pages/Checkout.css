@@ -1051,3 +1051,35 @@
   }
 
 }
+
+
+/* =====================================================
+   DELIVERY DOCUMENT
+===================================================== */
+
+.checkout-document-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.checkout-document-link a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+
+.checkout-document-link a:hover {
+  opacity: 0.7;
+}
+
+.checkout-document-link span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+}
