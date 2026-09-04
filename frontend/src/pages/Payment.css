@@ -1,11 +1,28 @@
 /* =====================================================
+   PAYMENT PAGE — A4A FESTIVE BRAND VERSION
+   Navy + Green anchor · Light · Premium · Indian festive
+   ===================================================== */
+
+:root {
+  --a4a-green: #69A943;
+  --a4a-navy: #17345F;
+  --marigold: #F5A623;
+  --haldi-yellow: #FFD54A;
+  --festive-coral: #E85D4A;
+  --kumkum-pink: #E96A7A;
+  --festival-purple: #7A5AA6;
+  --ivory: #FFFDF5;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =====================================================
    PAYMENT PAGE - MAIN CONTAINER
 ===================================================== */
 
 .payment-page {
   min-height: 100vh;
-  background: #f8f9fa;
-  padding: 2rem 0;
+  background: var(--ivory);
+  padding: 120px 0 3rem 0;
 }
 
 .payment-container {
@@ -15,7 +32,7 @@
 }
 
 /* =====================================================
-   PAYMENT HEADER
+   PAYMENT HEADER - Festive style
 ===================================================== */
 
 .payment-header {
@@ -24,7 +41,7 @@
   align-items: flex-start;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 2px solid rgba(105,169,67,0.08);
 }
 
 .payment-header > div:first-child {
@@ -34,23 +51,31 @@
 }
 
 .payment-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 1.5px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .payment-header h1 {
-  font-size: 1.75rem;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.payment-header h1 .highlight {
+  background: linear-gradient(135deg, var(--a4a-green), var(--marigold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .payment-header p {
   font-size: 0.95rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   margin: 0;
   max-width: 500px;
 }
@@ -60,39 +85,44 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 0.25rem;
-  background: #f0f0f0;
+  background: rgba(255,253,245,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(23,52,95,0.04);
+  box-shadow: 0 2px 12px rgba(23,52,95,0.02);
 }
 
 .payment-order-number span {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #999;
+  color: rgba(23,52,95,0.25);
   text-transform: uppercase;
 }
 
 .payment-order-number strong {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 /* =====================================================
-   PAYMENT METHOD TOGGLE
+   PAYMENT METHOD TOGGLE - Festive style
 ===================================================== */
 
 .payment-method-toggle {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
-  background: #f0f0f0;
+  background: rgba(23,52,95,0.02);
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 14px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid rgba(23,52,95,0.04);
 }
 
 .payment-method-btn {
@@ -103,23 +133,24 @@
   gap: 0.75rem;
   padding: 0.9rem 1.5rem;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   background: transparent;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .payment-method-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(23,52,95,0.02);
 }
 
 .payment-method-btn.active {
-  background: #ffffff;
-  color: #1a1a1a;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: var(--ivory);
+  color: var(--a4a-navy);
+  box-shadow: 0 4px 15px rgba(23,52,95,0.04);
+  border: 1px solid rgba(105,169,67,0.04);
 }
 
 .payment-method-icon {
@@ -148,15 +179,31 @@
 }
 
 /* =====================================================
-   PAYMENT CARD
+   PAYMENT CARD - Festive style
 ===================================================== */
 
 .payment-card {
-  background: #ffffff;
-  border-radius: 1rem;
+  background: rgba(255,253,245,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 14px;
   padding: 1.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 12px rgba(23,52,95,0.02);
+  border: 1px solid rgba(23,52,95,0.04);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--a4a-green), var(--marigold));
+  opacity: 0.6;
 }
 
 .payment-card-header {
@@ -173,42 +220,42 @@
 }
 
 .payment-card-header span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .payment-card-header h2 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 .bank-transfer-badge {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: rgba(105,169,67,0.06);
+  color: var(--a4a-green);
   padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  font-size: 0.75rem;
+  border-radius: 100px;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 .paypal-badge {
-  background: #e3f2fd;
-  color: #0070ba;
+  background: rgba(245,166,35,0.06);
+  color: var(--marigold);
   padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  font-size: 0.75rem;
+  border-radius: 100px;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 /* =====================================================
-   AMOUNT BOX
+   AMOUNT BOX - Festive style
 ===================================================== */
 
 .payment-amount-box {
@@ -216,33 +263,34 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 0.75rem;
+  background: rgba(105,169,67,0.02);
+  border-radius: 10px;
   margin-bottom: 1.5rem;
+  border: 1px solid rgba(105,169,67,0.04);
 }
 
 .payment-amount-box span {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: rgba(23,52,95,0.25);
   text-transform: uppercase;
 }
 
 .payment-amount-box strong {
   font-size: 2rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0.25rem 0;
 }
 
 .payment-amount-box small {
   font-size: 0.8rem;
-  color: #999;
+  color: rgba(23,52,95,0.25);
 }
 
 /* =====================================================
-   BANK DETAILS
+   BANK DETAILS - Festive style
 ===================================================== */
 
 .bank-details {
@@ -250,8 +298,8 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid rgba(23,52,95,0.04);
+  border-bottom: 1px solid rgba(23,52,95,0.04);
   margin-bottom: 1rem;
 }
 
@@ -263,17 +311,17 @@
 }
 
 .bank-details-title span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .bank-details-title h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
@@ -282,7 +330,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgba(23,52,95,0.02);
 }
 
 .bank-detail-row:last-child {
@@ -291,19 +339,19 @@
 
 .bank-detail-row span {
   font-size: 0.85rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .bank-detail-row strong {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   text-align: right;
   word-break: break-all;
 }
 
 /* =====================================================
-   PAYMENT REFERENCE
+   PAYMENT REFERENCE - Festive style
 ===================================================== */
 
 .payment-reference {
@@ -311,33 +359,33 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 1rem;
-  background: #fff3e0;
-  border-radius: 0.5rem;
+  background: rgba(245,166,35,0.02);
+  border-radius: 10px;
   margin-top: 0.5rem;
-  border-left: 3px solid #ff9800;
+  border-left: 3px solid var(--marigold);
 }
 
 .payment-reference span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: rgba(23,52,95,0.25);
   text-transform: uppercase;
 }
 
 .payment-reference strong {
   font-size: 1rem;
   font-weight: 700;
-  color: #e65100;
+  color: var(--marigold);
 }
 
 .payment-reference small {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 /* =====================================================
-   QR SECTION
+   QR SECTION - Festive style
 ===================================================== */
 
 .payment-qr-section {
@@ -354,23 +402,23 @@
 }
 
 .payment-qr-section > div:first-child span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .payment-qr-section > div:first-child h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 .payment-qr-section > div:first-child p {
   margin: 0;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   font-size: 0.95rem;
   line-height: 1.5;
 }
@@ -380,9 +428,9 @@
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
-  background: #f8f9fa;
+  background: rgba(255,253,245,0.5);
   border-radius: 1rem;
-  border: 1px dashed #ddd;
+  border: 1px dashed rgba(23,52,95,0.06);
 }
 
 .payment-qr-image {
@@ -392,7 +440,7 @@
 }
 
 /* =====================================================
-   PAYMENT CARD TITLE
+   PAYMENT CARD TITLE - Festive style
 ===================================================== */
 
 .payment-card-title {
@@ -402,29 +450,29 @@
 }
 
 .payment-card-title span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .payment-card-title h2 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 .payment-card-title p {
   margin: 0.25rem 0 0 0;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 /* =====================================================
-   PAYMENT DETAILS
+   PAYMENT DETAILS - Festive style
 ===================================================== */
 
 .payment-details {
@@ -442,17 +490,17 @@
 
 .payment-details span {
   font-size: 0.75rem;
-  color: #999;
+  color: rgba(23,52,95,0.25);
 }
 
 .payment-details strong {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 /* =====================================================
-   PAYMENT ADDRESS
+   PAYMENT ADDRESS - Festive style
 ===================================================== */
 
 .payment-address {
@@ -466,17 +514,17 @@
 .payment-address strong {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .payment-address span {
   font-size: 0.9rem;
-  color: #555;
+  color: rgba(23,52,95,0.4);
   line-height: 1.5;
 }
 
 /* =====================================================
-   PAYMENT PROOF - Upload Form
+   PAYMENT PROOF - Upload Form - Festive style
 ===================================================== */
 
 .payment-proof-form {
@@ -493,37 +541,37 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 2rem;
-  border: 2px dashed #ddd;
-  border-radius: 0.75rem;
+  border: 2px dashed rgba(23,52,95,0.06);
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #fafafa;
+  background: rgba(255,253,245,0.5);
 }
 
 .payment-upload-box:hover {
-  border-color: #0070ba;
-  background: #f0f7ff;
+  border-color: var(--a4a-green);
+  background: rgba(105,169,67,0.02);
 }
 
 .payment-upload-icon {
   font-size: 2rem;
-  color: #999;
+  color: rgba(23,52,95,0.15);
 }
 
 .payment-upload-box strong {
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .payment-upload-box span {
   font-size: 0.85rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .payment-upload-box small {
   font-size: 0.75rem;
-  color: #999;
+  color: rgba(23,52,95,0.2);
 }
 
 .selected-payment-file {
@@ -531,9 +579,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: #e8f5e9;
-  border-radius: 0.5rem;
-  border: 1px solid #c8e6c9;
+  background: rgba(105,169,67,0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(105,169,67,0.06);
 }
 
 .selected-payment-file > div {
@@ -544,32 +592,33 @@
 
 .selected-payment-file span {
   font-size: 0.7rem;
-  color: #666;
+  color: rgba(23,52,95,0.25);
 }
 
 .selected-payment-file strong {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .selected-payment-file button {
   padding: 0.25rem 0.75rem;
-  background: #f44336;
+  background: var(--festive-coral);
   color: #ffffff;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 6px;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .selected-payment-file button:hover {
-  background: #d32f2f;
+  background: #d94a36;
+  transform: scale(1.02);
 }
 
 /* =====================================================
-   PAYMENT PROOF - Submit Button
+   PAYMENT PROOF - Submit Button - Festive style
 ===================================================== */
 
 .payment-submit-proof {
@@ -578,20 +627,21 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 0.9rem 2rem;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, var(--festive-coral), #d94a36);
   color: #ffffff;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(232,93,74,0.15);
 }
 
 .payment-submit-proof:hover:not(:disabled) {
-  background: #333;
+  background: linear-gradient(135deg, #f06a54, #d94a36);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(232,93,74,0.25);
 }
 
 .payment-submit-proof:disabled {
@@ -611,44 +661,42 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255,255,255,0.3);
   border-top-color: #ffffff;
   border-radius: 50%;
   animation: spinner 0.6s linear infinite;
 }
 
 @keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .payment-verification-note {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   line-height: 1.5;
   margin: 0;
   padding: 0.75rem;
-  background: #fff8e1;
-  border-radius: 0.5rem;
-  border-left: 3px solid #ffc107;
+  background: rgba(245,166,35,0.02);
+  border-radius: 10px;
+  border-left: 3px solid var(--marigold);
 }
 
 .payment-verification-note strong {
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 /* =====================================================
-   PAYMENT PROOF - Success
+   PAYMENT PROOF - Success - Festive style
 ===================================================== */
 
 .proof-success {
   display: flex;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: #e8f5e9;
-  border-radius: 0.75rem;
-  border: 1px solid #c8e6c9;
+  background: rgba(105,169,67,0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(105,169,67,0.06);
   margin-top: 1rem;
 }
 
@@ -658,7 +706,7 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: #4caf50;
+  background: var(--a4a-green);
   color: #ffffff;
   border-radius: 50%;
   font-size: 1.5rem;
@@ -673,23 +721,23 @@
 }
 
 .proof-success-label {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #2e7d32;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .proof-success-content h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 .proof-success-content p {
   font-size: 0.9rem;
-  color: #555;
+  color: rgba(23,52,95,0.4);
   margin: 0;
 }
 
@@ -698,19 +746,19 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.75rem;
-  background: #fff8e1;
-  border-radius: 0.5rem;
-  border-left: 3px solid #ffc107;
+  background: rgba(245,166,35,0.02);
+  border-radius: 10px;
+  border-left: 3px solid var(--marigold);
 }
 
 .verification-notice strong {
   font-size: 0.85rem;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .verification-notice span {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .invoice-info {
@@ -718,60 +766,75 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.75rem;
-  background: #e3f2fd;
-  border-radius: 0.5rem;
-  border-left: 3px solid #0070ba;
+  background: rgba(105,169,67,0.02);
+  border-radius: 10px;
+  border-left: 3px solid var(--a4a-green);
 }
 
 .invoice-info span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #666;
+  color: rgba(23,52,95,0.25);
   text-transform: uppercase;
 }
 
 .invoice-info strong {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #0070ba;
+  color: var(--a4a-green);
 }
 
 .proof-final-message {
   font-size: 0.85rem;
-  color: #555;
+  color: rgba(23,52,95,0.4);
   margin: 0;
   padding-top: 0.5rem;
-  border-top: 1px solid #c8e6c9;
+  border-top: 1px solid rgba(105,169,67,0.04);
 }
 
 .proof-message {
   padding: 0.75rem;
-  background: #f44336;
+  background: var(--festive-coral);
   color: #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   font-size: 0.9rem;
 }
 
 .proof-message.success {
-  background: #4caf50;
+  background: var(--a4a-green);
 }
 
 /* =====================================================
-   PAYMENT SIDEBAR - Right Column
+   PAYMENT SIDEBAR - Right Column - Festive style
 ===================================================== */
 
 .payment-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 100px;
 }
 
 .payment-summary {
-  background: #ffffff;
-  border-radius: 1rem;
+  background: rgba(255,253,245,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 14px;
   padding: 1.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 12px rgba(23,52,95,0.02);
+  border: 1px solid rgba(23,52,95,0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--a4a-green), var(--marigold), var(--festive-coral));
+  opacity: 0.6;
 }
 
 .payment-summary-header {
@@ -780,26 +843,26 @@
   gap: 0.25rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(23,52,95,0.04);
 }
 
 .payment-summary-header span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--a4a-green);
   text-transform: uppercase;
 }
 
 .payment-summary-header h2 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 /* =====================================================
-   PAYMENT ITEMS
+   PAYMENT ITEMS - Festive style
 ===================================================== */
 
 .payment-items {
@@ -816,7 +879,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgba(23,52,95,0.02);
 }
 
 .payment-item:last-child {
@@ -832,22 +895,22 @@
 .payment-item strong {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .payment-item span {
   font-size: 0.8rem;
-  color: #999;
+  color: rgba(23,52,95,0.25);
 }
 
 .payment-item > strong {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 /* =====================================================
-   PAYMENT TOTALS
+   PAYMENT TOTALS - Festive style
 ===================================================== */
 
 .payment-totals {
@@ -855,8 +918,8 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid rgba(23,52,95,0.04);
+  border-bottom: 1px solid rgba(23,52,95,0.04);
   margin-bottom: 1rem;
 }
 
@@ -868,34 +931,34 @@
 
 .payment-totals span {
   font-size: 0.85rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .payment-totals strong {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .payment-total {
   padding-top: 0.5rem;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid rgba(23,52,95,0.06);
 }
 
 .payment-total span {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 .payment-total strong {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
 }
 
 /* =====================================================
-   PAYMENT STATUS
+   PAYMENT STATUS - Festive style
 ===================================================== */
 
 .payment-status {
@@ -903,27 +966,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(23,52,95,0.04);
   margin-bottom: 1rem;
 }
 
 .payment-status span {
   font-size: 0.85rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
 }
 
 .payment-status strong {
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0.25rem 0.75rem;
-  background: #e8f5e9;
-  color: #2e7d32;
-  border-radius: 2rem;
+  background: rgba(105,169,67,0.06);
+  color: var(--a4a-green);
+  border-radius: 100px;
   text-transform: uppercase;
 }
 
 /* =====================================================
-   SIDEBAR VERIFICATION
+   SIDEBAR VERIFICATION - Festive style
 ===================================================== */
 
 .sidebar-verification {
@@ -931,33 +994,34 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 0.5rem;
+  background: rgba(255,253,245,0.5);
+  border-radius: 10px;
+  border: 1px solid rgba(23,52,95,0.04);
 }
 
 .sidebar-verification span {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #999;
+  color: rgba(23,52,95,0.25);
   text-transform: uppercase;
 }
 
 .sidebar-verification strong {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #ff9800;
+  color: var(--marigold);
 }
 
 .sidebar-verification p {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   margin: 0;
   line-height: 1.5;
 }
 
 /* =====================================================
-   PAYMENT LOADING
+   PAYMENT LOADING - Festive style
 ===================================================== */
 
 .payment-loading {
@@ -972,20 +1036,20 @@
 .payment-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #f0f0f0;
-  border-top-color: #1a1a1a;
+  border: 3px solid rgba(23,52,95,0.04);
+  border-top-color: var(--a4a-green);
   border-radius: 50%;
   animation: spinner 0.8s linear infinite;
 }
 
 .payment-loading p {
   font-size: 0.95rem;
-  color: #666;
+  color: rgba(23,52,95,0.3);
   margin: 0;
 }
 
 /* =====================================================
-   PAYMENT ERROR
+   PAYMENT ERROR - Festive style
 ===================================================== */
 
 .payment-error {
@@ -1001,19 +1065,19 @@
 }
 
 .payment-error .payment-eyebrow {
-  color: #f44336;
+  color: var(--festive-coral);
 }
 
 .payment-error h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--a4a-navy);
   margin: 0;
 }
 
 .payment-error p {
   font-size: 0.95rem;
-  color: #666;
+  color: rgba(23,52,95,0.4);
   margin: 0 0 1rem 0;
 }
 
@@ -1022,20 +1086,20 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.5rem;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, var(--festive-coral), #d94a36);
   color: #ffffff;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(232,93,74,0.15);
 }
 
 .payment-back-button:hover {
-  background: #333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(232,93,74,0.25);
 }
 
 .payment-back-button span {
@@ -1047,7 +1111,7 @@
 }
 
 /* =====================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ===================================================== */
 
 @media (max-width: 1024px) {
@@ -1063,7 +1127,7 @@
 
 @media (max-width: 768px) {
   .payment-page {
-    padding: 1rem 0;
+    padding: 100px 0 2rem 0;
   }
 
   .payment-container {
@@ -1088,7 +1152,7 @@
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.5rem;
-    border-radius: 0.75rem;
+    border-radius: 12px;
   }
 
   .payment-method-btn {

@@ -1,18 +1,29 @@
 /* ============================================================
-   WHY CHOOSE US — COMPACT MODERN
-   Clean. Scannable. Matches other sections.
+   WHY CHOOSE US — A4A FESTIVE BRAND VERSION
+   Navy + Green anchor · Light · Premium · Indian festive
    ============================================================ */
+
+:root {
+  --a4a-green: #69A943;
+  --a4a-navy: #17345F;
+  --marigold: #F5A623;
+  --haldi-yellow: #FFD54A;
+  --festive-coral: #E85D4A;
+  --kumkum-pink: #E96A7A;
+  --festival-purple: #7A5AA6;
+  --ivory: #FFFDF5;
+}
 
 /* ----- SECTION ----- */
 .wc-compact {
   position: relative;
-  padding: 3.5rem 0;
-  background: #0b1120;
+  padding: 4rem 0;
+  background: var(--ivory);
   overflow: hidden;
   isolation: isolate;
 }
 
-/* ----- BACKGROUND ----- */
+/* ----- BACKGROUND - Festive Indian vibes ----- */
 .wc-bg-compact {
   position: absolute;
   inset: 0;
@@ -23,29 +34,66 @@
 .wc-glow-compact {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.05;
+  filter: blur(140px);
+  animation: glowFloat 20s ease-in-out infinite alternate;
 }
 
-.wc-glow-compact--teal {
-  width: 40vw;
-  height: 40vw;
-  max-width: 400px;
-  max-height: 400px;
-  background: radial-gradient(circle, #14b8a6, transparent);
+@keyframes glowFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.wc-glow-compact--marigold {
+  width: 45vw;
+  height: 45vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, #F5A623, transparent 70%);
   top: -20%;
   left: -10%;
+  opacity: 0.06;
+  animation-delay: 0s;
 }
 
-.wc-glow-compact--blue {
-  width: 35vw;
-  height: 35vw;
-  max-width: 350px;
-  max-height: 350px;
-  background: radial-gradient(circle, #3b82f6, transparent);
+.wc-glow-compact--kumkum {
+  width: 40vw;
+  height: 40vw;
+  max-width: 450px;
+  max-height: 450px;
+  background: radial-gradient(circle, #E96A7A, transparent 70%);
   bottom: -20%;
   right: -10%;
   opacity: 0.04;
+  animation-delay: -6s;
+}
+
+.wc-glow-compact--green {
+  width: 35vw;
+  height: 35vw;
+  max-width: 400px;
+  max-height: 400px;
+  background: radial-gradient(circle, #69A943, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.03;
+  animation-delay: -12s;
+}
+
+/* Rangoli inspired pattern */
+.wc-rangoli-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.012;
+  background-image: 
+    radial-gradient(circle at 20% 30%, #F5A623 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, #E96A7A 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, #69A943 2px, transparent 2px),
+    radial-gradient(circle at 10% 80%, #7A5AA6 1px, transparent 1px),
+    radial-gradient(circle at 90% 20%, #FFD54A 1px, transparent 1px);
+  background-size: 80px 80px, 100px 100px, 150px 150px, 90px 90px, 110px 110px;
+  background-position: 0 0, 40px 60px, 20px 20px, 60px 10px, 30px 70px;
 }
 
 .wc-grain-compact {
@@ -53,7 +101,14 @@
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
   background-size: 200px 200px;
-  opacity: 0.5;
+  opacity: 0.4;
+}
+
+.wc-vignette-compact {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(255, 253, 245, 0.4) 100%);
+  pointer-events: none;
 }
 
 /* ----- CONTAINER ----- */
@@ -65,7 +120,7 @@
   padding: 0 5%;
 }
 
-/* ----- HEADER ----- */
+/* ----- HEADER - Festive style ----- */
 .wc-header-compact {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -87,7 +142,8 @@
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(20, 184, 166, 0.5);
+  color: var(--festival-purple);
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
@@ -95,34 +151,41 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #14b8a6;
+  background: var(--a4a-green);
   animation: dotPulse 2s infinite;
 }
 
 @keyframes dotPulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.2; }
 }
 
 .wc-title-compact {
   font-size: clamp(1.6rem, 3vw, 2.6rem);
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--a4a-navy);
   margin: 0 0 0.5rem 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
 .wc-title-highlight {
-  background: linear-gradient(135deg, #14b8a6, #3b82f6);
+  background: linear-gradient(135deg, var(--a4a-green), var(--marigold), var(--festive-coral));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .wc-subtitle-compact {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(23 52 95 / 70%);
   margin: 0;
   max-width: 550px;
   margin-left: auto;
@@ -138,15 +201,52 @@
   margin-bottom: 2.5rem;
 }
 
-/* ----- CARDS ----- */
+/* ----- CARDS - Festive style ----- */
 .wc-card-compact {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
+  background: rgba(255, 253, 245, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(23, 52, 95, 0.04);
+  border-radius: 14px;
   padding: 1.5rem 1.25rem;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   opacity: 0;
   transform: translateY(15px) scale(0.98);
+  box-shadow: 0 2px 12px rgba(23, 52, 95, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Festive accent line on cards */
+.wc-card-compact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.wc-card-compact:nth-child(1)::before {
+  background: linear-gradient(90deg, var(--a4a-green), var(--marigold));
+}
+
+.wc-card-compact:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--festive-coral), var(--kumkum-pink));
+}
+
+.wc-card-compact:nth-child(3)::before {
+  background: linear-gradient(90deg, var(--festival-purple), var(--a4a-green));
+}
+
+.wc-card-compact:nth-child(4)::before {
+  background: linear-gradient(90deg, var(--marigold), var(--festive-coral));
+}
+
+.wc-card-compact:hover::before {
+  opacity: 1;
 }
 
 .wc-visible .wc-card-compact {
@@ -161,23 +261,28 @@
 .wc-visible .wc-card-compact:nth-child(4) { transition-delay: 0.3s; }
 
 .wc-card-compact:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(20, 184, 166, 0.15);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 253, 245, 0.95);
+  border-color: rgba(105, 169, 67, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(23, 52, 95, 0.04);
 }
 
 .wc-card-icon {
-  font-size: 1.2rem;
-  color: #14b8a6;
+  font-size: 1.4rem;
+  color: var(--a4a-green);
   margin-bottom: 0.5rem;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.wc-card-compact:hover .wc-card-icon {
+  transform: scale(1.1) rotate(-4deg);
 }
 
 .wc-card-title-compact {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--a4a-navy);
   margin: 0 0 0.4rem 0;
   line-height: 1.2;
 }
@@ -185,18 +290,18 @@
 .wc-card-description-compact {
   font-size: 0.75rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(23, 52, 95, 0.45);
   margin: 0;
 }
 
-/* ----- HERITAGE STRIP ----- */
+/* ----- HERITAGE STRIP - Festive style ----- */
 .wc-heritage-compact {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(23, 52, 95, 0.04);
   opacity: 0;
   transform: translateY(15px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -217,14 +322,21 @@
 
 .wc-heritage-number {
   font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--a4a-navy);
   letter-spacing: -0.02em;
+}
+
+.wc-heritage-number--accent {
+  background: linear-gradient(135deg, var(--a4a-green), var(--marigold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .wc-heritage-label {
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(23, 52, 95, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 500;
@@ -233,14 +345,32 @@
 .wc-heritage-divider {
   width: 1px;
   height: 30px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(23, 52, 95, 0.06);
+}
+
+.wc-heritage-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--marigold);
+  opacity: 0.4;
 }
 
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
+  .wc-compact {
+    padding: 3rem 0;
+  }
+  
   .wc-grid-compact {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+  
+  .wc-glow-compact--marigold,
+  .wc-glow-compact--kumkum,
+  .wc-glow-compact--green {
+    opacity: 0.03;
   }
 }
 
@@ -274,6 +404,10 @@
   .wc-heritage-divider {
     display: none;
   }
+  
+  .wc-rangoli-pattern {
+    opacity: 0.008;
+  }
 }
 
 @media (max-width: 480px) {
@@ -296,7 +430,7 @@
   }
 
   .wc-card-icon {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 0.3rem;
   }
 
