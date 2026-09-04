@@ -26,6 +26,56 @@
 // module.exports = router;
 
 
+// const express = require('express');
+
+// const router = express.Router();
+
+// const protect =
+//   require('../middleware/authMiddleware');
+
+// const {
+//   getProducts,
+//   getFeaturedProducts,
+//   createProduct,
+//   getProductById,
+//   updateProduct,
+//   deleteProduct
+// } = require('../controllers/productController');
+
+// // PUBLIC ROUTES
+// router.get('/', getProducts);
+
+// router.get(
+//   '/featured',
+//   getFeaturedProducts
+// );
+
+// router.get(
+//   '/:id',
+//   getProductById
+// );
+
+// // PROTECTED ROUTES
+// router.post(
+//   '/',
+//   protect,
+//   createProduct
+// );
+
+// router.put(
+//   '/:id',
+//   protect,
+//   updateProduct
+// );
+
+// router.delete(
+//   '/:id',
+//   protect,
+//   deleteProduct
+// );
+
+// module.exports = router;
+
 const express = require('express');
 
 const router = express.Router();
@@ -39,10 +89,12 @@ const {
   createProduct,
   getProductById,
   updateProduct,
+  toggleProductStatus,
   deleteProduct
 } = require('../controllers/productController');
 
 // PUBLIC ROUTES
+
 router.get('/', getProducts);
 
 router.get(
@@ -56,6 +108,7 @@ router.get(
 );
 
 // PROTECTED ROUTES
+
 router.post(
   '/',
   protect,
@@ -66,6 +119,13 @@ router.put(
   '/:id',
   protect,
   updateProduct
+);
+
+// ACTIVE / OUT OF STOCK
+router.patch(
+  '/:id/status',
+  protect,
+  toggleProductStatus
 );
 
 router.delete(

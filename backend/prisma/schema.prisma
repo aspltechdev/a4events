@@ -28,6 +28,8 @@ model Product {
   category        String?
   discountPercent Int?    @default(0)
 
+  isActive Boolean @default(true)
+
   ingredients ProductIngredient[]
 
   heroSlides HeroSlide[]
@@ -37,6 +39,7 @@ model Product {
 
   createdAt DateTime @default(now())
 }
+
 
 model ProductIngredient {
   id Int @id @default(autoincrement())
