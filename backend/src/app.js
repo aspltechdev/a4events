@@ -137,6 +137,7 @@ const heroSlideRoutes = require('./routes/heroSlideRoutes');
 const galleryRoutes = require('./routes/galleryRoutes');
 const testimonialRoutes = require('./routes/testimonialRoutes');
 const orderRoutes = require("./routes/orderRoutes");
+const documentRoutes = require("./routes/documentRoutes");
 
 const cartRoutes = require('./routes/cartRoutes');
 const paypalRoutes = require("./routes/paypalRoutes");
@@ -167,7 +168,11 @@ app.use("/api/orders", orderRoutes);
 app.use(
   '/uploads',
   express.static(path.join(__dirname, '../uploads'))
+
+
 );
+
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/contact', contactRoutes);
