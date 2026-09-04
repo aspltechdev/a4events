@@ -164,6 +164,7 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 app.use("/api/orders", orderRoutes);
+app.use("/api/documents", documentRoutes);
 
 app.use(
   '/uploads',

@@ -34,6 +34,7 @@ import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import Payment from '../pages/Payment';
 import PaymentProofs from '../pages/admin/PaymentProofs';
+import Documents from '../pages/admin/Documents';
 
 
 
@@ -45,24 +46,24 @@ function AppRoutes() {
       <Route path="/events" element={<Events />} />
       <Route path="/login" element={<Login />} />
       <Route path="/contact" element={<Contact />} />
-         <Route path="/business" element={<Business />} />
-          <Route path="/education" element={<Education/>} />
-          <Route path="/cart" element={<Cart />} />
+      <Route path="/business" element={<Business />} />
+      <Route path="/education" element={<Education />} />
+      <Route path="/cart" element={<Cart />} />
 
-<Route
-  path="/payment"
-  element={<Payment />}
-/>
+      <Route
+        path="/payment"
+        element={<Payment />}
+      />
 
-          <Route
-  path="/checkout"
-  element={<Checkout />}
-/>
-   
+      <Route
+        path="/checkout"
+        element={<Checkout />}
+      />
+
       <Route path="/products/:id" element={<ProductDetails />} />
-<Route path="/events/:id" element={<EventDetails />} />
+      <Route path="/events/:id" element={<EventDetails />} />
 
- <Route
+      <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
@@ -73,160 +74,109 @@ function AppRoutes() {
 
 
       <Route
-  path="/admin"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
 
-<Route
-  path="/admin/products"
-  element={
-    <ProtectedRoute>
-      <ProductsList />
-    </ProtectedRoute>
-  }
-/>
-
-
-<Route
-  path="/admin/payment-proofs"
-  element={
-   <ProtectedRoute>
-  <PaymentProofs />
-  </ProtectedRoute>}
-/>
-
-<Route
-  path="/admin/products/add"
-  element={
-    <ProtectedRoute>
-      <AddProduct />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/products/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditProduct />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/events"
-  element={
-    <ProtectedRoute>
-      <EventsList />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/events/add"
-  element={
-    <ProtectedRoute>
-      <AddEvent />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/events/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditEvent />
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/admin/products"
+        element={
+          <ProtectedRoute>
+            <ProductsList />
+          </ProtectedRoute>
+        }
+      />
 
 
-<Route
-  path="/admin/inquiries"
-  element={
-    <ProtectedRoute>
-      <Inquiries />
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/admin/payment-proofs"
+        element={
+          <ProtectedRoute>
+            <PaymentProofs />
+          </ProtectedRoute>}
+      />
+
+      <Route
+        path="/admin/products/add"
+        element={
+          <ProtectedRoute>
+            <AddProduct />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/products/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditProduct />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/events"
+        element={
+          <ProtectedRoute>
+            <EventsList />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/events/add"
+        element={
+          <ProtectedRoute>
+            <AddEvent />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/events/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditEvent />
+          </ProtectedRoute>
+        }
+      />
 
 
-
-
-
-<Route
-  path="/admin/contacts"
-  element={
-    <ProtectedRoute>
-      <Contacts/>
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/admin/inquiries"
+        element={
+          <ProtectedRoute>
+            <Inquiries />
+          </ProtectedRoute>
+        }
+      />
 
 
 
 
 
+      <Route
+        path="/admin/contacts"
+        element={
+          <ProtectedRoute>
+            <Contacts />
+          </ProtectedRoute>
+        }
+      />
 
 
-<Route
-  path="/admin/hero-slides"
-  element={
-    <ProtectedRoute>
-      <HeroSlides />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/hero-slides/add"
-  element={
-    <ProtectedRoute>
-      <AddHeroSlide />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/hero-slides/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditHeroSlide />
-    </ProtectedRoute>
-  }
-/>
-
-
-<Route
-  path="/admin/gallery"
-  element={
-    <ProtectedRoute>
-      <Gallery />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/gallery/add"
-  element={
-    <ProtectedRoute>
-      <AddGalleryImage />
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/gallery/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditGalleryImage />
-    </ProtectedRoute>
-  }
-/>
+          <Route
+        path="/admin/documents"
+        element={
+          <ProtectedRoute>
+            <Documents />
+          </ProtectedRoute>
+        }
+      />
 
 
 
@@ -235,6 +185,60 @@ function AppRoutes() {
 
 
 
+      <Route
+        path="/admin/hero-slides"
+        element={
+          <ProtectedRoute>
+            <HeroSlides />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/hero-slides/add"
+        element={
+          <ProtectedRoute>
+            <AddHeroSlide />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/hero-slides/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditHeroSlide />
+          </ProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/admin/gallery"
+        element={
+          <ProtectedRoute>
+            <Gallery />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/gallery/add"
+        element={
+          <ProtectedRoute>
+            <AddGalleryImage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/gallery/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditGalleryImage />
+          </ProtectedRoute>
+        }
+      />
 
 
 
@@ -248,32 +252,40 @@ function AppRoutes() {
 
 
 
-<Route
-  path="/admin/testimonials"
-  element={
-    <ProtectedRoute>
-      <Testimonials />
-    </ProtectedRoute>
-  }
-/>
 
-<Route
-  path="/admin/testimonials/add"
-  element={
-    <ProtectedRoute>
-      <AddTestimonial />
-    </ProtectedRoute>
-  }
-/>
 
-<Route
-  path="/admin/testimonials/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditTestimonial />
-    </ProtectedRoute>
-  }
-/>
+
+
+
+
+
+
+      <Route
+        path="/admin/testimonials"
+        element={
+          <ProtectedRoute>
+            <Testimonials />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/testimonials/add"
+        element={
+          <ProtectedRoute>
+            <AddTestimonial />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/testimonials/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditTestimonial />
+          </ProtectedRoute>
+        }
+      />
 
 
 
@@ -282,7 +294,7 @@ function AppRoutes() {
 
 
     </Routes>
-    
+
   );
 }
 
