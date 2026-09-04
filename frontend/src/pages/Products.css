@@ -952,6 +952,210 @@
 
 
 
+/* ============================================================
+   PRODUCT CARD - ACTION SECTION (FIXED)
+   ============================================================ */
+
+.prd-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.3rem 1.2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* View Details Link */
+.prd-view-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(15, 23, 36, 0.5);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.3s var(--ease-premium);
+}
+
+.prd-card:hover .prd-view-details {
+  color: #0d9488;
+}
+
+.prd-view-details .prd-card-arrow {
+  transition: transform 0.3s var(--ease-premium);
+}
+
+.prd-card:hover .prd-view-details .prd-card-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   ADD TO CART BUTTON
+   ============================================================ */
+
+.prd-add-cart {
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-premium);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.prd-add-cart:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+}
+
+.prd-add-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   QUANTITY CONTROLS
+   ============================================================ */
+
+.prd-cart-quantity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 0.15rem;
+  flex-shrink: 0;
+}
+
+.prd-cart-quantity button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prd-cart-quantity button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.prd-cart-quantity button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.prd-cart-quantity span {
+  min-width: 24px;
+  text-align: center;
+  color: #1a1a2e;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   PRODUCT CARD - DARK CARD VARIANT (if used)
+   ============================================================ */
+
+/* If your cards are dark themed, use these overrides */
+.prd-card-dark .prd-card-action {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+.prd-card-dark .prd-view-details {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.prd-card-dark .prd-view-details:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.prd-card-dark .prd-cart-quantity {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.prd-card-dark .prd-cart-quantity button {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.prd-card-dark .prd-cart-quantity button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.prd-card-dark .prd-cart-quantity span {
+  color: #fff;
+}
+
+/* ============================================================
+   FIX: Remove conflicting styles
+   ============================================================ */
+
+/* Remove or comment out any conflicting .prd-card-action styles */
+/* The styles below were merged into the ones above */
+
+/* 
+   OLD CONFLICTING STYLES (REMOVED):
+   .prd-card-action {
+     display: inline-flex;
+     align-items: center;
+     gap: 0.4rem;
+     font-size: 0.78rem;
+     font-weight: 500;
+     color: rgba(15, 23, 36, 0.45);
+     margin-top: auto;
+     transition: all 0.3s var(--ease-premium);
+   }
+*/
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 500px) {
+  .prd-card-action {
+    padding: 0.6rem 1rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .prd-view-details {
+    font-size: 0.75rem;
+  }
+
+  .prd-add-cart {
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+  }
+
+  .prd-cart-quantity button {
+    width: 24px;
+    height: 24px;
+    font-size: 0.9rem;
+  }
+
+  .prd-cart-quantity span {
+    min-width: 20px;
+    font-size: 0.78rem;
+  }
+}
+
 
 
 

@@ -257,6 +257,12 @@ model Order {
   deliveryChargeRequired Boolean @default(false)
 
   // =====================================================
+  // DELIVERY OPTION
+  // =====================================================
+
+  deliveryOption String @default("normal")
+
+  // =====================================================
   // GDPR / DATA ACKNOWLEDGEMENT
   // =====================================================
 
