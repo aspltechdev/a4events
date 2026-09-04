@@ -1083,3 +1083,79 @@
   letter-spacing: 0.04em;
   opacity: 0.55;
 }
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   ORDER DESCRIPTION
+===================================================== */
+
+.checkout-order-description {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.checkout-order-description-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.checkout-order-description p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #333;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+
+
+
+/* =====================================================
+   DELIVERY OPTION DISPLAY
+===================================================== */
+
+.checkout-delivery-option-display {
+  margin-top: 16px;
+  padding: 13px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.checkout-delivery-option-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+  flex-shrink: 0;
+}
+
+.checkout-delivery-option-value {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #333;
+  text-align: right;
+}

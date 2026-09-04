@@ -4024,6 +4024,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import scanner from "../assets/scanner.jpeg";
+import bankscanner from "../assets/bankscanner.png";
 
 import PublicLayout from "../layouts/PublicLayout";
 import "./Payment.css";
@@ -4036,10 +4037,10 @@ const API_URL =
 // =====================================================
 
 const BANK_DETAILS = {
-  accountName: "Naga Kumar Gangeswaran",
-  iban: "DE75 2687 0024 0207 7303 00",
-  bic: "DEUTDEDB268",
-  bankName: "Deutsche Bank",
+  accountName: "A4A Anagrams UG",
+  iban: "DE76 1001 8000 0256 7072 41",
+  bic: "FNOMDEB2",
+  bankName: "FINOM PAYMENTS",
   country: "Germany",
 };
 
@@ -4401,7 +4402,7 @@ function Payment() {
 
                       <div className="payment-qr-wrapper">
                         <img
-                          src={QR_IMAGE}
+                          src={bankscanner}
                           alt="Payment QR Code"
                           className="payment-qr-image"
                         />
