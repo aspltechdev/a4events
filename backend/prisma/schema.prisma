@@ -269,6 +269,12 @@ model Order {
   dataAcknowledgement Boolean @default(false)
 
   // =====================================================
+  // ORDER DESCRIPTION - NEW FIELD
+  // =====================================================
+
+  orderDescription String? @db.VarChar(500)
+
+  // =====================================================
   // ORDER ITEMS
   // =====================================================
 
