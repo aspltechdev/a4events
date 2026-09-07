@@ -5204,22 +5204,85 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import PublicLayout from "../layouts/PublicLayout";
 import "./Products.css";
 
-function Products() {
-  // =====================================================
-  // PRODUCTS
-  // =====================================================
+// =====================================================
+// API URL
+// =====================================================
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
+
+// =====================================================
+// PRODUCTS
+// =====================================================
+
+function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("all");
   const [isPaused, setIsPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+
   const sectionRef = useRef(null);
 
   // =====================================================
@@ -5243,7 +5306,12 @@ function Products() {
     let sessionId = localStorage.getItem("cartSessionId");
 
     if (!sessionId) {
-      sessionId = "cart-" + Date.now() + "-" + Math.random().toString(36).substring(2, 10);
+      sessionId =
+        "cart-" +
+        Date.now() +
+        "-" +
+        Math.random().toString(36).substring(2, 10);
+
       localStorage.setItem("cartSessionId", sessionId);
     }
 
@@ -5255,15 +5323,15 @@ function Products() {
   // =====================================================
 
   useEffect(() => {
-    const popupShown = sessionStorage.getItem("flowerPopupShown");
+    const popupShown =
+      sessionStorage.getItem("flowerPopupShown");
 
-    if (popupShown) {
+    if (popupShown === "true") {
       return;
     }
 
     const timer = setTimeout(() => {
       setShowFlowerPopup(true);
-      sessionStorage.setItem("flowerPopupShown", "true");
     }, 500);
 
     return () => {
@@ -5278,9 +5346,13 @@ function Products() {
   const fetchCartItems = useCallback(async () => {
     try {
       const sessionId = getSessionId();
-      const { data } = await api.get(`/cart/${sessionId}`);
+
+      const { data } = await api.get(
+        `/cart/${sessionId}`
+      );
 
       const quantities = {};
+
       data.items?.forEach((item) => {
         quantities[item.productId] = item.quantity;
       });
@@ -5291,7 +5363,11 @@ function Products() {
         setCartItems({});
         return;
       }
-      console.error("Failed to load cart:", error);
+
+      console.error(
+        "Failed to load cart:",
+        error
+      );
     }
   }, [getSessionId]);
 
@@ -5312,10 +5388,16 @@ function Products() {
       fetchCartItems();
     };
 
-    window.addEventListener("cartUpdated", handleCartUpdated);
+    window.addEventListener(
+      "cartUpdated",
+      handleCartUpdated
+    );
 
     return () => {
-      window.removeEventListener("cartUpdated", handleCartUpdated);
+      window.removeEventListener(
+        "cartUpdated",
+        handleCartUpdated
+      );
     };
   }, [fetchCartItems]);
 
@@ -5323,22 +5405,46 @@ function Products() {
   // FETCH PRODUCTS
   // =====================================================
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
 
     try {
       const { data } = await api.get("/products");
-      setProducts(data);
+
+      /*
+       * Supports both:
+       * [
+       *   {...}
+       * ]
+       *
+       * and:
+       * {
+       *   products: [...]
+       * }
+       */
+
+      if (Array.isArray(data)) {
+        setProducts(data);
+      } else if (Array.isArray(data?.products)) {
+        setProducts(data.products);
+      } else {
+        setProducts([]);
+      }
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error(
+        "Failed to fetch products:",
+        error
+      );
+
+      setProducts([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   // =====================================================
   // VISIBILITY OBSERVER
@@ -5384,16 +5490,25 @@ function Products() {
         quantity: 1,
       });
 
-      if (response.status === 200 || response.status === 201) {
+      if (
+        response.status === 200 ||
+        response.status === 201
+      ) {
         setCartItems((prev) => ({
           ...prev,
-          [productId]: (prev[productId] || 0) + 1,
+          [productId]:
+            (prev[productId] || 0) + 1,
         }));
 
-        window.dispatchEvent(new Event("cartUpdated"));
+        window.dispatchEvent(
+          new Event("cartUpdated")
+        );
       }
     } catch (error) {
-      console.error("Add to cart error:", error);
+      console.error(
+        "Add to cart error:",
+        error
+      );
     } finally {
       setCartLoading((prev) => ({
         ...prev,
@@ -5406,7 +5521,10 @@ function Products() {
   // UPDATE CART QUANTITY
   // =====================================================
 
-  const updateCartQuantity = async (productId, quantity) => {
+  const updateCartQuantity = async (
+    productId,
+    quantity
+  ) => {
     if (quantity < 1) {
       await removeFromCart(productId);
       return;
@@ -5420,18 +5538,26 @@ function Products() {
 
       const sessionId = getSessionId();
 
-      await api.put(`/cart/${sessionId}/${productId}`, {
-        quantity,
-      });
+      await api.put(
+        `/cart/${sessionId}/${productId}`,
+        {
+          quantity,
+        }
+      );
 
       setCartItems((prev) => ({
         ...prev,
         [productId]: quantity,
       }));
 
-      window.dispatchEvent(new Event("cartUpdated"));
+      window.dispatchEvent(
+        new Event("cartUpdated")
+      );
     } catch (error) {
-      console.error("Update cart error:", error);
+      console.error(
+        "Update cart error:",
+        error
+      );
     } finally {
       setCartLoading((prev) => ({
         ...prev,
@@ -5453,17 +5579,28 @@ function Products() {
 
       const sessionId = getSessionId();
 
-      await api.delete(`/cart/${sessionId}/${productId}`);
+      await api.delete(
+        `/cart/${sessionId}/${productId}`
+      );
 
       setCartItems((prev) => {
-        const updated = { ...prev };
+        const updated = {
+          ...prev,
+        };
+
         delete updated[productId];
+
         return updated;
       });
 
-      window.dispatchEvent(new Event("cartUpdated"));
+      window.dispatchEvent(
+        new Event("cartUpdated")
+      );
     } catch (error) {
-      console.error("Remove cart error:", error);
+      console.error(
+        "Remove cart error:",
+        error
+      );
     } finally {
       setCartLoading((prev) => ({
         ...prev,
@@ -5473,18 +5610,28 @@ function Products() {
   };
 
   // =====================================================
-  // CATEGORIES - CUSTOM ORDER WITH MERGED CATEGORIES
+  // CATEGORIES
   // =====================================================
 
-  // Define category display names and their filter values
   const categoryConfig = [
     {
       display: "Fresh Flowers & Seasonal",
-      filter: ["Fresh Items - Seasonal Fruits & Flowers", "Flowers", "fresh flowers", "seasonal"],
+      filter: [
+        "Fresh Items - Seasonal Fruits & Flowers",
+        "Flowers",
+        "fresh flowers",
+        "seasonal",
+      ],
     },
     {
       display: "Organic & Millets",
-      filter: ["Organic", "Millets", "Millet", "Organic Millets", "Organic & Millets"],
+      filter: [
+        "Organic",
+        "Millets",
+        "Millet",
+        "Organic Millets",
+        "Organic & Millets",
+      ],
     },
     {
       display: "All Products",
@@ -5492,130 +5639,258 @@ function Products() {
     },
   ];
 
-  // Get all unique categories from products
-  const allCategories = [...new Set(
-    products
-      .map((product) => product.category)
-      .filter(Boolean)
-  )];
+  // =====================================================
+  // ALL CATEGORIES
+  // =====================================================
 
-  // Helper to check if a product belongs to a category group
-  const isInCategoryGroup = (product, filterValues) => {
-    if (filterValues === "all") return true;
+  const allCategories = [
+    ...new Set(
+      products
+        .map((product) => product.category)
+        .filter(Boolean)
+    ),
+  ];
+
+  // =====================================================
+  // CATEGORY HELPER
+  // =====================================================
+
+  const isInCategoryGroup = (
+    product,
+    filterValues
+  ) => {
+    if (filterValues === "all") {
+      return true;
+    }
+
     if (Array.isArray(filterValues)) {
-      const productCategory = String(product.category || "").trim().toLowerCase();
+      const productCategory = String(
+        product.category || ""
+      )
+        .trim()
+        .toLowerCase();
+
       return filterValues.some((val) => {
-        const filter = String(val).trim().toLowerCase();
-        return productCategory.includes(filter) || filter.includes(productCategory);
+        const filter = String(val)
+          .trim()
+          .toLowerCase();
+
+        return (
+          productCategory.includes(filter) ||
+          filter.includes(productCategory)
+        );
       });
     }
+
     return product.category === filterValues;
   };
 
-  // Get products for a specific category group
-  const getProductsForCategory = (filterValues) => {
-    if (filterValues === "all") return products;
-    if (Array.isArray(filterValues)) {
-      return products.filter((product) => isInCategoryGroup(product, filterValues));
+  // =====================================================
+  // PRODUCTS FOR CATEGORY
+  // =====================================================
+
+  const getProductsForCategory = (
+    filterValues
+  ) => {
+    if (filterValues === "all") {
+      return products;
     }
-    return products.filter((product) => product.category === filterValues);
+
+    if (Array.isArray(filterValues)) {
+      return products.filter((product) =>
+        isInCategoryGroup(
+          product,
+          filterValues
+        )
+      );
+    }
+
+    return products.filter(
+      (product) =>
+        product.category === filterValues
+    );
   };
 
-  // Build the final category list with counts
-  const categories = categoryConfig.map((config) => {
-    const count = getProductsForCategory(config.filter).length;
-    return {
-      display: config.display,
-      filter: config.filter,
-      count: count,
-    };
-  }).filter((cat) => cat.count > 0);
+  // =====================================================
+  // CATEGORY LIST
+  // =====================================================
 
-  // Add any remaining categories that aren't in the config
-  const usedFilters = categoryConfig.flatMap(c => 
-    Array.isArray(c.filter) ? c.filter : [c.filter]
-  );
+  const categories = categoryConfig
+    .map((config) => {
+      const count =
+        getProductsForCategory(
+          config.filter
+        ).length;
 
-  const remainingCategories = allCategories.filter(
-    (cat) => !usedFilters.some((filter) => 
-      typeof filter === "string" && 
-      cat.toLowerCase().includes(filter.toLowerCase())
-    )
-  );
-
-  remainingCategories.forEach((cat) => {
-    const count = products.filter((p) => p.category === cat).length;
-    if (count > 0) {
-      categories.push({
-        display: cat,
-        filter: cat,
-        count: count,
-      });
-    }
-  });
+      return {
+        display: config.display,
+        filter: config.filter,
+        count,
+      };
+    })
+    .filter((cat) => cat.count > 0);
 
   // =====================================================
-  // GET FILTERED PRODUCTS FOR ACTIVE CATEGORY - FIXED
+  // REMAINING CATEGORIES
+  // =====================================================
+
+  const usedFilters =
+    categoryConfig.flatMap((category) =>
+      Array.isArray(category.filter)
+        ? category.filter
+        : [category.filter]
+    );
+
+  const remainingCategories =
+    allCategories.filter(
+      (category) =>
+        !usedFilters.some(
+          (filter) =>
+            typeof filter === "string" &&
+            filter !== "all" &&
+            category
+              .toLowerCase()
+              .includes(
+                filter.toLowerCase()
+              )
+        )
+    );
+
+  remainingCategories.forEach(
+    (category) => {
+      const count = products.filter(
+        (product) =>
+          product.category === category
+      ).length;
+
+      if (count > 0) {
+        categories.push({
+          display: category,
+          filter: category,
+          count,
+        });
+      }
+    }
+  );
+
+  // =====================================================
+  // FILTERED PRODUCTS
   // =====================================================
 
   const getFilteredProducts = () => {
-    if (activeCategory === "all") return products;
-    
-    // Find the category config by display name
-    const config = categoryConfig.find((c) => c.display === activeCategory);
-
-    if (config) {
-      return getProductsForCategory(config.filter);
+    if (activeCategory === "all") {
+      return products;
     }
 
-    // Fallback: direct category match
-    return products.filter((product) => product.category === activeCategory);
+    const config = categoryConfig.find(
+      (category) =>
+        category.display === activeCategory
+    );
+
+    if (config) {
+      return getProductsForCategory(
+        config.filter
+      );
+    }
+
+    return products.filter(
+      (product) =>
+        product.category === activeCategory
+    );
   };
 
-  const filteredProducts = getFilteredProducts();
+  const filteredProducts =
+    getFilteredProducts();
 
   // =====================================================
   // FEATURED PRODUCTS
   // =====================================================
 
-  const featuredProducts = products.filter((product) => product.featured);
-  const marqueeProducts = [...featuredProducts, ...featuredProducts];
+  const featuredProducts =
+    products.filter(
+      (product) => product.featured
+    );
+
+  const marqueeProducts = [
+    ...featuredProducts,
+    ...featuredProducts,
+  ];
 
   // =====================================================
-  // CHECK IF PRODUCT IS FLOWER
+  // FLOWER PRODUCT
   // =====================================================
 
   const isFlowerProduct = (product) => {
-    const category = String(product.category || "").trim().toLowerCase();
-    return category.includes("flower") || 
-           category.includes("fresh items - seasonal fruits & flowers") ||
-           category.includes("seasonal");
+    const category = String(
+      product.category || ""
+    )
+      .trim()
+      .toLowerCase();
+
+    return (
+      category.includes("flower") ||
+      category.includes(
+        "fresh items - seasonal fruits & flowers"
+      ) ||
+      category.includes("seasonal")
+    );
   };
 
   // =====================================================
-  // PRICE
+  // PRODUCT IMAGE URL
   // =====================================================
 
-  const getDisplayPrice = (price, discountPercent) => {
-    if (discountPercent && Number(discountPercent) > 0) {
-      return Math.round(price - (price * Number(discountPercent)) / 100);
+  const getProductImageUrl = (image) => {
+    if (!image) {
+      return null;
     }
-    return Math.round(price);
+
+    if (
+      image.startsWith("http://") ||
+      image.startsWith("https://")
+    ) {
+      return image;
+    }
+
+    return `${API_ORIGIN}${
+      image.startsWith("/") ? "" : "/"
+    }${image}`;
   };
 
   // =====================================================
   // PRODUCT CARD
   // =====================================================
 
-  const renderProductCard = (product, index) => {
-    const discountPercent = Number(product.discountPercent) || 0;
-    const hasDiscount = discountPercent > 0;
+  const renderProductCard = (
+    product,
+    index
+  ) => {
+    const discountPercent =
+      Number(product.discountPercent) || 0;
+
+    const hasDiscount =
+      discountPercent > 0;
+
     const displayPrice = hasDiscount
-      ? Math.round(product.price - (product.price * discountPercent) / 100)
+      ? Math.round(
+          product.price -
+            (product.price *
+              discountPercent) /
+              100
+        )
       : Math.round(product.price);
 
-    const isLoading = cartLoading[product.id] || false;
-    const isFlower = isFlowerProduct(product);
+    const isLoading =
+      cartLoading[product.id] || false;
+
+    const isFlower =
+      isFlowerProduct(product);
+
+    const imageUrl =
+      getProductImageUrl(product.image);
+
+    const isOutOfStock =
+      product.isActive === false;
 
     return (
       <div
@@ -5626,7 +5901,10 @@ function Products() {
         }}
       >
         <div className="prd-card">
-          <div className="prd-card-shine" aria-hidden="true" />
+          <div
+            className="prd-card-shine"
+            aria-hidden="true"
+          />
 
           {/* =========================================
               PRODUCT IMAGE
@@ -5638,23 +5916,25 @@ function Products() {
           >
             <div className="prd-card-media">
               <div className="prd-card-image-wrap">
-                {product.image && (
+                {imageUrl && (
                   <img
-                    src={`https://a4agroup.eu${product.image}`}
+                    src={imageUrl}
                     alt={product.title}
                     className="prd-card-image"
                     loading="lazy"
                   />
                 )}
+
                 <div className="prd-card-image-veil" />
               </div>
 
               <div className="prd-card-badges">
-                {product.featured && !hasDiscount && (
-                  <span className="prd-badge prd-badge-featured">
-                    Featured
-                  </span>
-                )}
+                {product.featured &&
+                  !hasDiscount && (
+                    <span className="prd-badge prd-badge-featured">
+                      Featured
+                    </span>
+                  )}
 
                 {hasDiscount && (
                   <span className="prd-badge prd-badge-discount">
@@ -5665,6 +5945,12 @@ function Products() {
                 {isFlower && (
                   <span className="prd-badge prd-badge-flower">
                     🌸 Flower
+                  </span>
+                )}
+
+                {isOutOfStock && (
+                  <span className="prd-badge prd-badge-out-of-stock">
+                    Out of Stock
                   </span>
                 )}
               </div>
@@ -5682,10 +5968,13 @@ function Products() {
             <div className="prd-card-details">
               <div className="prd-card-category">
                 <span className="prd-card-category-dot" />
+
                 {product.category}
               </div>
 
-              <h3 className="prd-card-title">{product.title}</h3>
+              <h3 className="prd-card-title">
+                {product.title}
+              </h3>
 
               <p className="prd-card-description">
                 {product.description ||
@@ -5693,11 +5982,13 @@ function Products() {
               </p>
 
               <div className="prd-card-pricing">
-                <span className="prd-card-price">€{displayPrice}</span>
+                <span className="prd-card-price">
+                  €{displayPrice}
+                </span>
 
                 {hasDiscount && (
                   <span className="prd-card-price-original">
-                    €{product.price}
+                    €{Math.round(product.price)}
                   </span>
                 )}
               </div>
@@ -5714,7 +6005,10 @@ function Products() {
               className="prd-view-details"
             >
               <span>View Details</span>
-              <span className="prd-card-arrow">→</span>
+
+              <span className="prd-card-arrow">
+                →
+              </span>
             </Link>
 
             {/* =====================================
@@ -5724,19 +6018,17 @@ function Products() {
             {isFlower && (
               <>
                 {/* OUT OF STOCK */}
-                {product.isActive === false ? (
+                {isOutOfStock ? (
                   <button
                     type="button"
                     className="prd-add-cart prd-add-cart-out-of-stock"
                     disabled
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
                   >
                     Out of Stock
                   </button>
-                ) : !cartItems[product.id] ? (
+                ) : !cartItems[
+                    product.id
+                  ] ? (
                   /* ADD TO CART */
                   <button
                     type="button"
@@ -5745,10 +6037,13 @@ function Products() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
+
                       addToCart(product.id);
                     }}
                   >
-                    {isLoading ? "Adding..." : "Add to Cart"}
+                    {isLoading
+                      ? "Adding..."
+                      : "Add to Cart"}
                   </button>
                 ) : (
                   /* QUANTITY */
@@ -5764,7 +6059,9 @@ function Products() {
                       onClick={() =>
                         updateCartQuantity(
                           product.id,
-                          cartItems[product.id] - 1
+                          cartItems[
+                            product.id
+                          ] - 1
                         )
                       }
                       disabled={isLoading}
@@ -5773,14 +6070,18 @@ function Products() {
                       −
                     </button>
 
-                    <span>{cartItems[product.id]}</span>
+                    <span>
+                      {cartItems[product.id]}
+                    </span>
 
                     <button
                       type="button"
                       onClick={() =>
                         updateCartQuantity(
                           product.id,
-                          cartItems[product.id] + 1
+                          cartItems[
+                            product.id
+                          ] + 1
                         )
                       }
                       disabled={isLoading}
@@ -5794,7 +6095,10 @@ function Products() {
             )}
           </div>
 
-          <div className="prd-card-edge" aria-hidden="true" />
+          <div
+            className="prd-card-edge"
+            aria-hidden="true"
+          />
         </div>
       </div>
     );
@@ -5809,6 +6113,7 @@ function Products() {
       <PublicLayout>
         <div className="prd-loading">
           <div className="prd-loading-spinner" />
+
           <p>Loading products...</p>
         </div>
       </PublicLayout>
@@ -5836,48 +6141,67 @@ function Products() {
             <button
               type="button"
               className="flower-popup-close"
-              onClick={() => setShowFlowerPopup(false)}
+              onClick={() => {
+                sessionStorage.setItem(
+                  "flowerPopupShown",
+                  "true"
+                );
+
+                setShowFlowerPopup(false);
+              }}
               aria-label="Close"
             >
               ×
             </button>
 
-            <div className="flower-popup-icon">✿</div>
+            <div className="flower-popup-icon">
+              ✿
+            </div>
 
-            <span className="flower-popup-eyebrow">A QUICK QUESTION</span>
+            <span className="flower-popup-eyebrow">
+              A QUICK QUESTION
+            </span>
 
-            <h2 id="flower-popup-title">Are you looking for flowers?</h2>
+            <h2 id="flower-popup-title">
+              Are you looking for flowers?
+            </h2>
 
             <p>
-              Looking for something beautiful? Explore our
-              fresh flower collection.
+              Looking for something beautiful?
+              Explore our fresh flower collection.
             </p>
 
             <div className="flower-popup-actions">
-              {/* YES - Show Flowers */}
+              {/* YES */}
               <button
                 type="button"
                 className="flower-popup-yes"
                 onClick={() => {
-                  // Find the Fresh Flowers category display name
-                  const flowerCategory = categories.find(
-                    (c) => c.display === "Fresh Flowers & Seasonal"
-                  );
-                  if (flowerCategory) {
-                    setActiveCategory(flowerCategory.display);
-                  } else {
-                    // Fallback: try to find by filter
-                    const flowerConfig = categoryConfig.find(
-                      (c) => c.display === "Fresh Flowers & Seasonal"
+                  const flowerCategory =
+                    categories.find(
+                      (category) =>
+                        category.display ===
+                        "Fresh Flowers & Seasonal"
                     );
-                    if (flowerConfig) {
-                      setActiveCategory(flowerConfig.display);
-                    }
+
+                  if (flowerCategory) {
+                    setActiveCategory(
+                      flowerCategory.display
+                    );
                   }
+
+                  sessionStorage.setItem(
+                    "flowerPopupShown",
+                    "true"
+                  );
+
                   setShowFlowerPopup(false);
+
                   setTimeout(() => {
                     document
-                      .querySelector(".prd-catalog")
+                      .querySelector(
+                        ".prd-catalog"
+                      )
                       ?.scrollIntoView({
                         behavior: "smooth",
                         block: "start",
@@ -5885,16 +6209,25 @@ function Products() {
                   }, 100);
                 }}
               >
-                <span>Yes, show me flowers</span>
+                <span>
+                  Yes, show me flowers
+                </span>
+
                 <span>→</span>
               </button>
 
-              {/* NO - Show Everything */}
+              {/* NO */}
               <button
                 type="button"
                 className="flower-popup-no"
                 onClick={() => {
+                  sessionStorage.setItem(
+                    "flowerPopupShown",
+                    "true"
+                  );
+
                   setActiveCategory("all");
+
                   setShowFlowerPopup(false);
                 }}
               >
@@ -5912,13 +6245,20 @@ function Products() {
       <PublicLayout>
         <section
           ref={sectionRef}
-          className={`prd-premium ${isVisible ? "prd-visible" : ""}`}
+          className={`prd-premium ${
+            isVisible
+              ? "prd-visible"
+              : ""
+          }`}
         >
           {/* ===============================================
               ATMOSPHERIC DEPTH
           =============================================== */}
 
-          <div className="prd-atmosphere" aria-hidden="true">
+          <div
+            className="prd-atmosphere"
+            aria-hidden="true"
+          >
             <div className="prd-glow prd-glow--emerald" />
             <div className="prd-glow prd-glow--teal" />
             <div className="prd-glow prd-glow--blue" />
@@ -5931,7 +6271,10 @@ function Products() {
               FLOATING ORBS
           =============================================== */}
 
-          <div className="prd-orbs" aria-hidden="true">
+          <div
+            className="prd-orbs"
+            aria-hidden="true"
+          >
             <div className="prd-orb prd-orb--primary" />
             <div className="prd-orb prd-orb--secondary" />
           </div>
@@ -5945,22 +6288,28 @@ function Products() {
               <div className="prd-hero-content">
                 <div className="prd-whisper">
                   <span className="prd-whisper-pulse" />
-                  <span>Farm Fresh, Direct to You</span>
+
+                  <span>
+                    Farm Fresh, Direct to You
+                  </span>
                 </div>
 
                 <h1 className="prd-headline">
                   <span className="prd-headline-line">
                     Healthy & Organic
                   </span>
+
                   <span className="prd-headline-line prd-headline-radiance">
                     products for everyday wellness
                   </span>
                 </h1>
 
                 <p className="prd-prose">
-                  Explore our collection of millet mixes, rice,
-                  snacks, organics, oils, and seasonal products —
-                  all sourced directly from trusted farms.
+                  Explore our collection of millet
+                  mixes, rice, snacks, organics,
+                  oils, and seasonal products —
+                  all sourced directly from trusted
+                  farms.
                 </p>
               </div>
             </div>
@@ -5973,6 +6322,7 @@ function Products() {
               <div className="prd-featured">
                 <div className="prd-featured-header">
                   <div className="prd-featured-thread" />
+
                   <span className="prd-featured-label">
                     Featured Products
                   </span>
@@ -5980,20 +6330,31 @@ function Products() {
 
                 <div
                   className="prd-marquee-stage"
-                  onMouseEnter={() => setIsPaused(true)}
-                  onMouseLeave={() => setIsPaused(false)}
+                  onMouseEnter={() =>
+                    setIsPaused(true)
+                  }
+                  onMouseLeave={() =>
+                    setIsPaused(false)
+                  }
                 >
                   <div
                     className={`prd-marquee-track ${
-                      isPaused ? "prd-marquee-paused" : ""
+                      isPaused
+                        ? "prd-marquee-paused"
+                        : ""
                     }`}
                   >
-                    {marqueeProducts.map((product, index) =>
-                      renderProductCard(product, index)
+                    {marqueeProducts.map(
+                      (product, index) =>
+                        renderProductCard(
+                          product,
+                          index
+                        )
                     )}
                   </div>
 
                   <div className="prd-marquee-fade prd-marquee-fade-left" />
+
                   <div className="prd-marquee-fade prd-marquee-fade-right" />
                 </div>
               </div>
@@ -6006,33 +6367,50 @@ function Products() {
             <div className="prd-catalog">
               <div className="prd-catalog-header">
                 <div className="prd-catalog-thread" />
+
                 <span className="prd-catalog-label">
                   Our Collection
                 </span>
               </div>
 
               {/* =========================================
-                  CATEGORY TABS - FIXED ACTIVE STATE
+                  CATEGORY TABS
               ========================================= */}
 
               <div className="prd-categories">
                 <div className="prd-categories-tabs">
-                  {categories.map((category) => (
-                    <button
-                      key={category.display}
-                      className={`prd-category-tab ${
-                        activeCategory === category.display ? "prd-category-active" : ""
-                      }`}
-                      onClick={() => {
-                        setActiveCategory(category.display);
-                      }}
-                    >
-                      <span>{category.display}</span>
-                      <span className="prd-category-count">
-                        {category.count}
-                      </span>
-                    </button>
-                  ))}
+                  {categories.map(
+                    (category) => (
+                      <button
+                        key={
+                          category.display
+                        }
+                        type="button"
+                        className={`prd-category-tab ${
+                          activeCategory ===
+                          category.display
+                            ? "prd-category-active"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          setActiveCategory(
+                            category.display ===
+                              "All Products"
+                              ? "all"
+                              : category.display
+                          );
+                        }}
+                      >
+                        <span>
+                          {category.display}
+                        </span>
+
+                        <span className="prd-category-count">
+                          {category.count}
+                        </span>
+                      </button>
+                    )
+                  )}
                 </div>
               </div>
 
@@ -6041,19 +6419,29 @@ function Products() {
               ========================================= */}
 
               <div className="prd-grid">
-                {filteredProducts.length > 0 ? (
-                  filteredProducts.map((product, index) =>
-                    renderProductCard(product, index)
+                {filteredProducts.length >
+                0 ? (
+                  filteredProducts.map(
+                    (product, index) =>
+                      renderProductCard(
+                        product,
+                        index
+                      )
                   )
                 ) : (
                   <div className="prd-empty">
                     <div className="prd-empty-content">
                       <div className="prd-empty-thread" />
+
                       <h3 className="prd-empty-title">
-                        No products in this category
+                        No products in this
+                        category
                       </h3>
+
                       <p className="prd-empty-text">
-                        Select another category to explore our collection.
+                        Select another category
+                        to explore our
+                        collection.
                       </p>
                     </div>
                   </div>
@@ -6069,9 +6457,14 @@ function Products() {
               <div className="prd-empty">
                 <div className="prd-empty-content">
                   <div className="prd-empty-thread" />
-                  <h3 className="prd-empty-title">No Products Available</h3>
+
+                  <h3 className="prd-empty-title">
+                    No Products Available
+                  </h3>
+
                   <p className="prd-empty-text">
-                    Check back later for our premium collection.
+                    Check back later for our
+                    premium collection.
                   </p>
                 </div>
               </div>
