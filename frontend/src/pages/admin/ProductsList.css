@@ -469,3 +469,418 @@
 .apl-card-out-of-stock .apl-title {
   opacity: 0.75;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   PRODUCT FILTER TOOLBAR
+===================================================== */
+
+.apl-toolbar {
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, 1.7fr)
+        minmax(135px, 1fr)
+        minmax(135px, 1fr)
+        minmax(150px, 1fr)
+        minmax(145px, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+    padding: 12px;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+
+    background: #fff;
+
+    box-sizing: border-box;
+}
+
+
+/* SEARCH */
+
+.apl-search-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    background: #fafafa;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.apl-search-wrapper:focus-within {
+    border-color: #69a943;
+    background: #fff;
+}
+
+.apl-search-icon {
+    position: absolute;
+
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #888;
+
+    pointer-events: none;
+}
+
+.apl-search-input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0 40px 0 40px;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+
+    color: #333;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    box-sizing: border-box;
+}
+
+.apl-search-input::placeholder {
+    color: #999;
+}
+
+
+/* SEARCH CLEAR */
+
+.apl-search-clear {
+    position: absolute;
+
+    right: 7px;
+    top: 50%;
+
+    width: 28px;
+    height: 28px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #ededed;
+
+    color: #666;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.apl-search-clear:hover {
+    background: #e1e1e1;
+    color: #222;
+}
+
+
+/* FILTER SELECTS */
+
+.apl-filter-select {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+
+    padding: 0 30px 0 12px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #fafafa;
+
+    color: #444;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    text-overflow: ellipsis;
+}
+
+.apl-filter-select:hover {
+    border-color: #d3d3d3;
+}
+
+.apl-filter-select:focus {
+    border-color: #69a943;
+    background: #fff;
+}
+
+
+/* CLEAR */
+
+.apl-clear-filters {
+    min-width: 72px;
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid #dedede;
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #666;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.apl-clear-filters:hover {
+    background: #f7f7f7;
+    color: #222;
+}
+
+
+/* =====================================================
+   RESULTS BAR
+===================================================== */
+
+.apl-results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 30px;
+
+    margin-bottom: 12px;
+
+    padding: 0 2px;
+}
+
+.apl-results-bar > span {
+    font-size: 11px;
+    color: #888;
+}
+
+.apl-results-bar strong {
+    color: #444;
+    font-weight: 700;
+}
+
+.apl-reset-link {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #69a943;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   EMPTY RESET
+===================================================== */
+
+.apl-empty-reset {
+    margin-top: 12px;
+
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    background: #fff;
+
+    color: #555;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.apl-empty-reset:hover {
+    background: #f7f7f7;
+}
+
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (max-width: 1350px) {
+
+    .apl-toolbar {
+        grid-template-columns:
+            minmax(230px, 1.5fr)
+            minmax(125px, 1fr)
+            minmax(125px, 1fr)
+            minmax(135px, 1fr)
+            minmax(135px, 1fr)
+            auto;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET / SMALL DESKTOP
+===================================================== */
+
+@media (max-width: 1150px) {
+
+    .apl-toolbar {
+        grid-template-columns:
+            minmax(220px, 1fr)
+            minmax(145px, 1fr)
+            minmax(145px, 1fr);
+
+        align-items: stretch;
+    }
+
+    .apl-search-wrapper {
+        grid-column: 1 / -1;
+    }
+
+    .apl-clear-filters {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .apl-toolbar {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .apl-search-wrapper {
+        grid-column: 1 / -1;
+    }
+
+    .apl-clear-filters {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .apl-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 8px;
+
+        padding: 10px;
+    }
+
+    .apl-search-wrapper,
+    .apl-filter-select,
+    .apl-clear-filters {
+        width: 100%;
+    }
+
+    .apl-results-bar {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 5px;
+
+        margin-bottom: 10px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .apl-toolbar {
+        padding: 8px;
+    }
+
+    .apl-search-input {
+        font-size: 11px;
+    }
+
+    .apl-filter-select {
+        font-size: 10px;
+    }
+
+}

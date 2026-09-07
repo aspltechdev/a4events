@@ -5257,7 +5257,1248 @@
 
 
 
-import { useEffect, useState, useRef, useCallback } from "react";
+// import { useEffect, useState, useRef, useCallback } from "react";
+// import { Link } from "react-router-dom";
+// import api from "../services/api";
+// import PublicLayout from "../layouts/PublicLayout";
+// import "./Products.css";
+
+// // =====================================================
+// // API URL
+// // =====================================================
+
+// const API_URL =
+//   import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+// const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
+
+// // =====================================================
+// // PRODUCTS
+// // =====================================================
+
+// function Products() {
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [activeCategory, setActiveCategory] = useState("all");
+//   const [isPaused, setIsPaused] = useState(false);
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   const sectionRef = useRef(null);
+
+//   // =====================================================
+//   // FLOWER POPUP
+//   // =====================================================
+
+//   const [showFlowerPopup, setShowFlowerPopup] = useState(false);
+
+//   // =====================================================
+//   // CART
+//   // =====================================================
+
+//   const [cartItems, setCartItems] = useState({});
+//   const [cartLoading, setCartLoading] = useState({});
+
+//   // =====================================================
+//   // SESSION
+//   // =====================================================
+
+//   const getSessionId = useCallback(() => {
+//     let sessionId = localStorage.getItem("cartSessionId");
+
+//     if (!sessionId) {
+//       sessionId =
+//         "cart-" +
+//         Date.now() +
+//         "-" +
+//         Math.random().toString(36).substring(2, 10);
+
+//       localStorage.setItem("cartSessionId", sessionId);
+//     }
+
+//     return sessionId;
+//   }, []);
+
+//   // =====================================================
+//   // SHOW FLOWER POPUP
+//   // =====================================================
+
+//   useEffect(() => {
+//     const popupShown =
+//       sessionStorage.getItem("flowerPopupShown");
+
+//     if (popupShown === "true") {
+//       return;
+//     }
+
+//     const timer = setTimeout(() => {
+//       setShowFlowerPopup(true);
+//     }, 500);
+
+//     return () => {
+//       clearTimeout(timer);
+//     };
+//   }, []);
+
+//   // =====================================================
+//   // FETCH CART
+//   // =====================================================
+
+//   const fetchCartItems = useCallback(async () => {
+//     try {
+//       const sessionId = getSessionId();
+
+//       const { data } = await api.get(
+//         `/cart/${sessionId}`
+//       );
+
+//       const quantities = {};
+
+//       data.items?.forEach((item) => {
+//         quantities[item.productId] = item.quantity;
+//       });
+
+//       setCartItems(quantities);
+//     } catch (error) {
+//       if (error.response?.status === 404) {
+//         setCartItems({});
+//         return;
+//       }
+
+//       console.error(
+//         "Failed to load cart:",
+//         error
+//       );
+//     }
+//   }, [getSessionId]);
+
+//   // =====================================================
+//   // LOAD CART ON PAGE LOAD
+//   // =====================================================
+
+//   useEffect(() => {
+//     fetchCartItems();
+//   }, [fetchCartItems]);
+
+//   // =====================================================
+//   // CART UPDATE LISTENER
+//   // =====================================================
+
+//   useEffect(() => {
+//     const handleCartUpdated = () => {
+//       fetchCartItems();
+//     };
+
+//     window.addEventListener(
+//       "cartUpdated",
+//       handleCartUpdated
+//     );
+
+//     return () => {
+//       window.removeEventListener(
+//         "cartUpdated",
+//         handleCartUpdated
+//       );
+//     };
+//   }, [fetchCartItems]);
+
+//   // =====================================================
+//   // FETCH PRODUCTS
+//   // =====================================================
+
+//   const fetchProducts = useCallback(async () => {
+//     setLoading(true);
+
+//     try {
+//       const { data } = await api.get("/products");
+
+//       /*
+//        * Supports both:
+//        * [
+//        *   {...}
+//        * ]
+//        *
+//        * and:
+//        * {
+//        *   products: [...]
+//        * }
+//        */
+
+//       if (Array.isArray(data)) {
+//         setProducts(data);
+//       } else if (Array.isArray(data?.products)) {
+//         setProducts(data.products);
+//       } else {
+//         setProducts([]);
+//       }
+//     } catch (error) {
+//       console.error(
+//         "Failed to fetch products:",
+//         error
+//       );
+
+//       setProducts([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, [fetchProducts]);
+
+//   // =====================================================
+//   // VISIBILITY OBSERVER
+//   // =====================================================
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true);
+//         }
+//       },
+//       {
+//         threshold: 0.03,
+//       }
+//     );
+
+//     if (sectionRef.current) {
+//       observer.observe(sectionRef.current);
+//     }
+
+//     return () => {
+//       observer.disconnect();
+//     };
+//   }, [products]);
+
+//   // =====================================================
+//   // ADD TO CART
+//   // =====================================================
+
+//   const addToCart = async (productId) => {
+//     try {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: true,
+//       }));
+
+//       const sessionId = getSessionId();
+
+//       const response = await api.post("/cart/add", {
+//         sessionId,
+//         productId,
+//         quantity: 1,
+//       });
+
+//       if (
+//         response.status === 200 ||
+//         response.status === 201
+//       ) {
+//         setCartItems((prev) => ({
+//           ...prev,
+//           [productId]:
+//             (prev[productId] || 0) + 1,
+//         }));
+
+//         window.dispatchEvent(
+//           new Event("cartUpdated")
+//         );
+//       }
+//     } catch (error) {
+//       console.error(
+//         "Add to cart error:",
+//         error
+//       );
+//     } finally {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: false,
+//       }));
+//     }
+//   };
+
+//   // =====================================================
+//   // UPDATE CART QUANTITY
+//   // =====================================================
+
+//   const updateCartQuantity = async (
+//     productId,
+//     quantity
+//   ) => {
+//     if (quantity < 1) {
+//       await removeFromCart(productId);
+//       return;
+//     }
+
+//     try {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: true,
+//       }));
+
+//       const sessionId = getSessionId();
+
+//       await api.put(
+//         `/cart/${sessionId}/${productId}`,
+//         {
+//           quantity,
+//         }
+//       );
+
+//       setCartItems((prev) => ({
+//         ...prev,
+//         [productId]: quantity,
+//       }));
+
+//       window.dispatchEvent(
+//         new Event("cartUpdated")
+//       );
+//     } catch (error) {
+//       console.error(
+//         "Update cart error:",
+//         error
+//       );
+//     } finally {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: false,
+//       }));
+//     }
+//   };
+
+//   // =====================================================
+//   // REMOVE FROM CART
+//   // =====================================================
+
+//   const removeFromCart = async (productId) => {
+//     try {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: true,
+//       }));
+
+//       const sessionId = getSessionId();
+
+//       await api.delete(
+//         `/cart/${sessionId}/${productId}`
+//       );
+
+//       setCartItems((prev) => {
+//         const updated = {
+//           ...prev,
+//         };
+
+//         delete updated[productId];
+
+//         return updated;
+//       });
+
+//       window.dispatchEvent(
+//         new Event("cartUpdated")
+//       );
+//     } catch (error) {
+//       console.error(
+//         "Remove cart error:",
+//         error
+//       );
+//     } finally {
+//       setCartLoading((prev) => ({
+//         ...prev,
+//         [productId]: false,
+//       }));
+//     }
+//   };
+
+//   // =====================================================
+//   // CATEGORIES
+//   // =====================================================
+
+//   const categoryConfig = [
+//     {
+//       display: "Fresh Flowers & Seasonal",
+//       filter: [
+//         "Fresh Items - Seasonal Fruits & Flowers",
+//         "Flowers",
+//         "fresh flowers",
+//         "seasonal",
+//       ],
+//     },
+//     {
+//       display: "Organic & Millets",
+//       filter: [
+//         "Organic",
+//         "Millets",
+//         "Millet",
+//         "Organic Millets",
+//         "Organic & Millets",
+//       ],
+//     },
+//     {
+//       display: "All Products",
+//       filter: "all",
+//     },
+//   ];
+
+//   // =====================================================
+//   // ALL CATEGORIES
+//   // =====================================================
+
+//   const allCategories = [
+//     ...new Set(
+//       products
+//         .map((product) => product.category)
+//         .filter(Boolean)
+//     ),
+//   ];
+
+//   // =====================================================
+//   // CATEGORY HELPER
+//   // =====================================================
+
+//   const isInCategoryGroup = (
+//     product,
+//     filterValues
+//   ) => {
+//     if (filterValues === "all") {
+//       return true;
+//     }
+
+//     if (Array.isArray(filterValues)) {
+//       const productCategory = String(
+//         product.category || ""
+//       )
+//         .trim()
+//         .toLowerCase();
+
+//       return filterValues.some((val) => {
+//         const filter = String(val)
+//           .trim()
+//           .toLowerCase();
+
+//         return (
+//           productCategory.includes(filter) ||
+//           filter.includes(productCategory)
+//         );
+//       });
+//     }
+
+//     return product.category === filterValues;
+//   };
+
+//   // =====================================================
+//   // PRODUCTS FOR CATEGORY
+//   // =====================================================
+
+//   const getProductsForCategory = (
+//     filterValues
+//   ) => {
+//     if (filterValues === "all") {
+//       return products;
+//     }
+
+//     if (Array.isArray(filterValues)) {
+//       return products.filter((product) =>
+//         isInCategoryGroup(
+//           product,
+//           filterValues
+//         )
+//       );
+//     }
+
+//     return products.filter(
+//       (product) =>
+//         product.category === filterValues
+//     );
+//   };
+
+//   // =====================================================
+//   // CATEGORY LIST
+//   // =====================================================
+
+//   const categories = categoryConfig
+//     .map((config) => {
+//       const count =
+//         getProductsForCategory(
+//           config.filter
+//         ).length;
+
+//       return {
+//         display: config.display,
+//         filter: config.filter,
+//         count,
+//       };
+//     })
+//     .filter((cat) => cat.count > 0);
+
+//   // =====================================================
+//   // REMAINING CATEGORIES
+//   // =====================================================
+
+//   const usedFilters =
+//     categoryConfig.flatMap((category) =>
+//       Array.isArray(category.filter)
+//         ? category.filter
+//         : [category.filter]
+//     );
+
+//   const remainingCategories =
+//     allCategories.filter(
+//       (category) =>
+//         !usedFilters.some(
+//           (filter) =>
+//             typeof filter === "string" &&
+//             filter !== "all" &&
+//             category
+//               .toLowerCase()
+//               .includes(
+//                 filter.toLowerCase()
+//               )
+//         )
+//     );
+
+//   remainingCategories.forEach(
+//     (category) => {
+//       const count = products.filter(
+//         (product) =>
+//           product.category === category
+//       ).length;
+
+//       if (count > 0) {
+//         categories.push({
+//           display: category,
+//           filter: category,
+//           count,
+//         });
+//       }
+//     }
+//   );
+
+//   // =====================================================
+//   // FILTERED PRODUCTS
+//   // =====================================================
+
+//   const getFilteredProducts = () => {
+//     if (activeCategory === "all") {
+//       return products;
+//     }
+
+//     const config = categoryConfig.find(
+//       (category) =>
+//         category.display === activeCategory
+//     );
+
+//     if (config) {
+//       return getProductsForCategory(
+//         config.filter
+//       );
+//     }
+
+//     return products.filter(
+//       (product) =>
+//         product.category === activeCategory
+//     );
+//   };
+
+//   const filteredProducts =
+//     getFilteredProducts();
+
+//   // =====================================================
+//   // FEATURED PRODUCTS
+//   // =====================================================
+
+//   const featuredProducts =
+//     products.filter(
+//       (product) => product.featured
+//     );
+
+//   const marqueeProducts = [
+//     ...featuredProducts,
+//     ...featuredProducts,
+//   ];
+
+//   // =====================================================
+//   // FLOWER PRODUCT
+//   // =====================================================
+
+//   const isFlowerProduct = (product) => {
+//     const category = String(
+//       product.category || ""
+//     )
+//       .trim()
+//       .toLowerCase();
+
+//     return (
+//       category.includes("flower") ||
+//       category.includes(
+//         "fresh items - seasonal fruits & flowers"
+//       ) ||
+//       category.includes("seasonal")
+//     );
+//   };
+
+//   // =====================================================
+//   // PRODUCT IMAGE URL
+//   // =====================================================
+
+//   const getProductImageUrl = (image) => {
+//     if (!image) {
+//       return null;
+//     }
+
+//     if (
+//       image.startsWith("http://") ||
+//       image.startsWith("https://")
+//     ) {
+//       return image;
+//     }
+
+//     return `${API_ORIGIN}${
+//       image.startsWith("/") ? "" : "/"
+//     }${image}`;
+//   };
+
+//   // =====================================================
+//   // PRODUCT CARD
+//   // =====================================================
+
+//   const renderProductCard = (
+//     product,
+//     index
+//   ) => {
+//     const discountPercent =
+//       Number(product.discountPercent) || 0;
+
+//     const hasDiscount =
+//       discountPercent > 0;
+
+//     const displayPrice = hasDiscount
+//       ? Math.round(
+//           product.price -
+//             (product.price *
+//               discountPercent) /
+//               100
+//         )
+//       : Math.round(product.price);
+
+//     const isLoading =
+//       cartLoading[product.id] || false;
+
+//     const isFlower =
+//       isFlowerProduct(product);
+
+//     const imageUrl =
+//       getProductImageUrl(product.image);
+
+//     const isOutOfStock =
+//       product.isActive === false;
+
+//     return (
+//       <div
+//         key={`${product.id}-${index}`}
+//         className="prd-card-link"
+//         style={{
+//           "--card-index": index,
+//         }}
+//       >
+//         <div className="prd-card">
+//           <div
+//             className="prd-card-shine"
+//             aria-hidden="true"
+//           />
+
+//           {/* =========================================
+//               PRODUCT IMAGE
+//           ========================================= */}
+
+//           <Link
+//             to={`/products/${product.id}`}
+//             className="prd-card-image-link"
+//           >
+//             <div className="prd-card-media">
+//               <div className="prd-card-image-wrap">
+//                 {imageUrl && (
+//                   <img
+//                     src={imageUrl}
+//                     alt={product.title}
+//                     className="prd-card-image"
+//                     loading="lazy"
+//                   />
+//                 )}
+
+//                 <div className="prd-card-image-veil" />
+//               </div>
+
+//               <div className="prd-card-badges">
+//                 {product.featured &&
+//                   !hasDiscount && (
+//                     <span className="prd-badge prd-badge-featured">
+//                       Featured
+//                     </span>
+//                   )}
+
+//                 {hasDiscount && (
+//                   <span className="prd-badge prd-badge-discount">
+//                     {discountPercent}% OFF
+//                   </span>
+//                 )}
+
+//                 {isFlower && (
+//                   <span className="prd-badge prd-badge-flower">
+//                     🌸 Flower
+//                   </span>
+//                 )}
+
+//                 {isOutOfStock && (
+//                   <span className="prd-badge prd-badge-out-of-stock">
+//                     Out of Stock
+//                   </span>
+//                 )}
+//               </div>
+//             </div>
+//           </Link>
+
+//           {/* =========================================
+//               PRODUCT DETAILS
+//           ========================================= */}
+
+//           <Link
+//             to={`/products/${product.id}`}
+//             className="prd-card-details-link"
+//           >
+//             <div className="prd-card-details">
+//               <div className="prd-card-category">
+//                 <span className="prd-card-category-dot" />
+
+//                 {product.category}
+//               </div>
+
+//               <h3 className="prd-card-title">
+//                 {product.title}
+//               </h3>
+
+//               <p className="prd-card-description">
+//                 {product.description ||
+//                   "Premium quality product sourced from trusted farms."}
+//               </p>
+
+//               <div className="prd-card-pricing">
+//                 <span className="prd-card-price">
+//                   €{displayPrice}
+//                 </span>
+
+//                 {hasDiscount && (
+//                   <span className="prd-card-price-original">
+//                     €{Math.round(product.price)}
+//                   </span>
+//                 )}
+//               </div>
+//             </div>
+//           </Link>
+
+//           {/* =========================================
+//               ACTION SECTION
+//           ========================================= */}
+
+//           <div className="prd-card-action">
+//             <Link
+//               to={`/products/${product.id}`}
+//               className="prd-view-details"
+//             >
+//               <span>View Details</span>
+
+//               <span className="prd-card-arrow">
+//                 →
+//               </span>
+//             </Link>
+
+//             {/* =====================================
+//                 CART ONLY FOR FLOWERS
+//             ===================================== */}
+
+//             {isFlower && (
+//               <>
+//                 {/* OUT OF STOCK */}
+//                 {isOutOfStock ? (
+//                   <button
+//                     type="button"
+//                     className="prd-add-cart prd-add-cart-out-of-stock"
+//                     disabled
+//                   >
+//                     Out of Stock
+//                   </button>
+//                 ) : !cartItems[
+//                     product.id
+//                   ] ? (
+//                   /* ADD TO CART */
+//                   <button
+//                     type="button"
+//                     className="prd-add-cart"
+//                     disabled={isLoading}
+//                     onClick={(e) => {
+//                       e.preventDefault();
+//                       e.stopPropagation();
+
+//                       addToCart(product.id);
+//                     }}
+//                   >
+//                     {isLoading
+//                       ? "Adding..."
+//                       : "Add to Cart"}
+//                   </button>
+//                 ) : (
+//                   /* QUANTITY */
+//                   <div
+//                     className="prd-cart-quantity"
+//                     onClick={(e) => {
+//                       e.preventDefault();
+//                       e.stopPropagation();
+//                     }}
+//                   >
+//                     <button
+//                       type="button"
+//                       onClick={() =>
+//                         updateCartQuantity(
+//                           product.id,
+//                           cartItems[
+//                             product.id
+//                           ] - 1
+//                         )
+//                       }
+//                       disabled={isLoading}
+//                       aria-label="Decrease quantity"
+//                     >
+//                       −
+//                     </button>
+
+//                     <span>
+//                       {cartItems[product.id]}
+//                     </span>
+
+//                     <button
+//                       type="button"
+//                       onClick={() =>
+//                         updateCartQuantity(
+//                           product.id,
+//                           cartItems[
+//                             product.id
+//                           ] + 1
+//                         )
+//                       }
+//                       disabled={isLoading}
+//                       aria-label="Increase quantity"
+//                     >
+//                       +
+//                     </button>
+//                   </div>
+//                 )}
+//               </>
+//             )}
+//           </div>
+
+//           <div
+//             className="prd-card-edge"
+//             aria-hidden="true"
+//           />
+//         </div>
+//       </div>
+//     );
+//   };
+
+//   // =====================================================
+//   // LOADING
+//   // =====================================================
+
+//   if (loading) {
+//     return (
+//       <PublicLayout>
+//         <div className="prd-loading">
+//           <div className="prd-loading-spinner" />
+
+//           <p>Loading products...</p>
+//         </div>
+//       </PublicLayout>
+//     );
+//   }
+
+//   // =====================================================
+//   // PAGE
+//   // =====================================================
+
+//   return (
+//     <>
+//       {/* =================================================
+//           FLOWER POPUP
+//       ================================================= */}
+
+//       {showFlowerPopup && (
+//         <div
+//           className="flower-popup-overlay"
+//           role="dialog"
+//           aria-modal="true"
+//           aria-labelledby="flower-popup-title"
+//         >
+//           <div className="flower-popup">
+//             <button
+//               type="button"
+//               className="flower-popup-close"
+//               onClick={() => {
+//                 sessionStorage.setItem(
+//                   "flowerPopupShown",
+//                   "true"
+//                 );
+
+//                 setShowFlowerPopup(false);
+//               }}
+//               aria-label="Close"
+//             >
+//               ×
+//             </button>
+
+//             <div className="flower-popup-icon">
+//               ✿
+//             </div>
+
+//             <span className="flower-popup-eyebrow">
+//               A QUICK QUESTION
+//             </span>
+
+//             <h2 id="flower-popup-title">
+//               Are you looking for flowers?
+//             </h2>
+
+//             <p>
+//               Looking for something beautiful?
+//               Explore our fresh flower collection.
+//             </p>
+
+//             <div className="flower-popup-actions">
+//               {/* YES */}
+//               <button
+//                 type="button"
+//                 className="flower-popup-yes"
+//                 onClick={() => {
+//                   const flowerCategory =
+//                     categories.find(
+//                       (category) =>
+//                         category.display ===
+//                         "Fresh Flowers & Seasonal"
+//                     );
+
+//                   if (flowerCategory) {
+//                     setActiveCategory(
+//                       flowerCategory.display
+//                     );
+//                   }
+
+//                   sessionStorage.setItem(
+//                     "flowerPopupShown",
+//                     "true"
+//                   );
+
+//                   setShowFlowerPopup(false);
+
+//                   setTimeout(() => {
+//                     document
+//                       .querySelector(
+//                         ".prd-catalog"
+//                       )
+//                       ?.scrollIntoView({
+//                         behavior: "smooth",
+//                         block: "start",
+//                       });
+//                   }, 100);
+//                 }}
+//               >
+//                 <span>
+//                   Yes, show me flowers
+//                 </span>
+
+//                 <span>→</span>
+//               </button>
+
+//               {/* NO */}
+//               <button
+//                 type="button"
+//                 className="flower-popup-no"
+//                 onClick={() => {
+//                   sessionStorage.setItem(
+//                     "flowerPopupShown",
+//                     "true"
+//                   );
+
+//                   setActiveCategory("all");
+
+//                   setShowFlowerPopup(false);
+//                 }}
+//               >
+//                 No, I'll browse everything
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* =================================================
+//           PRODUCTS SECTION
+//       ================================================= */}
+
+//       <PublicLayout>
+//         <section
+//           ref={sectionRef}
+//           className={`prd-premium ${
+//             isVisible
+//               ? "prd-visible"
+//               : ""
+//           }`}
+//         >
+//           {/* ===============================================
+//               ATMOSPHERIC DEPTH
+//           =============================================== */}
+
+//           <div
+//             className="prd-atmosphere"
+//             aria-hidden="true"
+//           >
+//             <div className="prd-glow prd-glow--emerald" />
+//             <div className="prd-glow prd-glow--teal" />
+//             <div className="prd-glow prd-glow--blue" />
+//             <div className="prd-mesh" />
+//             <div className="prd-grain" />
+//             <div className="prd-vignette" />
+//           </div>
+
+//           {/* ===============================================
+//               FLOATING ORBS
+//           =============================================== */}
+
+//           <div
+//             className="prd-orbs"
+//             aria-hidden="true"
+//           >
+//             <div className="prd-orb prd-orb--primary" />
+//             <div className="prd-orb prd-orb--secondary" />
+//           </div>
+
+//           <div className="prd-container">
+//             {/* =============================================
+//                 HERO
+//             ============================================= */}
+
+//             <div className="prd-hero">
+//               <div className="prd-hero-content">
+//                 <div className="prd-whisper">
+//                   <span className="prd-whisper-pulse" />
+
+//                   <span>
+//                     Farm Fresh, Direct to You
+//                   </span>
+//                 </div>
+
+//                 <h1 className="prd-headline">
+//                   <span className="prd-headline-line">
+//                     Healthy & Organic
+//                   </span>
+
+//                   <span className="prd-headline-line prd-headline-radiance">
+//                     products for everyday wellness
+//                   </span>
+//                 </h1>
+
+//                 <p className="prd-prose">
+//                   Explore our collection of millet
+//                   mixes, rice, snacks, organics,
+//                   oils, and seasonal products —
+//                   all sourced directly from trusted
+//                   farms.
+//                 </p>
+//               </div>
+//             </div>
+
+//             {/* =============================================
+//                 FEATURED PRODUCTS
+//             ============================================= */}
+
+//             {featuredProducts.length > 0 && (
+//               <div className="prd-featured">
+//                 <div className="prd-featured-header">
+//                   <div className="prd-featured-thread" />
+
+//                   <span className="prd-featured-label">
+//                     Featured Products
+//                   </span>
+//                 </div>
+
+//                 <div
+//                   className="prd-marquee-stage"
+//                   onMouseEnter={() =>
+//                     setIsPaused(true)
+//                   }
+//                   onMouseLeave={() =>
+//                     setIsPaused(false)
+//                   }
+//                 >
+//                   <div
+//                     className={`prd-marquee-track ${
+//                       isPaused
+//                         ? "prd-marquee-paused"
+//                         : ""
+//                     }`}
+//                   >
+//                     {marqueeProducts.map(
+//                       (product, index) =>
+//                         renderProductCard(
+//                           product,
+//                           index
+//                         )
+//                     )}
+//                   </div>
+
+//                   <div className="prd-marquee-fade prd-marquee-fade-left" />
+
+//                   <div className="prd-marquee-fade prd-marquee-fade-right" />
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* =============================================
+//                 CATALOG
+//             ============================================= */}
+
+//             <div className="prd-catalog">
+//               <div className="prd-catalog-header">
+//                 <div className="prd-catalog-thread" />
+
+//                 <span className="prd-catalog-label">
+//                   Our Collection
+//                 </span>
+//               </div>
+
+//               {/* =========================================
+//                   CATEGORY TABS
+//               ========================================= */}
+
+//               <div className="prd-categories">
+//                 <div className="prd-categories-tabs">
+//                   {categories.map(
+//                     (category) => (
+//                       <button
+//                         key={
+//                           category.display
+//                         }
+//                         type="button"
+//                         className={`prd-category-tab ${
+//                           activeCategory ===
+//                           category.display
+//                             ? "prd-category-active"
+//                             : ""
+//                         }`}
+//                         onClick={() => {
+//                           setActiveCategory(
+//                             category.display ===
+//                               "All Products"
+//                               ? "all"
+//                               : category.display
+//                           );
+//                         }}
+//                       >
+//                         <span>
+//                           {category.display}
+//                         </span>
+
+//                         <span className="prd-category-count">
+//                           {category.count}
+//                         </span>
+//                       </button>
+//                     )
+//                   )}
+//                 </div>
+//               </div>
+
+//               {/* =========================================
+//                   PRODUCTS GRID
+//               ========================================= */}
+
+//               <div className="prd-grid">
+//                 {filteredProducts.length >
+//                 0 ? (
+//                   filteredProducts.map(
+//                     (product, index) =>
+//                       renderProductCard(
+//                         product,
+//                         index
+//                       )
+//                   )
+//                 ) : (
+//                   <div className="prd-empty">
+//                     <div className="prd-empty-content">
+//                       <div className="prd-empty-thread" />
+
+//                       <h3 className="prd-empty-title">
+//                         No products in this
+//                         category
+//                       </h3>
+
+//                       <p className="prd-empty-text">
+//                         Select another category
+//                         to explore our
+//                         collection.
+//                       </p>
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* =============================================
+//                 GLOBAL EMPTY STATE
+//             ============================================= */}
+
+//             {products.length === 0 && (
+//               <div className="prd-empty">
+//                 <div className="prd-empty-content">
+//                   <div className="prd-empty-thread" />
+
+//                   <h3 className="prd-empty-title">
+//                     No Products Available
+//                   </h3>
+
+//                   <p className="prd-empty-text">
+//                     Check back later for our
+//                     premium collection.
+//                   </p>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         </section>
+//       </PublicLayout>
+//     </>
+//   );
+// }
+
+// export default Products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import PublicLayout from "../layouts/PublicLayout";
@@ -5268,122 +6509,197 @@ import "./Products.css";
 // =====================================================
 
 const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000/api";
 
-const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
+const API_ORIGIN =
+  API_URL.replace(/\/api\/?$/, "");
 
 // =====================================================
 // PRODUCTS
 // =====================================================
 
 function Products() {
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [isPaused, setIsPaused] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+
+  const [activeCategory, setActiveCategory] =
+    useState("all");
+
+  const [isPaused, setIsPaused] =
+    useState(false);
+
+  const [isVisible, setIsVisible] =
+    useState(false);
 
   const sectionRef = useRef(null);
+
+
+  // =====================================================
+  // SEARCH / FILTER / SORT
+  // =====================================================
+
+  const [searchTerm, setSearchTerm] =
+    useState("");
+
+  const [stockFilter, setStockFilter] =
+    useState("all");
+
+  const [featuredFilter, setFeaturedFilter] =
+    useState("all");
+
+  const [sortOption, setSortOption] =
+    useState("default");
+
 
   // =====================================================
   // FLOWER POPUP
   // =====================================================
 
-  const [showFlowerPopup, setShowFlowerPopup] = useState(false);
+  const [showFlowerPopup, setShowFlowerPopup] =
+    useState(false);
+
 
   // =====================================================
   // CART
   // =====================================================
 
-  const [cartItems, setCartItems] = useState({});
-  const [cartLoading, setCartLoading] = useState({});
+  const [cartItems, setCartItems] =
+    useState({});
+
+  const [cartLoading, setCartLoading] =
+    useState({});
+
 
   // =====================================================
   // SESSION
   // =====================================================
 
   const getSessionId = useCallback(() => {
-    let sessionId = localStorage.getItem("cartSessionId");
+
+    let sessionId =
+      localStorage.getItem(
+        "cartSessionId"
+      );
 
     if (!sessionId) {
+
       sessionId =
         "cart-" +
         Date.now() +
         "-" +
-        Math.random().toString(36).substring(2, 10);
+        Math.random()
+          .toString(36)
+          .substring(2, 10);
 
-      localStorage.setItem("cartSessionId", sessionId);
+      localStorage.setItem(
+        "cartSessionId",
+        sessionId
+      );
     }
 
     return sessionId;
+
   }, []);
+
 
   // =====================================================
   // SHOW FLOWER POPUP
   // =====================================================
 
   useEffect(() => {
+
     const popupShown =
-      sessionStorage.getItem("flowerPopupShown");
+      sessionStorage.getItem(
+        "flowerPopupShown"
+      );
 
     if (popupShown === "true") {
       return;
     }
 
-    const timer = setTimeout(() => {
-      setShowFlowerPopup(true);
-    }, 500);
+    const timer =
+      setTimeout(() => {
+        setShowFlowerPopup(true);
+      }, 500);
 
     return () => {
       clearTimeout(timer);
     };
+
   }, []);
+
 
   // =====================================================
   // FETCH CART
   // =====================================================
 
-  const fetchCartItems = useCallback(async () => {
-    try {
-      const sessionId = getSessionId();
+  const fetchCartItems =
+    useCallback(async () => {
 
-      const { data } = await api.get(
-        `/cart/${sessionId}`
-      );
+      try {
 
-      const quantities = {};
+        const sessionId =
+          getSessionId();
 
-      data.items?.forEach((item) => {
-        quantities[item.productId] = item.quantity;
-      });
+        const { data } =
+          await api.get(
+            `/cart/${sessionId}`
+          );
 
-      setCartItems(quantities);
-    } catch (error) {
-      if (error.response?.status === 404) {
-        setCartItems({});
-        return;
+        const quantities = {};
+
+        data.items?.forEach(
+          (item) => {
+            quantities[item.productId] =
+              item.quantity;
+          }
+        );
+
+        setCartItems(
+          quantities
+        );
+
+      } catch (error) {
+
+        if (
+          error.response?.status ===
+          404
+        ) {
+
+          setCartItems({});
+          return;
+
+        }
+
+        console.error(
+          "Failed to load cart:",
+          error
+        );
+
       }
 
-      console.error(
-        "Failed to load cart:",
-        error
-      );
-    }
-  }, [getSessionId]);
+    }, [getSessionId]);
+
 
   // =====================================================
   // LOAD CART ON PAGE LOAD
   // =====================================================
 
   useEffect(() => {
+
     fetchCartItems();
+
   }, [fetchCartItems]);
+
 
   // =====================================================
   // CART UPDATE LISTENER
   // =====================================================
 
   useEffect(() => {
+
     const handleCartUpdated = () => {
       fetchCartItems();
     };
@@ -5394,228 +6710,341 @@ function Products() {
     );
 
     return () => {
+
       window.removeEventListener(
         "cartUpdated",
         handleCartUpdated
       );
+
     };
+
   }, [fetchCartItems]);
+
 
   // =====================================================
   // FETCH PRODUCTS
   // =====================================================
 
-  const fetchProducts = useCallback(async () => {
-    setLoading(true);
+  const fetchProducts =
+    useCallback(async () => {
 
-    try {
-      const { data } = await api.get("/products");
+      setLoading(true);
 
-      /*
-       * Supports both:
-       * [
-       *   {...}
-       * ]
-       *
-       * and:
-       * {
-       *   products: [...]
-       * }
-       */
+      try {
 
-      if (Array.isArray(data)) {
-        setProducts(data);
-      } else if (Array.isArray(data?.products)) {
-        setProducts(data.products);
-      } else {
+        const { data } =
+          await api.get(
+            "/products"
+          );
+
+        if (
+          Array.isArray(data)
+        ) {
+
+          setProducts(data);
+
+        } else if (
+          Array.isArray(
+            data?.products
+          )
+        ) {
+
+          setProducts(
+            data.products
+          );
+
+        } else {
+
+          setProducts([]);
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Failed to fetch products:",
+          error
+        );
+
         setProducts([]);
-      }
-    } catch (error) {
-      console.error(
-        "Failed to fetch products:",
-        error
-      );
 
-      setProducts([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    }, []);
+
 
   useEffect(() => {
+
     fetchProducts();
+
   }, [fetchProducts]);
+
 
   // =====================================================
   // VISIBILITY OBSERVER
   // =====================================================
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+
+          if (
+            entry.isIntersecting
+          ) {
+
+            setIsVisible(true);
+
+          }
+
+        },
+        {
+          threshold: 0.03,
         }
-      },
-      {
-        threshold: 0.03,
-      }
-    );
+      );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+
+      observer.observe(
+        sectionRef.current
+      );
+
     }
 
     return () => {
       observer.disconnect();
     };
+
   }, [products]);
+
 
   // =====================================================
   // ADD TO CART
   // =====================================================
 
-  const addToCart = async (productId) => {
-    try {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: true,
-      }));
+  const addToCart =
+    async (productId) => {
 
-      const sessionId = getSessionId();
+      try {
 
-      const response = await api.post("/cart/add", {
-        sessionId,
-        productId,
-        quantity: 1,
-      });
-
-      if (
-        response.status === 200 ||
-        response.status === 201
-      ) {
-        setCartItems((prev) => ({
-          ...prev,
-          [productId]:
-            (prev[productId] || 0) + 1,
-        }));
-
-        window.dispatchEvent(
-          new Event("cartUpdated")
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: true,
+          })
         );
+
+        const sessionId =
+          getSessionId();
+
+        const response =
+          await api.post(
+            "/cart/add",
+            {
+              sessionId,
+              productId,
+              quantity: 1,
+            }
+          );
+
+        if (
+          response.status === 200 ||
+          response.status === 201
+        ) {
+
+          setCartItems(
+            (prev) => ({
+              ...prev,
+              [productId]:
+                (prev[productId] || 0) +
+                1,
+            })
+          );
+
+          window.dispatchEvent(
+            new Event(
+              "cartUpdated"
+            )
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Add to cart error:",
+          error
+        );
+
+      } finally {
+
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: false,
+          })
+        );
+
       }
-    } catch (error) {
-      console.error(
-        "Add to cart error:",
-        error
-      );
-    } finally {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: false,
-      }));
-    }
-  };
+
+    };
+
 
   // =====================================================
   // UPDATE CART QUANTITY
   // =====================================================
 
-  const updateCartQuantity = async (
-    productId,
-    quantity
-  ) => {
-    if (quantity < 1) {
-      await removeFromCart(productId);
-      return;
-    }
+  const updateCartQuantity =
+    async (
+      productId,
+      quantity
+    ) => {
 
-    try {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: true,
-      }));
+      if (quantity < 1) {
 
-      const sessionId = getSessionId();
+        await removeFromCart(
+          productId
+        );
 
-      await api.put(
-        `/cart/${sessionId}/${productId}`,
-        {
-          quantity,
-        }
-      );
+        return;
 
-      setCartItems((prev) => ({
-        ...prev,
-        [productId]: quantity,
-      }));
+      }
 
-      window.dispatchEvent(
-        new Event("cartUpdated")
-      );
-    } catch (error) {
-      console.error(
-        "Update cart error:",
-        error
-      );
-    } finally {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: false,
-      }));
-    }
-  };
+      try {
+
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: true,
+          })
+        );
+
+        const sessionId =
+          getSessionId();
+
+        await api.put(
+          `/cart/${sessionId}/${productId}`,
+          {
+            quantity,
+          }
+        );
+
+        setCartItems(
+          (prev) => ({
+            ...prev,
+            [productId]:
+              quantity,
+          })
+        );
+
+        window.dispatchEvent(
+          new Event(
+            "cartUpdated"
+          )
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Update cart error:",
+          error
+        );
+
+      } finally {
+
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: false,
+          })
+        );
+
+      }
+
+    };
+
 
   // =====================================================
   // REMOVE FROM CART
   // =====================================================
 
-  const removeFromCart = async (productId) => {
-    try {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: true,
-      }));
+  const removeFromCart =
+    async (productId) => {
 
-      const sessionId = getSessionId();
+      try {
 
-      await api.delete(
-        `/cart/${sessionId}/${productId}`
-      );
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: true,
+          })
+        );
 
-      setCartItems((prev) => {
-        const updated = {
-          ...prev,
-        };
+        const sessionId =
+          getSessionId();
 
-        delete updated[productId];
+        await api.delete(
+          `/cart/${sessionId}/${productId}`
+        );
 
-        return updated;
-      });
+        setCartItems(
+          (prev) => {
 
-      window.dispatchEvent(
-        new Event("cartUpdated")
-      );
-    } catch (error) {
-      console.error(
-        "Remove cart error:",
-        error
-      );
-    } finally {
-      setCartLoading((prev) => ({
-        ...prev,
-        [productId]: false,
-      }));
-    }
-  };
+            const updated = {
+              ...prev,
+            };
+
+            delete updated[
+              productId
+            ];
+
+            return updated;
+
+          }
+        );
+
+        window.dispatchEvent(
+          new Event(
+            "cartUpdated"
+          )
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Remove cart error:",
+          error
+        );
+
+      } finally {
+
+        setCartLoading(
+          (prev) => ({
+            ...prev,
+            [productId]: false,
+          })
+        );
+
+      }
+
+    };
+
 
   // =====================================================
   // CATEGORIES
   // =====================================================
 
   const categoryConfig = [
+
     {
-      display: "Fresh Flowers & Seasonal",
+      display:
+        "Fresh Flowers & Seasonal",
+
       filter: [
         "Fresh Items - Seasonal Fruits & Flowers",
         "Flowers",
@@ -5623,8 +7052,11 @@ function Products() {
         "seasonal",
       ],
     },
+
     {
-      display: "Organic & Millets",
+      display:
+        "Organic & Millets",
+
       filter: [
         "Organic",
         "Millets",
@@ -5633,11 +7065,16 @@ function Products() {
         "Organic & Millets",
       ],
     },
+
     {
-      display: "All Products",
+      display:
+        "All Products",
+
       filter: "all",
     },
+
   ];
+
 
   // =====================================================
   // ALL CATEGORIES
@@ -5646,10 +7083,14 @@ function Products() {
   const allCategories = [
     ...new Set(
       products
-        .map((product) => product.category)
+        .map(
+          (product) =>
+            product.category
+        )
         .filter(Boolean)
     ),
   ];
+
 
   // =====================================================
   // CATEGORY HELPER
@@ -5659,94 +7100,150 @@ function Products() {
     product,
     filterValues
   ) => {
-    if (filterValues === "all") {
+
+    if (
+      filterValues === "all"
+    ) {
+
       return true;
+
     }
 
-    if (Array.isArray(filterValues)) {
-      const productCategory = String(
-        product.category || ""
+    if (
+      Array.isArray(
+        filterValues
       )
-        .trim()
-        .toLowerCase();
+    ) {
 
-      return filterValues.some((val) => {
-        const filter = String(val)
+      const productCategory =
+        String(
+          product.category || ""
+        )
           .trim()
           .toLowerCase();
 
-        return (
-          productCategory.includes(filter) ||
-          filter.includes(productCategory)
-        );
-      });
+      return filterValues.some(
+        (val) => {
+
+          const filter =
+            String(val)
+              .trim()
+              .toLowerCase();
+
+          return (
+            productCategory.includes(
+              filter
+            ) ||
+            filter.includes(
+              productCategory
+            )
+          );
+
+        }
+      );
+
     }
 
-    return product.category === filterValues;
+    return (
+      product.category ===
+      filterValues
+    );
+
   };
+
 
   // =====================================================
   // PRODUCTS FOR CATEGORY
   // =====================================================
 
-  const getProductsForCategory = (
-    filterValues
-  ) => {
-    if (filterValues === "all") {
-      return products;
-    }
+  const getProductsForCategory =
+    (filterValues) => {
 
-    if (Array.isArray(filterValues)) {
-      return products.filter((product) =>
-        isInCategoryGroup(
-          product,
+      if (
+        filterValues === "all"
+      ) {
+
+        return products;
+
+      }
+
+      if (
+        Array.isArray(
           filterValues
         )
-      );
-    }
+      ) {
 
-    return products.filter(
-      (product) =>
-        product.category === filterValues
-    );
-  };
+        return products.filter(
+          (product) =>
+            isInCategoryGroup(
+              product,
+              filterValues
+            )
+        );
+
+      }
+
+      return products.filter(
+        (product) =>
+          product.category ===
+          filterValues
+      );
+
+    };
+
 
   // =====================================================
   // CATEGORY LIST
   // =====================================================
 
-  const categories = categoryConfig
-    .map((config) => {
-      const count =
-        getProductsForCategory(
-          config.filter
-        ).length;
+  const categories =
+    categoryConfig
+      .map((config) => {
 
-      return {
-        display: config.display,
-        filter: config.filter,
-        count,
-      };
-    })
-    .filter((cat) => cat.count > 0);
+        const count =
+          getProductsForCategory(
+            config.filter
+          ).length;
+
+        return {
+          display:
+            config.display,
+
+          filter:
+            config.filter,
+
+          count,
+        };
+
+      })
+      .filter(
+        (cat) =>
+          cat.count > 0
+      );
+
 
   // =====================================================
   // REMAINING CATEGORIES
   // =====================================================
 
   const usedFilters =
-    categoryConfig.flatMap((category) =>
-      Array.isArray(category.filter)
-        ? category.filter
-        : [category.filter]
+    categoryConfig.flatMap(
+      (category) =>
+        Array.isArray(
+          category.filter
+        )
+          ? category.filter
+          : [category.filter]
     );
+
 
   const remainingCategories =
     allCategories.filter(
       (category) =>
         !usedFilters.some(
           (filter) =>
-            typeof filter === "string" &&
+            typeof filter ===
+              "string" &&
             filter !== "all" &&
             category
               .toLowerCase()
@@ -5756,51 +7253,307 @@ function Products() {
         )
     );
 
+
   remainingCategories.forEach(
     (category) => {
-      const count = products.filter(
-        (product) =>
-          product.category === category
-      ).length;
+
+      const count =
+        products.filter(
+          (product) =>
+            product.category ===
+            category
+        ).length;
 
       if (count > 0) {
+
         categories.push({
-          display: category,
-          filter: category,
+          display:
+            category,
+
+          filter:
+            category,
+
           count,
         });
+
       }
+
     }
   );
 
+
   // =====================================================
-  // FILTERED PRODUCTS
+  // CATEGORY PRODUCTS
   // =====================================================
 
-  const getFilteredProducts = () => {
-    if (activeCategory === "all") {
-      return products;
-    }
+  const getCategoryProducts =
+    () => {
 
-    const config = categoryConfig.find(
-      (category) =>
-        category.display === activeCategory
-    );
+      if (
+        activeCategory ===
+        "all"
+      ) {
 
-    if (config) {
-      return getProductsForCategory(
-        config.filter
+        return products;
+
+      }
+
+      const config =
+        categoryConfig.find(
+          (category) =>
+            category.display ===
+            activeCategory
+        );
+
+      if (config) {
+
+        return getProductsForCategory(
+          config.filter
+        );
+
+      }
+
+      return products.filter(
+        (product) =>
+          product.category ===
+          activeCategory
       );
-    }
 
-    return products.filter(
-      (product) =>
-        product.category === activeCategory
-    );
-  };
+    };
+
+
+  // =====================================================
+  // FILTER + SEARCH + SORT
+  // =====================================================
 
   const filteredProducts =
-    getFilteredProducts();
+    useMemo(() => {
+
+      let result = [
+        ...getCategoryProducts()
+      ];
+
+
+      // -------------------------------------------------
+      // SEARCH
+      // -------------------------------------------------
+
+      const search =
+        searchTerm
+          .trim()
+          .toLowerCase();
+
+      if (search) {
+
+        result =
+          result.filter(
+            (product) => {
+
+              const searchableText =
+                [
+
+                  product.title,
+
+                  product.category,
+
+                  product.description,
+
+                ]
+                  .filter(Boolean)
+                  .join(" ")
+                  .toLowerCase();
+
+              return searchableText.includes(
+                search
+              );
+
+            }
+          );
+
+      }
+
+
+      // -------------------------------------------------
+      // STOCK
+      // -------------------------------------------------
+
+      if (
+        stockFilter ===
+        "in_stock"
+      ) {
+
+        result =
+          result.filter(
+            (product) =>
+              product.isActive !==
+              false
+          );
+
+      }
+
+      if (
+        stockFilter ===
+        "out_of_stock"
+      ) {
+
+        result =
+          result.filter(
+            (product) =>
+              product.isActive ===
+              false
+          );
+
+      }
+
+
+      // -------------------------------------------------
+      // FEATURED
+      // -------------------------------------------------
+
+      if (
+        featuredFilter ===
+        "featured"
+      ) {
+
+        result =
+          result.filter(
+            (product) =>
+              product.featured ===
+              true
+          );
+
+      }
+
+
+      // -------------------------------------------------
+      // SORT
+      // -------------------------------------------------
+
+      result.sort(
+        (a, b) => {
+
+          if (
+            sortOption ===
+            "price_low"
+          ) {
+
+            return (
+              Number(a.price || 0) -
+              Number(b.price || 0)
+            );
+
+          }
+
+
+          if (
+            sortOption ===
+            "price_high"
+          ) {
+
+            return (
+              Number(b.price || 0) -
+              Number(a.price || 0)
+            );
+
+          }
+
+
+          if (
+            sortOption ===
+            "name_az"
+          ) {
+
+            return String(
+              a.title || ""
+            ).localeCompare(
+              String(
+                b.title || ""
+              )
+            );
+
+          }
+
+
+          if (
+            sortOption ===
+            "name_za"
+          ) {
+
+            return String(
+              b.title || ""
+            ).localeCompare(
+              String(
+                a.title || ""
+              )
+            );
+
+          }
+
+
+          if (
+            sortOption ===
+            "newest"
+          ) {
+
+            return (
+              new Date(
+                b.createdAt || 0
+              ).getTime() -
+              new Date(
+                a.createdAt || 0
+              ).getTime()
+            );
+
+          }
+
+
+          return 0;
+
+        }
+      );
+
+
+      return result;
+
+    }, [
+      products,
+      activeCategory,
+      searchTerm,
+      stockFilter,
+      featuredFilter,
+      sortOption,
+    ]);
+
+
+  // =====================================================
+  // CLEAR FILTERS
+  // =====================================================
+
+  const clearFilters = () => {
+
+    setSearchTerm("");
+
+    setStockFilter(
+      "all"
+    );
+
+    setFeaturedFilter(
+      "all"
+    );
+
+    setSortOption(
+      "default"
+    );
+
+  };
+
+
+  const hasActiveFilters =
+    searchTerm.trim() !== "" ||
+    stockFilter !== "all" ||
+    featuredFilter !== "all" ||
+    sortOption !== "default";
+
 
   // =====================================================
   // FEATURED PRODUCTS
@@ -5808,375 +7561,529 @@ function Products() {
 
   const featuredProducts =
     products.filter(
-      (product) => product.featured
+      (product) =>
+        product.featured
     );
+
 
   const marqueeProducts = [
     ...featuredProducts,
     ...featuredProducts,
   ];
 
+
   // =====================================================
   // FLOWER PRODUCT
   // =====================================================
 
-  const isFlowerProduct = (product) => {
-    const category = String(
-      product.category || ""
-    )
-      .trim()
-      .toLowerCase();
+  const isFlowerProduct =
+    (product) => {
 
-    return (
-      category.includes("flower") ||
-      category.includes(
-        "fresh items - seasonal fruits & flowers"
-      ) ||
-      category.includes("seasonal")
-    );
-  };
+      const category =
+        String(
+          product.category || ""
+        )
+          .trim()
+          .toLowerCase();
+
+      return (
+        category.includes(
+          "flower"
+        ) ||
+        category.includes(
+          "fresh items - seasonal fruits & flowers"
+        ) ||
+        category.includes(
+          "seasonal"
+        )
+      );
+
+    };
+
 
   // =====================================================
   // PRODUCT IMAGE URL
   // =====================================================
 
-  const getProductImageUrl = (image) => {
-    if (!image) {
-      return null;
-    }
+  const getProductImageUrl =
+    (image) => {
 
-    if (
-      image.startsWith("http://") ||
-      image.startsWith("https://")
-    ) {
-      return image;
-    }
+      if (!image) {
+        return null;
+      }
 
-    return `${API_ORIGIN}${
-      image.startsWith("/") ? "" : "/"
-    }${image}`;
-  };
+      if (
+        image.startsWith(
+          "http://"
+        ) ||
+        image.startsWith(
+          "https://"
+        )
+      ) {
+
+        return image;
+
+      }
+
+      return `${API_ORIGIN}${
+        image.startsWith("/")
+          ? ""
+          : "/"
+      }${image}`;
+
+    };
+
 
   // =====================================================
   // PRODUCT CARD
   // =====================================================
 
-  const renderProductCard = (
-    product,
-    index
-  ) => {
-    const discountPercent =
-      Number(product.discountPercent) || 0;
+  const renderProductCard =
+    (
+      product,
+      index
+    ) => {
 
-    const hasDiscount =
-      discountPercent > 0;
+      const discountPercent =
+        Number(
+          product.discountPercent
+        ) || 0;
 
-    const displayPrice = hasDiscount
-      ? Math.round(
-          product.price -
-            (product.price *
-              discountPercent) /
-              100
-        )
-      : Math.round(product.price);
+      const hasDiscount =
+        discountPercent > 0;
 
-    const isLoading =
-      cartLoading[product.id] || false;
+      const displayPrice =
+        hasDiscount
+          ? Math.round(
+              product.price -
+                (product.price *
+                  discountPercent) /
+                  100
+            )
+          : Math.round(
+              product.price
+            );
 
-    const isFlower =
-      isFlowerProduct(product);
+      const isLoading =
+        cartLoading[
+          product.id
+        ] || false;
 
-    const imageUrl =
-      getProductImageUrl(product.image);
+      const isFlower =
+        isFlowerProduct(
+          product
+        );
 
-    const isOutOfStock =
-      product.isActive === false;
+      const imageUrl =
+        getProductImageUrl(
+          product.image
+        );
 
-    return (
-      <div
-        key={`${product.id}-${index}`}
-        className="prd-card-link"
-        style={{
-          "--card-index": index,
-        }}
-      >
-        <div className="prd-card">
-          <div
-            className="prd-card-shine"
-            aria-hidden="true"
-          />
+      const isOutOfStock =
+        product.isActive ===
+        false;
 
-          {/* =========================================
-              PRODUCT IMAGE
-          ========================================= */}
 
-          <Link
-            to={`/products/${product.id}`}
-            className="prd-card-image-link"
-          >
-            <div className="prd-card-media">
-              <div className="prd-card-image-wrap">
-                {imageUrl && (
-                  <img
-                    src={imageUrl}
-                    alt={product.title}
-                    className="prd-card-image"
-                    loading="lazy"
-                  />
-                )}
+      return (
 
-                <div className="prd-card-image-veil" />
-              </div>
+        <div
+          key={`${product.id}-${index}`}
+          className="prd-card-link"
+          style={{
+            "--card-index":
+              index,
+          }}
+        >
 
-              <div className="prd-card-badges">
-                {product.featured &&
-                  !hasDiscount && (
-                    <span className="prd-badge prd-badge-featured">
-                      Featured
-                    </span>
-                  )}
+          <div className="prd-card">
 
-                {hasDiscount && (
-                  <span className="prd-badge prd-badge-discount">
-                    {discountPercent}% OFF
-                  </span>
-                )}
+            <div
+              className="prd-card-shine"
+              aria-hidden="true"
+            />
 
-                {isFlower && (
-                  <span className="prd-badge prd-badge-flower">
-                    🌸 Flower
-                  </span>
-                )}
 
-                {isOutOfStock && (
-                  <span className="prd-badge prd-badge-out-of-stock">
-                    Out of Stock
-                  </span>
-                )}
-              </div>
-            </div>
-          </Link>
+            {/* =========================================
+                PRODUCT IMAGE
+            ========================================= */}
 
-          {/* =========================================
-              PRODUCT DETAILS
-          ========================================= */}
-
-          <Link
-            to={`/products/${product.id}`}
-            className="prd-card-details-link"
-          >
-            <div className="prd-card-details">
-              <div className="prd-card-category">
-                <span className="prd-card-category-dot" />
-
-                {product.category}
-              </div>
-
-              <h3 className="prd-card-title">
-                {product.title}
-              </h3>
-
-              <p className="prd-card-description">
-                {product.description ||
-                  "Premium quality product sourced from trusted farms."}
-              </p>
-
-              <div className="prd-card-pricing">
-                <span className="prd-card-price">
-                  €{displayPrice}
-                </span>
-
-                {hasDiscount && (
-                  <span className="prd-card-price-original">
-                    €{Math.round(product.price)}
-                  </span>
-                )}
-              </div>
-            </div>
-          </Link>
-
-          {/* =========================================
-              ACTION SECTION
-          ========================================= */}
-
-          <div className="prd-card-action">
             <Link
               to={`/products/${product.id}`}
-              className="prd-view-details"
+              className="prd-card-image-link"
             >
-              <span>View Details</span>
 
-              <span className="prd-card-arrow">
-                →
-              </span>
-            </Link>
+              <div className="prd-card-media">
 
-            {/* =====================================
-                CART ONLY FOR FLOWERS
-            ===================================== */}
+                <div className="prd-card-image-wrap">
 
-            {isFlower && (
-              <>
-                {/* OUT OF STOCK */}
-                {isOutOfStock ? (
-                  <button
-                    type="button"
-                    className="prd-add-cart prd-add-cart-out-of-stock"
-                    disabled
-                  >
-                    Out of Stock
-                  </button>
-                ) : !cartItems[
-                    product.id
-                  ] ? (
-                  /* ADD TO CART */
-                  <button
-                    type="button"
-                    className="prd-add-cart"
-                    disabled={isLoading}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
+                  {imageUrl && (
 
-                      addToCart(product.id);
-                    }}
-                  >
-                    {isLoading
-                      ? "Adding..."
-                      : "Add to Cart"}
-                  </button>
-                ) : (
-                  /* QUANTITY */
-                  <div
-                    className="prd-cart-quantity"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() =>
-                        updateCartQuantity(
-                          product.id,
-                          cartItems[
-                            product.id
-                          ] - 1
-                        )
-                      }
-                      disabled={isLoading}
-                      aria-label="Decrease quantity"
-                    >
-                      −
-                    </button>
+                    <img
+                      src={imageUrl}
+                      alt={product.title}
+                      className="prd-card-image"
+                      loading="lazy"
+                    />
 
-                    <span>
-                      {cartItems[product.id]}
+                  )}
+
+                  <div className="prd-card-image-veil" />
+
+                </div>
+
+
+                <div className="prd-card-badges">
+
+                  {product.featured &&
+                    !hasDiscount && (
+
+                      <span className="prd-badge prd-badge-featured">
+                        Featured
+                      </span>
+
+                  )}
+
+
+                  {hasDiscount && (
+
+                    <span className="prd-badge prd-badge-discount">
+                      {discountPercent}% OFF
                     </span>
 
+                  )}
+
+
+                  {isFlower && (
+
+                    <span className="prd-badge prd-badge-flower">
+                      🌸 Flower
+                    </span>
+
+                  )}
+
+
+                  {isOutOfStock && (
+
+                    <span className="prd-badge prd-badge-out-of-stock">
+                      Out of Stock
+                    </span>
+
+                  )}
+
+                </div>
+
+              </div>
+
+            </Link>
+
+
+            {/* =========================================
+                PRODUCT DETAILS
+            ========================================= */}
+
+            <Link
+              to={`/products/${product.id}`}
+              className="prd-card-details-link"
+            >
+
+              <div className="prd-card-details">
+
+                <div className="prd-card-category">
+
+                  <span className="prd-card-category-dot" />
+
+                  {product.category}
+
+                </div>
+
+
+                <h3 className="prd-card-title">
+                  {product.title}
+                </h3>
+
+
+                <p className="prd-card-description">
+
+                  {product.description ||
+                    "Premium quality product sourced from trusted farms."}
+
+                </p>
+
+
+                <div className="prd-card-pricing">
+
+                  <span className="prd-card-price">
+                    €{displayPrice}
+                  </span>
+
+
+                  {hasDiscount && (
+
+                    <span className="prd-card-price-original">
+                      €{Math.round(
+                        product.price
+                      )}
+                    </span>
+
+                  )}
+
+                </div>
+
+              </div>
+
+            </Link>
+
+
+            {/* =========================================
+                ACTION
+            ========================================= */}
+
+            <div className="prd-card-action">
+
+              <Link
+                to={`/products/${product.id}`}
+                className="prd-view-details"
+              >
+
+                <span>
+                  View Details
+                </span>
+
+                <span className="prd-card-arrow">
+                  →
+                </span>
+
+              </Link>
+
+
+              {/* =====================================
+                  CART ONLY FOR FLOWERS
+              ===================================== */}
+
+              {isFlower && (
+
+                <>
+
+                  {isOutOfStock ? (
+
                     <button
                       type="button"
-                      onClick={() =>
-                        updateCartQuantity(
-                          product.id,
+                      className="prd-add-cart prd-add-cart-out-of-stock"
+                      disabled
+                    >
+                      Out of Stock
+                    </button>
+
+                  ) : !cartItems[
+                      product.id
+                    ] ? (
+
+                    <button
+                      type="button"
+                      className="prd-add-cart"
+                      disabled={
+                        isLoading
+                      }
+                      onClick={(e) => {
+
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        addToCart(
+                          product.id
+                        );
+
+                      }}
+                    >
+
+                      {isLoading
+                        ? "Adding..."
+                        : "Add to Cart"}
+
+                    </button>
+
+                  ) : (
+
+                    <div
+                      className="prd-cart-quantity"
+                      onClick={(e) => {
+
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                      }}
+                    >
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateCartQuantity(
+                            product.id,
+                            cartItems[
+                              product.id
+                            ] - 1
+                          )
+                        }
+                        disabled={
+                          isLoading
+                        }
+                        aria-label="Decrease quantity"
+                      >
+                        −
+                      </button>
+
+
+                      <span>
+                        {
                           cartItems[
                             product.id
-                          ] + 1
-                        )
-                      }
-                      disabled={isLoading}
-                      aria-label="Increase quantity"
-                    >
-                      +
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
+                          ]
+                        }
+                      </span>
+
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateCartQuantity(
+                            product.id,
+                            cartItems[
+                              product.id
+                            ] + 1
+                          )
+                        }
+                        disabled={
+                          isLoading
+                        }
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+
+                    </div>
+
+                  )}
+
+                </>
+
+              )}
+
+            </div>
+
+
+            <div
+              className="prd-card-edge"
+              aria-hidden="true"
+            />
+
           </div>
 
-          <div
-            className="prd-card-edge"
-            aria-hidden="true"
-          />
         </div>
-      </div>
-    );
-  };
+
+      );
+
+    };
+
 
   // =====================================================
   // LOADING
   // =====================================================
 
   if (loading) {
+
     return (
+
       <PublicLayout>
+
         <div className="prd-loading">
+
           <div className="prd-loading-spinner" />
 
-          <p>Loading products...</p>
+          <p>
+            Loading products...
+          </p>
+
         </div>
+
       </PublicLayout>
+
     );
+
   }
+
 
   // =====================================================
   // PAGE
   // =====================================================
 
   return (
+
     <>
+
       {/* =================================================
           FLOWER POPUP
       ================================================= */}
 
       {showFlowerPopup && (
+
         <div
           className="flower-popup-overlay"
           role="dialog"
           aria-modal="true"
           aria-labelledby="flower-popup-title"
         >
+
           <div className="flower-popup">
+
             <button
               type="button"
               className="flower-popup-close"
               onClick={() => {
+
                 sessionStorage.setItem(
                   "flowerPopupShown",
                   "true"
                 );
 
-                setShowFlowerPopup(false);
+                setShowFlowerPopup(
+                  false
+                );
+
               }}
               aria-label="Close"
             >
               ×
             </button>
 
+
             <div className="flower-popup-icon">
               ✿
             </div>
+
 
             <span className="flower-popup-eyebrow">
               A QUICK QUESTION
             </span>
 
+
             <h2 id="flower-popup-title">
               Are you looking for flowers?
             </h2>
+
 
             <p>
               Looking for something beautiful?
               Explore our fresh flower collection.
             </p>
 
+
             <div className="flower-popup-actions">
-              {/* YES */}
+
               <button
                 type="button"
                 className="flower-popup-yes"
                 onClick={() => {
+
                   const flowerCategory =
                     categories.find(
                       (category) =>
@@ -6184,65 +8091,97 @@ function Products() {
                         "Fresh Flowers & Seasonal"
                     );
 
-                  if (flowerCategory) {
+                  if (
+                    flowerCategory
+                  ) {
+
                     setActiveCategory(
                       flowerCategory.display
                     );
+
                   }
+
+                  clearFilters();
 
                   sessionStorage.setItem(
                     "flowerPopupShown",
                     "true"
                   );
 
-                  setShowFlowerPopup(false);
+                  setShowFlowerPopup(
+                    false
+                  );
+
 
                   setTimeout(() => {
+
                     document
                       .querySelector(
                         ".prd-catalog"
                       )
                       ?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
+                        behavior:
+                          "smooth",
+                        block:
+                          "start",
                       });
+
                   }, 100);
+
                 }}
               >
+
                 <span>
                   Yes, show me flowers
                 </span>
 
-                <span>→</span>
+                <span>
+                  →
+                </span>
+
               </button>
 
-              {/* NO */}
+
               <button
                 type="button"
                 className="flower-popup-no"
                 onClick={() => {
+
                   sessionStorage.setItem(
                     "flowerPopupShown",
                     "true"
                   );
 
-                  setActiveCategory("all");
+                  setActiveCategory(
+                    "all"
+                  );
 
-                  setShowFlowerPopup(false);
+                  clearFilters();
+
+                  setShowFlowerPopup(
+                    false
+                  );
+
                 }}
               >
                 No, I'll browse everything
               </button>
+
             </div>
+
           </div>
+
         </div>
+
       )}
 
+
       {/* =================================================
-          PRODUCTS SECTION
+          PRODUCTS
       ================================================= */}
 
       <PublicLayout>
+
         <section
           ref={sectionRef}
           className={`prd-premium ${
@@ -6251,6 +8190,7 @@ function Products() {
               : ""
           }`}
         >
+
           {/* ===============================================
               ATMOSPHERIC DEPTH
           =============================================== */}
@@ -6259,13 +8199,21 @@ function Products() {
             className="prd-atmosphere"
             aria-hidden="true"
           >
+
             <div className="prd-glow prd-glow--emerald" />
+
             <div className="prd-glow prd-glow--teal" />
+
             <div className="prd-glow prd-glow--blue" />
+
             <div className="prd-mesh" />
+
             <div className="prd-grain" />
+
             <div className="prd-vignette" />
+
           </div>
+
 
           {/* ===============================================
               FLOATING ORBS
@@ -6275,26 +8223,38 @@ function Products() {
             className="prd-orbs"
             aria-hidden="true"
           >
+
             <div className="prd-orb prd-orb--primary" />
+
             <div className="prd-orb prd-orb--secondary" />
+
           </div>
 
+
           <div className="prd-container">
+
+
             {/* =============================================
                 HERO
             ============================================= */}
 
             <div className="prd-hero">
+
               <div className="prd-hero-content">
+
                 <div className="prd-whisper">
+
                   <span className="prd-whisper-pulse" />
 
                   <span>
                     Farm Fresh, Direct to You
                   </span>
+
                 </div>
 
+
                 <h1 className="prd-headline">
+
                   <span className="prd-headline-line">
                     Healthy & Organic
                   </span>
@@ -6302,31 +8262,44 @@ function Products() {
                   <span className="prd-headline-line prd-headline-radiance">
                     products for everyday wellness
                   </span>
+
                 </h1>
 
+
                 <p className="prd-prose">
+
                   Explore our collection of millet
                   mixes, rice, snacks, organics,
                   oils, and seasonal products —
                   all sourced directly from trusted
                   farms.
+
                 </p>
+
               </div>
+
             </div>
+
 
             {/* =============================================
                 FEATURED PRODUCTS
             ============================================= */}
 
-            {featuredProducts.length > 0 && (
+            {featuredProducts.length >
+              0 && (
+
               <div className="prd-featured">
+
                 <div className="prd-featured-header">
+
                   <div className="prd-featured-thread" />
 
                   <span className="prd-featured-label">
                     Featured Products
                   </span>
+
                 </div>
+
 
                 <div
                   className="prd-marquee-stage"
@@ -6337,6 +8310,7 @@ function Products() {
                     setIsPaused(false)
                   }
                 >
+
                   <div
                     className={`prd-marquee-track ${
                       isPaused
@@ -6344,43 +8318,60 @@ function Products() {
                         : ""
                     }`}
                   >
+
                     {marqueeProducts.map(
-                      (product, index) =>
+                      (
+                        product,
+                        index
+                      ) =>
                         renderProductCard(
                           product,
                           index
                         )
                     )}
+
                   </div>
+
 
                   <div className="prd-marquee-fade prd-marquee-fade-left" />
 
                   <div className="prd-marquee-fade prd-marquee-fade-right" />
+
                 </div>
+
               </div>
+
             )}
+
 
             {/* =============================================
                 CATALOG
             ============================================= */}
 
             <div className="prd-catalog">
+
               <div className="prd-catalog-header">
+
                 <div className="prd-catalog-thread" />
 
                 <span className="prd-catalog-label">
                   Our Collection
                 </span>
+
               </div>
+
 
               {/* =========================================
                   CATEGORY TABS
               ========================================= */}
 
               <div className="prd-categories">
+
                 <div className="prd-categories-tabs">
+
                   {categories.map(
                     (category) => (
+
                       <button
                         key={
                           category.display
@@ -6393,69 +8384,320 @@ function Products() {
                             : ""
                         }`}
                         onClick={() => {
+
                           setActiveCategory(
                             category.display ===
                               "All Products"
                               ? "all"
                               : category.display
                           );
+
                         }}
                       >
+
                         <span>
-                          {category.display}
+                          {
+                            category.display
+                          }
                         </span>
 
                         <span className="prd-category-count">
-                          {category.count}
+                          {
+                            category.count
+                          }
                         </span>
+
                       </button>
+
                     )
                   )}
+
                 </div>
+
               </div>
+
+
+              {/* =========================================
+                  SEARCH + FILTERS
+              ========================================= */}
+
+              <div className="prd-product-controls">
+
+                {/* SEARCH */}
+
+                <div className="prd-product-search">
+
+                  <span
+                    className="prd-product-search-icon"
+                    aria-hidden="true"
+                  >
+                    ⌕
+                  </span>
+
+
+                  <input
+                    type="search"
+                    value={searchTerm}
+                    onChange={(e) =>
+                      setSearchTerm(
+                        e.target.value
+                      )
+                    }
+                    placeholder="Search products..."
+                    aria-label="Search products"
+                  />
+
+
+                  {searchTerm && (
+
+                    <button
+                      type="button"
+                      className="prd-product-search-clear"
+                      onClick={() =>
+                        setSearchTerm("")
+                      }
+                      aria-label="Clear search"
+                    >
+                      ×
+                    </button>
+
+                  )}
+
+                </div>
+
+
+                {/* STOCK */}
+
+                <select
+                  value={
+                    stockFilter
+                  }
+                  onChange={(e) =>
+                    setStockFilter(
+                      e.target.value
+                    )
+                  }
+                  className="prd-product-filter"
+                  aria-label="Filter by stock"
+                >
+
+                  <option value="all">
+                    All Stock
+                  </option>
+
+                  <option value="in_stock">
+                    In Stock
+                  </option>
+
+                  <option value="out_of_stock">
+                    Out of Stock
+                  </option>
+
+                </select>
+
+
+                {/* FEATURED */}
+
+                <select
+                  value={
+                    featuredFilter
+                  }
+                  onChange={(e) =>
+                    setFeaturedFilter(
+                      e.target.value
+                    )
+                  }
+                  className="prd-product-filter"
+                  aria-label="Filter featured products"
+                >
+
+                  <option value="all">
+                    All Products
+                  </option>
+
+                  <option value="featured">
+                    Featured Only
+                  </option>
+
+                </select>
+
+
+                {/* SORT */}
+
+                <select
+                  value={
+                    sortOption
+                  }
+                  onChange={(e) =>
+                    setSortOption(
+                      e.target.value
+                    )
+                  }
+                  className="prd-product-filter"
+                  aria-label="Sort products"
+                >
+
+                  <option value="default">
+                    Sort: Default
+                  </option>
+
+                  <option value="newest">
+                    Newest First
+                  </option>
+
+                  <option value="price_low">
+                    Price: Low to High
+                  </option>
+
+                  <option value="price_high">
+                    Price: High to Low
+                  </option>
+
+                  <option value="name_az">
+                    Name: A to Z
+                  </option>
+
+                  <option value="name_za">
+                    Name: Z to A
+                  </option>
+
+                </select>
+
+
+                {/* CLEAR */}
+
+                {hasActiveFilters && (
+
+                  <button
+                    type="button"
+                    className="prd-product-clear"
+                    onClick={
+                      clearFilters
+                    }
+                  >
+                    Clear
+                  </button>
+
+                )}
+
+              </div>
+
+
+              {/* =========================================
+                  RESULT COUNT
+              ========================================= */}
+
+              <div className="prd-product-results">
+
+                <span>
+
+                  Showing{" "}
+
+                  <strong>
+                    {
+                      filteredProducts.length
+                    }
+                  </strong>{" "}
+
+                  of{" "}
+
+                  <strong>
+                    {
+                      getCategoryProducts()
+                        .length
+                    }
+                  </strong>{" "}
+
+                  products
+
+                </span>
+
+
+                {hasActiveFilters && (
+
+                  <button
+                    type="button"
+                    onClick={
+                      clearFilters
+                    }
+                  >
+                    Reset filters
+                  </button>
+
+                )}
+
+              </div>
+
 
               {/* =========================================
                   PRODUCTS GRID
               ========================================= */}
 
               <div className="prd-grid">
+
                 {filteredProducts.length >
                 0 ? (
+
                   filteredProducts.map(
-                    (product, index) =>
+                    (
+                      product,
+                      index
+                    ) =>
                       renderProductCard(
                         product,
                         index
                       )
                   )
+
                 ) : (
+
                   <div className="prd-empty">
+
                     <div className="prd-empty-content">
+
                       <div className="prd-empty-thread" />
 
                       <h3 className="prd-empty-title">
-                        No products in this
-                        category
+                        No products found
                       </h3>
 
                       <p className="prd-empty-text">
-                        Select another category
-                        to explore our
-                        collection.
+                        Try changing your search
+                        or filter options.
                       </p>
+
+
+                      <button
+                        type="button"
+                        className="prd-empty-reset"
+                        onClick={
+                          clearFilters
+                        }
+                      >
+                        Clear Filters
+                      </button>
+
                     </div>
+
                   </div>
+
                 )}
+
               </div>
+
             </div>
+
 
             {/* =============================================
                 GLOBAL EMPTY STATE
             ============================================= */}
 
             {products.length === 0 && (
+
               <div className="prd-empty">
+
                 <div className="prd-empty-content">
+
                   <div className="prd-empty-thread" />
 
                   <h3 className="prd-empty-title">
@@ -6466,14 +8708,24 @@ function Products() {
                     Check back later for our
                     premium collection.
                   </p>
+
                 </div>
+
               </div>
+
             )}
+
           </div>
+
         </section>
+
       </PublicLayout>
+
     </>
+
   );
+
 }
+
 
 export default Products;

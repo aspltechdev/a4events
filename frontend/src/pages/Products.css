@@ -1235,3 +1235,418 @@
     padding: 12px 16px;
   }
 }
+
+
+
+/* =====================================================
+   PRODUCT SEARCH / FILTER CONTROLS
+===================================================== */
+
+.prd-product-controls {
+    display: grid;
+    grid-template-columns:
+        minmax(260px, 1.7fr)
+        minmax(145px, 1fr)
+        minmax(145px, 1fr)
+        minmax(145px, 1fr)
+        auto;
+
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.92);
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.prd-product-search {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    background: #fafafa;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.prd-product-search:focus-within {
+    border-color: #69a943;
+    background: #fff;
+}
+
+.prd-product-search-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 20px;
+    color: #888;
+
+    pointer-events: none;
+}
+
+.prd-product-search input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0 40px;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+
+    color: #333;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    box-sizing: border-box;
+}
+
+.prd-product-search input::placeholder {
+    color: #a0a0a0;
+}
+
+
+/* =====================================================
+   SEARCH CLEAR
+===================================================== */
+
+.prd-product-search-clear {
+    position: absolute;
+
+    right: 7px;
+    top: 50%;
+
+    width: 28px;
+    height: 28px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #ededed;
+
+    color: #666;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.prd-product-search-clear:hover {
+    background: #e2e2e2;
+    color: #222;
+}
+
+
+/* =====================================================
+   FILTER SELECT
+===================================================== */
+
+.prd-product-filter {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+
+    padding: 0 30px 0 12px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #fafafa;
+
+    color: #444;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    text-overflow: ellipsis;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.prd-product-filter:hover {
+    border-color: #d3d3d3;
+}
+
+.prd-product-filter:focus {
+    border-color: #69a943;
+    background: #fff;
+}
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+.prd-product-clear {
+    min-width: 76px;
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #666;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.prd-product-clear:hover {
+    background: #f7f7f7;
+    color: #222;
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+.prd-product-results {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 30px;
+
+    margin-top: 9px;
+    margin-bottom: 12px;
+
+    padding: 0 2px;
+}
+
+.prd-product-results span {
+    font-size: 11px;
+    color: #888;
+}
+
+.prd-product-results strong {
+    color: #444;
+    font-weight: 700;
+}
+
+.prd-product-results button {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #69a943;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   EMPTY FILTER RESULT
+===================================================== */
+
+.prd-empty-reset {
+    margin-top: 12px;
+
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    background: #fff;
+
+    color: #555;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.prd-empty-reset:hover {
+    background: #f7f7f7;
+}
+
+
+/* =====================================================
+   FILTER RESPONSIVE — LARGE DESKTOP
+===================================================== */
+
+@media (max-width: 1250px) {
+
+    .prd-product-controls {
+        grid-template-columns:
+            minmax(240px, 1.5fr)
+            minmax(135px, 1fr)
+            minmax(135px, 1fr)
+            minmax(135px, 1fr)
+            auto;
+    }
+
+}
+
+
+/* =====================================================
+   FILTER RESPONSIVE — TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .prd-product-controls {
+        grid-template-columns:
+            minmax(220px, 1fr)
+            minmax(145px, 1fr)
+            minmax(145px, 1fr);
+
+        align-items: stretch;
+    }
+
+    .prd-product-search {
+        grid-column: 1 / -1;
+    }
+
+    .prd-product-clear {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   FILTER RESPONSIVE — SMALL TABLET
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .prd-product-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 8px;
+
+        padding: 10px;
+    }
+
+    .prd-product-search,
+    .prd-product-filter,
+    .prd-product-clear {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   FILTER RESPONSIVE — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .prd-product-controls {
+        margin-top: 18px;
+        border-radius: 10px;
+    }
+
+    .prd-product-search {
+        height: 44px;
+    }
+
+    .prd-product-filter {
+        height: 44px;
+    }
+
+    .prd-product-clear {
+        height: 44px;
+    }
+
+    .prd-product-results {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 6px;
+
+        margin-top: 8px;
+        margin-bottom: 10px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .prd-product-controls {
+        padding: 8px;
+    }
+
+    .prd-product-search input {
+        font-size: 11px;
+    }
+
+    .prd-product-filter {
+        font-size: 10px;
+    }
+
+}
