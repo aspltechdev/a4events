@@ -272,6 +272,259 @@
 // };
 
 
+// const fs = require("fs");
+// const path = require("path");
+
+// const prisma = require("../config/db");
+
+// // =====================================================
+// // UPLOAD / REPLACE PDF
+// // =====================================================
+
+// const uploadDocument = async (req, res) => {
+//   try {
+//     // Check file
+//     if (!req.file) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "PDF file is required.",
+//       });
+//     }
+
+//     // Check title
+//     const { title } = req.body;
+
+//     if (!title || !title.trim()) {
+//       // Remove uploaded file if title is missing
+//       if (req.file.path && fs.existsSync(req.file.path)) {
+//         fs.unlinkSync(req.file.path);
+//       }
+
+//       return res.status(400).json({
+//         success: false,
+//         message: "Document title is required.",
+//       });
+//     }
+
+//     // New PDF URL
+//     const fileUrl = `/uploads/documents/${req.file.filename}`;
+
+//     // Check if an existing PDF already exists
+//     const existingDocument = await prisma.document.findFirst({
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//     });
+
+//     // =================================================
+//     // REPLACE EXISTING PDF
+//     // =================================================
+
+//     if (existingDocument) {
+//       // Build old physical file path
+//       const oldFilePath = path.join(
+//         process.cwd(),
+//         existingDocument.fileUrl.replace(/^\/+/, "")
+//       );
+
+//       // Delete old physical PDF
+//       if (fs.existsSync(oldFilePath)) {
+//         fs.unlinkSync(oldFilePath);
+//       }
+
+//       // Delete old database record
+//       await prisma.document.delete({
+//         where: {
+//           id: existingDocument.id,
+//         },
+//       });
+//     }
+
+//     // =================================================
+//     // CREATE NEW PDF RECORD
+//     // =================================================
+
+//     const document = await prisma.document.create({
+//       data: {
+//         title: title.trim(),
+//         fileName: req.file.originalname,
+//         fileUrl,
+//       },
+//     });
+
+//     return res.status(201).json({
+//       success: true,
+//       message: existingDocument
+//         ? "PDF replaced successfully."
+//         : "PDF uploaded successfully.",
+//       document,
+//     });
+//   } catch (error) {
+//     console.error("Upload document error:", error);
+
+//     // If database operation fails, remove newly uploaded file
+//     if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+//       try {
+//         fs.unlinkSync(req.file.path);
+//       } catch (fileError) {
+//         console.error(
+//           "Failed to remove uploaded file:",
+//           fileError
+//         );
+//       }
+//     }
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to upload PDF.",
+//       error: error.message,
+//     });
+//   }
+// };
+
+// // =====================================================
+// // GET ALL DOCUMENTS
+// // =====================================================
+
+// const getDocuments = async (req, res) => {
+//   try {
+//     const documents = await prisma.document.findMany({
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//     });
+
+//     return res.status(200).json({
+//       success: true,
+//       documents,
+//     });
+//   } catch (error) {
+//     console.error("Get documents error:", error);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to fetch documents.",
+//       error: error.message,
+//     });
+//   }
+// };
+
+// // =====================================================
+// // GET DOCUMENT BY ID
+// // =====================================================
+
+// const getDocumentById = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+
+//     if (!Number.isInteger(id)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid document ID.",
+//       });
+//     }
+
+//     const document = await prisma.document.findUnique({
+//       where: {
+//         id,
+//       },
+//     });
+
+//     if (!document) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Document not found.",
+//       });
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       document,
+//     });
+//   } catch (error) {
+//     console.error("Get document error:", error);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to fetch document.",
+//       error: error.message,
+//     });
+//   }
+// };
+
+// // =====================================================
+// // DELETE DOCUMENT
+// // =====================================================
+
+// const deleteDocument = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+
+//     if (!Number.isInteger(id)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid document ID.",
+//       });
+//     }
+
+//     const document = await prisma.document.findUnique({
+//       where: {
+//         id,
+//       },
+//     });
+
+//     if (!document) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Document not found.",
+//       });
+//     }
+
+//     // Delete physical PDF
+//     const filePath = path.join(
+//       process.cwd(),
+//       document.fileUrl.replace(/^\/+/, "")
+//     );
+
+//     if (fs.existsSync(filePath)) {
+//       fs.unlinkSync(filePath);
+//     }
+
+//     // Delete database record
+//     await prisma.document.delete({
+//       where: {
+//         id,
+//       },
+//     });
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "PDF deleted successfully.",
+//     });
+//   } catch (error) {
+//     console.error("Delete document error:", error);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to delete PDF.",
+//       error: error.message,
+//     });
+//   }
+// };
+
+// // =====================================================
+// // EXPORTS
+// // =====================================================
+
+// module.exports = {
+//   uploadDocument,
+//   getDocuments,
+//   getDocumentById,
+//   deleteDocument,
+// };
+
+
+
 const fs = require("fs");
 const path = require("path");
 
@@ -283,7 +536,10 @@ const prisma = require("../config/db");
 
 const uploadDocument = async (req, res) => {
   try {
-    // Check file
+    // -------------------------------------------------
+    // CHECK FILE
+    // -------------------------------------------------
+
     if (!req.file) {
       return res.status(400).json({
         success: false,
@@ -291,12 +547,18 @@ const uploadDocument = async (req, res) => {
       });
     }
 
-    // Check title
+    // -------------------------------------------------
+    // CHECK TITLE
+    // -------------------------------------------------
+
     const { title } = req.body;
 
     if (!title || !title.trim()) {
       // Remove uploaded file if title is missing
-      if (req.file.path && fs.existsSync(req.file.path)) {
+      if (
+        req.file.path &&
+        fs.existsSync(req.file.path)
+      ) {
         fs.unlinkSync(req.file.path);
       }
 
@@ -306,15 +568,23 @@ const uploadDocument = async (req, res) => {
       });
     }
 
-    // New PDF URL
-    const fileUrl = `/uploads/documents/${req.file.filename}`;
+    // -------------------------------------------------
+    // NEW PDF URL
+    // -------------------------------------------------
 
-    // Check if an existing PDF already exists
-    const existingDocument = await prisma.document.findFirst({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    const fileUrl =
+      `/uploads/documents/${req.file.filename}`;
+
+    // -------------------------------------------------
+    // CHECK EXISTING PDF
+    // -------------------------------------------------
+
+    const existingDocument =
+      await prisma.document.findFirst({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
 
     // =================================================
     // REPLACE EXISTING PDF
@@ -322,17 +592,23 @@ const uploadDocument = async (req, res) => {
 
     if (existingDocument) {
       // Build old physical file path
+
       const oldFilePath = path.join(
         process.cwd(),
-        existingDocument.fileUrl.replace(/^\/+/, "")
+        existingDocument.fileUrl.replace(
+          /^\/+/,
+          ""
+        )
       );
 
       // Delete old physical PDF
+
       if (fs.existsSync(oldFilePath)) {
         fs.unlinkSync(oldFilePath);
       }
 
       // Delete old database record
+
       await prisma.document.delete({
         where: {
           id: existingDocument.id,
@@ -344,26 +620,43 @@ const uploadDocument = async (req, res) => {
     // CREATE NEW PDF RECORD
     // =================================================
 
-    const document = await prisma.document.create({
-      data: {
-        title: title.trim(),
-        fileName: req.file.originalname,
-        fileUrl,
-      },
-    });
+    const document =
+      await prisma.document.create({
+        data: {
+          title: title.trim(),
+          fileName: req.file.originalname,
+          fileUrl,
+        },
+      });
+
+    // =================================================
+    // SUCCESS
+    // =================================================
 
     return res.status(201).json({
       success: true,
+
       message: existingDocument
         ? "PDF replaced successfully."
         : "PDF uploaded successfully.",
+
       document,
     });
   } catch (error) {
-    console.error("Upload document error:", error);
+    console.error(
+      "Upload document error:",
+      error
+    );
 
-    // If database operation fails, remove newly uploaded file
-    if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+    // -------------------------------------------------
+    // REMOVE NEWLY UPLOADED FILE ON ERROR
+    // -------------------------------------------------
+
+    if (
+      req.file &&
+      req.file.path &&
+      fs.existsSync(req.file.path)
+    ) {
       try {
         fs.unlinkSync(req.file.path);
       } catch (fileError) {
@@ -388,18 +681,22 @@ const uploadDocument = async (req, res) => {
 
 const getDocuments = async (req, res) => {
   try {
-    const documents = await prisma.document.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    const documents =
+      await prisma.document.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
 
     return res.status(200).json({
       success: true,
       documents,
     });
   } catch (error) {
-    console.error("Get documents error:", error);
+    console.error(
+      "Get documents error:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
@@ -424,11 +721,12 @@ const getDocumentById = async (req, res) => {
       });
     }
 
-    const document = await prisma.document.findUnique({
-      where: {
-        id,
-      },
-    });
+    const document =
+      await prisma.document.findUnique({
+        where: {
+          id,
+        },
+      });
 
     if (!document) {
       return res.status(404).json({
@@ -442,7 +740,10 @@ const getDocumentById = async (req, res) => {
       document,
     });
   } catch (error) {
-    console.error("Get document error:", error);
+    console.error(
+      "Get document error:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
@@ -467,11 +768,16 @@ const deleteDocument = async (req, res) => {
       });
     }
 
-    const document = await prisma.document.findUnique({
-      where: {
-        id,
-      },
-    });
+    // -------------------------------------------------
+    // FIND DOCUMENT
+    // -------------------------------------------------
+
+    const document =
+      await prisma.document.findUnique({
+        where: {
+          id,
+        },
+      });
 
     if (!document) {
       return res.status(404).json({
@@ -480,29 +786,49 @@ const deleteDocument = async (req, res) => {
       });
     }
 
-    // Delete physical PDF
+    // -------------------------------------------------
+    // BUILD PHYSICAL FILE PATH
+    // -------------------------------------------------
+
     const filePath = path.join(
       process.cwd(),
-      document.fileUrl.replace(/^\/+/, "")
+      document.fileUrl.replace(
+        /^\/+/,
+        ""
+      )
     );
+
+    // -------------------------------------------------
+    // DELETE PHYSICAL PDF
+    // -------------------------------------------------
 
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
     }
 
-    // Delete database record
+    // -------------------------------------------------
+    // DELETE DATABASE RECORD
+    // -------------------------------------------------
+
     await prisma.document.delete({
       where: {
         id,
       },
     });
 
+    // -------------------------------------------------
+    // SUCCESS
+    // -------------------------------------------------
+
     return res.status(200).json({
       success: true,
       message: "PDF deleted successfully.",
     });
   } catch (error) {
-    console.error("Delete document error:", error);
+    console.error(
+      "Delete document error:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
