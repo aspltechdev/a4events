@@ -988,3 +988,12 @@
     padding: 20px 15px;
   }
 }
+
+.checkout-expected-delivery {
+  margin-top: 14px;
+}
+
+.checkout-expected-delivery p {
+  margin: 6px 0 0;
+  font-weight: 600;
+}

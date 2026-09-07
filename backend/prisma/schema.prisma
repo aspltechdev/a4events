@@ -256,6 +256,7 @@ model Order {
   deliveryInstructions String?
 
   deliveryCharge Float @default(0)
+  expectedDeliveryDate DateTime?
 
   deliveryChargeRequired Boolean @default(false)
 
