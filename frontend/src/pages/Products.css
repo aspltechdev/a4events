@@ -3655,3 +3655,435 @@
 .pdt-cart-check {
   animation: checkPop 0.4s ease forwards;
 }
+
+/* ============================================================
+   FEATURED MARQUEE — FIXED SIZE CARDS (UNIFORM)
+   ============================================================ */
+
+/* Override card sizes in marquee - ALL CARDS MUST BE SAME SIZE */
+.prd-marquee-track .prd-card-link {
+  width: 280px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+.prd-marquee-track .prd-card {
+  height: 400px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.prd-marquee-track .prd-card-image-wrap {
+  height: 190px !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+
+.prd-marquee-track .prd-card-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.prd-marquee-track .prd-card-details {
+  flex: 1 !important;
+  padding: 1rem 1.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+  min-height: 0 !important;
+}
+
+.prd-marquee-track .prd-card-title {
+  font-size: 0.9rem !important;
+  line-height: 1.25 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 2.3rem !important;
+}
+
+.prd-marquee-track .prd-card-description {
+  font-size: 0.75rem !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 2.1rem !important;
+}
+
+.prd-marquee-track .prd-card-category {
+  font-size: 0.6rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.prd-marquee-track .prd-card-pricing {
+  margin-top: auto !important;
+  padding-top: 0.3rem !important;
+}
+
+.prd-marquee-track .prd-card-price {
+  font-size: 1rem !important;
+}
+
+.prd-marquee-track .prd-card-price-original {
+  font-size: 0.75rem !important;
+}
+
+.prd-marquee-track .prd-card-action {
+  padding: 0.5rem 1.2rem 0.9rem !important;
+  flex-shrink: 0 !important;
+  min-height: 50px !important;
+}
+
+.prd-marquee-track .prd-view-details {
+  font-size: 0.78rem !important;
+}
+
+.prd-marquee-track .prd-add-cart {
+  font-size: 0.72rem !important;
+  padding: 0.4rem 1rem !important;
+}
+
+.prd-marquee-track .prd-cart-quantity button {
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 1rem !important;
+}
+
+.prd-marquee-track .prd-cart-quantity span {
+  font-size: 0.8rem !important;
+  min-width: 20px !important;
+}
+
+.prd-marquee-track .prd-badge {
+  font-size: 0.55rem !important;
+  padding: 0.2rem 0.5rem !important;
+}
+
+/* ============================================================
+   RESPONSIVE FOR MARQUEE - UNIFORM SIZES
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .prd-marquee-track .prd-card-link {
+    width: 260px !important;
+  }
+  .prd-marquee-track .prd-card {
+    height: 380px !important;
+  }
+  .prd-marquee-track .prd-card-image-wrap {
+    height: 175px !important;
+  }
+  .prd-marquee-track .prd-card-title {
+    font-size: 0.85rem !important;
+    min-height: 2.1rem !important;
+  }
+  .prd-marquee-track .prd-card-description {
+    font-size: 0.7rem !important;
+    min-height: 2rem !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .prd-marquee-track .prd-card-link {
+    width: 240px !important;
+  }
+  .prd-marquee-track .prd-card {
+    height: 360px !important;
+  }
+  .prd-marquee-track .prd-card-image-wrap {
+    height: 160px !important;
+  }
+  .prd-marquee-track .prd-card-details {
+    padding: 0.8rem 1rem !important;
+    gap: 0.3rem !important;
+  }
+  .prd-marquee-track .prd-card-title {
+    font-size: 0.8rem !important;
+    min-height: 2rem !important;
+  }
+  .prd-marquee-track .prd-card-description {
+    font-size: 0.65rem !important;
+    min-height: 1.8rem !important;
+  }
+  .prd-marquee-track .prd-card-price {
+    font-size: 0.9rem !important;
+  }
+  .prd-marquee-track .prd-card-action {
+    padding: 0.4rem 1rem 0.7rem !important;
+    min-height: 44px !important;
+  }
+  .prd-marquee-track .prd-view-details {
+    font-size: 0.7rem !important;
+  }
+  .prd-marquee-track .prd-add-cart {
+    font-size: 0.65rem !important;
+    padding: 0.3rem 0.8rem !important;
+  }
+  .prd-marquee-track .prd-cart-quantity button {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.8rem !important;
+  }
+  .prd-marquee-track .prd-cart-quantity span {
+    font-size: 0.7rem !important;
+    min-width: 18px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .prd-marquee-track .prd-card-link {
+    width: 200px !important;
+  }
+  .prd-marquee-track .prd-card {
+    height: 310px !important;
+  }
+  .prd-marquee-track .prd-card-image-wrap {
+    height: 130px !important;
+  }
+  .prd-marquee-track .prd-card-details {
+    padding: 0.6rem 0.8rem !important;
+    gap: 0.2rem !important;
+  }
+  .prd-marquee-track .prd-card-category {
+    font-size: 0.5rem !important;
+  }
+  .prd-marquee-track .prd-card-title {
+    font-size: 0.7rem !important;
+    min-height: 1.7rem !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  .prd-marquee-track .prd-card-description {
+    display: none !important;
+  }
+  .prd-marquee-track .prd-card-price {
+    font-size: 0.8rem !important;
+  }
+  .prd-marquee-track .prd-card-price-original {
+    font-size: 0.6rem !important;
+  }
+  .prd-marquee-track .prd-card-action {
+    padding: 0.3rem 0.6rem 0.6rem !important;
+    min-height: 38px !important;
+    gap: 0.3rem !important;
+  }
+  .prd-marquee-track .prd-view-details {
+    font-size: 0.6rem !important;
+    gap: 0.2rem !important;
+  }
+  .prd-marquee-track .prd-view-details .prd-card-arrow {
+    font-size: 0.6rem !important;
+  }
+  .prd-marquee-track .prd-add-cart {
+    font-size: 0.55rem !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 5px !important;
+  }
+  .prd-marquee-track .prd-cart-quantity {
+    gap: 0.1rem !important;
+    padding: 0.05rem !important;
+  }
+  .prd-marquee-track .prd-cart-quantity button {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 0.7rem !important;
+    border-radius: 4px !important;
+  }
+  .prd-marquee-track .prd-cart-quantity span {
+    font-size: 0.6rem !important;
+    min-width: 16px !important;
+  }
+  .prd-marquee-track .prd-badge {
+    font-size: 0.4rem !important;
+    padding: 0.1rem 0.3rem !important;
+  }
+  .prd-marquee-track .prd-card-badges {
+    top: 0.3rem !important;
+    left: 0.3rem !important;
+    gap: 0.15rem !important;
+  }
+  .prd-marquee-track .prd-card-pricing {
+    padding-top: 0.2rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .prd-marquee-track .prd-card-link {
+    width: 160px !important;
+  }
+  .prd-marquee-track .prd-card {
+    height: 270px !important;
+  }
+  .prd-marquee-track .prd-card-image-wrap {
+    height: 100px !important;
+  }
+  .prd-marquee-track .prd-card-details {
+    padding: 0.4rem 0.5rem !important;
+    gap: 0.15rem !important;
+  }
+  .prd-marquee-track .prd-card-title {
+    font-size: 0.6rem !important;
+    min-height: 1.4rem !important;
+  }
+  .prd-marquee-track .prd-card-price {
+    font-size: 0.7rem !important;
+  }
+  .prd-marquee-track .prd-card-price-original {
+    font-size: 0.5rem !important;
+  }
+  .prd-marquee-track .prd-card-action {
+    padding: 0.2rem 0.4rem 0.4rem !important;
+    min-height: 32px !important;
+  }
+  .prd-marquee-track .prd-view-details {
+    font-size: 0.5rem !important;
+  }
+  .prd-marquee-track .prd-add-cart {
+    font-size: 0.45rem !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+  .prd-marquee-track .prd-cart-quantity button {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.5rem !important;
+  }
+  .prd-marquee-track .prd-cart-quantity span {
+    font-size: 0.5rem !important;
+    min-width: 12px !important;
+  }
+}
+
+/* ============================================================
+   FIX: GRID CARDS UNIFORM SIZE
+   ============================================================ */
+
+/* Make all grid cards uniform */
+.prd-grid .prd-card-link {
+  display: block !important;
+  height: 100% !important;
+}
+
+.prd-grid .prd-card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.prd-grid .prd-card-image-wrap {
+  height: 220px !important;
+  flex-shrink: 0 !important;
+}
+
+.prd-grid .prd-card-details {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.prd-grid .prd-card-pricing {
+  margin-top: auto !important;
+  padding-top: 0.3rem !important;
+}
+
+.prd-grid .prd-card-action {
+  flex-shrink: 0 !important;
+}
+
+/* ============================================================
+   RESPONSIVE FOR GRID CARDS
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .prd-grid .prd-card-image-wrap {
+    height: 200px !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .prd-grid .prd-card-image-wrap {
+    height: 180px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .prd-grid .prd-card-image-wrap {
+    height: 130px !important;
+  }
+  .prd-grid .prd-card-details {
+    padding: 0.6rem 0.6rem 0.3rem !important;
+  }
+  .prd-grid .prd-card-title {
+    font-size: 0.7rem !important;
+    min-height: 1.7rem !important;
+  }
+  .prd-grid .prd-card-description {
+    display: none !important;
+  }
+  .prd-grid .prd-card-price {
+    font-size: 0.8rem !important;
+  }
+  .prd-grid .prd-card-action {
+    padding: 0.3rem 0.5rem 0.5rem !important;
+  }
+  .prd-grid .prd-view-details {
+    font-size: 0.6rem !important;
+  }
+  .prd-grid .prd-add-cart {
+    font-size: 0.55rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+  .prd-grid .prd-cart-quantity button {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 0.7rem !important;
+  }
+  .prd-grid .prd-cart-quantity span {
+    font-size: 0.6rem !important;
+    min-width: 16px !important;
+  }
+  .prd-grid .prd-badge {
+    font-size: 0.4rem !important;
+    padding: 0.1rem 0.3rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .prd-grid .prd-card-image-wrap {
+    height: 100px !important;
+  }
+  .prd-grid .prd-card-details {
+    padding: 0.4rem 0.4rem 0.2rem !important;
+  }
+  .prd-grid .prd-card-title {
+    font-size: 0.6rem !important;
+    min-height: 1.4rem !important;
+  }
+  .prd-grid .prd-card-price {
+    font-size: 0.7rem !important;
+  }
+  .prd-grid .prd-card-action {
+    padding: 0.2rem 0.3rem 0.3rem !important;
+  }
+  .prd-grid .prd-view-details {
+    font-size: 0.5rem !important;
+  }
+  .prd-grid .prd-add-cart {
+    font-size: 0.45rem !important;
+    padding: 0.15rem 0.3rem !important;
+  }
+  .prd-grid .prd-cart-quantity button {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.5rem !important;
+  }
+  .prd-grid .prd-cart-quantity span {
+    font-size: 0.5rem !important;
+    min-width: 12px !important;
+  }
+}
