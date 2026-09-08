@@ -56,6 +56,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .pdt-nav-back:hover {
@@ -188,6 +189,7 @@
 }
 
 .pdt-info-card {
+  position: relative;
   background: rgba(255,253,245,0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -330,6 +332,9 @@
 .pdt-q-gold { background: var(--marigold); box-shadow: 0 0 6px rgba(245,166,35,0.3); }
 .pdt-q-coral { background: var(--festive-coral); box-shadow: 0 0 6px rgba(232,93,74,0.3); }
 .pdt-q-purple { background: var(--festival-purple); box-shadow: 0 0 6px rgba(122,90,166,0.3); }
+.pdt-q-teal { background: #2A9D8F; box-shadow: 0 0 6px rgba(42,157,143,0.3); }
+.pdt-q-blue { background: #4A90D9; box-shadow: 0 0 6px rgba(74,144,217,0.3); }
+.pdt-q-amber { background: #D4A373; box-shadow: 0 0 6px rgba(212,163,115,0.3); }
 
 /* ============================================================
    CART SECTION
@@ -384,6 +389,15 @@
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+/* Out of Stock Button */
+.pdt-out-of-stock-btn {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  width: 100%;
+  justify-content: center;
 }
 
 /* ----- QUANTITY SELECTOR - Festive style ----- */
@@ -661,6 +675,13 @@
 .pdt-visible .pdt-section:nth-child(3) { transition-delay: 0.3s; }
 .pdt-visible .pdt-section:nth-child(4) { transition-delay: 0.4s; }
 
+.pdt-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
 /* ----- SECTION CARDS — Festive white-blend ----- */
 .pdt-section-card {
   background: rgba(255,253,245,0.85);
@@ -690,6 +711,8 @@
 .pdt-thread-gold { background: var(--marigold); }
 .pdt-thread-coral { background: var(--festive-coral); }
 .pdt-thread-purple { background: var(--festival-purple); }
+.pdt-thread-blue { background: #4A90D9; }
+.pdt-thread-emerald { background: #2A9D8F; }
 
 .pdt-section-eyebrow {
   font-size: 0.62rem;
@@ -902,6 +925,7 @@
   font-size: 0.75rem;
   color: rgba(23,52,95,0.4);
   margin: 0;
+  word-break: break-word;
 }
 
 .pdt-store-stock {
@@ -1150,39 +1174,442 @@
     align-items: stretch;
   }
 
-  .pdt-quantity-selector { justify-content: center; }
-  .pdt-add-cart-btn { flex: unset; width: 100%; }
+  .pdt-quantity-selector { 
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .pdt-add-cart-btn { 
+    flex: unset; 
+    width: 100%; 
+  }
+  
   .pdt-remove-cart-btn { width: 100%; }
   .pdt-enquire-btn { font-size: 0.85rem; padding: 0.75rem 1.25rem; }
   .pdt-quantity-selector button { width: 38px; height: 38px; }
   .pdt-quantity-selector input[type="number"] { width: 44px; font-size: 0.9rem; }
   .pdt-cart-btn-with-count { justify-content: center; width: 100%; }
+  
+  /* Top nav responsive */
+  .pdt-top-nav {
+    padding-top: 70px;
+  }
+  
+  .pdt-nav-back, .pdt-nav-all {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
 
-@media (max-width: 480px) {
-  .pdt-container { padding: 1.5rem 4%; gap: 1.5rem; }
-  .pdt-stores-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-  .pdt-specs-grid { grid-template-columns: 1fr; }
-  .pdt-info-card { padding: 1.5rem; }
-  .pdt-section-card { padding: 1.3rem; }
-  .pdt-store-card { padding: 1rem; }
-  .pdt-title { font-size: 1.5rem; }
-  .pdt-price-current { font-size: 1.6rem; }
-  .pdt-top-nav-inner { padding: 0.65rem 4%; }
-  .pdt-map-frame { height: 240px; }
-  .pdt-ingredients-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-  .pdt-ingredient-image-wrap { height: 120px; }
+@media (max-width: 600px) {
+  .pdt-container { 
+    padding: 1.2rem 3%; 
+    gap: 1.2rem; 
+  }
+  
+  .pdt-stores-grid { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.6rem; 
+  }
+  
+  .pdt-specs-grid { 
+    grid-template-columns: 1fr; 
+    gap: 0.5rem;
+  }
+  
+  .pdt-info-card { 
+    padding: 1.2rem; 
+  }
+  
+  .pdt-section-card { 
+    padding: 1.2rem; 
+  }
+  
+  .pdt-store-card { 
+    padding: 0.8rem; 
+  }
+  
+  .pdt-title { 
+    font-size: 1.5rem; 
+  }
+  
+  .pdt-price-current { 
+    font-size: 1.6rem; 
+  }
+  
+  .pdt-top-nav-inner { 
+    padding: 0.5rem 3%; 
+  }
+  
+  .pdt-map-frame { 
+    height: 240px; 
+  }
+  
+  .pdt-ingredients-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0.5rem; 
+  }
+  
+  .pdt-ingredient-image-wrap { 
+    height: 110px; 
+  }
+  
+  .pdt-ingredient-name {
+    font-size: 0.8rem;
+  }
+  
+  .pdt-ingredient-description {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2;
+  }
 
-  .pdt-cart-section { padding: 0.75rem 0; }
-  .pdt-add-cart-btn { font-size: 0.8rem; padding: 0.5rem 1rem; }
-  .pdt-remove-cart-btn { font-size: 0.75rem; padding: 0.5rem 0.8rem; }
-  .pdt-quantity-selector button { width: 32px; height: 32px; font-size: 0.9rem; }
-  .pdt-quantity-selector input[type="number"] { width: 36px; height: 30px; font-size: 0.8rem; }
-  .pdt-quantity-display { min-width: 28px; font-size: 0.85rem; }
-  .pdt-enquire-btn { font-size: 0.8rem; padding: 0.65rem 1rem; }
-  .pdt-cart-count-badge { min-width: 20px; height: 20px; font-size: 0.65rem; padding: 0 5px; }
-  .pdt-cart-btn-with-count { font-size: 0.8rem; padding: 0.5rem 1rem; }
-  .pdt-cart-btn-with-count .pdt-cart-count-badge { min-width: 18px; height: 18px; font-size: 0.6rem; }
+  .pdt-cart-section { 
+    padding: 0.6rem 0; 
+  }
+  
+  .pdt-add-cart-btn { 
+    font-size: 0.8rem; 
+    padding: 0.5rem 1rem; 
+  }
+  
+  .pdt-remove-cart-btn { 
+    font-size: 0.75rem; 
+    padding: 0.5rem 0.8rem; 
+  }
+  
+  .pdt-quantity-selector button { 
+    width: 34px; 
+    height: 34px; 
+    font-size: 0.9rem; 
+  }
+  
+  .pdt-quantity-selector input[type="number"] { 
+    width: 40px; 
+    height: 30px; 
+    font-size: 0.8rem; 
+  }
+  
+  .pdt-quantity-display { 
+    min-width: 28px; 
+    font-size: 0.85rem; 
+  }
+  
+  .pdt-enquire-btn { 
+    font-size: 0.8rem; 
+    padding: 0.65rem 1rem; 
+  }
+  
+  .pdt-cart-count-badge { 
+    min-width: 20px; 
+    height: 20px; 
+    font-size: 0.65rem; 
+    padding: 0 5px; 
+  }
+  
+  .pdt-cart-btn-with-count { 
+    font-size: 0.8rem; 
+    padding: 0.5rem 1rem; 
+  }
+  
+  .pdt-cart-btn-with-count .pdt-cart-count-badge { 
+    min-width: 18px; 
+    height: 18px; 
+    font-size: 0.6rem; 
+  }
+  
+  /* Qualities - wrap better */
+  .pdt-qualities {
+    gap: 0.6rem;
+  }
+  
+  .pdt-quality-item {
+    font-size: 0.7rem;
+  }
+  
+  .pdt-quality-dot {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Store card improvements */
+  .pdt-store-logo-wrap {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .pdt-store-name {
+    font-size: 0.78rem;
+  }
+  
+  .pdt-store-address {
+    font-size: 0.65rem;
+  }
+  
+  .pdt-store-stock {
+    font-size: 0.6rem;
+  }
+  
+  /* Bottom CTA */
+  .pdt-bottom-card {
+    padding: 1.2rem;
+  }
+  
+  .pdt-bottom-title {
+    font-size: 1rem;
+  }
+  
+  .pdt-bottom-sub {
+    font-size: 0.78rem;
+  }
+  
+  .pdt-bottom-btn {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Category tags */
+  .pdt-category-tag {
+    font-size: 0.55rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .pdt-description {
+    font-size: 0.82rem;
+  }
+  
+  /* Section titles */
+  .pdt-section-title {
+    font-size: 1rem;
+  }
+  
+  .pdt-section-sub {
+    font-size: 0.78rem;
+  }
+  
+  .pdt-spec-item {
+    padding: 0.7rem 0.9rem;
+  }
+  
+  .pdt-spec-label {
+    font-size: 0.55rem;
+  }
+  
+  .pdt-spec-value {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .pdt-container { 
+    padding: 1rem 2%; 
+    gap: 1rem; 
+  }
+  
+  .pdt-stores-grid { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.4rem; 
+  }
+  
+  .pdt-info-card { 
+    padding: 0.8rem; 
+  }
+  
+  .pdt-section-card { 
+    padding: 0.8rem; 
+  }
+  
+  .pdt-store-card { 
+    padding: 0.6rem; 
+    gap: 0.4rem;
+  }
+  
+  .pdt-title { 
+    font-size: 1.2rem; 
+  }
+  
+  .pdt-price-current { 
+    font-size: 1.3rem; 
+  }
+  
+  .pdt-price-original {
+    font-size: 0.85rem;
+  }
+  
+  .pdt-price-save {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+  
+  .pdt-ingredients-grid { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.4rem; 
+  }
+  
+  .pdt-ingredient-image-wrap { 
+    height: 90px; 
+  }
+  
+  .pdt-ingredient-info { 
+    padding: 0.5rem; 
+  }
+  
+  .pdt-ingredient-name { 
+    font-size: 0.7rem; 
+  }
+  
+  .pdt-ingredient-description {
+    font-size: 0.6rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  .pdt-store-logo-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  
+  .pdt-store-logo {
+    padding: 0.3rem;
+  }
+  
+  .pdt-store-name {
+    font-size: 0.7rem;
+  }
+  
+  .pdt-store-address {
+    font-size: 0.55rem;
+  }
+  
+  .pdt-store-stock {
+    font-size: 0.55rem;
+  }
+  
+  .pdt-store-stock-dot {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .pdt-map-frame {
+    height: 200px;
+  }
+  
+  .pdt-bottom-card {
+    padding: 0.8rem;
+  }
+  
+  .pdt-bottom-title {
+    font-size: 0.9rem;
+  }
+  
+  .pdt-bottom-sub {
+    font-size: 0.7rem;
+  }
+  
+  .pdt-bottom-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .pdt-add-cart-btn {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    min-width: 80px;
+  }
+  
+  .pdt-remove-cart-btn {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .pdt-quantity-selector button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .pdt-quantity-selector input[type="number"] {
+    width: 32px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+  
+  .pdt-quantity-display {
+    min-width: 24px;
+    font-size: 0.75rem;
+  }
+  
+  .pdt-enquire-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .pdt-quality-item {
+    font-size: 0.6rem;
+  }
+  
+  .pdt-quality-dot {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .pdt-category-tag {
+    font-size: 0.5rem;
+    padding: 0.15rem 0.4rem;
+  }
+  
+  .pdt-description {
+    font-size: 0.75rem;
+  }
+  
+  .pdt-section-title {
+    font-size: 0.9rem;
+  }
+  
+  .pdt-section-sub {
+    font-size: 0.7rem;
+  }
+  
+  .pdt-spec-item {
+    padding: 0.5rem 0.7rem;
+  }
+  
+  .pdt-spec-label {
+    font-size: 0.5rem;
+  }
+  
+  .pdt-spec-value {
+    font-size: 0.7rem;
+  }
+  
+  .pdt-spec-original {
+    font-size: 0.65rem;
+  }
+  
+  .pdt-top-nav {
+    padding-top: 60px;
+  }
+  
+  .pdt-nav-back, .pdt-nav-all {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+  }
+  
+  .pdt-nav-back span, .pdt-nav-all span {
+    font-size: 0.65rem;
+  }
+  
+  .pdt-cart-status {
+    font-size: 0.75rem;
+  }
+  
+  .pdt-cart-check {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
 }
 
 /* ============================================================

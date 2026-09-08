@@ -477,6 +477,7 @@
 .prd-card-link {
   text-decoration: none;
   display: block;
+  min-width: 0;
 }
 
 .prd-card {
@@ -493,6 +494,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 /* Festive accent line on cards */
@@ -611,6 +613,11 @@
   letter-spacing: 0.05em;
 }
 
+.prd-badge-out-of-stock {
+  background: rgba(23, 52, 95, 0.6);
+  color: #ffffff;
+}
+
 .prd-card-details {
   position: relative;
   z-index: 1;
@@ -619,6 +626,7 @@
   flex-direction: column;
   gap: 0.45rem;
   flex: 1;
+  min-width: 0;
 }
 
 .prd-card-category {
@@ -630,6 +638,9 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: rgb(23 52 95 / 70%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .prd-card-category-dot {
@@ -637,6 +648,7 @@
   height: 4px;
   border-radius: 50%;
   background: var(--a4a-green);
+  flex-shrink: 0;
 }
 
 .prd-card-title {
@@ -646,6 +658,11 @@
   letter-spacing: -0.01em;
   line-height: 1.25;
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .prd-card-description {
@@ -656,12 +673,14 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word;
 }
 
 .prd-card-pricing {
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .prd-card-price {
@@ -685,12 +704,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.5rem;
   padding: 0.75rem 1.3rem 1.2rem;
   border-top: 1px solid rgba(23, 52, 95, 0.04);
   margin-top: auto;
   position: relative;
   z-index: 1;
+  flex-wrap: wrap;
 }
 
 /* View Details Link */
@@ -703,6 +723,9 @@
   font-size: 0.82rem;
   font-weight: 500;
   transition: all 0.3s var(--ease-premium);
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .prd-card:hover .prd-view-details {
@@ -711,6 +734,7 @@
 
 .prd-view-details .prd-card-arrow {
   transition: transform 0.3s var(--ease-premium);
+  flex-shrink: 0;
 }
 
 .prd-card:hover .prd-view-details .prd-card-arrow {
@@ -926,66 +950,297 @@
   .prd-rangoli-pattern {
     opacity: 0.008;
   }
+
+  .prd-category-tab {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
+  }
 }
 
-@media (max-width: 500px) {
+/* ============================================================
+   MOBILE RESPONSIVE - FIXED 2-COLUMN VIEW
+   ============================================================ */
+@media (max-width: 640px) {
   .prd-premium {
-    padding: 4rem 0 4rem;
+    padding: 3rem 0 3rem;
   }
 
   .prd-container {
-    gap: 3rem;
-    padding: 0 4%;
+    gap: 2.5rem;
+    padding: 0 3%;
   }
 
   .prd-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
 
+  /* Fix featured marquee on mobile */
+  .prd-marquee-stage {
+    padding: 0.25rem 0;
+  }
+  
+  .prd-marquee-track {
+    gap: 0.6rem;
+  }
+  
   .prd-marquee-track .prd-card-link {
-    width: 240px;
+    width: 180px;
   }
   .prd-marquee-track .prd-card {
-    height: 350px;
+    height: 290px;
   }
   .prd-marquee-track .prd-card-image-wrap {
-    height: 150px;
+    height: 110px;
   }
 
   .prd-headline {
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-size: clamp(1.6rem, 4vw, 2rem);
   }
 
+  /* Category tabs - scrollable on mobile */
+  .prd-categories {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 0 0.5rem 0;
+  }
+  
+  .prd-categories::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .prd-categories-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    border-radius: 12px;
+    padding: 0.3rem;
+    min-width: max-content;
+  }
+  
   .prd-category-tab {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.72rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    gap: 0.3rem;
+  }
+  
+  .prd-category-count {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.35rem;
+    min-width: 16px;
   }
 
+  /* =============================================
+     FIXED: PRODUCT CARD - MOBILE 2-COLUMN
+  ============================================= */
+  
+  /* Image height - smaller on mobile */
+  .prd-card-image-wrap {
+    height: 130px;
+  }
+  
+  /* Card details - compact */
+  .prd-card-details {
+    padding: 0.6rem 0.6rem 0.3rem;
+    gap: 0.2rem;
+  }
+  
+  /* Category text - smaller */
+  .prd-card-category {
+    font-size: 0.5rem;
+    gap: 0.2rem;
+  }
+  
+  .prd-card-category-dot {
+    width: 3px;
+    height: 3px;
+  }
+  
+  /* Title - smaller with 2 lines max */
+  .prd-card-title {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    -webkit-line-clamp: 2;
+    min-height: 1.7rem;
+  }
+  
+  /* Description - hide on mobile to save space */
+  .prd-card-description {
+    display: none;
+  }
+  
+  /* Pricing - smaller */
+  .prd-card-pricing {
+    gap: 0.25rem;
+  }
+  
+  .prd-card-price {
+    font-size: 0.8rem;
+  }
+  
+  .prd-card-price-original {
+    font-size: 0.6rem;
+  }
+  
+  /* Badges - smaller */
+  .prd-card-badges {
+    top: 0.3rem;
+    left: 0.3rem;
+    gap: 0.2rem;
+  }
+  
+  .prd-badge {
+    font-size: 0.45rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  /* =============================================
+     FIXED: CARD ACTION - MOBILE
+  ============================================= */
   .prd-card-action {
-    padding: 0.6rem 1rem 1rem;
+    padding: 0.4rem 0.6rem 0.6rem;
+    gap: 0.3rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    justify-content: center;
   }
 
+  /* View Details - smaller */
   .prd-view-details {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+  
+  .prd-view-details .prd-card-arrow {
+    font-size: 0.6rem;
   }
 
+  /* Add to Cart button - smaller */
   .prd-add-cart {
-    padding: 0.4rem 1rem;
-    font-size: 0.72rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+    border-radius: 6px;
   }
 
+  /* Quantity controls - smaller */
+  .prd-cart-quantity {
+    gap: 0.15rem;
+    padding: 0.1rem;
+    border-radius: 6px;
+  }
+  
   .prd-cart-quantity button {
-    width: 24px;
-    height: 24px;
-    font-size: 0.9rem;
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+    border-radius: 4px;
   }
 
   .prd-cart-quantity span {
-    min-width: 20px;
-    font-size: 0.78rem;
+    min-width: 16px;
+    font-size: 0.65rem;
+  }
+
+  /* Hero */
+  .prd-hero-content {
+    gap: 0.8rem;
+  }
+  
+  .prd-prose {
+    font-size: 0.8rem;
+  }
+  
+  .prd-whisper {
+    font-size: 0.55rem;
+  }
+}
+
+/* ============================================================
+   VERY SMALL MOBILE (under 400px)
+   ============================================================ */
+@media (max-width: 400px) {
+  .prd-grid {
+    gap: 0.4rem;
+  }
+  
+  .prd-container {
+    padding: 0 2%;
+    gap: 2rem;
+  }
+  
+  .prd-card-image-wrap {
+    height: 100px;
+  }
+  
+  .prd-card-details {
+    padding: 0.4rem 0.4rem 0.2rem;
+    gap: 0.15rem;
+  }
+  
+  .prd-card-title {
+    font-size: 0.6rem;
+    min-height: 1.4rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  .prd-card-category {
+    font-size: 0.45rem;
+  }
+  
+  .prd-card-price {
+    font-size: 0.7rem;
+  }
+  
+  .prd-card-price-original {
+    font-size: 0.5rem;
+  }
+  
+  .prd-card-action {
+    padding: 0.3rem 0.4rem 0.4rem;
+    gap: 0.2rem;
+  }
+  
+  .prd-view-details {
+    font-size: 0.5rem;
+  }
+  
+  .prd-add-cart {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.5rem;
+  }
+  
+  .prd-cart-quantity button {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+  }
+  
+  .prd-cart-quantity span {
+    min-width: 14px;
+    font-size: 0.55rem;
+  }
+  
+  .prd-badge {
+    font-size: 0.4rem;
+    padding: 0.05rem 0.25rem;
+  }
+  
+  .prd-card-badges {
+    top: 0.2rem;
+    left: 0.2rem;
+    gap: 0.15rem;
+  }
+  
+  .prd-marquee-track .prd-card-link {
+    width: 150px;
+  }
+  .prd-marquee-track .prd-card {
+    height: 250px;
+  }
+  .prd-marquee-track .prd-card-image-wrap {
+    height: 90px;
   }
 }
 
@@ -1236,8 +1491,6 @@
   }
 }
 
-
-
 /* =====================================================
    PRODUCT SEARCH / FILTER CONTROLS
 ===================================================== */
@@ -1265,7 +1518,6 @@
 
     box-sizing: border-box;
 }
-
 
 /* =====================================================
    SEARCH
@@ -1335,7 +1587,6 @@
     color: #a0a0a0;
 }
 
-
 /* =====================================================
    SEARCH CLEAR
 ===================================================== */
@@ -1373,7 +1624,6 @@
     background: #e2e2e2;
     color: #222;
 }
-
 
 /* =====================================================
    FILTER SELECT
@@ -1419,7 +1669,6 @@
     background: #fff;
 }
 
-
 /* =====================================================
    CLEAR
 ===================================================== */
@@ -1450,7 +1699,6 @@
     background: #f7f7f7;
     color: #222;
 }
-
 
 /* =====================================================
    RESULTS
@@ -1495,7 +1743,6 @@
     cursor: pointer;
 }
 
-
 /* =====================================================
    EMPTY FILTER RESULT
 ===================================================== */
@@ -1525,7 +1772,6 @@
     background: #f7f7f7;
 }
 
-
 /* =====================================================
    FILTER RESPONSIVE — LARGE DESKTOP
 ===================================================== */
@@ -1542,7 +1788,6 @@
     }
 
 }
-
 
 /* =====================================================
    FILTER RESPONSIVE — TABLET
@@ -1569,7 +1814,6 @@
 
 }
 
-
 /* =====================================================
    FILTER RESPONSIVE — SMALL TABLET
 ===================================================== */
@@ -1594,7 +1838,6 @@
 
 }
 
-
 /* =====================================================
    FILTER RESPONSIVE — MOBILE
 ===================================================== */
@@ -1604,32 +1847,62 @@
     .prd-product-controls {
         margin-top: 18px;
         border-radius: 10px;
+        padding: 8px;
+        gap: 6px;
     }
 
     .prd-product-search {
-        height: 44px;
+        height: 40px;
+    }
+
+    .prd-product-search input {
+        font-size: 11px;
+        padding: 0 32px;
+    }
+    
+    .prd-product-search-icon {
+        font-size: 16px;
+        left: 10px;
+    }
+    
+    .prd-product-search-clear {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        right: 5px;
     }
 
     .prd-product-filter {
-        height: 44px;
+        height: 40px;
+        font-size: 10px;
+        padding: 0 24px 0 10px;
     }
 
     .prd-product-clear {
-        height: 44px;
+        height: 40px;
+        font-size: 10px;
+        min-width: 56px;
     }
 
     .prd-product-results {
         align-items: flex-start;
         flex-direction: column;
 
-        gap: 6px;
+        gap: 4px;
 
-        margin-top: 8px;
-        margin-bottom: 10px;
+        margin-top: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .prd-product-results span {
+        font-size: 10px;
+    }
+    
+    .prd-product-results button {
+        font-size: 10px;
     }
 
 }
-
 
 /* =====================================================
    VERY SMALL MOBILE
@@ -1638,15 +1911,34 @@
 @media (max-width: 380px) {
 
     .prd-product-controls {
-        padding: 8px;
+        padding: 6px;
+        gap: 4px;
     }
 
+    .prd-product-search {
+        height: 36px;
+    }
+    
     .prd-product-search input {
-        font-size: 11px;
+        font-size: 10px;
+        padding: 0 28px;
+    }
+    
+    .prd-product-search-icon {
+        font-size: 14px;
+        left: 8px;
     }
 
     .prd-product-filter {
-        font-size: 10px;
+        height: 36px;
+        font-size: 9px;
+        padding: 0 20px 0 8px;
+    }
+
+    .prd-product-clear {
+        height: 36px;
+        font-size: 9px;
+        min-width: 48px;
     }
 
 }
