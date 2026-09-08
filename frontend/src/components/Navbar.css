@@ -266,18 +266,18 @@
 }
 
 .navbar-mobile-btn:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(234, 98, 98, 0.792);
 }
 
 .navbar-scrolled .navbar-mobile-btn:hover {
-  background: rgba(23, 52, 95, 0.04);
+  background: rgba(23, 52, 95, 0.783);
 }
 
 .navbar-mobile-line {
   display: block;
   width: 24px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(41, 40, 40, 0.7);
   border-radius: 2px;
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   transform-origin: center;
