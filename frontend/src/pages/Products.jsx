@@ -13033,9 +13033,9 @@ function Products() {
                     </div>
 
 
-                    <div className="prd-marquee-fade prd-marquee-fade-left" />
+                    {/* <div className="prd-marquee-fade prd-marquee-fade-left" />
 
-                    <div className="prd-marquee-fade prd-marquee-fade-right" />
+                    <div className="prd-marquee-fade prd-marquee-fade-right" /> */}
 
                   </div>
 
