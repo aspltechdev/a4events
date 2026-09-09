@@ -282,7 +282,7 @@ router.patch(
 ========================================================= */
 
 router.patch(
-  "/order",
+  "/sortorder",
   protect,
   updateProductOrder
 );
