@@ -884,3 +884,360 @@
     }
 
 }
+
+
+/* =====================================================
+   CUSTOM PRODUCT ORDER
+   POINTER-BASED DRAG SYSTEM
+===================================================== */
+
+.apl-order-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 14px 0 18px;
+  padding: 12px 15px;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+
+  background: #fafafa;
+}
+
+.apl-order-notice-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid #e4e4e4;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #666;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  letter-spacing: -3px;
+}
+
+.apl-order-notice-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.apl-order-notice-content strong {
+  color: #333;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.apl-order-notice-content span {
+  color: #888;
+
+  font-size: 11px;
+}
+
+.apl-saving-order {
+  margin-left: auto;
+
+  color: #777;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   CUSTOM SORT SELECT
+===================================================== */
+
+.apl-custom-sort-active {
+  border-color: #999 !important;
+  background: #fafafa !important;
+}
+
+
+/* =====================================================
+   GRID DURING DRAG
+===================================================== */
+
+.apl-grid-dragging {
+  cursor: grabbing;
+}
+
+
+/* =====================================================
+   PRODUCT CARD
+===================================================== */
+
+.apl-card-drop-target {
+  position: relative;
+
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+
+/*
+ IMPORTANT:
+
+ Your existing .apl-card:hover uses transform.
+
+ This selector intentionally has higher specificity
+ so hover cannot fight with the drag state.
+*/
+
+.apl-card.apl-card-dragging {
+  opacity: 0.45;
+
+  transform: scale(0.97) !important;
+
+  z-index: 100;
+
+  cursor: grabbing;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =====================================================
+   DROP TARGET
+===================================================== */
+
+.apl-card.apl-card-drag-over {
+  transform: translateY(-6px) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(60, 60, 60, 0.55),
+    0 16px 35px rgba(0, 0, 0, 0.14);
+
+  z-index: 20;
+}
+
+
+/* =====================================================
+   DRAG HANDLE
+===================================================== */
+
+.apl-drag-handle {
+  position: absolute;
+
+  top: 12px;
+  left: 12px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  color: #666;
+
+  z-index: 50;
+
+  cursor: grab;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  touch-action: none;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.1);
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.apl-drag-handle:hover {
+  background: #ffffff;
+
+  color: #222;
+
+  transform: scale(1.04);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.apl-drag-handle:active {
+  cursor: grabbing;
+
+  transform: scale(0.96);
+}
+
+.apl-drag-handle:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.5;
+}
+
+
+/* =====================================================
+   SIX DOT DRAG ICON
+===================================================== */
+
+.apl-drag-dots {
+  width: 14px;
+  height: 16px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 4px);
+
+  grid-template-rows:
+    repeat(3, 4px);
+
+  gap: 2px;
+
+  pointer-events: none;
+}
+
+.apl-drag-dots i {
+  display: block;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+
+/* =====================================================
+   ORDER NUMBER
+===================================================== */
+
+.apl-sort-number {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  min-width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 7px;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  color: #555;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  z-index: 40;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.apl-card-drop-target img {
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   DO NOT ALLOW IMAGE TO CREATE DRAG GHOST
+===================================================== */
+
+.apl-image {
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+
+/* =====================================================
+   DRAGGING BODY
+===================================================== */
+
+.apl-is-dragging {
+  cursor: grabbing;
+}
+
+.apl-is-dragging .apl-card {
+  user-select: none;
+}
+
+.apl-is-dragging .apl-card * {
+  user-select: none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .apl-drag-handle {
+    width: 40px;
+    height: 40px;
+
+    top: 10px;
+    left: 10px;
+  }
+
+  .apl-sort-number {
+    top: 10px;
+    right: 10px;
+  }
+
+  .apl-order-notice {
+    align-items: flex-start;
+  }
+
+  .apl-saving-order {
+    margin-left: 0;
+  }
+}
