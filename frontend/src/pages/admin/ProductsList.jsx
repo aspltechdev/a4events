@@ -1,688 +1,1067 @@
-// // // // // import { useEffect, useState } from 'react';
-// // // // // import api from '../../services/api';
-// // // // // import AdminLayout from './AdminLayout';
-// // // // // import { Link } from 'react-router-dom';
-// // // // // function ProductsList() {
-// // // // //     const [products, setProducts] = useState([]);
+// // // // // // import { useEffect, useState } from 'react';
+// // // // // // import api from '../../services/api';
+// // // // // // import AdminLayout from './AdminLayout';
+// // // // // // import { Link } from 'react-router-dom';
+// // // // // // function ProductsList() {
+// // // // // //     const [products, setProducts] = useState([]);
 
-// // // // //     useEffect(() => {
-// // // // //         fetchProducts();
-// // // // //     }, []);
+// // // // // //     useEffect(() => {
+// // // // // //         fetchProducts();
+// // // // // //     }, []);
 
-// // // // //     const fetchProducts = async () => {
-// // // // //         try {
-// // // // //             const { data } = await api.get('/products');
-// // // // //             setProducts(data);
-// // // // //         } catch (error) {
-// // // // //             console.error(error);
-// // // // //         }
-// // // // //     };
+// // // // // //     const fetchProducts = async () => {
+// // // // // //         try {
+// // // // // //             const { data } = await api.get('/products');
+// // // // // //             setProducts(data);
+// // // // // //         } catch (error) {
+// // // // // //             console.error(error);
+// // // // // //         }
+// // // // // //     };
 
-// // // // //     const deleteProduct = async (id) => {
-// // // // //         const token = localStorage.getItem('token');
+// // // // // //     const deleteProduct = async (id) => {
+// // // // // //         const token = localStorage.getItem('token');
 
-// // // // //         if (!window.confirm('Delete Product?')) {
-// // // // //             return;
-// // // // //         }
+// // // // // //         if (!window.confirm('Delete Product?')) {
+// // // // // //             return;
+// // // // // //         }
 
-// // // // //         try {
-// // // // //             await api.delete(`/products/${id}`, {
-// // // // //                 headers: {
-// // // // //                     Authorization: `Bearer ${token}`
-// // // // //                 }
-// // // // //             });
+// // // // // //         try {
+// // // // // //             await api.delete(`/products/${id}`, {
+// // // // // //                 headers: {
+// // // // // //                     Authorization: `Bearer ${token}`
+// // // // // //                 }
+// // // // // //             });
 
-// // // // //             fetchProducts();
+// // // // // //             fetchProducts();
 
-// // // // //         } catch (error) {
-// // // // //             console.error(error);
-// // // // //         }
-// // // // //     };
+// // // // // //         } catch (error) {
+// // // // // //             console.error(error);
+// // // // // //         }
+// // // // // //     };
 
-// // // // //     return (
-// // // // //         <AdminLayout>
-// // // // //             <div>
-// // // // //                 <h1>Products</h1>
+// // // // // //     return (
+// // // // // //         <AdminLayout>
+// // // // // //             <div>
+// // // // // //                 <h1>Products</h1>
 
  
-// // // // //                     <div key={product.id}>
-// // // // //                                        {products.map((product) => (
-// // // // //                     {product.image && (
-// // // // //   <img
-// // // // //     src={`http://localhost:5000${product.image}`}
-// // // // //     alt={product.title}
-// // // // //     width="120"
-// // // // //   />
-// // // // // )}
-// // // // //                         <h3>{product.title}</h3>
+// // // // // //                     <div key={product.id}>
+// // // // // //                                        {products.map((product) => (
+// // // // // //                     {product.image && (
+// // // // // //   <img
+// // // // // //     src={`http://localhost:5000${product.image}`}
+// // // // // //     alt={product.title}
+// // // // // //     width="120"
+// // // // // //   />
+// // // // // // )}
+// // // // // //                         <h3>{product.title}</h3>
 
-// // // // //                         <Link to={`/admin/products/edit/${product.id}`}>
-// // // // //                             Edit
-// // // // //                         </Link>
+// // // // // //                         <Link to={`/admin/products/edit/${product.id}`}>
+// // // // // //                             Edit
+// // // // // //                         </Link>
 
-// // // // //                         {' | '}
+// // // // // //                         {' | '}
 
-// // // // //                         <button
-// // // // //                             onClick={() => deleteProduct(product.id)}
-// // // // //                         >
-// // // // //                             Delete
-// // // // //                         </button>
-// // // // //                     </div>
-// // // // //                 ))}
-// // // // //             </div>
-// // // // //         </AdminLayout>
-// // // // //     );
+// // // // // //                         <button
+// // // // // //                             onClick={() => deleteProduct(product.id)}
+// // // // // //                         >
+// // // // // //                             Delete
+// // // // // //                         </button>
+// // // // // //                     </div>
+// // // // // //                 ))}
+// // // // // //             </div>
+// // // // // //         </AdminLayout>
+// // // // // //     );
+// // // // // // }
+
+// // // // // // export default ProductsList;
+
+
+// // // // // import { useEffect, useState } from 'react';
+// // // // // import { Link } from 'react-router-dom';
+// // // // // import api from '../../services/api';
+// // // // // import AdminLayout from './AdminLayout';
+
+// // // // // function ProductsList() {
+// // // // //   const [products, setProducts] = useState([]);
+
+// // // // //   useEffect(() => {
+// // // // //     fetchProducts();
+// // // // //   }, []);
+
+// // // // //   const fetchProducts = async () => {
+// // // // //     try {
+// // // // //       const { data } = await api.get('/products');
+// // // // //       setProducts(data);
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const deleteProduct = async (id) => {
+// // // // //     const token = localStorage.getItem('token');
+
+// // // // //     if (!window.confirm('Delete Product?')) {
+// // // // //       return;
+// // // // //     }
+
+// // // // //     try {
+// // // // //       await api.delete(`/products/${id}`, {
+// // // // //         headers: {
+// // // // //           Authorization: `Bearer ${token}`
+// // // // //         }
+// // // // //       });
+
+// // // // //       fetchProducts();
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   return (
+// // // // //     <AdminLayout>
+// // // // //       <div>
+// // // // //         <h1>Products</h1>
+
+// // // // //         {products.map((product) => (
+// // // // //           <div key={product.id}>
+// // // // //             {product.image && (
+// // // // //               <img
+// // // // //                 src={`http://localhost:5000${product.image}`}
+// // // // //                 alt={product.title}
+// // // // //                 width="120"
+// // // // //               />
+// // // // //             )}
+
+// // // // //             <h3>{product.title}</h3>
+
+// // // // //             <Link to={`/admin/products/edit/${product.id}`}>
+// // // // //               Edit
+// // // // //             </Link>
+
+// // // // //             {' | '}
+
+// // // // //             <button
+// // // // //               onClick={() => deleteProduct(product.id)}
+// // // // //             >
+// // // // //               Delete
+// // // // //             </button>
+// // // // //           </div>
+// // // // //         ))}
+// // // // //       </div>
+// // // // //     </AdminLayout>
+// // // // //   );
 // // // // // }
 
 // // // // // export default ProductsList;
 
 
-// // // // import { useEffect, useState } from 'react';
-// // // // import { Link } from 'react-router-dom';
-// // // // import api from '../../services/api';
-// // // // import AdminLayout from './AdminLayout';
-
-// // // // function ProductsList() {
-// // // //   const [products, setProducts] = useState([]);
-
-// // // //   useEffect(() => {
-// // // //     fetchProducts();
-// // // //   }, []);
-
-// // // //   const fetchProducts = async () => {
-// // // //     try {
-// // // //       const { data } = await api.get('/products');
-// // // //       setProducts(data);
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   const deleteProduct = async (id) => {
-// // // //     const token = localStorage.getItem('token');
-
-// // // //     if (!window.confirm('Delete Product?')) {
-// // // //       return;
-// // // //     }
-
-// // // //     try {
-// // // //       await api.delete(`/products/${id}`, {
-// // // //         headers: {
-// // // //           Authorization: `Bearer ${token}`
-// // // //         }
-// // // //       });
-
-// // // //       fetchProducts();
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   return (
-// // // //     <AdminLayout>
-// // // //       <div>
-// // // //         <h1>Products</h1>
-
-// // // //         {products.map((product) => (
-// // // //           <div key={product.id}>
-// // // //             {product.image && (
-// // // //               <img
-// // // //                 src={`http://localhost:5000${product.image}`}
-// // // //                 alt={product.title}
-// // // //                 width="120"
-// // // //               />
-// // // //             )}
-
-// // // //             <h3>{product.title}</h3>
-
-// // // //             <Link to={`/admin/products/edit/${product.id}`}>
-// // // //               Edit
-// // // //             </Link>
-
-// // // //             {' | '}
-
-// // // //             <button
-// // // //               onClick={() => deleteProduct(product.id)}
-// // // //             >
-// // // //               Delete
-// // // //             </button>
-// // // //           </div>
-// // // //         ))}
-// // // //       </div>
-// // // //     </AdminLayout>
-// // // //   );
-// // // // }
-
-// // // // export default ProductsList;
-
-
-// // // // import { useEffect, useState } from "react";
-// // // // import { Link } from "react-router-dom";
-// // // // import api from "../../services/api";
-// // // // import AdminLayout from "./AdminLayout";
-// // // // import "./ProductsList.css";
-
-// // // // function ProductsList() {
-// // // //   const [products, setProducts] = useState([]);
-// // // //   const [search, setSearch] = useState("");
-
-// // // //   useEffect(() => {
-// // // //     fetchProducts();
-// // // //   }, []);
-
-// // // //   const fetchProducts = async () => {
-// // // //     try {
-// // // //       const { data } = await api.get("/products");
-// // // //       setProducts(data);
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   const deleteProduct = async (id) => {
-// // // //     const token = localStorage.getItem("token");
-
-// // // //     if (!window.confirm("Delete Product?")) {
-// // // //       return;
-// // // //     }
-
-// // // //     try {
-// // // //       await api.delete(`/products/${id}`, {
-// // // //         headers: {
-// // // //           Authorization: `Bearer ${token}`,
-// // // //         },
-// // // //       });
-
-// // // //       fetchProducts();
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
+// // // // // import { useEffect, useState } from "react";
+// // // // // import { Link } from "react-router-dom";
+// // // // // import api from "../../services/api";
+// // // // // import AdminLayout from "./AdminLayout";
+// // // // // import "./ProductsList.css";
+
+// // // // // function ProductsList() {
+// // // // //   const [products, setProducts] = useState([]);
+// // // // //   const [search, setSearch] = useState("");
+
+// // // // //   useEffect(() => {
+// // // // //     fetchProducts();
+// // // // //   }, []);
+
+// // // // //   const fetchProducts = async () => {
+// // // // //     try {
+// // // // //       const { data } = await api.get("/products");
+// // // // //       setProducts(data);
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const deleteProduct = async (id) => {
+// // // // //     const token = localStorage.getItem("token");
+
+// // // // //     if (!window.confirm("Delete Product?")) {
+// // // // //       return;
+// // // // //     }
+
+// // // // //     try {
+// // // // //       await api.delete(`/products/${id}`, {
+// // // // //         headers: {
+// // // // //           Authorization: `Bearer ${token}`,
+// // // // //         },
+// // // // //       });
+
+// // // // //       fetchProducts();
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const filteredProducts = products.filter(
+// // // // //     (product) =>
+// // // // //       product.title
+// // // // //         .toLowerCase()
+// // // // //         .includes(search.toLowerCase())
+// // // // //   );
+
+// // // // //   return (
+// // // // //     <AdminLayout>
+
+// // // // //       <div className="a4-products-admin">
+
+// // // // //         <div className="a4-products-header">
+
+// // // // //           <div>
+// // // // //             <h1>Products</h1>
+// // // // //             <p>
+// // // // //               Manage all food, snacks and beverages.
+// // // // //             </p>
+// // // // //           </div>
+
+// // // // //           <Link
+// // // // //             to="/admin/products/add"
+// // // // //             className="a4-add-product-btn"
+// // // // //           >
+// // // // //             + Add Product
+// // // // //           </Link>
+
+// // // // //         </div>
+
+// // // // //         <div className="a4-products-toolbar">
+
+// // // // //           <input
+// // // // //             type="text"
+// // // // //             placeholder="Search products..."
+// // // // //             value={search}
+// // // // //             onChange={(e) =>
+// // // // //               setSearch(e.target.value)
+// // // // //             }
+// // // // //             className="a4-product-search"
+// // // // //           />
+
+// // // // //         </div>
+
+// // // // //         <div className="a4-products-grid">
+
+// // // // //           {filteredProducts.map((product) => (
+// // // // //             <div
+// // // // //               key={product.id}
+// // // // //               className="a4-product-card"
+// // // // //             >
+
+// // // // //               <div className="a4-product-image-wrapper">
+
+// // // // //                 <img
+// // // // //                   src={`http://localhost:5000${product.image}`}
+// // // // //                   alt={product.title}
+// // // // //                   className="a4-product-image"
+// // // // //                 />
+
+// // // // //               </div>
 
-// // // //   const filteredProducts = products.filter(
-// // // //     (product) =>
-// // // //       product.title
-// // // //         .toLowerCase()
-// // // //         .includes(search.toLowerCase())
-// // // //   );
+// // // // //               <div className="a4-product-content">
 
-// // // //   return (
-// // // //     <AdminLayout>
+// // // // //                 <h3>{product.title}</h3>
 
-// // // //       <div className="a4-products-admin">
+// // // // //                 <div className="a4-product-price">
+// // // // //                   €{product.price}
+// // // // //                 </div>
 
-// // // //         <div className="a4-products-header">
+// // // // //                 <div className="a4-product-actions">
 
-// // // //           <div>
-// // // //             <h1>Products</h1>
-// // // //             <p>
-// // // //               Manage all food, snacks and beverages.
-// // // //             </p>
-// // // //           </div>
+// // // // //                   <Link
+// // // // //                     to={`/admin/products/edit/${product.id}`}
+// // // // //                     className="a4-edit-btn"
+// // // // //                   >
+// // // // //                     Edit
+// // // // //                   </Link>
+
+// // // // //                   <button
+// // // // //                     onClick={() =>
+// // // // //                       deleteProduct(product.id)
+// // // // //                     }
+// // // // //                     className="a4-delete-btn"
+// // // // //                   >
+// // // // //                     Delete
+// // // // //                   </button>
+
+// // // // //                 </div>
+
+// // // // //               </div>
+
+// // // // //             </div>
+// // // // //           ))}
+
+// // // // //         </div>
 
-// // // //           <Link
-// // // //             to="/admin/products/add"
-// // // //             className="a4-add-product-btn"
-// // // //           >
-// // // //             + Add Product
-// // // //           </Link>
-
-// // // //         </div>
+// // // // //       </div>
 
-// // // //         <div className="a4-products-toolbar">
-
-// // // //           <input
-// // // //             type="text"
-// // // //             placeholder="Search products..."
-// // // //             value={search}
-// // // //             onChange={(e) =>
-// // // //               setSearch(e.target.value)
-// // // //             }
-// // // //             className="a4-product-search"
-// // // //           />
-
-// // // //         </div>
-
-// // // //         <div className="a4-products-grid">
-
-// // // //           {filteredProducts.map((product) => (
-// // // //             <div
-// // // //               key={product.id}
-// // // //               className="a4-product-card"
-// // // //             >
-
-// // // //               <div className="a4-product-image-wrapper">
-
-// // // //                 <img
-// // // //                   src={`http://localhost:5000${product.image}`}
-// // // //                   alt={product.title}
-// // // //                   className="a4-product-image"
-// // // //                 />
-
-// // // //               </div>
-
-// // // //               <div className="a4-product-content">
-
-// // // //                 <h3>{product.title}</h3>
-
-// // // //                 <div className="a4-product-price">
-// // // //                   €{product.price}
-// // // //                 </div>
-
-// // // //                 <div className="a4-product-actions">
-
-// // // //                   <Link
-// // // //                     to={`/admin/products/edit/${product.id}`}
-// // // //                     className="a4-edit-btn"
-// // // //                   >
-// // // //                     Edit
-// // // //                   </Link>
-
-// // // //                   <button
-// // // //                     onClick={() =>
-// // // //                       deleteProduct(product.id)
-// // // //                     }
-// // // //                     className="a4-delete-btn"
-// // // //                   >
-// // // //                     Delete
-// // // //                   </button>
-
-// // // //                 </div>
-
-// // // //               </div>
-
-// // // //             </div>
-// // // //           ))}
-
-// // // //         </div>
-
-// // // //       </div>
-
-// // // //     </AdminLayout>
-// // // //   );
-// // // // }
-
-// // // // export default ProductsList;
-
-
-// // // // import { useEffect, useState } from "react";
-// // // // import { Link } from "react-router-dom";
-// // // // import api from "../../services/api";
-// // // // import AdminLayout from "./AdminLayout";
-// // // // import "./ProductsList.css";
-
-// // // // function ProductsList() {
-// // // //   const [products, setProducts] = useState([]);
-// // // //   const [search, setSearch] = useState("");
-
-// // // //   useEffect(() => {
-// // // //     fetchProducts();
-// // // //   }, []);
-
-// // // //   const fetchProducts = async () => {
-// // // //     try {
-// // // //       const { data } = await api.get("/products");
-// // // //       setProducts(data);
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   const deleteProduct = async (id) => {
-// // // //     const token = localStorage.getItem("token");
-
-// // // //     if (!window.confirm("Delete Product?")) {
-// // // //       return;
-// // // //     }
-
-// // // //     try {
-// // // //       await api.delete(`/products/${id}`, {
-// // // //         headers: {
-// // // //           Authorization: `Bearer ${token}`,
-// // // //         },
-// // // //       });
-
-// // // //       fetchProducts();
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   const filteredProducts = products.filter(
-// // // //     (product) =>
-// // // //       product.title
-// // // //         .toLowerCase()
-// // // //         .includes(search.toLowerCase())
-// // // //   );
-
-// // // //   return (
-// // // //     <AdminLayout>
-// // // //       <div className="a4-products-admin">
-
-// // // //         <div className="a4-products-header">
-
-// // // //           <div>
-// // // //             <h1>Products</h1>
-
-// // // //             <p>
-// // // //               Manage all products and categories.
-// // // //             </p>
-// // // //           </div>
-
-// // // //           <Link
-// // // //             to="/admin/products/add"
-// // // //             className="a4-add-product-btn"
-// // // //           >
-// // // //             + Add Product
-// // // //           </Link>
-
-// // // //         </div>
-
-// // // //         <div className="a4-products-toolbar">
-
-// // // //           <input
-// // // //             type="text"
-// // // //             placeholder="Search products..."
-// // // //             value={search}
-// // // //             onChange={(e) =>
-// // // //               setSearch(e.target.value)
-// // // //             }
-// // // //             className="a4-product-search"
-// // // //           />
-
-// // // //         </div>
-
-// // // //         <div className="a4-products-grid">
-
-// // // //           {filteredProducts.map((product) => {
-
-// // // //             const discountedPrice =
-// // // //               product.price -
-// // // //               (product.price *
-// // // //                 (product.discountPercent || 0)) /
-// // // //                 100;
-
-// // // //             return (
-// // // //               <div
-// // // //                 key={product.id}
-// // // //                 className="a4-product-card"
-// // // //               >
-
-// // // //                 <div className="a4-product-image-wrapper">
-
-// // // //                   <img
-// // // //                     src={`http://localhost:5000${product.image}`}
-// // // //                     alt={product.title}
-// // // //                     className="a4-product-image"
-// // // //                   />
-
-// // // //                   {product.featured && (
-// // // //                     <span className="a4-featured-badge">
-// // // //                       Featured
-// // // //                     </span>
-// // // //                   )}
-
-// // // //                   {product.discountPercent > 0 && (
-// // // //                     <span className="a4-discount-badge">
-// // // //                       {product.discountPercent}% OFF
-// // // //                     </span>
-// // // //                   )}
-
-// // // //                 </div>
-
-// // // //                 <div className="a4-product-content">
-
-// // // //                   <h3>
-// // // //                     {product.title}
-// // // //                   </h3>
-
-// // // //                   <div className="a4-product-category">
-// // // //                     {product.category}
-// // // //                   </div>
-
-// // // //                   <div className="a4-product-pricing">
-
-// // // //                     <span className="a4-final-price">
-// // // //                       €{discountedPrice.toFixed(2)}
-// // // //                     </span>
-
-// // // //                     {product.discountPercent >
-// // // //                       0 && (
-// // // //                       <span className="a4-old-price">
-// // // //                         €{product.price}
-// // // //                       </span>
-// // // //                     )}
-
-// // // //                   </div>
-
-// // // //                   <div className="a4-product-actions">
-
-// // // //                     <Link
-// // // //                       to={`/admin/products/edit/${product.id}`}
-// // // //                       className="a4-edit-btn"
-// // // //                     >
-// // // //                       Edit
-// // // //                     </Link>
-
-// // // //                     <button
-// // // //                       onClick={() =>
-// // // //                         deleteProduct(product.id)
-// // // //                       }
-// // // //                       className="a4-delete-btn"
-// // // //                     >
-// // // //                       Delete
-// // // //                     </button>
-
-// // // //                   </div>
-
-// // // //                 </div>
-
-// // // //               </div>
-// // // //             );
-// // // //           })}
-
-// // // //         </div>
-
-// // // //       </div>
-// // // //     </AdminLayout>
-// // // //   );
-// // // // }
-
-// // // // export default ProductsList; 
-
-// // // // import { useEffect, useState } from "react";
-// // // // import { Link } from "react-router-dom";
-// // // // import api from "../../services/api";
-// // // // import AdminLayout from "./AdminLayout";
-// // // // import "./ProductsList.css";
-
-// // // // function ProductsList() {
-// // // //   const [products, setProducts] = useState([]);
-// // // //   const [search, setSearch] = useState("");
-// // // //   const [loading, setLoading] = useState(true);
-
-// // // //   useEffect(() => {
-// // // //     fetchProducts();
-// // // //   }, []);
-
-// // // //   const fetchProducts = async () => {
-// // // //     try {
-// // // //       const { data } = await api.get("/products");
-// // // //       setProducts(data);
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     } finally {
-// // // //       setLoading(false);
-// // // //     }
-// // // //   };
-
-// // // //   const deleteProduct = async (id) => {
-// // // //     const token = localStorage.getItem("token");
-
-// // // //     if (!window.confirm("Are you sure you want to delete this product?")) {
-// // // //       return;
-// // // //     }
-
-// // // //     try {
-// // // //       await api.delete(`/products/${id}`, {
-// // // //         headers: {
-// // // //           Authorization: `Bearer ${token}`,
-// // // //         },
-// // // //       });
-
-// // // //       fetchProducts();
-// // // //     } catch (error) {
-// // // //       console.error(error);
-// // // //     }
-// // // //   };
-
-// // // //   const filteredProducts = products.filter(
-// // // //     (product) =>
-// // // //       product.title
-// // // //         .toLowerCase()
-// // // //         .includes(search.toLowerCase())
-// // // //   );
-
-// // // //   if (loading) {
-// // // //     return (
-// // // //       <AdminLayout>
-// // // //         <div className="apl-loading">
-// // // //           <div className="apl-loading-spinner"></div>
-// // // //           <p>Loading products...</p>
-// // // //         </div>
-// // // //       </AdminLayout>
-// // // //     );
-// // // //   }
-
-// // // //   return (
-// // // //     <AdminLayout>
-// // // //       <div className="apl-admin">
-// // // //         {/* Header */}
-// // // //         <div className="apl-header">
-// // // //           <div className="apl-header-left">
-// // // //             <h1>Products</h1>
-// // // //             <p>Manage all products and categories</p>
-// // // //           </div>
-// // // //           <Link to="/admin/products/add" className="apl-btn-primary">
-// // // //             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-// // // //               <path d="M9 3v12M3 9h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-// // // //             </svg>
-// // // //             Add Product
-// // // //           </Link>
-// // // //         </div>
-
-// // // //         {/* Toolbar */}
-// // // //         <div className="apl-toolbar">
-// // // //           <div className="apl-search-wrapper">
-// // // //             <svg className="apl-search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
-// // // //               <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
-// // // //               <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-// // // //             </svg>
-// // // //             <input
-// // // //               type="text"
-// // // //               placeholder="Search products..."
-// // // //               value={search}
-// // // //               onChange={(e) => setSearch(e.target.value)}
-// // // //               className="apl-search-input"
-// // // //             />
-// // // //           </div>
-// // // //           <div className="apl-toolbar-info">
-// // // //             <span className="apl-count-badge">
-// // // //               {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-// // // //             </span>
-// // // //           </div>
-// // // //         </div>
-
-// // // //         {/* Products Grid */}
-// // // //         {filteredProducts.length === 0 ? (
-// // // //           <div className="apl-empty">
-// // // //             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-// // // //               <path d="M12 12l8-4 20 10-8 4-20-10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-// // // //               <path d="M12 24l8 4 20-10" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-// // // //               <path d="M12 36l8 4 20-10" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-// // // //             </svg>
-// // // //             <h3>No products found</h3>
-// // // //             <p>{search ? 'Try adjusting your search terms' : 'Add your first product to get started'}</p>
-// // // //           </div>
-// // // //         ) : (
-// // // //           <div className="apl-grid">
-// // // //             {filteredProducts.map((product) => {
-// // // //               const discountedPrice =
-// // // //                 product.price -
-// // // //                 (product.price * (product.discountPercent || 0)) / 100;
-
-// // // //               return (
-// // // //                 <div key={product.id} className="apl-card">
-// // // //                   {/* Image */}
-// // // //                   <div className="apl-card-image">
-// // // //                     <img
-// // // //                       src={`https://a4agroup.eu${product.image}`}
-// // // //                       alt={product.title}
-// // // //                       className="apl-image"
-// // // //                     />
-// // // //                     <div className="apl-card-badges">
-// // // //                       {product.featured && (
-// // // //                         <span className="apl-badge-featured">
-// // // //                           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-// // // //                             <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
-// // // //                           </svg>
-// // // //                           Featured
-// // // //                         </span>
-// // // //                       )}
-// // // //                       {product.discountPercent > 0 && (
-// // // //                         <span className="apl-badge-discount">
-// // // //                           {product.discountPercent}% OFF
-// // // //                         </span>
-// // // //                       )}
-// // // //                     </div>
-// // // //                   </div>
-
-// // // //                   {/* Content */}
-// // // //                   <div className="apl-card-content">
-// // // //                     <span className="apl-category">{product.category}</span>
-// // // //                     <h3 className="apl-title">{product.title}</h3>
+// // // // //     </AdminLayout>
+// // // // //   );
+// // // // // }
+
+// // // // // export default ProductsList;
+
+
+// // // // // import { useEffect, useState } from "react";
+// // // // // import { Link } from "react-router-dom";
+// // // // // import api from "../../services/api";
+// // // // // import AdminLayout from "./AdminLayout";
+// // // // // import "./ProductsList.css";
+
+// // // // // function ProductsList() {
+// // // // //   const [products, setProducts] = useState([]);
+// // // // //   const [search, setSearch] = useState("");
+
+// // // // //   useEffect(() => {
+// // // // //     fetchProducts();
+// // // // //   }, []);
+
+// // // // //   const fetchProducts = async () => {
+// // // // //     try {
+// // // // //       const { data } = await api.get("/products");
+// // // // //       setProducts(data);
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const deleteProduct = async (id) => {
+// // // // //     const token = localStorage.getItem("token");
+
+// // // // //     if (!window.confirm("Delete Product?")) {
+// // // // //       return;
+// // // // //     }
+
+// // // // //     try {
+// // // // //       await api.delete(`/products/${id}`, {
+// // // // //         headers: {
+// // // // //           Authorization: `Bearer ${token}`,
+// // // // //         },
+// // // // //       });
+
+// // // // //       fetchProducts();
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const filteredProducts = products.filter(
+// // // // //     (product) =>
+// // // // //       product.title
+// // // // //         .toLowerCase()
+// // // // //         .includes(search.toLowerCase())
+// // // // //   );
+
+// // // // //   return (
+// // // // //     <AdminLayout>
+// // // // //       <div className="a4-products-admin">
+
+// // // // //         <div className="a4-products-header">
+
+// // // // //           <div>
+// // // // //             <h1>Products</h1>
+
+// // // // //             <p>
+// // // // //               Manage all products and categories.
+// // // // //             </p>
+// // // // //           </div>
+
+// // // // //           <Link
+// // // // //             to="/admin/products/add"
+// // // // //             className="a4-add-product-btn"
+// // // // //           >
+// // // // //             + Add Product
+// // // // //           </Link>
+
+// // // // //         </div>
+
+// // // // //         <div className="a4-products-toolbar">
+
+// // // // //           <input
+// // // // //             type="text"
+// // // // //             placeholder="Search products..."
+// // // // //             value={search}
+// // // // //             onChange={(e) =>
+// // // // //               setSearch(e.target.value)
+// // // // //             }
+// // // // //             className="a4-product-search"
+// // // // //           />
+
+// // // // //         </div>
+
+// // // // //         <div className="a4-products-grid">
+
+// // // // //           {filteredProducts.map((product) => {
+
+// // // // //             const discountedPrice =
+// // // // //               product.price -
+// // // // //               (product.price *
+// // // // //                 (product.discountPercent || 0)) /
+// // // // //                 100;
+
+// // // // //             return (
+// // // // //               <div
+// // // // //                 key={product.id}
+// // // // //                 className="a4-product-card"
+// // // // //               >
+
+// // // // //                 <div className="a4-product-image-wrapper">
+
+// // // // //                   <img
+// // // // //                     src={`http://localhost:5000${product.image}`}
+// // // // //                     alt={product.title}
+// // // // //                     className="a4-product-image"
+// // // // //                   />
+
+// // // // //                   {product.featured && (
+// // // // //                     <span className="a4-featured-badge">
+// // // // //                       Featured
+// // // // //                     </span>
+// // // // //                   )}
+
+// // // // //                   {product.discountPercent > 0 && (
+// // // // //                     <span className="a4-discount-badge">
+// // // // //                       {product.discountPercent}% OFF
+// // // // //                     </span>
+// // // // //                   )}
+
+// // // // //                 </div>
+
+// // // // //                 <div className="a4-product-content">
+
+// // // // //                   <h3>
+// // // // //                     {product.title}
+// // // // //                   </h3>
+
+// // // // //                   <div className="a4-product-category">
+// // // // //                     {product.category}
+// // // // //                   </div>
+
+// // // // //                   <div className="a4-product-pricing">
+
+// // // // //                     <span className="a4-final-price">
+// // // // //                       €{discountedPrice.toFixed(2)}
+// // // // //                     </span>
+
+// // // // //                     {product.discountPercent >
+// // // // //                       0 && (
+// // // // //                       <span className="a4-old-price">
+// // // // //                         €{product.price}
+// // // // //                       </span>
+// // // // //                     )}
+
+// // // // //                   </div>
+
+// // // // //                   <div className="a4-product-actions">
+
+// // // // //                     <Link
+// // // // //                       to={`/admin/products/edit/${product.id}`}
+// // // // //                       className="a4-edit-btn"
+// // // // //                     >
+// // // // //                       Edit
+// // // // //                     </Link>
+
+// // // // //                     <button
+// // // // //                       onClick={() =>
+// // // // //                         deleteProduct(product.id)
+// // // // //                       }
+// // // // //                       className="a4-delete-btn"
+// // // // //                     >
+// // // // //                       Delete
+// // // // //                     </button>
+
+// // // // //                   </div>
+
+// // // // //                 </div>
+
+// // // // //               </div>
+// // // // //             );
+// // // // //           })}
+
+// // // // //         </div>
+
+// // // // //       </div>
+// // // // //     </AdminLayout>
+// // // // //   );
+// // // // // }
+
+// // // // // export default ProductsList; 
+
+// // // // // import { useEffect, useState } from "react";
+// // // // // import { Link } from "react-router-dom";
+// // // // // import api from "../../services/api";
+// // // // // import AdminLayout from "./AdminLayout";
+// // // // // import "./ProductsList.css";
+
+// // // // // function ProductsList() {
+// // // // //   const [products, setProducts] = useState([]);
+// // // // //   const [search, setSearch] = useState("");
+// // // // //   const [loading, setLoading] = useState(true);
+
+// // // // //   useEffect(() => {
+// // // // //     fetchProducts();
+// // // // //   }, []);
+
+// // // // //   const fetchProducts = async () => {
+// // // // //     try {
+// // // // //       const { data } = await api.get("/products");
+// // // // //       setProducts(data);
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     } finally {
+// // // // //       setLoading(false);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const deleteProduct = async (id) => {
+// // // // //     const token = localStorage.getItem("token");
+
+// // // // //     if (!window.confirm("Are you sure you want to delete this product?")) {
+// // // // //       return;
+// // // // //     }
+
+// // // // //     try {
+// // // // //       await api.delete(`/products/${id}`, {
+// // // // //         headers: {
+// // // // //           Authorization: `Bearer ${token}`,
+// // // // //         },
+// // // // //       });
+
+// // // // //       fetchProducts();
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const filteredProducts = products.filter(
+// // // // //     (product) =>
+// // // // //       product.title
+// // // // //         .toLowerCase()
+// // // // //         .includes(search.toLowerCase())
+// // // // //   );
+
+// // // // //   if (loading) {
+// // // // //     return (
+// // // // //       <AdminLayout>
+// // // // //         <div className="apl-loading">
+// // // // //           <div className="apl-loading-spinner"></div>
+// // // // //           <p>Loading products...</p>
+// // // // //         </div>
+// // // // //       </AdminLayout>
+// // // // //     );
+// // // // //   }
+
+// // // // //   return (
+// // // // //     <AdminLayout>
+// // // // //       <div className="apl-admin">
+// // // // //         {/* Header */}
+// // // // //         <div className="apl-header">
+// // // // //           <div className="apl-header-left">
+// // // // //             <h1>Products</h1>
+// // // // //             <p>Manage all products and categories</p>
+// // // // //           </div>
+// // // // //           <Link to="/admin/products/add" className="apl-btn-primary">
+// // // // //             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+// // // // //               <path d="M9 3v12M3 9h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+// // // // //             </svg>
+// // // // //             Add Product
+// // // // //           </Link>
+// // // // //         </div>
+
+// // // // //         {/* Toolbar */}
+// // // // //         <div className="apl-toolbar">
+// // // // //           <div className="apl-search-wrapper">
+// // // // //             <svg className="apl-search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+// // // // //               <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
+// // // // //               <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+// // // // //             </svg>
+// // // // //             <input
+// // // // //               type="text"
+// // // // //               placeholder="Search products..."
+// // // // //               value={search}
+// // // // //               onChange={(e) => setSearch(e.target.value)}
+// // // // //               className="apl-search-input"
+// // // // //             />
+// // // // //           </div>
+// // // // //           <div className="apl-toolbar-info">
+// // // // //             <span className="apl-count-badge">
+// // // // //               {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+// // // // //             </span>
+// // // // //           </div>
+// // // // //         </div>
+
+// // // // //         {/* Products Grid */}
+// // // // //         {filteredProducts.length === 0 ? (
+// // // // //           <div className="apl-empty">
+// // // // //             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+// // // // //               <path d="M12 12l8-4 20 10-8 4-20-10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+// // // // //               <path d="M12 24l8 4 20-10" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+// // // // //               <path d="M12 36l8 4 20-10" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+// // // // //             </svg>
+// // // // //             <h3>No products found</h3>
+// // // // //             <p>{search ? 'Try adjusting your search terms' : 'Add your first product to get started'}</p>
+// // // // //           </div>
+// // // // //         ) : (
+// // // // //           <div className="apl-grid">
+// // // // //             {filteredProducts.map((product) => {
+// // // // //               const discountedPrice =
+// // // // //                 product.price -
+// // // // //                 (product.price * (product.discountPercent || 0)) / 100;
+
+// // // // //               return (
+// // // // //                 <div key={product.id} className="apl-card">
+// // // // //                   {/* Image */}
+// // // // //                   <div className="apl-card-image">
+// // // // //                     <img
+// // // // //                       src={`https://a4agroup.eu${product.image}`}
+// // // // //                       alt={product.title}
+// // // // //                       className="apl-image"
+// // // // //                     />
+// // // // //                     <div className="apl-card-badges">
+// // // // //                       {product.featured && (
+// // // // //                         <span className="apl-badge-featured">
+// // // // //                           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+// // // // //                             <path d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z" fill="currentColor"/>
+// // // // //                           </svg>
+// // // // //                           Featured
+// // // // //                         </span>
+// // // // //                       )}
+// // // // //                       {product.discountPercent > 0 && (
+// // // // //                         <span className="apl-badge-discount">
+// // // // //                           {product.discountPercent}% OFF
+// // // // //                         </span>
+// // // // //                       )}
+// // // // //                     </div>
+// // // // //                   </div>
+
+// // // // //                   {/* Content */}
+// // // // //                   <div className="apl-card-content">
+// // // // //                     <span className="apl-category">{product.category}</span>
+// // // // //                     <h3 className="apl-title">{product.title}</h3>
                     
-// // // //                     <div className="apl-pricing">
-// // // //                       <span className="apl-price-current">€{discountedPrice.toFixed(0)}</span>
-// // // //                       {product.discountPercent > 0 && (
-// // // //                         <span className="apl-price-original">€{product.price}</span>
-// // // //                       )}
-// // // //                     </div>
+// // // // //                     <div className="apl-pricing">
+// // // // //                       <span className="apl-price-current">€{discountedPrice.toFixed(0)}</span>
+// // // // //                       {product.discountPercent > 0 && (
+// // // // //                         <span className="apl-price-original">€{product.price}</span>
+// // // // //                       )}
+// // // // //                     </div>
 
-// // // //                     <div className="apl-actions">
-// // // //                       <Link
-// // // //                         to={`/admin/products/edit/${product.id}`}
-// // // //                         className="apl-btn-edit"
-// // // //                       >
-// // // //                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-// // // //                           <path d="M10 2l2 2-8 8H2v-2l8-8z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-// // // //                         </svg>
-// // // //                         Edit
-// // // //                       </Link>
-// // // //                       <button
-// // // //                         onClick={() => deleteProduct(product.id)}
-// // // //                         className="apl-btn-delete"
-// // // //                       >
-// // // //                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-// // // //                           <path d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-// // // //                         </svg>
-// // // //                         Delete
-// // // //                       </button>
-// // // //                     </div>
-// // // //                   </div>
-// // // //                 </div>
-// // // //               );
-// // // //             })}
-// // // //           </div>
-// // // //         )}
-// // // //       </div>
-// // // //     </AdminLayout>
-// // // //   );
-// // // // }
+// // // // //                     <div className="apl-actions">
+// // // // //                       <Link
+// // // // //                         to={`/admin/products/edit/${product.id}`}
+// // // // //                         className="apl-btn-edit"
+// // // // //                       >
+// // // // //                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+// // // // //                           <path d="M10 2l2 2-8 8H2v-2l8-8z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+// // // // //                         </svg>
+// // // // //                         Edit
+// // // // //                       </Link>
+// // // // //                       <button
+// // // // //                         onClick={() => deleteProduct(product.id)}
+// // // // //                         className="apl-btn-delete"
+// // // // //                       >
+// // // // //                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+// // // // //                           <path d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+// // // // //                         </svg>
+// // // // //                         Delete
+// // // // //                       </button>
+// // // // //                     </div>
+// // // // //                   </div>
+// // // // //                 </div>
+// // // // //               );
+// // // // //             })}
+// // // // //           </div>
+// // // // //         )}
+// // // // //       </div>
+// // // // //     </AdminLayout>
+// // // // //   );
+// // // // // }
 
-// // // // export default ProductsList;
+// // // // // export default ProductsList;
 
-// // // // import { useEffect, useState } from "react";
+// // // // // import { useEffect, useState } from "react";
+// // // // // import { Link } from "react-router-dom";
+// // // // // import api from "../../services/api";
+// // // // // import AdminLayout from "./AdminLayout";
+// // // // // import "./ProductsList.css";
+
+// // // // // function ProductsList() {
+// // // // //   const [products, setProducts] = useState([]);
+// // // // //   const [search, setSearch] = useState("");
+// // // // //   const [loading, setLoading] = useState(true);
+
+// // // // //   useEffect(() => {
+// // // // //     fetchProducts();
+// // // // //   }, []);
+
+// // // // //   const fetchProducts = async () => {
+// // // // //     try {
+// // // // //       const { data } = await api.get("/products");
+// // // // //       setProducts(data);
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     } finally {
+// // // // //       setLoading(false);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const deleteProduct = async (id) => {
+// // // // //     const token = localStorage.getItem("token");
+
+// // // // //     if (!window.confirm("Are you sure you want to delete this product?")) {
+// // // // //       return;
+// // // // //     }
+
+// // // // //     try {
+// // // // //       await api.delete(`/products/${id}`, {
+// // // // //         headers: {
+// // // // //           Authorization: `Bearer ${token}`,
+// // // // //         },
+// // // // //       });
+
+// // // // //       fetchProducts();
+// // // // //     } catch (error) {
+// // // // //       console.error(error);
+// // // // //     }
+// // // // //   };
+
+// // // // //   const filteredProducts = products.filter((product) =>
+// // // // //     product.title.toLowerCase().includes(search.toLowerCase())
+// // // // //   );
+
+// // // // //   if (loading) {
+// // // // //     return (
+// // // // //       <AdminLayout>
+// // // // //         <div className="apl-loading">
+// // // // //           <div className="apl-loading-spinner"></div>
+// // // // //           <p>Loading products...</p>
+// // // // //         </div>
+// // // // //       </AdminLayout>
+// // // // //     );
+// // // // //   }
+
+// // // // //   return (
+// // // // //     <AdminLayout>
+// // // // //       <div className="apl-admin">
+
+// // // // //         {/* Header */}
+// // // // //         <div className="apl-header">
+// // // // //           <div className="apl-header-left">
+// // // // //             <h1>Products</h1>
+// // // // //             <p>Manage all products and categories</p>
+// // // // //           </div>
+
+// // // // //           <Link
+// // // // //             to="/admin/products/add"
+// // // // //             className="apl-btn-primary"
+// // // // //           >
+// // // // //             <svg
+// // // // //               width="18"
+// // // // //               height="18"
+// // // // //               viewBox="0 0 18 18"
+// // // // //               fill="none"
+// // // // //             >
+// // // // //               <path
+// // // // //                 d="M9 3v12M3 9h12"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.8"
+// // // // //                 strokeLinecap="round"
+// // // // //               />
+// // // // //             </svg>
+
+// // // // //             Add Product
+// // // // //           </Link>
+// // // // //         </div>
+
+// // // // //         {/* Toolbar */}
+// // // // //         <div className="apl-toolbar">
+
+// // // // //           <div className="apl-search-wrapper">
+// // // // //             <svg
+// // // // //               className="apl-search-icon"
+// // // // //               width="18"
+// // // // //               height="18"
+// // // // //               viewBox="0 0 18 18"
+// // // // //               fill="none"
+// // // // //             >
+// // // // //               <circle
+// // // // //                 cx="8"
+// // // // //                 cy="8"
+// // // // //                 r="6"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.5"
+// // // // //               />
+
+// // // // //               <path
+// // // // //                 d="M12.5 12.5L16 16"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.5"
+// // // // //                 strokeLinecap="round"
+// // // // //               />
+// // // // //             </svg>
+
+// // // // //             <input
+// // // // //               type="text"
+// // // // //               placeholder="Search products..."
+// // // // //               value={search}
+// // // // //               onChange={(e) => setSearch(e.target.value)}
+// // // // //               className="apl-search-input"
+// // // // //             />
+// // // // //           </div>
+
+// // // // //           <div className="apl-toolbar-info">
+// // // // //             <span className="apl-count-badge">
+// // // // //               {filteredProducts.length} product
+// // // // //               {filteredProducts.length !== 1 ? "s" : ""}
+// // // // //             </span>
+// // // // //           </div>
+
+// // // // //         </div>
+
+// // // // //         {/* Products Grid */}
+// // // // //         {filteredProducts.length === 0 ? (
+// // // // //           <div className="apl-empty">
+
+// // // // //             <svg
+// // // // //               width="48"
+// // // // //               height="48"
+// // // // //               viewBox="0 0 48 48"
+// // // // //               fill="none"
+// // // // //             >
+// // // // //               <path
+// // // // //                 d="M12 12l8-4 20 10-8 4-20-10z"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.5"
+// // // // //                 strokeLinejoin="round"
+// // // // //               />
+
+// // // // //               <path
+// // // // //                 d="M12 24l8 4 20-10"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.5"
+// // // // //                 strokeLinejoin="round"
+// // // // //               />
+
+// // // // //               <path
+// // // // //                 d="M12 36l8 4 20-10"
+// // // // //                 stroke="currentColor"
+// // // // //                 strokeWidth="1.5"
+// // // // //                 strokeLinejoin="round"
+// // // // //               />
+// // // // //             </svg>
+
+// // // // //             <h3>No products found</h3>
+
+// // // // //             <p>
+// // // // //               {search
+// // // // //                 ? "Try adjusting your search terms"
+// // // // //                 : "Add your first product to get started"}
+// // // // //             </p>
+
+// // // // //           </div>
+// // // // //         ) : (
+
+// // // // //           <div className="apl-grid">
+
+// // // // //             {filteredProducts.map((product) => {
+
+// // // // //               const discountedPrice =
+// // // // //                 product.price -
+// // // // //                 (product.price *
+// // // // //                   (product.discountPercent || 0)) /
+// // // // //                   100;
+
+// // // // //               return (
+
+// // // // //                 <div
+// // // // //                   key={product.id}
+// // // // //                   className={`apl-card ${
+// // // // //                     product.isActive === false
+// // // // //                       ? "apl-card-out-of-stock"
+// // // // //                       : ""
+// // // // //                   }`}
+// // // // //                 >
+
+// // // // //                   {/* Image */}
+// // // // //                   <div className="apl-card-image">
+
+// // // // //                     <img
+// // // // //                       src={`https://a4agroup.eu${product.image}`}
+// // // // //                       alt={product.title}
+// // // // //                       className="apl-image"
+// // // // //                     />
+
+// // // // //                     {/* Badges */}
+// // // // //                     <div className="apl-card-badges">
+
+// // // // //                       {/* ACTIVE / OUT OF STOCK */}
+// // // // //                       {product.isActive === false ? (
+// // // // //                         <span className="apl-badge-stock apl-badge-out">
+// // // // //                           <span className="apl-stock-dot"></span>
+// // // // //                           Out of Stock
+// // // // //                         </span>
+// // // // //                       ) : (
+// // // // //                         <span className="apl-badge-stock apl-badge-active">
+// // // // //                           <span className="apl-stock-dot"></span>
+// // // // //                           Active
+// // // // //                         </span>
+// // // // //                       )}
+
+// // // // //                       {/* FEATURED */}
+// // // // //                       {product.featured && (
+// // // // //                         <span className="apl-badge-featured">
+
+// // // // //                           <svg
+// // // // //                             width="10"
+// // // // //                             height="10"
+// // // // //                             viewBox="0 0 10 10"
+// // // // //                             fill="none"
+// // // // //                           >
+// // // // //                             <path
+// // // // //                               d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z"
+// // // // //                               fill="currentColor"
+// // // // //                             />
+// // // // //                           </svg>
+
+// // // // //                           Featured
+// // // // //                         </span>
+// // // // //                       )}
+
+// // // // //                       {/* DISCOUNT */}
+// // // // //                       {product.discountPercent > 0 && (
+// // // // //                         <span className="apl-badge-discount">
+// // // // //                           {product.discountPercent}% OFF
+// // // // //                         </span>
+// // // // //                       )}
+
+// // // // //                     </div>
+
+// // // // //                   </div>
+
+// // // // //                   {/* Content */}
+// // // // //                   <div className="apl-card-content">
+
+// // // // //                     <span className="apl-category">
+// // // // //                       {product.category}
+// // // // //                     </span>
+
+// // // // //                     <h3 className="apl-title">
+// // // // //                       {product.title}
+// // // // //                     </h3>
+
+// // // // //                     <div className="apl-pricing">
+
+// // // // //                       <span className="apl-price-current">
+// // // // //                         €{discountedPrice.toFixed(0)}
+// // // // //                       </span>
+
+// // // // //                       {product.discountPercent > 0 && (
+// // // // //                         <span className="apl-price-original">
+// // // // //                           €{product.price}
+// // // // //                         </span>
+// // // // //                       )}
+
+// // // // //                     </div>
+
+// // // // //                     {/* Actions */}
+// // // // //                     <div className="apl-actions">
+
+// // // // //                       <Link
+// // // // //                         to={`/admin/products/edit/${product.id}`}
+// // // // //                         className="apl-btn-edit"
+// // // // //                       >
+// // // // //                         <svg
+// // // // //                           width="14"
+// // // // //                           height="14"
+// // // // //                           viewBox="0 0 14 14"
+// // // // //                           fill="none"
+// // // // //                         >
+// // // // //                           <path
+// // // // //                             d="M10 2l2 2-8 8H2v-2l8-8z"
+// // // // //                             stroke="currentColor"
+// // // // //                             strokeWidth="1.3"
+// // // // //                             strokeLinecap="round"
+// // // // //                             strokeLinejoin="round"
+// // // // //                           />
+// // // // //                         </svg>
+
+// // // // //                         Edit
+// // // // //                       </Link>
+
+// // // // //                       <button
+// // // // //                         onClick={() =>
+// // // // //                           deleteProduct(product.id)
+// // // // //                         }
+// // // // //                         className="apl-btn-delete"
+// // // // //                       >
+// // // // //                         <svg
+// // // // //                           width="14"
+// // // // //                           height="14"
+// // // // //                           viewBox="0 0 14 14"
+// // // // //                           fill="none"
+// // // // //                         >
+// // // // //                           <path
+// // // // //                             d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4"
+// // // // //                             stroke="currentColor"
+// // // // //                             strokeWidth="1.3"
+// // // // //                             strokeLinecap="round"
+// // // // //                             strokeLinejoin="round"
+// // // // //                           />
+// // // // //                         </svg>
+
+// // // // //                         Delete
+// // // // //                       </button>
+
+// // // // //                     </div>
+
+// // // // //                   </div>
+
+// // // // //                 </div>
+
+// // // // //               );
+// // // // //             })}
+
+// // // // //           </div>
+
+// // // // //         )}
+
+// // // // //       </div>
+// // // // //     </AdminLayout>
+// // // // //   );
+// // // // // }
+
+// // // // // export default ProductsList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // // // import { useEffect, useMemo, useState } from "react";
 // // // // import { Link } from "react-router-dom";
 // // // // import api from "../../services/api";
 // // // // import AdminLayout from "./AdminLayout";
@@ -693,6 +1072,19 @@
 // // // //   const [search, setSearch] = useState("");
 // // // //   const [loading, setLoading] = useState(true);
 
+// // // //   // =====================================================
+// // // //   // FILTERS
+// // // //   // =====================================================
+
+// // // //   const [stockFilter, setStockFilter] = useState("all");
+// // // //   const [featuredFilter, setFeaturedFilter] = useState("all");
+// // // //   const [categoryFilter, setCategoryFilter] = useState("all");
+// // // //   const [sortOption, setSortOption] = useState("newest");
+
+// // // //   // =====================================================
+// // // //   // FETCH PRODUCTS
+// // // //   // =====================================================
+
 // // // //   useEffect(() => {
 // // // //     fetchProducts();
 // // // //   }, []);
@@ -700,7 +1092,14 @@
 // // // //   const fetchProducts = async () => {
 // // // //     try {
 // // // //       const { data } = await api.get("/products");
-// // // //       setProducts(data);
+
+// // // //       if (Array.isArray(data)) {
+// // // //         setProducts(data);
+// // // //       } else if (Array.isArray(data?.products)) {
+// // // //         setProducts(data.products);
+// // // //       } else {
+// // // //         setProducts([]);
+// // // //       }
 // // // //     } catch (error) {
 // // // //       console.error(error);
 // // // //     } finally {
@@ -708,10 +1107,18 @@
 // // // //     }
 // // // //   };
 
+// // // //   // =====================================================
+// // // //   // DELETE PRODUCT
+// // // //   // =====================================================
+
 // // // //   const deleteProduct = async (id) => {
 // // // //     const token = localStorage.getItem("token");
 
-// // // //     if (!window.confirm("Are you sure you want to delete this product?")) {
+// // // //     if (
+// // // //       !window.confirm(
+// // // //         "Are you sure you want to delete this product?"
+// // // //       )
+// // // //     ) {
 // // // //       return;
 // // // //     }
 
@@ -728,9 +1135,183 @@
 // // // //     }
 // // // //   };
 
-// // // //   const filteredProducts = products.filter((product) =>
-// // // //     product.title.toLowerCase().includes(search.toLowerCase())
-// // // //   );
+// // // //   // =====================================================
+// // // //   // CATEGORIES
+// // // //   // =====================================================
+
+// // // //   const categories = useMemo(() => {
+// // // //     return [
+// // // //       ...new Set(
+// // // //         products
+// // // //           .map((product) => product.category)
+// // // //           .filter(Boolean)
+// // // //       ),
+// // // //     ].sort((a, b) =>
+// // // //       String(a).localeCompare(String(b))
+// // // //     );
+// // // //   }, [products]);
+
+// // // //   // =====================================================
+// // // //   // FILTER + SORT PRODUCTS
+// // // //   // =====================================================
+
+// // // //   const filteredProducts = useMemo(() => {
+// // // //     let result = [...products];
+
+// // // //     // -------------------------------------------------
+// // // //     // SEARCH
+// // // //     // -------------------------------------------------
+
+// // // //     const searchValue = search
+// // // //       .trim()
+// // // //       .toLowerCase();
+
+// // // //     if (searchValue) {
+// // // //       result = result.filter((product) => {
+// // // //         const searchableText = [
+// // // //           product.title,
+// // // //           product.category,
+// // // //           product.description,
+// // // //         ]
+// // // //           .filter(Boolean)
+// // // //           .join(" ")
+// // // //           .toLowerCase();
+
+// // // //         return searchableText.includes(
+// // // //           searchValue
+// // // //         );
+// // // //       });
+// // // //     }
+
+// // // //     // -------------------------------------------------
+// // // //     // STOCK
+// // // //     // -------------------------------------------------
+
+// // // //     if (stockFilter === "active") {
+// // // //       result = result.filter(
+// // // //         (product) =>
+// // // //           product.isActive !== false
+// // // //       );
+// // // //     }
+
+// // // //     if (stockFilter === "out_of_stock") {
+// // // //       result = result.filter(
+// // // //         (product) =>
+// // // //           product.isActive === false
+// // // //       );
+// // // //     }
+
+// // // //     // -------------------------------------------------
+// // // //     // FEATURED
+// // // //     // -------------------------------------------------
+
+// // // //     if (featuredFilter === "featured") {
+// // // //       result = result.filter(
+// // // //         (product) =>
+// // // //           product.featured === true
+// // // //       );
+// // // //     }
+
+// // // //     // -------------------------------------------------
+// // // //     // CATEGORY
+// // // //     // -------------------------------------------------
+
+// // // //     if (categoryFilter !== "all") {
+// // // //       result = result.filter(
+// // // //         (product) =>
+// // // //           product.category ===
+// // // //           categoryFilter
+// // // //       );
+// // // //     }
+
+// // // //     // -------------------------------------------------
+// // // //     // SORT
+// // // //     // -------------------------------------------------
+
+// // // //     result.sort((a, b) => {
+// // // //       switch (sortOption) {
+// // // //         case "newest":
+// // // //           return (
+// // // //             new Date(
+// // // //               b.createdAt || 0
+// // // //             ).getTime() -
+// // // //             new Date(
+// // // //               a.createdAt || 0
+// // // //             ).getTime()
+// // // //           );
+
+// // // //         case "oldest":
+// // // //           return (
+// // // //             new Date(
+// // // //               a.createdAt || 0
+// // // //             ).getTime() -
+// // // //             new Date(
+// // // //               b.createdAt || 0
+// // // //             ).getTime()
+// // // //           );
+
+// // // //         case "price_low":
+// // // //           return (
+// // // //             Number(a.price || 0) -
+// // // //             Number(b.price || 0)
+// // // //           );
+
+// // // //         case "price_high":
+// // // //           return (
+// // // //             Number(b.price || 0) -
+// // // //             Number(a.price || 0)
+// // // //           );
+
+// // // //         case "name_az":
+// // // //           return String(
+// // // //             a.title || ""
+// // // //           ).localeCompare(
+// // // //             String(b.title || "")
+// // // //           );
+
+// // // //         case "name_za":
+// // // //           return String(
+// // // //             b.title || ""
+// // // //           ).localeCompare(
+// // // //             String(a.title || "")
+// // // //           );
+
+// // // //         default:
+// // // //           return 0;
+// // // //       }
+// // // //     });
+
+// // // //     return result;
+// // // //   }, [
+// // // //     products,
+// // // //     search,
+// // // //     stockFilter,
+// // // //     featuredFilter,
+// // // //     categoryFilter,
+// // // //     sortOption,
+// // // //   ]);
+
+// // // //   // =====================================================
+// // // //   // CLEAR FILTERS
+// // // //   // =====================================================
+
+// // // //   const clearFilters = () => {
+// // // //     setSearch("");
+// // // //     setStockFilter("all");
+// // // //     setFeaturedFilter("all");
+// // // //     setCategoryFilter("all");
+// // // //     setSortOption("newest");
+// // // //   };
+
+// // // //   const hasActiveFilters =
+// // // //     search.trim() !== "" ||
+// // // //     stockFilter !== "all" ||
+// // // //     featuredFilter !== "all" ||
+// // // //     categoryFilter !== "all";
+
+// // // //   // =====================================================
+// // // //   // LOADING
+// // // //   // =====================================================
 
 // // // //   if (loading) {
 // // // //     return (
@@ -743,15 +1324,26 @@
 // // // //     );
 // // // //   }
 
+// // // //   // =====================================================
+// // // //   // PAGE
+// // // //   // =====================================================
+
 // // // //   return (
 // // // //     <AdminLayout>
 // // // //       <div className="apl-admin">
 
-// // // //         {/* Header */}
+// // // //         {/* =================================================
+// // // //             HEADER
+// // // //         ================================================= */}
+
 // // // //         <div className="apl-header">
+
 // // // //           <div className="apl-header-left">
 // // // //             <h1>Products</h1>
-// // // //             <p>Manage all products and categories</p>
+
+// // // //             <p>
+// // // //               Manage all products and categories
+// // // //             </p>
 // // // //           </div>
 
 // // // //           <Link
@@ -774,12 +1366,20 @@
 
 // // // //             Add Product
 // // // //           </Link>
+
 // // // //         </div>
 
-// // // //         {/* Toolbar */}
+
+// // // //         {/* =================================================
+// // // //             TOOLBAR
+// // // //         ================================================= */}
+
 // // // //         <div className="apl-toolbar">
 
+// // // //           {/* SEARCH */}
+
 // // // //           <div className="apl-search-wrapper">
+
 // // // //             <svg
 // // // //               className="apl-search-icon"
 // // // //               width="18"
@@ -805,24 +1405,193 @@
 
 // // // //             <input
 // // // //               type="text"
-// // // //               placeholder="Search products..."
+// // // //               placeholder="Search products, category..."
 // // // //               value={search}
-// // // //               onChange={(e) => setSearch(e.target.value)}
+// // // //               onChange={(e) =>
+// // // //                 setSearch(e.target.value)
+// // // //               }
 // // // //               className="apl-search-input"
 // // // //             />
+
+// // // //             {search && (
+// // // //               <button
+// // // //                 type="button"
+// // // //                 className="apl-search-clear"
+// // // //                 onClick={() =>
+// // // //                   setSearch("")
+// // // //                 }
+// // // //                 aria-label="Clear search"
+// // // //               >
+// // // //                 ×
+// // // //               </button>
+// // // //             )}
+
 // // // //           </div>
 
-// // // //           <div className="apl-toolbar-info">
-// // // //             <span className="apl-count-badge">
-// // // //               {filteredProducts.length} product
-// // // //               {filteredProducts.length !== 1 ? "s" : ""}
-// // // //             </span>
-// // // //           </div>
+
+// // // //           {/* STOCK */}
+
+// // // //           <select
+// // // //             value={stockFilter}
+// // // //             onChange={(e) =>
+// // // //               setStockFilter(
+// // // //                 e.target.value
+// // // //               )
+// // // //             }
+// // // //             className="apl-filter-select"
+// // // //           >
+// // // //             <option value="all">
+// // // //               All Stock
+// // // //             </option>
+
+// // // //             <option value="active">
+// // // //               Active
+// // // //             </option>
+
+// // // //             <option value="out_of_stock">
+// // // //               Out of Stock
+// // // //             </option>
+// // // //           </select>
+
+
+// // // //           {/* FEATURED */}
+
+// // // //           <select
+// // // //             value={featuredFilter}
+// // // //             onChange={(e) =>
+// // // //               setFeaturedFilter(
+// // // //                 e.target.value
+// // // //               )
+// // // //             }
+// // // //             className="apl-filter-select"
+// // // //           >
+// // // //             <option value="all">
+// // // //               All Products
+// // // //             </option>
+
+// // // //             <option value="featured">
+// // // //               Featured Only
+// // // //             </option>
+// // // //           </select>
+
+
+// // // //           {/* CATEGORY */}
+
+// // // //           <select
+// // // //             value={categoryFilter}
+// // // //             onChange={(e) =>
+// // // //               setCategoryFilter(
+// // // //                 e.target.value
+// // // //               )
+// // // //             }
+// // // //             className="apl-filter-select"
+// // // //           >
+// // // //             <option value="all">
+// // // //               All Categories
+// // // //             </option>
+
+// // // //             {categories.map(
+// // // //               (category) => (
+// // // //                 <option
+// // // //                   key={category}
+// // // //                   value={category}
+// // // //                 >
+// // // //                   {category}
+// // // //                 </option>
+// // // //               )
+// // // //             )}
+// // // //           </select>
+
+
+// // // //           {/* SORT */}
+
+// // // //           <select
+// // // //             value={sortOption}
+// // // //             onChange={(e) =>
+// // // //               setSortOption(
+// // // //                 e.target.value
+// // // //               )
+// // // //             }
+// // // //             className="apl-filter-select apl-sort-select"
+// // // //           >
+// // // //             <option value="newest">
+// // // //               Newest First
+// // // //             </option>
+
+// // // //             <option value="oldest">
+// // // //               Oldest First
+// // // //             </option>
+
+// // // //             <option value="price_low">
+// // // //               Price: Low to High
+// // // //             </option>
+
+// // // //             <option value="price_high">
+// // // //               Price: High to Low
+// // // //             </option>
+
+// // // //             <option value="name_az">
+// // // //               Name: A to Z
+// // // //             </option>
+
+// // // //             <option value="name_za">
+// // // //               Name: Z to A
+// // // //             </option>
+// // // //           </select>
+
+
+// // // //           {/* CLEAR */}
+
+// // // //           {hasActiveFilters && (
+// // // //             <button
+// // // //               type="button"
+// // // //               className="apl-clear-filters"
+// // // //               onClick={clearFilters}
+// // // //             >
+// // // //               Clear
+// // // //             </button>
+// // // //           )}
 
 // // // //         </div>
 
-// // // //         {/* Products Grid */}
+
+// // // //         {/* =================================================
+// // // //             RESULTS INFO
+// // // //         ================================================= */}
+
+// // // //         <div className="apl-results-bar">
+
+// // // //           <span>
+// // // //             Showing{" "}
+// // // //             <strong>
+// // // //               {filteredProducts.length}
+// // // //             </strong>{" "}
+// // // //             of{" "}
+// // // //             <strong>
+// // // //               {products.length}
+// // // //             </strong>{" "}
+// // // //             products
+// // // //           </span>
+
+// // // //           {hasActiveFilters && (
+// // // //             <button
+// // // //               type="button"
+// // // //               onClick={clearFilters}
+// // // //               className="apl-reset-link"
+// // // //             >
+// // // //               Reset filters
+// // // //             </button>
+// // // //           )}
+
+// // // //         </div>
+
+
+// // // //         {/* =================================================
+// // // //             PRODUCTS GRID
+// // // //         ================================================= */}
+
 // // // //         {filteredProducts.length === 0 ? (
+
 // // // //           <div className="apl-empty">
 
 // // // //             <svg
@@ -853,176 +1622,233 @@
 // // // //               />
 // // // //             </svg>
 
-// // // //             <h3>No products found</h3>
+// // // //             <h3>
+// // // //               No products found
+// // // //             </h3>
 
 // // // //             <p>
-// // // //               {search
-// // // //                 ? "Try adjusting your search terms"
+// // // //               {search ||
+// // // //               stockFilter !== "all" ||
+// // // //               featuredFilter !== "all" ||
+// // // //               categoryFilter !== "all"
+// // // //                 ? "Try adjusting your search or filter options"
 // // // //                 : "Add your first product to get started"}
 // // // //             </p>
 
+// // // //             {hasActiveFilters && (
+// // // //               <button
+// // // //                 type="button"
+// // // //                 className="apl-empty-reset"
+// // // //                 onClick={
+// // // //                   clearFilters
+// // // //                 }
+// // // //               >
+// // // //                 Clear Filters
+// // // //               </button>
+// // // //             )}
+
 // // // //           </div>
+
 // // // //         ) : (
 
 // // // //           <div className="apl-grid">
 
-// // // //             {filteredProducts.map((product) => {
+// // // //             {filteredProducts.map(
+// // // //               (product) => {
 
-// // // //               const discountedPrice =
-// // // //                 product.price -
-// // // //                 (product.price *
-// // // //                   (product.discountPercent || 0)) /
-// // // //                   100;
+// // // //                 const discountedPrice =
+// // // //                   product.price -
+// // // //                   (
+// // // //                     product.price *
+// // // //                     (
+// // // //                       product.discountPercent ||
+// // // //                       0
+// // // //                     )
+// // // //                   ) /
+// // // //                     100;
 
-// // // //               return (
+// // // //                 return (
 
-// // // //                 <div
-// // // //                   key={product.id}
-// // // //                   className={`apl-card ${
-// // // //                     product.isActive === false
-// // // //                       ? "apl-card-out-of-stock"
-// // // //                       : ""
-// // // //                   }`}
-// // // //                 >
+// // // //                   <div
+// // // //                     key={product.id}
+// // // //                     className={`apl-card ${
+// // // //                       product.isActive === false
+// // // //                         ? "apl-card-out-of-stock"
+// // // //                         : ""
+// // // //                     }`}
+// // // //                   >
 
-// // // //                   {/* Image */}
-// // // //                   <div className="apl-card-image">
+// // // //                     {/* =================================================
+// // // //                         IMAGE
+// // // //                     ================================================= */}
 
-// // // //                     <img
-// // // //                       src={`https://a4agroup.eu${product.image}`}
-// // // //                       alt={product.title}
-// // // //                       className="apl-image"
-// // // //                     />
+// // // //                     <div className="apl-card-image">
 
-// // // //                     {/* Badges */}
-// // // //                     <div className="apl-card-badges">
+// // // //                       <img
+// // // //                         src={`https://a4agroup.eu${product.image}`}
+// // // //                         alt={product.title}
+// // // //                         className="apl-image"
+// // // //                       />
 
-// // // //                       {/* ACTIVE / OUT OF STOCK */}
-// // // //                       {product.isActive === false ? (
-// // // //                         <span className="apl-badge-stock apl-badge-out">
-// // // //                           <span className="apl-stock-dot"></span>
-// // // //                           Out of Stock
+// // // //                       <div className="apl-card-badges">
+
+// // // //                         {/* STOCK */}
+
+// // // //                         {product.isActive === false ? (
+
+// // // //                           <span className="apl-badge-stock apl-badge-out">
+// // // //                             <span className="apl-stock-dot"></span>
+// // // //                             Out of Stock
+// // // //                           </span>
+
+// // // //                         ) : (
+
+// // // //                           <span className="apl-badge-stock apl-badge-active">
+// // // //                             <span className="apl-stock-dot"></span>
+// // // //                             Active
+// // // //                           </span>
+
+// // // //                         )}
+
+
+// // // //                         {/* FEATURED */}
+
+// // // //                         {product.featured && (
+
+// // // //                           <span className="apl-badge-featured">
+
+// // // //                             <svg
+// // // //                               width="10"
+// // // //                               height="10"
+// // // //                               viewBox="0 0 10 10"
+// // // //                               fill="none"
+// // // //                             >
+// // // //                               <path
+// // // //                                 d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z"
+// // // //                                 fill="currentColor"
+// // // //                               />
+// // // //                             </svg>
+
+// // // //                             Featured
+
+// // // //                           </span>
+
+// // // //                         )}
+
+
+// // // //                         {/* DISCOUNT */}
+
+// // // //                         {product.discountPercent > 0 && (
+
+// // // //                           <span className="apl-badge-discount">
+// // // //                             {product.discountPercent}% OFF
+// // // //                           </span>
+
+// // // //                         )}
+
+// // // //                       </div>
+
+// // // //                     </div>
+
+
+// // // //                     {/* =================================================
+// // // //                         CONTENT
+// // // //                     ================================================= */}
+
+// // // //                     <div className="apl-card-content">
+
+// // // //                       <span className="apl-category">
+// // // //                         {product.category}
+// // // //                       </span>
+
+// // // //                       <h3 className="apl-title">
+// // // //                         {product.title}
+// // // //                       </h3>
+
+
+// // // //                       <div className="apl-pricing">
+
+// // // //                         <span className="apl-price-current">
+// // // //                           €{discountedPrice.toFixed(0)}
 // // // //                         </span>
-// // // //                       ) : (
-// // // //                         <span className="apl-badge-stock apl-badge-active">
-// // // //                           <span className="apl-stock-dot"></span>
-// // // //                           Active
-// // // //                         </span>
-// // // //                       )}
 
-// // // //                       {/* FEATURED */}
-// // // //                       {product.featured && (
-// // // //                         <span className="apl-badge-featured">
+// // // //                         {product.discountPercent > 0 && (
+
+// // // //                           <span className="apl-price-original">
+// // // //                             €{product.price}
+// // // //                           </span>
+
+// // // //                         )}
+
+// // // //                       </div>
+
+
+// // // //                       {/* ACTIONS */}
+
+// // // //                       <div className="apl-actions">
+
+// // // //                         <Link
+// // // //                           to={`/admin/products/edit/${product.id}`}
+// // // //                           className="apl-btn-edit"
+// // // //                         >
 
 // // // //                           <svg
-// // // //                             width="10"
-// // // //                             height="10"
-// // // //                             viewBox="0 0 10 10"
+// // // //                             width="14"
+// // // //                             height="14"
+// // // //                             viewBox="0 0 14 14"
 // // // //                             fill="none"
 // // // //                           >
 // // // //                             <path
-// // // //                               d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z"
-// // // //                               fill="currentColor"
+// // // //                               d="M10 2l2 2-8 8H2v-2l8-8z"
+// // // //                               stroke="currentColor"
+// // // //                               strokeWidth="1.3"
+// // // //                               strokeLinecap="round"
+// // // //                               strokeLinejoin="round"
 // // // //                             />
 // // // //                           </svg>
 
-// // // //                           Featured
-// // // //                         </span>
-// // // //                       )}
+// // // //                           Edit
 
-// // // //                       {/* DISCOUNT */}
-// // // //                       {product.discountPercent > 0 && (
-// // // //                         <span className="apl-badge-discount">
-// // // //                           {product.discountPercent}% OFF
-// // // //                         </span>
-// // // //                       )}
+// // // //                         </Link>
+
+
+// // // //                         <button
+// // // //                           onClick={() =>
+// // // //                             deleteProduct(
+// // // //                               product.id
+// // // //                             )
+// // // //                           }
+// // // //                           className="apl-btn-delete"
+// // // //                         >
+
+// // // //                           <svg
+// // // //                             width="14"
+// // // //                             height="14"
+// // // //                             viewBox="0 0 14 14"
+// // // //                             fill="none"
+// // // //                           >
+// // // //                             <path
+// // // //                               d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4"
+// // // //                               stroke="currentColor"
+// // // //                               strokeWidth="1.3"
+// // // //                               strokeLinecap="round"
+// // // //                               strokeLinejoin="round"
+// // // //                             />
+// // // //                           </svg>
+
+// // // //                           Delete
+
+// // // //                         </button>
+
+// // // //                       </div>
 
 // // // //                     </div>
 
 // // // //                   </div>
 
-// // // //                   {/* Content */}
-// // // //                   <div className="apl-card-content">
-
-// // // //                     <span className="apl-category">
-// // // //                       {product.category}
-// // // //                     </span>
-
-// // // //                     <h3 className="apl-title">
-// // // //                       {product.title}
-// // // //                     </h3>
-
-// // // //                     <div className="apl-pricing">
-
-// // // //                       <span className="apl-price-current">
-// // // //                         €{discountedPrice.toFixed(0)}
-// // // //                       </span>
-
-// // // //                       {product.discountPercent > 0 && (
-// // // //                         <span className="apl-price-original">
-// // // //                           €{product.price}
-// // // //                         </span>
-// // // //                       )}
-
-// // // //                     </div>
-
-// // // //                     {/* Actions */}
-// // // //                     <div className="apl-actions">
-
-// // // //                       <Link
-// // // //                         to={`/admin/products/edit/${product.id}`}
-// // // //                         className="apl-btn-edit"
-// // // //                       >
-// // // //                         <svg
-// // // //                           width="14"
-// // // //                           height="14"
-// // // //                           viewBox="0 0 14 14"
-// // // //                           fill="none"
-// // // //                         >
-// // // //                           <path
-// // // //                             d="M10 2l2 2-8 8H2v-2l8-8z"
-// // // //                             stroke="currentColor"
-// // // //                             strokeWidth="1.3"
-// // // //                             strokeLinecap="round"
-// // // //                             strokeLinejoin="round"
-// // // //                           />
-// // // //                         </svg>
-
-// // // //                         Edit
-// // // //                       </Link>
-
-// // // //                       <button
-// // // //                         onClick={() =>
-// // // //                           deleteProduct(product.id)
-// // // //                         }
-// // // //                         className="apl-btn-delete"
-// // // //                       >
-// // // //                         <svg
-// // // //                           width="14"
-// // // //                           height="14"
-// // // //                           viewBox="0 0 14 14"
-// // // //                           fill="none"
-// // // //                         >
-// // // //                           <path
-// // // //                             d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4"
-// // // //                             stroke="currentColor"
-// // // //                             strokeWidth="1.3"
-// // // //                             strokeLinecap="round"
-// // // //                             strokeLinejoin="round"
-// // // //                           />
-// // // //                         </svg>
-
-// // // //                         Delete
-// // // //                       </button>
-
-// // // //                     </div>
-
-// // // //                   </div>
-
-// // // //                 </div>
-
-// // // //               );
-// // // //             })}
+// // // //                 );
+// // // //               }
+// // // //             )}
 
 // // // //           </div>
 
@@ -1034,31 +1860,6 @@
 // // // // }
 
 // // // // export default ProductsList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // // // import { useEffect, useMemo, useState } from "react";
@@ -1079,7 +1880,22 @@
 // // //   const [stockFilter, setStockFilter] = useState("all");
 // // //   const [featuredFilter, setFeaturedFilter] = useState("all");
 // // //   const [categoryFilter, setCategoryFilter] = useState("all");
-// // //   const [sortOption, setSortOption] = useState("newest");
+
+// // //   // Custom Order is now the default
+// // //   const [sortOption, setSortOption] = useState("custom");
+
+// // //   // =====================================================
+// // //   // DRAG & DROP
+// // //   // =====================================================
+
+// // //   const [draggedProductId, setDraggedProductId] =
+// // //     useState(null);
+
+// // //   const [dragOverProductId, setDragOverProductId] =
+// // //     useState(null);
+
+// // //   const [savingOrder, setSavingOrder] =
+// // //     useState(false);
 
 // // //   // =====================================================
 // // //   // FETCH PRODUCTS
@@ -1101,7 +1917,7 @@
 // // //         setProducts([]);
 // // //       }
 // // //     } catch (error) {
-// // //       console.error(error);
+// // //       console.error("FETCH PRODUCTS ERROR:", error);
 // // //     } finally {
 // // //       setLoading(false);
 // // //     }
@@ -1129,9 +1945,9 @@
 // // //         },
 // // //       });
 
-// // //       fetchProducts();
+// // //       await fetchProducts();
 // // //     } catch (error) {
-// // //       console.error(error);
+// // //       console.error("DELETE PRODUCT ERROR:", error);
 // // //     }
 // // //   };
 
@@ -1177,9 +1993,7 @@
 // // //           .join(" ")
 // // //           .toLowerCase();
 
-// // //         return searchableText.includes(
-// // //           searchValue
-// // //         );
+// // //         return searchableText.includes(searchValue);
 // // //       });
 // // //     }
 
@@ -1219,8 +2033,7 @@
 // // //     if (categoryFilter !== "all") {
 // // //       result = result.filter(
 // // //         (product) =>
-// // //           product.category ===
-// // //           categoryFilter
+// // //           product.category === categoryFilter
 // // //       );
 // // //     }
 
@@ -1230,6 +2043,15 @@
 
 // // //     result.sort((a, b) => {
 // // //       switch (sortOption) {
+
+// // //         // ⭐ CUSTOM ADMIN ORDER
+// // //         case "custom":
+// // //           return (
+// // //             Number(a.sortOrder ?? 0) -
+// // //             Number(b.sortOrder ?? 0)
+// // //           );
+
+// // //         // NEWEST
 // // //         case "newest":
 // // //           return (
 // // //             new Date(
@@ -1240,6 +2062,7 @@
 // // //             ).getTime()
 // // //           );
 
+// // //         // OLDEST
 // // //         case "oldest":
 // // //           return (
 // // //             new Date(
@@ -1250,18 +2073,21 @@
 // // //             ).getTime()
 // // //           );
 
+// // //         // PRICE LOW
 // // //         case "price_low":
 // // //           return (
 // // //             Number(a.price || 0) -
 // // //             Number(b.price || 0)
 // // //           );
 
+// // //         // PRICE HIGH
 // // //         case "price_high":
 // // //           return (
 // // //             Number(b.price || 0) -
 // // //             Number(a.price || 0)
 // // //           );
 
+// // //         // NAME A-Z
 // // //         case "name_az":
 // // //           return String(
 // // //             a.title || ""
@@ -1269,6 +2095,7 @@
 // // //             String(b.title || "")
 // // //           );
 
+// // //         // NAME Z-A
 // // //         case "name_za":
 // // //           return String(
 // // //             b.title || ""
@@ -1292,6 +2119,239 @@
 // // //   ]);
 
 // // //   // =====================================================
+// // //   // CAN DRAG PRODUCTS?
+// // //   // =====================================================
+
+// // //   const canDragProducts =
+// // //     sortOption === "custom" &&
+// // //     search.trim() === "" &&
+// // //     stockFilter === "all" &&
+// // //     featuredFilter === "all" &&
+// // //     categoryFilter === "all";
+
+// // //   // =====================================================
+// // //   // SAVE PRODUCT ORDER
+// // //   // =====================================================
+
+// // //   const saveProductOrder = async (
+// // //     reorderedProducts
+// // //   ) => {
+// // //     try {
+// // //       setSavingOrder(true);
+
+// // //       const token =
+// // //         localStorage.getItem("token");
+
+// // //       await api.patch(
+// // //         "/products/orders",
+// // //         {
+// // //           products:
+// // //             reorderedProducts.map(
+// // //               (product) => ({
+// // //                 id: product.id,
+// // //               })
+// // //             ),
+// // //         },
+// // //         {
+// // //           headers: {
+// // //             Authorization:
+// // //               `Bearer ${token}`,
+// // //           },
+// // //         }
+// // //       );
+
+// // //     } catch (error) {
+// // //       console.error(
+// // //         "SAVE PRODUCT ORDER ERROR:",
+// // //         error
+// // //       );
+
+// // //       // Restore server order if saving failed
+// // //       await fetchProducts();
+
+// // //       alert(
+// // //         error?.response?.data?.message ||
+// // //         "Failed to save product order."
+// // //       );
+
+// // //     } finally {
+// // //       setSavingOrder(false);
+// // //     }
+// // //   };
+
+// // //   // =====================================================
+// // //   // DRAG START
+// // //   // =====================================================
+
+// // //   const handleDragStart = (
+// // //     event,
+// // //     productId
+// // //   ) => {
+// // //     if (!canDragProducts) {
+// // //       return;
+// // //     }
+
+// // //     setDraggedProductId(productId);
+
+// // //     event.dataTransfer.effectAllowed =
+// // //       "move";
+
+// // //     event.dataTransfer.setData(
+// // //       "text/plain",
+// // //       String(productId)
+// // //     );
+// // //   };
+
+// // //   // =====================================================
+// // //   // DRAG OVER
+// // //   // =====================================================
+
+// // //   const handleDragOver = (
+// // //     event,
+// // //     productId
+// // //   ) => {
+// // //     if (!canDragProducts) {
+// // //       return;
+// // //     }
+
+// // //     event.preventDefault();
+
+// // //     event.dataTransfer.dropEffect =
+// // //       "move";
+
+// // //     if (
+// // //       draggedProductId !== null &&
+// // //       draggedProductId !== productId
+// // //     ) {
+// // //       setDragOverProductId(productId);
+// // //     }
+// // //   };
+
+// // //   // =====================================================
+// // //   // DRAG LEAVE
+// // //   // =====================================================
+
+// // //   const handleDragLeave = () => {
+// // //     setDragOverProductId(null);
+// // //   };
+
+// // //   // =====================================================
+// // //   // DRAG END
+// // //   // =====================================================
+
+// // //   const handleDragEnd = () => {
+// // //     setDraggedProductId(null);
+// // //     setDragOverProductId(null);
+// // //   };
+
+// // //   // =====================================================
+// // //   // DROP
+// // //   // =====================================================
+
+// // //   const handleDrop = async (
+// // //     event,
+// // //     targetProductId
+// // //   ) => {
+// // //     event.preventDefault();
+
+// // //     if (!canDragProducts) {
+// // //       return;
+// // //     }
+
+// // //     const draggedId = Number(
+// // //       event.dataTransfer.getData(
+// // //         "text/plain"
+// // //       )
+// // //     );
+
+// // //     setDragOverProductId(null);
+
+// // //     if (
+// // //       !draggedId ||
+// // //       draggedId === targetProductId
+// // //     ) {
+// // //       setDraggedProductId(null);
+// // //       return;
+// // //     }
+
+// // //     // -----------------------------------------------
+// // //     // Work from the complete product list
+// // //     // -----------------------------------------------
+
+// // //     const currentList = [...products];
+
+// // //     const draggedIndex =
+// // //       currentList.findIndex(
+// // //         (product) =>
+// // //           product.id === draggedId
+// // //       );
+
+// // //     const targetIndex =
+// // //       currentList.findIndex(
+// // //         (product) =>
+// // //           product.id === targetProductId
+// // //       );
+
+// // //     if (
+// // //       draggedIndex === -1 ||
+// // //       targetIndex === -1
+// // //     ) {
+// // //       setDraggedProductId(null);
+// // //       return;
+// // //     }
+
+// // //     // -----------------------------------------------
+// // //     // Reorder
+// // //     // -----------------------------------------------
+
+// // //     const reorderedList = [
+// // //       ...currentList,
+// // //     ];
+
+// // //     const [draggedProduct] =
+// // //       reorderedList.splice(
+// // //         draggedIndex,
+// // //         1
+// // //       );
+
+// // //     reorderedList.splice(
+// // //       targetIndex,
+// // //       0,
+// // //       draggedProduct
+// // //     );
+
+// // //     // -----------------------------------------------
+// // //     // Assign new sortOrder
+// // //     // -----------------------------------------------
+
+// // //     const updatedProducts =
+// // //       reorderedList.map(
+// // //         (product, index) => ({
+// // //           ...product,
+// // //           sortOrder: index + 1,
+// // //         })
+// // //       );
+
+// // //     // -----------------------------------------------
+// // //     // Update UI immediately
+// // //     // -----------------------------------------------
+
+// // //     setProducts(
+// // //       updatedProducts
+// // //     );
+
+// // //     setDraggedProductId(null);
+
+// // //     // -----------------------------------------------
+// // //     // Save database
+// // //     // -----------------------------------------------
+
+// // //     await saveProductOrder(
+// // //       updatedProducts
+// // //     );
+// // //   };
+
+// // //   // =====================================================
 // // //   // CLEAR FILTERS
 // // //   // =====================================================
 
@@ -1300,14 +2360,15 @@
 // // //     setStockFilter("all");
 // // //     setFeaturedFilter("all");
 // // //     setCategoryFilter("all");
-// // //     setSortOption("newest");
+// // //     setSortOption("custom");
 // // //   };
 
 // // //   const hasActiveFilters =
 // // //     search.trim() !== "" ||
 // // //     stockFilter !== "all" ||
 // // //     featuredFilter !== "all" ||
-// // //     categoryFilter !== "all";
+// // //     categoryFilter !== "all" ||
+// // //     sortOption !== "custom";
 
 // // //   // =====================================================
 // // //   // LOADING
@@ -1318,7 +2379,10 @@
 // // //       <AdminLayout>
 // // //         <div className="apl-loading">
 // // //           <div className="apl-loading-spinner"></div>
-// // //           <p>Loading products...</p>
+
+// // //           <p>
+// // //             Loading products...
+// // //           </p>
 // // //         </div>
 // // //       </AdminLayout>
 // // //     );
@@ -1339,32 +2403,40 @@
 // // //         <div className="apl-header">
 
 // // //           <div className="apl-header-left">
-// // //             <h1>Products</h1>
+
+// // //             <h1>
+// // //               Products
+// // //             </h1>
 
 // // //             <p>
 // // //               Manage all products and categories
 // // //             </p>
+
 // // //           </div>
 
 // // //           <Link
 // // //             to="/admin/products/add"
 // // //             className="apl-btn-primary"
 // // //           >
+
 // // //             <svg
 // // //               width="18"
 // // //               height="18"
 // // //               viewBox="0 0 18 18"
 // // //               fill="none"
 // // //             >
+
 // // //               <path
 // // //                 d="M9 3v12M3 9h12"
 // // //                 stroke="currentColor"
 // // //                 strokeWidth="1.8"
 // // //                 strokeLinecap="round"
 // // //               />
+
 // // //             </svg>
 
 // // //             Add Product
+
 // // //           </Link>
 
 // // //         </div>
@@ -1387,6 +2459,7 @@
 // // //               viewBox="0 0 18 18"
 // // //               fill="none"
 // // //             >
+
 // // //               <circle
 // // //                 cx="8"
 // // //                 cy="8"
@@ -1401,6 +2474,7 @@
 // // //                 strokeWidth="1.5"
 // // //                 strokeLinecap="round"
 // // //               />
+
 // // //             </svg>
 
 // // //             <input
@@ -1412,19 +2486,6 @@
 // // //               }
 // // //               className="apl-search-input"
 // // //             />
-
-// // //             {search && (
-// // //               <button
-// // //                 type="button"
-// // //                 className="apl-search-clear"
-// // //                 onClick={() =>
-// // //                   setSearch("")
-// // //                 }
-// // //                 aria-label="Clear search"
-// // //               >
-// // //                 ×
-// // //               </button>
-// // //             )}
 
 // // //           </div>
 
@@ -1440,6 +2501,7 @@
 // // //             }
 // // //             className="apl-filter-select"
 // // //           >
+
 // // //             <option value="all">
 // // //               All Stock
 // // //             </option>
@@ -1451,6 +2513,7 @@
 // // //             <option value="out_of_stock">
 // // //               Out of Stock
 // // //             </option>
+
 // // //           </select>
 
 
@@ -1465,6 +2528,7 @@
 // // //             }
 // // //             className="apl-filter-select"
 // // //           >
+
 // // //             <option value="all">
 // // //               All Products
 // // //             </option>
@@ -1472,6 +2536,7 @@
 // // //             <option value="featured">
 // // //               Featured Only
 // // //             </option>
+
 // // //           </select>
 
 
@@ -1486,6 +2551,7 @@
 // // //             }
 // // //             className="apl-filter-select"
 // // //           >
+
 // // //             <option value="all">
 // // //               All Categories
 // // //             </option>
@@ -1500,6 +2566,7 @@
 // // //                 </option>
 // // //               )
 // // //             )}
+
 // // //           </select>
 
 
@@ -1514,6 +2581,11 @@
 // // //             }
 // // //             className="apl-filter-select apl-sort-select"
 // // //           >
+
+// // //             <option value="custom">
+// // //               Custom Order
+// // //             </option>
+
 // // //             <option value="newest">
 // // //               Newest First
 // // //             </option>
@@ -1537,6 +2609,7 @@
 // // //             <option value="name_za">
 // // //               Name: Z to A
 // // //             </option>
+
 // // //           </select>
 
 
@@ -1556,6 +2629,38 @@
 
 
 // // //         {/* =================================================
+// // //             CUSTOM ORDER NOTICE
+// // //         ================================================= */}
+
+// // //         {canDragProducts && (
+// // //           <div className="apl-order-notice">
+
+// // //             <div className="apl-order-notice-icon">
+// // //               ⋮⋮
+// // //             </div>
+
+// // //             <div>
+// // //               <strong>
+// // //                 Custom Order
+// // //               </strong>
+
+// // //               <span>
+// // //                 Drag and drop products to arrange
+// // //                 their display order.
+// // //               </span>
+// // //             </div>
+
+// // //             {savingOrder && (
+// // //               <span className="apl-saving-order">
+// // //                 Saving...
+// // //               </span>
+// // //             )}
+
+// // //           </div>
+// // //         )}
+
+
+// // //         {/* =================================================
 // // //             RESULTS INFO
 // // //         ================================================= */}
 
@@ -1563,15 +2668,20 @@
 
 // // //           <span>
 // // //             Showing{" "}
+
 // // //             <strong>
 // // //               {filteredProducts.length}
 // // //             </strong>{" "}
+
 // // //             of{" "}
+
 // // //             <strong>
 // // //               {products.length}
 // // //             </strong>{" "}
+
 // // //             products
 // // //           </span>
+
 
 // // //           {hasActiveFilters && (
 // // //             <button
@@ -1600,6 +2710,7 @@
 // // //               viewBox="0 0 48 48"
 // // //               fill="none"
 // // //             >
+
 // // //               <path
 // // //                 d="M12 12l8-4 20 10-8 4-20-10z"
 // // //                 stroke="currentColor"
@@ -1620,6 +2731,7 @@
 // // //                 strokeWidth="1.5"
 // // //                 strokeLinejoin="round"
 // // //               />
+
 // // //             </svg>
 
 // // //             <h3>
@@ -1654,18 +2766,25 @@
 // // //           <div className="apl-grid">
 
 // // //             {filteredProducts.map(
-// // //               (product) => {
+// // //               (product, index) => {
 
 // // //                 const discountedPrice =
-// // //                   product.price -
+// // //                   Number(product.price || 0) -
 // // //                   (
-// // //                     product.price *
-// // //                     (
-// // //                       product.discountPercent ||
-// // //                       0
+// // //                     Number(product.price || 0) *
+// // //                     Number(
+// // //                       product.discountPercent || 0
 // // //                     )
 // // //                   ) /
 // // //                     100;
+
+// // //                 const isDragging =
+// // //                   draggedProductId ===
+// // //                   product.id;
+
+// // //                 const isDragOver =
+// // //                   dragOverProductId ===
+// // //                   product.id;
 
 // // //                 return (
 
@@ -1675,8 +2794,75 @@
 // // //                       product.isActive === false
 // // //                         ? "apl-card-out-of-stock"
 // // //                         : ""
+// // //                     } ${
+// // //                       canDragProducts
+// // //                         ? "apl-card-draggable"
+// // //                         : ""
+// // //                     } ${
+// // //                       isDragging
+// // //                         ? "apl-card-dragging"
+// // //                         : ""
+// // //                     } ${
+// // //                       isDragOver
+// // //                         ? "apl-card-drag-over"
+// // //                         : ""
 // // //                     }`}
+// // //                     draggable={
+// // //                       canDragProducts
+// // //                     }
+// // //                     onDragStart={(event) =>
+// // //                       handleDragStart(
+// // //                         event,
+// // //                         product.id
+// // //                       )
+// // //                     }
+// // //                     onDragOver={(event) =>
+// // //                       handleDragOver(
+// // //                         event,
+// // //                         product.id
+// // //                       )
+// // //                     }
+// // //                     onDragLeave={
+// // //                       handleDragLeave
+// // //                     }
+// // //                     onDrop={(event) =>
+// // //                       handleDrop(
+// // //                         event,
+// // //                         product.id
+// // //                       )
+// // //                     }
+// // //                     onDragEnd={
+// // //                       handleDragEnd
+// // //                     }
 // // //                   >
+
+// // //                     {/* =================================================
+// // //                         DRAG HANDLE
+// // //                     ================================================= */}
+
+// // //                     {canDragProducts && (
+// // //                       <div
+// // //                         className="apl-drag-handle"
+// // //                         title="Drag to reorder"
+// // //                       >
+// // //                         <span>
+// // //                           ⋮⋮
+// // //                         </span>
+// // //                       </div>
+// // //                     )}
+
+
+// // //                     {/* =================================================
+// // //                         SORT NUMBER
+// // //                     ================================================= */}
+
+// // //                     {canDragProducts && (
+// // //                       <div className="apl-sort-number">
+// // //                         #
+// // //                         {index + 1}
+// // //                       </div>
+// // //                     )}
+
 
 // // //                     {/* =================================================
 // // //                         IMAGE
@@ -1684,11 +2870,22 @@
 
 // // //                     <div className="apl-card-image">
 
-// // //                       <img
-// // //                         src={`https://a4agroup.eu${product.image}`}
-// // //                         alt={product.title}
-// // //                         className="apl-image"
-// // //                       />
+// // //                       {product.image ? (
+
+// // //                         <img
+// // //                           src={`https://a4agroup.eu${product.image}`}
+// // //                           alt={product.title}
+// // //                           className="apl-image"
+// // //                         />
+
+// // //                       ) : (
+
+// // //                         <div className="apl-image-placeholder">
+// // //                           No image
+// // //                         </div>
+
+// // //                       )}
+
 
 // // //                       <div className="apl-card-badges">
 
@@ -1697,15 +2894,21 @@
 // // //                         {product.isActive === false ? (
 
 // // //                           <span className="apl-badge-stock apl-badge-out">
+
 // // //                             <span className="apl-stock-dot"></span>
+
 // // //                             Out of Stock
+
 // // //                           </span>
 
 // // //                         ) : (
 
 // // //                           <span className="apl-badge-stock apl-badge-active">
+
 // // //                             <span className="apl-stock-dot"></span>
+
 // // //                             Active
+
 // // //                           </span>
 
 // // //                         )}
@@ -1723,10 +2926,12 @@
 // // //                               viewBox="0 0 10 10"
 // // //                               fill="none"
 // // //                             >
+
 // // //                               <path
 // // //                                 d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z"
 // // //                                 fill="currentColor"
 // // //                               />
+
 // // //                             </svg>
 
 // // //                             Featured
@@ -1738,10 +2943,15 @@
 
 // // //                         {/* DISCOUNT */}
 
-// // //                         {product.discountPercent > 0 && (
+// // //                         {Number(
+// // //                           product.discountPercent || 0
+// // //                         ) > 0 && (
 
 // // //                           <span className="apl-badge-discount">
-// // //                             {product.discountPercent}% OFF
+
+// // //                             {product.discountPercent}
+// // //                             % OFF
+
 // // //                           </span>
 
 // // //                         )}
@@ -1758,8 +2968,10 @@
 // // //                     <div className="apl-card-content">
 
 // // //                       <span className="apl-category">
-// // //                         {product.category}
+// // //                         {product.category ||
+// // //                           "Uncategorized"}
 // // //                       </span>
+
 
 // // //                       <h3 className="apl-title">
 // // //                         {product.title}
@@ -1769,13 +2981,20 @@
 // // //                       <div className="apl-pricing">
 
 // // //                         <span className="apl-price-current">
-// // //                           €{discountedPrice.toFixed(0)}
+// // //                           €
+// // //                           {discountedPrice.toFixed(
+// // //                             0
+// // //                           )}
 // // //                         </span>
 
-// // //                         {product.discountPercent > 0 && (
+
+// // //                         {Number(
+// // //                           product.discountPercent || 0
+// // //                         ) > 0 && (
 
 // // //                           <span className="apl-price-original">
-// // //                             €{product.price}
+// // //                             €
+// // //                             {product.price}
 // // //                           </span>
 
 // // //                         )}
@@ -1783,13 +3002,18 @@
 // // //                       </div>
 
 
-// // //                       {/* ACTIONS */}
+// // //                       {/* =================================================
+// // //                           ACTIONS
+// // //                       ================================================= */}
 
 // // //                       <div className="apl-actions">
 
 // // //                         <Link
 // // //                           to={`/admin/products/edit/${product.id}`}
 // // //                           className="apl-btn-edit"
+// // //                           onClick={(event) => {
+// // //                             event.stopPropagation();
+// // //                           }}
 // // //                         >
 
 // // //                           <svg
@@ -1798,6 +3022,7 @@
 // // //                             viewBox="0 0 14 14"
 // // //                             fill="none"
 // // //                           >
+
 // // //                             <path
 // // //                               d="M10 2l2 2-8 8H2v-2l8-8z"
 // // //                               stroke="currentColor"
@@ -1805,6 +3030,7 @@
 // // //                               strokeLinecap="round"
 // // //                               strokeLinejoin="round"
 // // //                             />
+
 // // //                           </svg>
 
 // // //                           Edit
@@ -1813,11 +3039,14 @@
 
 
 // // //                         <button
-// // //                           onClick={() =>
+// // //                           type="button"
+// // //                           onClick={(event) => {
+// // //                             event.stopPropagation();
+
 // // //                             deleteProduct(
 // // //                               product.id
-// // //                             )
-// // //                           }
+// // //                             );
+// // //                           }}
 // // //                           className="apl-btn-delete"
 // // //                         >
 
@@ -1827,6 +3056,7 @@
 // // //                             viewBox="0 0 14 14"
 // // //                             fill="none"
 // // //                           >
+
 // // //                             <path
 // // //                               d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4"
 // // //                               stroke="currentColor"
@@ -1834,6 +3064,7 @@
 // // //                               strokeLinecap="round"
 // // //                               strokeLinejoin="round"
 // // //                             />
+
 // // //                           </svg>
 
 // // //                           Delete
@@ -1862,7 +3093,20 @@
 // // // export default ProductsList;
 
 
-// // import { useEffect, useMemo, useState } from "react";
+
+
+
+
+
+
+
+// // import {
+// //   useCallback,
+// //   useEffect,
+// //   useMemo,
+// //   useRef,
+// //   useState,
+// // } from "react";
 // // import { Link } from "react-router-dom";
 // // import api from "../../services/api";
 // // import AdminLayout from "./AdminLayout";
@@ -1877,12 +3121,17 @@
 // //   // FILTERS
 // //   // =====================================================
 
-// //   const [stockFilter, setStockFilter] = useState("all");
-// //   const [featuredFilter, setFeaturedFilter] = useState("all");
-// //   const [categoryFilter, setCategoryFilter] = useState("all");
+// //   const [stockFilter, setStockFilter] =
+// //     useState("all");
 
-// //   // Custom Order is now the default
-// //   const [sortOption, setSortOption] = useState("custom");
+// //   const [featuredFilter, setFeaturedFilter] =
+// //     useState("all");
+
+// //   const [categoryFilter, setCategoryFilter] =
+// //     useState("all");
+
+// //   const [sortOption, setSortOption] =
+// //     useState("custom");
 
 // //   // =====================================================
 // //   // DRAG & DROP
@@ -1897,6 +3146,12 @@
 // //   const [savingOrder, setSavingOrder] =
 // //     useState(false);
 
+// //   const dragScrollAnimationRef =
+// //     useRef(null);
+
+// //   const dragPointerYRef =
+// //     useRef(null);
+
 // //   // =====================================================
 // //   // FETCH PRODUCTS
 // //   // =====================================================
@@ -1907,17 +3162,23 @@
 
 // //   const fetchProducts = async () => {
 // //     try {
-// //       const { data } = await api.get("/products");
+// //       const { data } =
+// //         await api.get("/products");
 
 // //       if (Array.isArray(data)) {
 // //         setProducts(data);
-// //       } else if (Array.isArray(data?.products)) {
+// //       } else if (
+// //         Array.isArray(data?.products)
+// //       ) {
 // //         setProducts(data.products);
 // //       } else {
 // //         setProducts([]);
 // //       }
 // //     } catch (error) {
-// //       console.error("FETCH PRODUCTS ERROR:", error);
+// //       console.error(
+// //         "FETCH PRODUCTS ERROR:",
+// //         error
+// //       );
 // //     } finally {
 // //       setLoading(false);
 // //     }
@@ -1928,7 +3189,8 @@
 // //   // =====================================================
 
 // //   const deleteProduct = async (id) => {
-// //     const token = localStorage.getItem("token");
+// //     const token =
+// //       localStorage.getItem("token");
 
 // //     if (
 // //       !window.confirm(
@@ -1939,15 +3201,23 @@
 // //     }
 
 // //     try {
-// //       await api.delete(`/products/${id}`, {
-// //         headers: {
-// //           Authorization: `Bearer ${token}`,
-// //         },
-// //       });
+// //       await api.delete(
+// //         `/products/${id}`,
+// //         {
+// //           headers: {
+// //             Authorization:
+// //               `Bearer ${token}`,
+// //           },
+// //         }
+// //       );
 
 // //       await fetchProducts();
+
 // //     } catch (error) {
-// //       console.error("DELETE PRODUCT ERROR:", error);
+// //       console.error(
+// //         "DELETE PRODUCT ERROR:",
+// //         error
+// //       );
 // //     }
 // //   };
 
@@ -1959,16 +3229,21 @@
 // //     return [
 // //       ...new Set(
 // //         products
-// //           .map((product) => product.category)
+// //           .map(
+// //             (product) =>
+// //               product.category
+// //           )
 // //           .filter(Boolean)
 // //       ),
 // //     ].sort((a, b) =>
-// //       String(a).localeCompare(String(b))
+// //       String(a).localeCompare(
+// //         String(b)
+// //       )
 // //     );
 // //   }, [products]);
 
 // //   // =====================================================
-// //   // FILTER + SORT PRODUCTS
+// //   // FILTER + SORT
 // //   // =====================================================
 
 // //   const filteredProducts = useMemo(() => {
@@ -1978,37 +3253,45 @@
 // //     // SEARCH
 // //     // -------------------------------------------------
 
-// //     const searchValue = search
-// //       .trim()
-// //       .toLowerCase();
+// //     const searchValue =
+// //       search.trim().toLowerCase();
 
 // //     if (searchValue) {
-// //       result = result.filter((product) => {
-// //         const searchableText = [
-// //           product.title,
-// //           product.category,
-// //           product.description,
-// //         ]
-// //           .filter(Boolean)
-// //           .join(" ")
-// //           .toLowerCase();
+// //       result = result.filter(
+// //         (product) => {
+// //           const searchableText = [
+// //             product.title,
+// //             product.category,
+// //             product.description,
+// //           ]
+// //             .filter(Boolean)
+// //             .join(" ")
+// //             .toLowerCase();
 
-// //         return searchableText.includes(searchValue);
-// //       });
+// //           return searchableText.includes(
+// //             searchValue
+// //           );
+// //         }
+// //       );
 // //     }
 
 // //     // -------------------------------------------------
 // //     // STOCK
 // //     // -------------------------------------------------
 
-// //     if (stockFilter === "active") {
+// //     if (
+// //       stockFilter === "active"
+// //     ) {
 // //       result = result.filter(
 // //         (product) =>
 // //           product.isActive !== false
 // //       );
 // //     }
 
-// //     if (stockFilter === "out_of_stock") {
+// //     if (
+// //       stockFilter ===
+// //       "out_of_stock"
+// //     ) {
 // //       result = result.filter(
 // //         (product) =>
 // //           product.isActive === false
@@ -2019,7 +3302,10 @@
 // //     // FEATURED
 // //     // -------------------------------------------------
 
-// //     if (featuredFilter === "featured") {
+// //     if (
+// //       featuredFilter ===
+// //       "featured"
+// //     ) {
 // //       result = result.filter(
 // //         (product) =>
 // //           product.featured === true
@@ -2030,10 +3316,13 @@
 // //     // CATEGORY
 // //     // -------------------------------------------------
 
-// //     if (categoryFilter !== "all") {
+// //     if (
+// //       categoryFilter !== "all"
+// //     ) {
 // //       result = result.filter(
 // //         (product) =>
-// //           product.category === categoryFilter
+// //           product.category ===
+// //           categoryFilter
 // //       );
 // //     }
 
@@ -2044,14 +3333,16 @@
 // //     result.sort((a, b) => {
 // //       switch (sortOption) {
 
-// //         // ⭐ CUSTOM ADMIN ORDER
 // //         case "custom":
 // //           return (
-// //             Number(a.sortOrder ?? 0) -
-// //             Number(b.sortOrder ?? 0)
+// //             Number(
+// //               a.sortOrder ?? 0
+// //             ) -
+// //             Number(
+// //               b.sortOrder ?? 0
+// //             )
 // //           );
 
-// //         // NEWEST
 // //         case "newest":
 // //           return (
 // //             new Date(
@@ -2062,7 +3353,6 @@
 // //             ).getTime()
 // //           );
 
-// //         // OLDEST
 // //         case "oldest":
 // //           return (
 // //             new Date(
@@ -2073,21 +3363,18 @@
 // //             ).getTime()
 // //           );
 
-// //         // PRICE LOW
 // //         case "price_low":
 // //           return (
 // //             Number(a.price || 0) -
 // //             Number(b.price || 0)
 // //           );
 
-// //         // PRICE HIGH
 // //         case "price_high":
 // //           return (
 // //             Number(b.price || 0) -
 // //             Number(a.price || 0)
 // //           );
 
-// //         // NAME A-Z
 // //         case "name_az":
 // //           return String(
 // //             a.title || ""
@@ -2095,7 +3382,6 @@
 // //             String(b.title || "")
 // //           );
 
-// //         // NAME Z-A
 // //         case "name_za":
 // //           return String(
 // //             b.title || ""
@@ -2109,6 +3395,7 @@
 // //     });
 
 // //     return result;
+
 // //   }, [
 // //     products,
 // //     search,
@@ -2119,7 +3406,7 @@
 // //   ]);
 
 // //   // =====================================================
-// //   // CAN DRAG PRODUCTS?
+// //   // DRAGGING ALLOWED ONLY IN TRUE CUSTOM ORDER
 // //   // =====================================================
 
 // //   const canDragProducts =
@@ -2130,54 +3417,254 @@
 // //     categoryFilter === "all";
 
 // //   // =====================================================
+// //   // STOP AUTO SCROLL
+// //   // =====================================================
+
+// //   const stopAutoScroll = useCallback(() => {
+// //     if (
+// //       dragScrollAnimationRef.current
+// //     ) {
+// //       cancelAnimationFrame(
+// //         dragScrollAnimationRef.current
+// //       );
+
+// //       dragScrollAnimationRef.current =
+// //         null;
+// //     }
+// //   }, []);
+
+// //   // =====================================================
+// //   // AUTO SCROLL DURING DRAG
+// //   // =====================================================
+
+// //   const runAutoScroll = useCallback(() => {
+// //     if (!canDragProducts) {
+// //       stopAutoScroll();
+// //       return;
+// //     }
+
+// //     if (
+// //       draggedProductId === null ||
+// //       dragPointerYRef.current === null
+// //     ) {
+// //       stopAutoScroll();
+// //       return;
+// //     }
+
+// //     const pointerY =
+// //       dragPointerYRef.current;
+
+// //     const viewportHeight =
+// //       window.innerHeight;
+
+// //     /*
+// //      * Larger zones make it much easier to
+// //      * scroll while holding a product.
+// //      */
+
+// //     const edgeSize = 150;
+
+// //     let scrollAmount = 0;
+
+// //     // -----------------------------------------------
+// //     // TOP EDGE
+// //     // -----------------------------------------------
+
+// //     if (pointerY < edgeSize) {
+// //       const distanceFromEdge =
+// //         edgeSize - pointerY;
+
+// //       const strength =
+// //         Math.min(
+// //           distanceFromEdge /
+// //             edgeSize,
+// //           1
+// //         );
+
+// //       scrollAmount =
+// //         -(
+// //           4 +
+// //           strength * 16
+// //         );
+// //     }
+
+// //     // -----------------------------------------------
+// //     // BOTTOM EDGE
+// //     // -----------------------------------------------
+
+// //     else if (
+// //       pointerY >
+// //       viewportHeight - edgeSize
+// //     ) {
+// //       const distanceFromEdge =
+// //         pointerY -
+// //         (viewportHeight - edgeSize);
+
+// //       const strength =
+// //         Math.min(
+// //           distanceFromEdge /
+// //             edgeSize,
+// //           1
+// //         );
+
+// //       scrollAmount =
+// //         4 +
+// //         strength * 16;
+// //     }
+
+// //     // -----------------------------------------------
+// //     // SCROLL
+// //     // -----------------------------------------------
+
+// //     if (scrollAmount !== 0) {
+// //       window.scrollBy(
+// //         0,
+// //         scrollAmount
+// //       );
+// //     }
+
+// //     dragScrollAnimationRef.current =
+// //       requestAnimationFrame(
+// //         runAutoScroll
+// //       );
+
+// //   }, [
+// //     canDragProducts,
+// //     draggedProductId,
+// //     stopAutoScroll,
+// //   ]);
+
+// //   // =====================================================
+// //   // START AUTO SCROLL
+// //   // =====================================================
+
+// //   const startAutoScroll = useCallback(
+// //     (clientY) => {
+// //       dragPointerYRef.current =
+// //         clientY;
+
+// //       if (
+// //         !dragScrollAnimationRef.current
+// //       ) {
+// //         dragScrollAnimationRef.current =
+// //           requestAnimationFrame(
+// //             runAutoScroll
+// //           );
+// //       }
+// //     },
+// //     [runAutoScroll]
+// //   );
+
+// //   // =====================================================
+// //   // GLOBAL POINTER POSITION
+// //   //
+// //   // This is what allows the page to keep
+// //   // scrolling even while the native drag
+// //   // event isn't firing frequently.
+// //   // =====================================================
+
+// //   useEffect(() => {
+// //     if (
+// //       draggedProductId === null
+// //     ) {
+// //       return;
+// //     }
+
+// //     const handlePointerMove =
+// //       (event) => {
+// //         dragPointerYRef.current =
+// //           event.clientY;
+// //       };
+
+// //     window.addEventListener(
+// //       "dragover",
+// //       handlePointerMove
+// //     );
+
+// //     window.addEventListener(
+// //       "mousemove",
+// //       handlePointerMove
+// //     );
+
+// //     return () => {
+// //       window.removeEventListener(
+// //         "dragover",
+// //         handlePointerMove
+// //       );
+
+// //       window.removeEventListener(
+// //         "mousemove",
+// //         handlePointerMove
+// //       );
+// //     };
+// //   }, [draggedProductId]);
+
+// //   // =====================================================
+// //   // CLEANUP AUTO SCROLL
+// //   // =====================================================
+
+// //   useEffect(() => {
+// //     return () => {
+// //       stopAutoScroll();
+// //     };
+// //   }, [stopAutoScroll]);
+
+// //   // =====================================================
 // //   // SAVE PRODUCT ORDER
 // //   // =====================================================
 
-// //   const saveProductOrder = async (
-// //     reorderedProducts
-// //   ) => {
-// //     try {
-// //       setSavingOrder(true);
+// //   const saveProductOrder =
+// //     async (reorderedProducts) => {
+// //       try {
+// //         setSavingOrder(true);
 
-// //       const token =
-// //         localStorage.getItem("token");
+// //         const token =
+// //           localStorage.getItem(
+// //             "token"
+// //           );
 
-// //       await api.patch(
-// //         "/products/orders",
-// //         {
-// //           products:
-// //             reorderedProducts.map(
-// //               (product) => ({
-// //                 id: product.id,
-// //               })
-// //             ),
-// //         },
-// //         {
-// //           headers: {
-// //             Authorization:
-// //               `Bearer ${token}`,
+// //         await api.patch(
+// //           "/products/orders",
+// //           {
+// //             products:
+// //               reorderedProducts.map(
+// //                 (product) => ({
+// //                   id: product.id,
+// //                 })
+// //               ),
 // //           },
-// //         }
-// //       );
+// //           {
+// //             headers: {
+// //               Authorization:
+// //                 `Bearer ${token}`,
+// //             },
+// //           }
+// //         );
 
-// //     } catch (error) {
-// //       console.error(
-// //         "SAVE PRODUCT ORDER ERROR:",
-// //         error
-// //       );
+// //       } catch (error) {
 
-// //       // Restore server order if saving failed
-// //       await fetchProducts();
+// //         console.error(
+// //           "SAVE PRODUCT ORDER ERROR:",
+// //           error
+// //         );
 
-// //       alert(
-// //         error?.response?.data?.message ||
-// //         "Failed to save product order."
-// //       );
+// //         /*
+// //          * If saving fails, restore
+// //          * the actual server order.
+// //          */
 
-// //     } finally {
-// //       setSavingOrder(false);
-// //     }
-// //   };
+// //         await fetchProducts();
+
+// //         alert(
+// //           error?.response?.data
+// //             ?.message ||
+// //           "Failed to save product order."
+// //         );
+
+// //       } finally {
+// //         setSavingOrder(false);
+// //       }
+// //     };
 
 // //   // =====================================================
 // //   // DRAG START
@@ -2191,7 +3678,14 @@
 // //       return;
 // //     }
 
-// //     setDraggedProductId(productId);
+// //     setDraggedProductId(
+// //       productId
+// //     );
+
+// //     setDragOverProductId(null);
+
+// //     dragPointerYRef.current =
+// //       event.clientY;
 
 // //     event.dataTransfer.effectAllowed =
 // //       "move";
@@ -2199,6 +3693,15 @@
 // //     event.dataTransfer.setData(
 // //       "text/plain",
 // //       String(productId)
+// //     );
+
+// //     /*
+// //      * Start scrolling immediately
+// //      * if the pointer is near an edge.
+// //      */
+
+// //     startAutoScroll(
+// //       event.clientY
 // //     );
 // //   };
 
@@ -2219,28 +3722,75 @@
 // //     event.dataTransfer.dropEffect =
 // //       "move";
 
+// //     dragPointerYRef.current =
+// //       event.clientY;
+
 // //     if (
-// //       draggedProductId !== null &&
-// //       draggedProductId !== productId
+// //       draggedProductId !==
+// //       productId
 // //     ) {
-// //       setDragOverProductId(productId);
+// //       setDragOverProductId(
+// //         productId
+// //       );
 // //     }
+
+// //     startAutoScroll(
+// //       event.clientY
+// //     );
+// //   };
+
+// //   // =====================================================
+// //   // DRAG ENTER
+// //   // =====================================================
+
+// //   const handleDragEnter = (
+// //     event,
+// //     productId
+// //   ) => {
+// //     if (!canDragProducts) {
+// //       return;
+// //     }
+
+// //     event.preventDefault();
+
+// //     dragPointerYRef.current =
+// //       event.clientY;
+
+// //     if (
+// //       draggedProductId !==
+// //       productId
+// //     ) {
+// //       setDragOverProductId(
+// //         productId
+// //       );
+// //     }
+
+// //     startAutoScroll(
+// //       event.clientY
+// //     );
 // //   };
 
 // //   // =====================================================
 // //   // DRAG LEAVE
 // //   // =====================================================
 
-// //   const handleDragLeave = () => {
-// //     setDragOverProductId(null);
-// //   };
+// //   const handleDragLeave = (
+// //     event
+// //   ) => {
+// //     /*
+// //      * Don't immediately clear everything
+// //      * when moving between children inside
+// //      * the same card.
+// //      */
 
-// //   // =====================================================
-// //   // DRAG END
-// //   // =====================================================
+// //     if (
+// //       event.currentTarget.contains(
+// //         event.relatedTarget
+// //       )
+// //     ) {
+// //       return;
+// //     }
 
-// //   const handleDragEnd = () => {
-// //     setDraggedProductId(null);
 // //     setDragOverProductId(null);
 // //   };
 
@@ -2257,6 +3807,11 @@
 // //     if (!canDragProducts) {
 // //       return;
 // //     }
+
+// //     stopAutoScroll();
+
+// //     dragPointerYRef.current =
+// //       null;
 
 // //     const draggedId = Number(
 // //       event.dataTransfer.getData(
@@ -2275,10 +3830,12 @@
 // //     }
 
 // //     // -----------------------------------------------
-// //     // Work from the complete product list
+// //     // COMPLETE PRODUCT LIST
 // //     // -----------------------------------------------
 
-// //     const currentList = [...products];
+// //     const currentList = [
+// //       ...products,
+// //     ];
 
 // //     const draggedIndex =
 // //       currentList.findIndex(
@@ -2289,7 +3846,8 @@
 // //     const targetIndex =
 // //       currentList.findIndex(
 // //         (product) =>
-// //           product.id === targetProductId
+// //           product.id ===
+// //           targetProductId
 // //       );
 
 // //     if (
@@ -2301,14 +3859,16 @@
 // //     }
 
 // //     // -----------------------------------------------
-// //     // Reorder
+// //     // REORDER
 // //     // -----------------------------------------------
 
 // //     const reorderedList = [
 // //       ...currentList,
 // //     ];
 
-// //     const [draggedProduct] =
+// //     const [
+// //       draggedProduct,
+// //     ] =
 // //       reorderedList.splice(
 // //         draggedIndex,
 // //         1
@@ -2321,19 +3881,20 @@
 // //     );
 
 // //     // -----------------------------------------------
-// //     // Assign new sortOrder
+// //     // NEW SORT ORDER
 // //     // -----------------------------------------------
 
 // //     const updatedProducts =
 // //       reorderedList.map(
 // //         (product, index) => ({
 // //           ...product,
-// //           sortOrder: index + 1,
+// //           sortOrder:
+// //             index + 1,
 // //         })
 // //       );
 
 // //     // -----------------------------------------------
-// //     // Update UI immediately
+// //     // UPDATE UI IMMEDIATELY
 // //     // -----------------------------------------------
 
 // //     setProducts(
@@ -2343,12 +3904,26 @@
 // //     setDraggedProductId(null);
 
 // //     // -----------------------------------------------
-// //     // Save database
+// //     // SAVE DATABASE
 // //     // -----------------------------------------------
 
 // //     await saveProductOrder(
 // //       updatedProducts
 // //     );
+// //   };
+
+// //   // =====================================================
+// //   // DRAG END
+// //   // =====================================================
+
+// //   const handleDragEnd = () => {
+// //     stopAutoScroll();
+
+// //     dragPointerYRef.current =
+// //       null;
+
+// //     setDraggedProductId(null);
+// //     setDragOverProductId(null);
 // //   };
 
 // //   // =====================================================
@@ -2378,11 +3953,13 @@
 // //     return (
 // //       <AdminLayout>
 // //         <div className="apl-loading">
+
 // //           <div className="apl-loading-spinner"></div>
 
 // //           <p>
 // //             Loading products...
 // //           </p>
+
 // //         </div>
 // //       </AdminLayout>
 // //     );
@@ -2394,6 +3971,7 @@
 
 // //   return (
 // //     <AdminLayout>
+
 // //       <div className="apl-admin">
 
 // //         {/* =================================================
@@ -2481,8 +4059,10 @@
 // //               type="text"
 // //               placeholder="Search products, category..."
 // //               value={search}
-// //               onChange={(e) =>
-// //                 setSearch(e.target.value)
+// //               onChange={(event) =>
+// //                 setSearch(
+// //                   event.target.value
+// //                 )
 // //               }
 // //               className="apl-search-input"
 // //             />
@@ -2494,9 +4074,9 @@
 
 // //           <select
 // //             value={stockFilter}
-// //             onChange={(e) =>
+// //             onChange={(event) =>
 // //               setStockFilter(
-// //                 e.target.value
+// //                 event.target.value
 // //               )
 // //             }
 // //             className="apl-filter-select"
@@ -2521,9 +4101,9 @@
 
 // //           <select
 // //             value={featuredFilter}
-// //             onChange={(e) =>
+// //             onChange={(event) =>
 // //               setFeaturedFilter(
-// //                 e.target.value
+// //                 event.target.value
 // //               )
 // //             }
 // //             className="apl-filter-select"
@@ -2544,9 +4124,9 @@
 
 // //           <select
 // //             value={categoryFilter}
-// //             onChange={(e) =>
+// //             onChange={(event) =>
 // //               setCategoryFilter(
-// //                 e.target.value
+// //                 event.target.value
 // //               )
 // //             }
 // //             className="apl-filter-select"
@@ -2574,12 +4154,12 @@
 
 // //           <select
 // //             value={sortOption}
-// //             onChange={(e) =>
+// //             onChange={(event) =>
 // //               setSortOption(
-// //                 e.target.value
+// //                 event.target.value
 // //               )
 // //             }
-// //             className="apl-filter-select apl-sort-select"
+// //             className="apl-filter-select"
 // //           >
 
 // //             <option value="custom">
@@ -2629,7 +4209,7 @@
 
 
 // //         {/* =================================================
-// //             CUSTOM ORDER NOTICE
+// //             CUSTOM ORDER INFORMATION
 // //         ================================================= */}
 
 // //         {canDragProducts && (
@@ -2639,7 +4219,8 @@
 // //               ⋮⋮
 // //             </div>
 
-// //             <div>
+// //             <div className="apl-order-notice-content">
+
 // //               <strong>
 // //                 Custom Order
 // //               </strong>
@@ -2648,11 +4229,12 @@
 // //                 Drag and drop products to arrange
 // //                 their display order.
 // //               </span>
+
 // //             </div>
 
 // //             {savingOrder && (
 // //               <span className="apl-saving-order">
-// //                 Saving...
+// //                 Saving order...
 // //               </span>
 // //             )}
 
@@ -2661,12 +4243,13 @@
 
 
 // //         {/* =================================================
-// //             RESULTS INFO
+// //             RESULTS BAR
 // //         ================================================= */}
 
 // //         <div className="apl-results-bar">
 
 // //           <span>
+
 // //             Showing{" "}
 
 // //             <strong>
@@ -2680,8 +4263,8 @@
 // //             </strong>{" "}
 
 // //             products
-// //           </span>
 
+// //           </span>
 
 // //           {hasActiveFilters && (
 // //             <button
@@ -2697,7 +4280,7 @@
 
 
 // //         {/* =================================================
-// //             PRODUCTS GRID
+// //             PRODUCTS
 // //         ================================================= */}
 
 // //         {filteredProducts.length === 0 ? (
@@ -2751,9 +4334,7 @@
 // //               <button
 // //                 type="button"
 // //                 className="apl-empty-reset"
-// //                 onClick={
-// //                   clearFilters
-// //                 }
+// //                 onClick={clearFilters}
 // //               >
 // //                 Clear Filters
 // //               </button>
@@ -2790,28 +4371,40 @@
 
 // //                   <div
 // //                     key={product.id}
-// //                     className={`apl-card ${
-// //                       product.isActive === false
-// //                         ? "apl-card-out-of-stock"
-// //                         : ""
-// //                     } ${
-// //                       canDragProducts
-// //                         ? "apl-card-draggable"
-// //                         : ""
-// //                     } ${
-// //                       isDragging
-// //                         ? "apl-card-dragging"
-// //                         : ""
-// //                     } ${
-// //                       isDragOver
-// //                         ? "apl-card-drag-over"
-// //                         : ""
-// //                     }`}
+// //                     className={`
+// //                       apl-card
+// //                       ${
+// //                         product.isActive === false
+// //                           ? "apl-card-out-of-stock"
+// //                           : ""
+// //                       }
+// //                       ${
+// //                         canDragProducts
+// //                           ? "apl-card-draggable"
+// //                           : ""
+// //                       }
+// //                       ${
+// //                         isDragging
+// //                           ? "apl-card-dragging"
+// //                           : ""
+// //                       }
+// //                       ${
+// //                         isDragOver
+// //                           ? "apl-card-drag-over"
+// //                           : ""
+// //                       }
+// //                     `}
 // //                     draggable={
 // //                       canDragProducts
 // //                     }
 // //                     onDragStart={(event) =>
 // //                       handleDragStart(
+// //                         event,
+// //                         product.id
+// //                       )
+// //                     }
+// //                     onDragEnter={(event) =>
+// //                       handleDragEnter(
 // //                         event,
 // //                         product.id
 // //                       )
@@ -2844,22 +4437,26 @@
 // //                       <div
 // //                         className="apl-drag-handle"
 // //                         title="Drag to reorder"
+// //                         onMouseDown={(event) =>
+// //                           event.stopPropagation()
+// //                         }
 // //                       >
+
 // //                         <span>
 // //                           ⋮⋮
 // //                         </span>
+
 // //                       </div>
 // //                     )}
 
 
 // //                     {/* =================================================
-// //                         SORT NUMBER
+// //                         ORDER NUMBER
 // //                     ================================================= */}
 
 // //                     {canDragProducts && (
 // //                       <div className="apl-sort-number">
-// //                         #
-// //                         {index + 1}
+// //                         #{index + 1}
 // //                       </div>
 // //                     )}
 
@@ -2876,6 +4473,7 @@
 // //                           src={`https://a4agroup.eu${product.image}`}
 // //                           alt={product.title}
 // //                           className="apl-image"
+// //                           draggable="false"
 // //                         />
 
 // //                       ) : (
@@ -2886,6 +4484,8 @@
 
 // //                       )}
 
+
+// //                       {/* BADGES */}
 
 // //                       <div className="apl-card-badges">
 
@@ -2981,10 +4581,12 @@
 // //                       <div className="apl-pricing">
 
 // //                         <span className="apl-price-current">
+
 // //                           €
 // //                           {discountedPrice.toFixed(
 // //                             0
 // //                           )}
+
 // //                         </span>
 
 
@@ -2993,8 +4595,10 @@
 // //                         ) > 0 && (
 
 // //                           <span className="apl-price-original">
+
 // //                             €
 // //                             {product.price}
+
 // //                           </span>
 
 // //                         )}
@@ -3002,18 +4606,16 @@
 // //                       </div>
 
 
-// //                       {/* =================================================
-// //                           ACTIONS
-// //                       ================================================= */}
+// //                       {/* ACTIONS */}
 
 // //                       <div className="apl-actions">
 
 // //                         <Link
 // //                           to={`/admin/products/edit/${product.id}`}
 // //                           className="apl-btn-edit"
-// //                           onClick={(event) => {
-// //                             event.stopPropagation();
-// //                           }}
+// //                           onClick={(event) =>
+// //                             event.stopPropagation()
+// //                           }
 // //                         >
 
 // //                           <svg
@@ -3076,7 +4678,6 @@
 // //                     </div>
 
 // //                   </div>
-
 // //                 );
 // //               }
 // //             )}
@@ -3086,18 +4687,12 @@
 // //         )}
 
 // //       </div>
+
 // //     </AdminLayout>
 // //   );
 // // }
 
 // // export default ProductsList;
-
-
-
-
-
-
-
 
 
 // import {
@@ -3113,6 +4708,10 @@
 // import "./ProductsList.css";
 
 // function ProductsList() {
+//   // =====================================================
+//   // PRODUCTS
+//   // =====================================================
+
 //   const [products, setProducts] = useState([]);
 //   const [search, setSearch] = useState("");
 //   const [loading, setLoading] = useState(true);
@@ -3121,76 +4720,66 @@
 //   // FILTERS
 //   // =====================================================
 
-//   const [stockFilter, setStockFilter] =
-//     useState("all");
+//   const [stockFilter, setStockFilter] = useState("all");
+//   const [featuredFilter, setFeaturedFilter] = useState("all");
+//   const [categoryFilter, setCategoryFilter] = useState("all");
 
-//   const [featuredFilter, setFeaturedFilter] =
-//     useState("all");
-
-//   const [categoryFilter, setCategoryFilter] =
-//     useState("all");
-
-//   const [sortOption, setSortOption] =
-//     useState("custom");
+//   // IMPORTANT:
+//   // custom = database sortOrder
+//   const [sortOption, setSortOption] = useState("custom");
 
 //   // =====================================================
-//   // DRAG & DROP
+//   // DRAG STATE
 //   // =====================================================
 
-//   const [draggedProductId, setDraggedProductId] =
-//     useState(null);
+//   const [draggedProductId, setDraggedProductId] = useState(null);
+//   const [dragOverProductId, setDragOverProductId] = useState(null);
+//   const [savingOrder, setSavingOrder] = useState(false);
 
-//   const [dragOverProductId, setDragOverProductId] =
-//     useState(null);
+//   const gridRef = useRef(null);
 
-//   const [savingOrder, setSavingOrder] =
-//     useState(false);
+//   const dragStateRef = useRef({
+//     active: false,
+//     productId: null,
+//     pointerId: null,
+//     x: 0,
+//     y: 0,
+//   });
 
-//   const dragScrollAnimationRef =
-//     useRef(null);
-
-//   const dragPointerYRef =
-//     useRef(null);
+//   const scrollAnimationRef = useRef(null);
 
 //   // =====================================================
 //   // FETCH PRODUCTS
 //   // =====================================================
 
-//   useEffect(() => {
-//     fetchProducts();
-//   }, []);
-
-//   const fetchProducts = async () => {
+//   const fetchProducts = useCallback(async () => {
 //     try {
-//       const { data } =
-//         await api.get("/products");
+//       const { data } = await api.get("/products");
 
 //       if (Array.isArray(data)) {
 //         setProducts(data);
-//       } else if (
-//         Array.isArray(data?.products)
-//       ) {
+//       } else if (Array.isArray(data?.products)) {
 //         setProducts(data.products);
 //       } else {
 //         setProducts([]);
 //       }
 //     } catch (error) {
-//       console.error(
-//         "FETCH PRODUCTS ERROR:",
-//         error
-//       );
+//       console.error("Failed to fetch products:", error);
 //     } finally {
 //       setLoading(false);
 //     }
-//   };
+//   }, []);
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, [fetchProducts]);
 
 //   // =====================================================
 //   // DELETE PRODUCT
 //   // =====================================================
 
 //   const deleteProduct = async (id) => {
-//     const token =
-//       localStorage.getItem("token");
+//     const token = localStorage.getItem("token");
 
 //     if (
 //       !window.confirm(
@@ -3201,22 +4790,18 @@
 //     }
 
 //     try {
-//       await api.delete(
-//         `/products/${id}`,
-//         {
-//           headers: {
-//             Authorization:
-//               `Bearer ${token}`,
-//           },
-//         }
-//       );
+//       await api.delete(`/products/${id}`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
 
 //       await fetchProducts();
-
 //     } catch (error) {
-//       console.error(
-//         "DELETE PRODUCT ERROR:",
-//         error
+//       console.error("Delete product error:", error);
+//       alert(
+//         error?.response?.data?.message ||
+//           "Failed to delete product."
 //       );
 //     }
 //   };
@@ -3229,16 +4814,11 @@
 //     return [
 //       ...new Set(
 //         products
-//           .map(
-//             (product) =>
-//               product.category
-//           )
+//           .map((product) => product.category)
 //           .filter(Boolean)
 //       ),
 //     ].sort((a, b) =>
-//       String(a).localeCompare(
-//         String(b)
-//       )
+//       String(a).localeCompare(String(b))
 //     );
 //   }, [products]);
 
@@ -3253,45 +4833,37 @@
 //     // SEARCH
 //     // -------------------------------------------------
 
-//     const searchValue =
-//       search.trim().toLowerCase();
+//     const searchValue = search
+//       .trim()
+//       .toLowerCase();
 
 //     if (searchValue) {
-//       result = result.filter(
-//         (product) => {
-//           const searchableText = [
-//             product.title,
-//             product.category,
-//             product.description,
-//           ]
-//             .filter(Boolean)
-//             .join(" ")
-//             .toLowerCase();
+//       result = result.filter((product) => {
+//         const searchableText = [
+//           product.title,
+//           product.category,
+//           product.description,
+//         ]
+//           .filter(Boolean)
+//           .join(" ")
+//           .toLowerCase();
 
-//           return searchableText.includes(
-//             searchValue
-//           );
-//         }
-//       );
+//         return searchableText.includes(searchValue);
+//       });
 //     }
 
 //     // -------------------------------------------------
 //     // STOCK
 //     // -------------------------------------------------
 
-//     if (
-//       stockFilter === "active"
-//     ) {
+//     if (stockFilter === "active") {
 //       result = result.filter(
 //         (product) =>
 //           product.isActive !== false
 //       );
 //     }
 
-//     if (
-//       stockFilter ===
-//       "out_of_stock"
-//     ) {
+//     if (stockFilter === "out_of_stock") {
 //       result = result.filter(
 //         (product) =>
 //           product.isActive === false
@@ -3302,10 +4874,7 @@
 //     // FEATURED
 //     // -------------------------------------------------
 
-//     if (
-//       featuredFilter ===
-//       "featured"
-//     ) {
+//     if (featuredFilter === "featured") {
 //       result = result.filter(
 //         (product) =>
 //           product.featured === true
@@ -3316,13 +4885,10 @@
 //     // CATEGORY
 //     // -------------------------------------------------
 
-//     if (
-//       categoryFilter !== "all"
-//     ) {
+//     if (categoryFilter !== "all") {
 //       result = result.filter(
 //         (product) =>
-//           product.category ===
-//           categoryFilter
+//           product.category === categoryFilter
 //       );
 //     }
 
@@ -3332,35 +4898,16 @@
 
 //     result.sort((a, b) => {
 //       switch (sortOption) {
-
-//         case "custom":
-//           return (
-//             Number(
-//               a.sortOrder ?? 0
-//             ) -
-//             Number(
-//               b.sortOrder ?? 0
-//             )
-//           );
-
 //         case "newest":
 //           return (
-//             new Date(
-//               b.createdAt || 0
-//             ).getTime() -
-//             new Date(
-//               a.createdAt || 0
-//             ).getTime()
+//             new Date(b.createdAt || 0).getTime() -
+//             new Date(a.createdAt || 0).getTime()
 //           );
 
 //         case "oldest":
 //           return (
-//             new Date(
-//               a.createdAt || 0
-//             ).getTime() -
-//             new Date(
-//               b.createdAt || 0
-//             ).getTime()
+//             new Date(a.createdAt || 0).getTime() -
+//             new Date(b.createdAt || 0).getTime()
 //           );
 
 //         case "price_low":
@@ -3389,13 +4936,16 @@
 //             String(a.title || "")
 //           );
 
+//         case "custom":
 //         default:
-//           return 0;
+//           return (
+//             Number(a.sortOrder ?? 999999) -
+//             Number(b.sortOrder ?? 999999)
+//           );
 //       }
 //     });
 
 //     return result;
-
 //   }, [
 //     products,
 //     search,
@@ -3406,529 +4956,14 @@
 //   ]);
 
 //   // =====================================================
-//   // DRAGGING ALLOWED ONLY IN TRUE CUSTOM ORDER
+//   // FILTER STATE
 //   // =====================================================
 
-//   const canDragProducts =
-//     sortOption === "custom" &&
-//     search.trim() === "" &&
-//     stockFilter === "all" &&
-//     featuredFilter === "all" &&
-//     categoryFilter === "all";
-
-//   // =====================================================
-//   // STOP AUTO SCROLL
-//   // =====================================================
-
-//   const stopAutoScroll = useCallback(() => {
-//     if (
-//       dragScrollAnimationRef.current
-//     ) {
-//       cancelAnimationFrame(
-//         dragScrollAnimationRef.current
-//       );
-
-//       dragScrollAnimationRef.current =
-//         null;
-//     }
-//   }, []);
-
-//   // =====================================================
-//   // AUTO SCROLL DURING DRAG
-//   // =====================================================
-
-//   const runAutoScroll = useCallback(() => {
-//     if (!canDragProducts) {
-//       stopAutoScroll();
-//       return;
-//     }
-
-//     if (
-//       draggedProductId === null ||
-//       dragPointerYRef.current === null
-//     ) {
-//       stopAutoScroll();
-//       return;
-//     }
-
-//     const pointerY =
-//       dragPointerYRef.current;
-
-//     const viewportHeight =
-//       window.innerHeight;
-
-//     /*
-//      * Larger zones make it much easier to
-//      * scroll while holding a product.
-//      */
-
-//     const edgeSize = 150;
-
-//     let scrollAmount = 0;
-
-//     // -----------------------------------------------
-//     // TOP EDGE
-//     // -----------------------------------------------
-
-//     if (pointerY < edgeSize) {
-//       const distanceFromEdge =
-//         edgeSize - pointerY;
-
-//       const strength =
-//         Math.min(
-//           distanceFromEdge /
-//             edgeSize,
-//           1
-//         );
-
-//       scrollAmount =
-//         -(
-//           4 +
-//           strength * 16
-//         );
-//     }
-
-//     // -----------------------------------------------
-//     // BOTTOM EDGE
-//     // -----------------------------------------------
-
-//     else if (
-//       pointerY >
-//       viewportHeight - edgeSize
-//     ) {
-//       const distanceFromEdge =
-//         pointerY -
-//         (viewportHeight - edgeSize);
-
-//       const strength =
-//         Math.min(
-//           distanceFromEdge /
-//             edgeSize,
-//           1
-//         );
-
-//       scrollAmount =
-//         4 +
-//         strength * 16;
-//     }
-
-//     // -----------------------------------------------
-//     // SCROLL
-//     // -----------------------------------------------
-
-//     if (scrollAmount !== 0) {
-//       window.scrollBy(
-//         0,
-//         scrollAmount
-//       );
-//     }
-
-//     dragScrollAnimationRef.current =
-//       requestAnimationFrame(
-//         runAutoScroll
-//       );
-
-//   }, [
-//     canDragProducts,
-//     draggedProductId,
-//     stopAutoScroll,
-//   ]);
-
-//   // =====================================================
-//   // START AUTO SCROLL
-//   // =====================================================
-
-//   const startAutoScroll = useCallback(
-//     (clientY) => {
-//       dragPointerYRef.current =
-//         clientY;
-
-//       if (
-//         !dragScrollAnimationRef.current
-//       ) {
-//         dragScrollAnimationRef.current =
-//           requestAnimationFrame(
-//             runAutoScroll
-//           );
-//       }
-//     },
-//     [runAutoScroll]
-//   );
-
-//   // =====================================================
-//   // GLOBAL POINTER POSITION
-//   //
-//   // This is what allows the page to keep
-//   // scrolling even while the native drag
-//   // event isn't firing frequently.
-//   // =====================================================
-
-//   useEffect(() => {
-//     if (
-//       draggedProductId === null
-//     ) {
-//       return;
-//     }
-
-//     const handlePointerMove =
-//       (event) => {
-//         dragPointerYRef.current =
-//           event.clientY;
-//       };
-
-//     window.addEventListener(
-//       "dragover",
-//       handlePointerMove
-//     );
-
-//     window.addEventListener(
-//       "mousemove",
-//       handlePointerMove
-//     );
-
-//     return () => {
-//       window.removeEventListener(
-//         "dragover",
-//         handlePointerMove
-//       );
-
-//       window.removeEventListener(
-//         "mousemove",
-//         handlePointerMove
-//       );
-//     };
-//   }, [draggedProductId]);
-
-//   // =====================================================
-//   // CLEANUP AUTO SCROLL
-//   // =====================================================
-
-//   useEffect(() => {
-//     return () => {
-//       stopAutoScroll();
-//     };
-//   }, [stopAutoScroll]);
-
-//   // =====================================================
-//   // SAVE PRODUCT ORDER
-//   // =====================================================
-
-//   const saveProductOrder =
-//     async (reorderedProducts) => {
-//       try {
-//         setSavingOrder(true);
-
-//         const token =
-//           localStorage.getItem(
-//             "token"
-//           );
-
-//         await api.patch(
-//           "/products/orders",
-//           {
-//             products:
-//               reorderedProducts.map(
-//                 (product) => ({
-//                   id: product.id,
-//                 })
-//               ),
-//           },
-//           {
-//             headers: {
-//               Authorization:
-//                 `Bearer ${token}`,
-//             },
-//           }
-//         );
-
-//       } catch (error) {
-
-//         console.error(
-//           "SAVE PRODUCT ORDER ERROR:",
-//           error
-//         );
-
-//         /*
-//          * If saving fails, restore
-//          * the actual server order.
-//          */
-
-//         await fetchProducts();
-
-//         alert(
-//           error?.response?.data
-//             ?.message ||
-//           "Failed to save product order."
-//         );
-
-//       } finally {
-//         setSavingOrder(false);
-//       }
-//     };
-
-//   // =====================================================
-//   // DRAG START
-//   // =====================================================
-
-//   const handleDragStart = (
-//     event,
-//     productId
-//   ) => {
-//     if (!canDragProducts) {
-//       return;
-//     }
-
-//     setDraggedProductId(
-//       productId
-//     );
-
-//     setDragOverProductId(null);
-
-//     dragPointerYRef.current =
-//       event.clientY;
-
-//     event.dataTransfer.effectAllowed =
-//       "move";
-
-//     event.dataTransfer.setData(
-//       "text/plain",
-//       String(productId)
-//     );
-
-//     /*
-//      * Start scrolling immediately
-//      * if the pointer is near an edge.
-//      */
-
-//     startAutoScroll(
-//       event.clientY
-//     );
-//   };
-
-//   // =====================================================
-//   // DRAG OVER
-//   // =====================================================
-
-//   const handleDragOver = (
-//     event,
-//     productId
-//   ) => {
-//     if (!canDragProducts) {
-//       return;
-//     }
-
-//     event.preventDefault();
-
-//     event.dataTransfer.dropEffect =
-//       "move";
-
-//     dragPointerYRef.current =
-//       event.clientY;
-
-//     if (
-//       draggedProductId !==
-//       productId
-//     ) {
-//       setDragOverProductId(
-//         productId
-//       );
-//     }
-
-//     startAutoScroll(
-//       event.clientY
-//     );
-//   };
-
-//   // =====================================================
-//   // DRAG ENTER
-//   // =====================================================
-
-//   const handleDragEnter = (
-//     event,
-//     productId
-//   ) => {
-//     if (!canDragProducts) {
-//       return;
-//     }
-
-//     event.preventDefault();
-
-//     dragPointerYRef.current =
-//       event.clientY;
-
-//     if (
-//       draggedProductId !==
-//       productId
-//     ) {
-//       setDragOverProductId(
-//         productId
-//       );
-//     }
-
-//     startAutoScroll(
-//       event.clientY
-//     );
-//   };
-
-//   // =====================================================
-//   // DRAG LEAVE
-//   // =====================================================
-
-//   const handleDragLeave = (
-//     event
-//   ) => {
-//     /*
-//      * Don't immediately clear everything
-//      * when moving between children inside
-//      * the same card.
-//      */
-
-//     if (
-//       event.currentTarget.contains(
-//         event.relatedTarget
-//       )
-//     ) {
-//       return;
-//     }
-
-//     setDragOverProductId(null);
-//   };
-
-//   // =====================================================
-//   // DROP
-//   // =====================================================
-
-//   const handleDrop = async (
-//     event,
-//     targetProductId
-//   ) => {
-//     event.preventDefault();
-
-//     if (!canDragProducts) {
-//       return;
-//     }
-
-//     stopAutoScroll();
-
-//     dragPointerYRef.current =
-//       null;
-
-//     const draggedId = Number(
-//       event.dataTransfer.getData(
-//         "text/plain"
-//       )
-//     );
-
-//     setDragOverProductId(null);
-
-//     if (
-//       !draggedId ||
-//       draggedId === targetProductId
-//     ) {
-//       setDraggedProductId(null);
-//       return;
-//     }
-
-//     // -----------------------------------------------
-//     // COMPLETE PRODUCT LIST
-//     // -----------------------------------------------
-
-//     const currentList = [
-//       ...products,
-//     ];
-
-//     const draggedIndex =
-//       currentList.findIndex(
-//         (product) =>
-//           product.id === draggedId
-//       );
-
-//     const targetIndex =
-//       currentList.findIndex(
-//         (product) =>
-//           product.id ===
-//           targetProductId
-//       );
-
-//     if (
-//       draggedIndex === -1 ||
-//       targetIndex === -1
-//     ) {
-//       setDraggedProductId(null);
-//       return;
-//     }
-
-//     // -----------------------------------------------
-//     // REORDER
-//     // -----------------------------------------------
-
-//     const reorderedList = [
-//       ...currentList,
-//     ];
-
-//     const [
-//       draggedProduct,
-//     ] =
-//       reorderedList.splice(
-//         draggedIndex,
-//         1
-//       );
-
-//     reorderedList.splice(
-//       targetIndex,
-//       0,
-//       draggedProduct
-//     );
-
-//     // -----------------------------------------------
-//     // NEW SORT ORDER
-//     // -----------------------------------------------
-
-//     const updatedProducts =
-//       reorderedList.map(
-//         (product, index) => ({
-//           ...product,
-//           sortOrder:
-//             index + 1,
-//         })
-//       );
-
-//     // -----------------------------------------------
-//     // UPDATE UI IMMEDIATELY
-//     // -----------------------------------------------
-
-//     setProducts(
-//       updatedProducts
-//     );
-
-//     setDraggedProductId(null);
-
-//     // -----------------------------------------------
-//     // SAVE DATABASE
-//     // -----------------------------------------------
-
-//     await saveProductOrder(
-//       updatedProducts
-//     );
-//   };
-
-//   // =====================================================
-//   // DRAG END
-//   // =====================================================
-
-//   const handleDragEnd = () => {
-//     stopAutoScroll();
-
-//     dragPointerYRef.current =
-//       null;
-
-//     setDraggedProductId(null);
-//     setDragOverProductId(null);
-//   };
-
-//   // =====================================================
-//   // CLEAR FILTERS
-//   // =====================================================
+//   const hasActiveFilters =
+//     search.trim() !== "" ||
+//     stockFilter !== "all" ||
+//     featuredFilter !== "all" ||
+//     categoryFilter !== "all";
 
 //   const clearFilters = () => {
 //     setSearch("");
@@ -3938,12 +4973,532 @@
 //     setSortOption("custom");
 //   };
 
-//   const hasActiveFilters =
-//     search.trim() !== "" ||
-//     stockFilter !== "all" ||
-//     featuredFilter !== "all" ||
-//     categoryFilter !== "all" ||
-//     sortOption !== "custom";
+//   // =====================================================
+//   // CAN DRAG?
+//   // =====================================================
+
+//   /*
+//     IMPORTANT:
+//     Dragging is enabled only in Custom Order mode
+//     and when no search/filter is active.
+
+//     This prevents accidentally changing the global
+//     order while looking at a filtered subset.
+//   */
+
+//   const canDrag =
+//     sortOption === "custom" &&
+//     !hasActiveFilters;
+
+//   // =====================================================
+//   // GET ACTUAL SCROLL CONTAINER
+//   // =====================================================
+
+//   const getScrollParent = (element) => {
+//     if (!element) {
+//       return document.scrollingElement;
+//     }
+
+//     let parent = element.parentElement;
+
+//     while (
+//       parent &&
+//       parent !== document.body &&
+//       parent !== document.documentElement
+//     ) {
+//       const style = window.getComputedStyle(parent);
+
+//       const overflowY = style.overflowY;
+
+//       const canScroll =
+//         (overflowY === "auto" ||
+//           overflowY === "scroll" ||
+//           overflowY === "overlay") &&
+//         parent.scrollHeight > parent.clientHeight;
+
+//       if (canScroll) {
+//         return parent;
+//       }
+
+//       parent = parent.parentElement;
+//     }
+
+//     return document.scrollingElement || document.documentElement;
+//   };
+
+//   // =====================================================
+//   // AUTO SCROLL
+//   // =====================================================
+
+//   const stopAutoScroll = useCallback(() => {
+//     if (scrollAnimationRef.current) {
+//       cancelAnimationFrame(
+//         scrollAnimationRef.current
+//       );
+
+//       scrollAnimationRef.current = null;
+//     }
+//   }, []);
+
+//   const autoScroll = useCallback(() => {
+//     if (!dragStateRef.current.active) {
+//       stopAutoScroll();
+//       return;
+//     }
+
+//     const grid = gridRef.current;
+
+//     if (!grid) {
+//       stopAutoScroll();
+//       return;
+//     }
+
+//     const pointerY =
+//       dragStateRef.current.y;
+
+//     const scrollParent =
+//       getScrollParent(grid);
+
+//     const isDocument =
+//       scrollParent ===
+//         document.documentElement ||
+//       scrollParent ===
+//         document.body ||
+//       scrollParent ===
+//         document.scrollingElement;
+
+//     let top;
+//     let bottom;
+
+//     if (isDocument) {
+//       top = 0;
+//       bottom = window.innerHeight;
+//     } else {
+//       const rect =
+//         scrollParent.getBoundingClientRect();
+
+//       top = rect.top;
+//       bottom = rect.bottom;
+//     }
+
+//     const edgeSize = 110;
+//     const maxSpeed = 18;
+
+//     let speed = 0;
+
+//     // Scroll UP
+//     if (pointerY < top + edgeSize) {
+//       const distance =
+//         Math.max(
+//           0,
+//           pointerY - top
+//         );
+
+//       const intensity =
+//         1 -
+//         distance / edgeSize;
+
+//       speed =
+//         -Math.ceil(
+//           maxSpeed * intensity
+//         );
+//     }
+
+//     // Scroll DOWN
+//     if (pointerY > bottom - edgeSize) {
+//       const distance =
+//         Math.max(
+//           0,
+//           bottom - pointerY
+//         );
+
+//       const intensity =
+//         1 -
+//         distance / edgeSize;
+
+//       speed =
+//         Math.ceil(
+//           maxSpeed * intensity
+//         );
+//     }
+
+//     if (speed !== 0) {
+//       if (isDocument) {
+//         window.scrollBy({
+//           top: speed,
+//           behavior: "auto",
+//         });
+//       } else {
+//         scrollParent.scrollTop += speed;
+//       }
+//     }
+
+//     scrollAnimationRef.current =
+//       requestAnimationFrame(autoScroll);
+//   }, [stopAutoScroll]);
+
+//   const startAutoScroll = useCallback(() => {
+//     if (
+//       scrollAnimationRef.current
+//     ) {
+//       return;
+//     }
+
+//     scrollAnimationRef.current =
+//       requestAnimationFrame(autoScroll);
+//   }, [autoScroll]);
+
+//   // =====================================================
+//   // FIND PRODUCT UNDER POINTER
+//   // =====================================================
+
+//   const findProductAtPoint = (
+//     x,
+//     y
+//   ) => {
+//     const element =
+//       document.elementFromPoint(
+//         x,
+//         y
+//       );
+
+//     if (!element) {
+//       return null;
+//     }
+
+//     const card =
+//       element.closest(
+//         "[data-product-id]"
+//       );
+
+//     if (!card) {
+//       return null;
+//     }
+
+//     const id = Number(
+//       card.getAttribute(
+//         "data-product-id"
+//       )
+//     );
+
+//     return Number.isFinite(id)
+//       ? id
+//       : null;
+//   };
+
+//   // =====================================================
+//   // POINTER MOVE
+//   // =====================================================
+
+//   useEffect(() => {
+//     if (!draggedProductId) {
+//       return undefined;
+//     }
+
+//     const handlePointerMove = (event) => {
+//       if (
+//         !dragStateRef.current.active
+//       ) {
+//         return;
+//       }
+
+//       dragStateRef.current.x =
+//         event.clientX;
+
+//       dragStateRef.current.y =
+//         event.clientY;
+
+//       const targetId =
+//         findProductAtPoint(
+//           event.clientX,
+//           event.clientY
+//         );
+
+//       if (
+//         targetId &&
+//         targetId !==
+//           draggedProductId
+//       ) {
+//         setDragOverProductId(
+//           targetId
+//         );
+//       } else if (
+//         targetId ===
+//         draggedProductId
+//       ) {
+//         setDragOverProductId(
+//           null
+//         );
+//       }
+
+//       startAutoScroll();
+
+//       event.preventDefault();
+//     };
+
+//     const handlePointerUp = () => {
+//       finishDrag();
+//     };
+
+//     document.addEventListener(
+//       "pointermove",
+//       handlePointerMove,
+//       {
+//         passive: false,
+//       }
+//     );
+
+//     document.addEventListener(
+//       "pointerup",
+//       handlePointerUp
+//     );
+
+//     document.addEventListener(
+//       "pointercancel",
+//       handlePointerUp
+//     );
+
+//     return () => {
+//       document.removeEventListener(
+//         "pointermove",
+//         handlePointerMove
+//       );
+
+//       document.removeEventListener(
+//         "pointerup",
+//         handlePointerUp
+//       );
+
+//       document.removeEventListener(
+//         "pointercancel",
+//         handlePointerUp
+//       );
+//     };
+//   }, [
+//     draggedProductId,
+//     startAutoScroll,
+//   ]);
+
+//   // =====================================================
+//   // FINISH DRAG
+//   // =====================================================
+
+//   const finishDrag = async () => {
+//     const state =
+//       dragStateRef.current;
+
+//     if (!state.active) {
+//       return;
+//     }
+
+//     const sourceId =
+//       state.productId;
+
+//     const targetId =
+//       dragOverProductId;
+
+//     state.active = false;
+//     state.productId = null;
+//     state.pointerId = null;
+
+//     stopAutoScroll();
+
+//     setDraggedProductId(null);
+//     setDragOverProductId(null);
+
+//     document.body.style.userSelect =
+//       "";
+//     document.body.style.cursor = "";
+
+//     if (
+//       !sourceId ||
+//       !targetId ||
+//       sourceId === targetId
+//     ) {
+//       return;
+//     }
+
+//     const sourceIndex =
+//       products.findIndex(
+//         (product) =>
+//           Number(product.id) ===
+//           Number(sourceId)
+//       );
+
+//     const targetIndex =
+//       products.findIndex(
+//         (product) =>
+//           Number(product.id) ===
+//           Number(targetId)
+//       );
+
+//     if (
+//       sourceIndex === -1 ||
+//       targetIndex === -1
+//     ) {
+//       return;
+//     }
+
+//     // -------------------------------------------------
+//     // CREATE NEW ORDER
+//     // -------------------------------------------------
+
+//     const reordered = [
+//       ...products,
+//     ];
+
+//     const [
+//       movedProduct,
+//     ] = reordered.splice(
+//       sourceIndex,
+//       1
+//     );
+
+//     reordered.splice(
+//       targetIndex,
+//       0,
+//       movedProduct
+//     );
+
+//     // -------------------------------------------------
+//     // ASSIGN SORT ORDER
+//     // -------------------------------------------------
+
+//     const updatedProducts =
+//       reordered.map(
+//         (product, index) => ({
+//           ...product,
+//           sortOrder: index + 1,
+//         })
+//       );
+
+//     // -------------------------------------------------
+//     // OPTIMISTIC UPDATE
+//     // -------------------------------------------------
+
+//     setProducts(
+//       updatedProducts
+//     );
+
+//     // -------------------------------------------------
+//     // SAVE TO DATABASE
+//     // -------------------------------------------------
+
+//     await saveProductOrder(
+//       updatedProducts
+//     );
+//   };
+
+//   // =====================================================
+//   // SAVE PRODUCT ORDER
+//   // =====================================================
+
+//   const saveProductOrder =
+//     async (orderedProducts) => {
+//       setSavingOrder(true);
+
+//       const token =
+//         localStorage.getItem(
+//           "token"
+//         );
+
+//       try {
+//         await api.patch(
+//           "/products/orders",
+//           {
+//             products:
+//               orderedProducts.map(
+//                 (
+//                   product,
+//                   index
+//                 ) => ({
+//                   id: Number(
+//                     product.id
+//                   ),
+//                   sortOrder:
+//                     index + 1,
+//                 })
+//               ),
+//           },
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+//       } catch (error) {
+//         console.error(
+//           "Failed to save product order:",
+//           error
+//         );
+
+//         alert(
+//           error?.response?.data?.message ||
+//             "Failed to save product order."
+//         );
+
+//         // Restore server order
+//         await fetchProducts();
+//       } finally {
+//         setSavingOrder(false);
+//       }
+//     };
+
+//   // =====================================================
+//   // START DRAG
+//   // =====================================================
+
+//   const handleDragStart = (
+//     event,
+//     productId
+//   ) => {
+//     if (!canDrag) {
+//       return;
+//     }
+
+//     event.preventDefault();
+//     event.stopPropagation();
+
+//     dragStateRef.current = {
+//       active: true,
+//       productId: Number(productId),
+//       pointerId:
+//         event.pointerId,
+//       x: event.clientX,
+//       y: event.clientY,
+//     };
+
+//     setDraggedProductId(
+//       Number(productId)
+//     );
+
+//     setDragOverProductId(
+//       null
+//     );
+
+//     document.body.style.userSelect =
+//       "none";
+
+//     document.body.style.cursor =
+//       "grabbing";
+
+//     startAutoScroll();
+//   };
+
+//   // =====================================================
+//   // CLEANUP DRAG ON UNMOUNT
+//   // =====================================================
+
+//   useEffect(() => {
+//     return () => {
+//       stopAutoScroll();
+
+//       document.body.style.userSelect =
+//         "";
+//       document.body.style.cursor =
+//         "";
+//     };
+//   }, [stopAutoScroll]);
 
 //   // =====================================================
 //   // LOADING
@@ -3953,13 +5508,10 @@
 //     return (
 //       <AdminLayout>
 //         <div className="apl-loading">
-
-//           <div className="apl-loading-spinner"></div>
-
+//           <div className="apl-loading-spinner" />
 //           <p>
 //             Loading products...
 //           </p>
-
 //         </div>
 //       </AdminLayout>
 //     );
@@ -3971,17 +5523,19 @@
 
 //   return (
 //     <AdminLayout>
-
-//       <div className="apl-admin">
-
+//       <div
+//         className={`apl-admin ${
+//           draggedProductId
+//             ? "apl-is-dragging"
+//             : ""
+//         }`}
+//       >
 //         {/* =================================================
 //             HEADER
 //         ================================================= */}
 
 //         <div className="apl-header">
-
 //           <div className="apl-header-left">
-
 //             <h1>
 //               Products
 //             </h1>
@@ -3989,47 +5543,38 @@
 //             <p>
 //               Manage all products and categories
 //             </p>
-
 //           </div>
 
 //           <Link
 //             to="/admin/products/add"
 //             className="apl-btn-primary"
 //           >
-
 //             <svg
 //               width="18"
 //               height="18"
 //               viewBox="0 0 18 18"
 //               fill="none"
 //             >
-
 //               <path
 //                 d="M9 3v12M3 9h12"
 //                 stroke="currentColor"
 //                 strokeWidth="1.8"
 //                 strokeLinecap="round"
 //               />
-
 //             </svg>
 
 //             Add Product
-
 //           </Link>
-
 //         </div>
-
 
 //         {/* =================================================
 //             TOOLBAR
 //         ================================================= */}
 
 //         <div className="apl-toolbar">
-
 //           {/* SEARCH */}
 
 //           <div className="apl-search-wrapper">
-
 //             <svg
 //               className="apl-search-icon"
 //               width="18"
@@ -4037,7 +5582,6 @@
 //               viewBox="0 0 18 18"
 //               fill="none"
 //             >
-
 //               <circle
 //                 cx="8"
 //                 cy="8"
@@ -4052,86 +5596,76 @@
 //                 strokeWidth="1.5"
 //                 strokeLinecap="round"
 //               />
-
 //             </svg>
 
 //             <input
 //               type="text"
-//               placeholder="Search products, category..."
+//               placeholder="Search products..."
 //               value={search}
-//               onChange={(event) =>
+//               onChange={(e) =>
 //                 setSearch(
-//                   event.target.value
+//                   e.target.value
 //                 )
 //               }
 //               className="apl-search-input"
 //             />
-
 //           </div>
-
 
 //           {/* STOCK */}
 
 //           <select
+//             className="apl-filter-select"
 //             value={stockFilter}
-//             onChange={(event) =>
+//             onChange={(e) =>
 //               setStockFilter(
-//                 event.target.value
+//                 e.target.value
 //               )
 //             }
-//             className="apl-filter-select"
 //           >
-
 //             <option value="all">
 //               All Stock
 //             </option>
 
 //             <option value="active">
-//               Active
+//               In Stock
 //             </option>
 
 //             <option value="out_of_stock">
 //               Out of Stock
 //             </option>
-
 //           </select>
-
 
 //           {/* FEATURED */}
 
 //           <select
+//             className="apl-filter-select"
 //             value={featuredFilter}
-//             onChange={(event) =>
+//             onChange={(e) =>
 //               setFeaturedFilter(
-//                 event.target.value
+//                 e.target.value
 //               )
 //             }
-//             className="apl-filter-select"
 //           >
-
 //             <option value="all">
 //               All Products
 //             </option>
 
 //             <option value="featured">
-//               Featured Only
+//               Featured
 //             </option>
-
 //           </select>
-
 
 //           {/* CATEGORY */}
 
 //           <select
+//             className="apl-filter-select"
 //             value={categoryFilter}
-//             onChange={(event) =>
+//             onChange={(e) =>
 //               setCategoryFilter(
-//                 event.target.value
+//                 e.target.value
 //               )
 //             }
-//             className="apl-filter-select"
 //           >
-
 //             <option value="all">
 //               All Categories
 //             </option>
@@ -4146,52 +5680,51 @@
 //                 </option>
 //               )
 //             )}
-
 //           </select>
-
 
 //           {/* SORT */}
 
 //           <select
+//             className={`apl-filter-select ${
+//               sortOption === "custom"
+//                 ? "apl-custom-sort-active"
+//                 : ""
+//             }`}
 //             value={sortOption}
-//             onChange={(event) =>
+//             onChange={(e) =>
 //               setSortOption(
-//                 event.target.value
+//                 e.target.value
 //               )
 //             }
-//             className="apl-filter-select"
 //           >
-
 //             <option value="custom">
 //               Custom Order
 //             </option>
 
 //             <option value="newest">
-//               Newest First
+//               Newest
 //             </option>
 
 //             <option value="oldest">
-//               Oldest First
+//               Oldest
 //             </option>
 
 //             <option value="price_low">
-//               Price: Low to High
+//               Price: Low → High
 //             </option>
 
 //             <option value="price_high">
-//               Price: High to Low
+//               Price: High → Low
 //             </option>
 
 //             <option value="name_az">
-//               Name: A to Z
+//               Name: A → Z
 //             </option>
 
 //             <option value="name_za">
-//               Name: Z to A
+//               Name: Z → A
 //             </option>
-
 //           </select>
-
 
 //           {/* CLEAR */}
 
@@ -4199,37 +5732,36 @@
 //             <button
 //               type="button"
 //               className="apl-clear-filters"
-//               onClick={clearFilters}
+//               onClick={
+//                 clearFilters
+//               }
 //             >
 //               Clear
 //             </button>
 //           )}
-
 //         </div>
 
-
 //         {/* =================================================
-//             CUSTOM ORDER INFORMATION
+//             CUSTOM ORDER NOTICE
 //         ================================================= */}
 
-//         {canDragProducts && (
+//         {sortOption ===
+//           "custom" && (
 //           <div className="apl-order-notice">
-
 //             <div className="apl-order-notice-icon">
 //               ⋮⋮
 //             </div>
 
 //             <div className="apl-order-notice-content">
-
 //               <strong>
-//                 Custom Order
+//                 Custom product order
 //               </strong>
 
 //               <span>
-//                 Drag and drop products to arrange
-//                 their display order.
+//                 {canDrag
+//                   ? "Press and hold the handle on a product, then drag it to a new position."
+//                   : "Clear search and filters to rearrange products."}
 //               </span>
-
 //             </div>
 
 //             {savingOrder && (
@@ -4237,63 +5769,54 @@
 //                 Saving order...
 //               </span>
 //             )}
-
 //           </div>
 //         )}
 
-
 //         {/* =================================================
-//             RESULTS BAR
+//             RESULTS
 //         ================================================= */}
 
 //         <div className="apl-results-bar">
-
 //           <span>
-
 //             Showing{" "}
-
 //             <strong>
-//               {filteredProducts.length}
+//               {
+//                 filteredProducts.length
+//               }
 //             </strong>{" "}
-
 //             of{" "}
-
 //             <strong>
 //               {products.length}
 //             </strong>{" "}
-
 //             products
-
 //           </span>
 
 //           {hasActiveFilters && (
 //             <button
 //               type="button"
-//               onClick={clearFilters}
+//               onClick={
+//                 clearFilters
+//               }
 //               className="apl-reset-link"
 //             >
 //               Reset filters
 //             </button>
 //           )}
-
 //         </div>
-
 
 //         {/* =================================================
 //             PRODUCTS
 //         ================================================= */}
 
-//         {filteredProducts.length === 0 ? (
-
+//         {filteredProducts.length ===
+//         0 ? (
 //           <div className="apl-empty">
-
 //             <svg
 //               width="48"
 //               height="48"
 //               viewBox="0 0 48 48"
 //               fill="none"
 //             >
-
 //               <path
 //                 d="M12 12l8-4 20 10-8 4-20-10z"
 //                 stroke="currentColor"
@@ -4314,7 +5837,6 @@
 //                 strokeWidth="1.5"
 //                 strokeLinejoin="round"
 //               />
-
 //             </svg>
 
 //             <h3>
@@ -4322,10 +5844,7 @@
 //             </h3>
 
 //             <p>
-//               {search ||
-//               stockFilter !== "all" ||
-//               featuredFilter !== "all" ||
-//               categoryFilter !== "all"
+//               {hasActiveFilters
 //                 ? "Try adjusting your search or filter options"
 //                 : "Add your first product to get started"}
 //             </p>
@@ -4334,297 +5853,240 @@
 //               <button
 //                 type="button"
 //                 className="apl-empty-reset"
-//                 onClick={clearFilters}
+//                 onClick={
+//                   clearFilters
+//                 }
 //               >
 //                 Clear Filters
 //               </button>
 //             )}
-
 //           </div>
-
 //         ) : (
-
-//           <div className="apl-grid">
-
+//           <div
+//             ref={gridRef}
+//             className={`apl-grid ${
+//               draggedProductId
+//                 ? "apl-grid-dragging"
+//                 : ""
+//             }`}
+//           >
 //             {filteredProducts.map(
 //               (product, index) => {
-
 //                 const discountedPrice =
-//                   Number(product.price || 0) -
-//                   (
-//                     Number(product.price || 0) *
+//                   Number(
+//                     product.price || 0
+//                   ) -
+//                   (Number(
+//                     product.price || 0
+//                   ) *
 //                     Number(
-//                       product.discountPercent || 0
-//                     )
-//                   ) /
+//                       product.discountPercent ||
+//                         0
+//                     )) /
 //                     100;
 
 //                 const isDragging =
-//                   draggedProductId ===
-//                   product.id;
+//                   Number(
+//                     draggedProductId
+//                   ) ===
+//                   Number(product.id);
 
-//                 const isDragOver =
-//                   dragOverProductId ===
-//                   product.id;
+//                 const isDropTarget =
+//                   Number(
+//                     dragOverProductId
+//                   ) ===
+//                   Number(product.id);
 
 //                 return (
-
 //                   <div
 //                     key={product.id}
-//                     className={`
-//                       apl-card
-//                       ${
-//                         product.isActive === false
-//                           ? "apl-card-out-of-stock"
-//                           : ""
-//                       }
-//                       ${
-//                         canDragProducts
-//                           ? "apl-card-draggable"
-//                           : ""
-//                       }
-//                       ${
-//                         isDragging
-//                           ? "apl-card-dragging"
-//                           : ""
-//                       }
-//                       ${
-//                         isDragOver
-//                           ? "apl-card-drag-over"
-//                           : ""
-//                       }
-//                     `}
-//                     draggable={
-//                       canDragProducts
+//                     data-product-id={
+//                       product.id
 //                     }
-//                     onDragStart={(event) =>
-//                       handleDragStart(
-//                         event,
-//                         product.id
-//                       )
-//                     }
-//                     onDragEnter={(event) =>
-//                       handleDragEnter(
-//                         event,
-//                         product.id
-//                       )
-//                     }
-//                     onDragOver={(event) =>
-//                       handleDragOver(
-//                         event,
-//                         product.id
-//                       )
-//                     }
-//                     onDragLeave={
-//                       handleDragLeave
-//                     }
-//                     onDrop={(event) =>
-//                       handleDrop(
-//                         event,
-//                         product.id
-//                       )
-//                     }
-//                     onDragEnd={
-//                       handleDragEnd
-//                     }
+//                     className={[
+//                       "apl-card",
+//                       "apl-card-drop-target",
+//                       product.isActive ===
+//                       false
+//                         ? "apl-card-out-of-stock"
+//                         : "",
+//                       isDragging
+//                         ? "apl-card-dragging"
+//                         : "",
+//                       isDropTarget
+//                         ? "apl-card-drag-over"
+//                         : "",
+//                     ]
+//                       .filter(Boolean)
+//                       .join(" ")}
 //                   >
-
 //                     {/* =================================================
 //                         DRAG HANDLE
 //                     ================================================= */}
 
-//                     {canDragProducts && (
-//                       <div
+//                     {sortOption ===
+//                       "custom" && (
+//                       <button
+//                         type="button"
 //                         className="apl-drag-handle"
-//                         title="Drag to reorder"
-//                         onMouseDown={(event) =>
-//                           event.stopPropagation()
+//                         disabled={!canDrag}
+//                         aria-label={`Drag ${product.title}`}
+//                         title={
+//                           canDrag
+//                             ? "Drag to reorder"
+//                             : "Clear filters to reorder"
+//                         }
+//                         onPointerDown={(
+//                           event
+//                         ) =>
+//                           handleDragStart(
+//                             event,
+//                             product.id
+//                           )
 //                         }
 //                       >
-
-//                         <span>
-//                           ⋮⋮
+//                         <span className="apl-drag-dots">
+//                           <i />
+//                           <i />
+//                           <i />
+//                           <i />
+//                           <i />
+//                           <i />
 //                         </span>
-
-//                       </div>
+//                       </button>
 //                     )}
-
 
 //                     {/* =================================================
 //                         ORDER NUMBER
 //                     ================================================= */}
 
-//                     {canDragProducts && (
-//                       <div className="apl-sort-number">
-//                         #{index + 1}
-//                       </div>
+//                     {sortOption ===
+//                       "custom" && (
+//                       <span className="apl-sort-number">
+//                         {index + 1}
+//                       </span>
 //                     )}
-
 
 //                     {/* =================================================
 //                         IMAGE
 //                     ================================================= */}
 
 //                     <div className="apl-card-image">
-
 //                       {product.image ? (
-
 //                         <img
 //                           src={`https://a4agroup.eu${product.image}`}
-//                           alt={product.title}
+//                           alt={
+//                             product.title
+//                           }
 //                           className="apl-image"
 //                           draggable="false"
 //                         />
-
 //                       ) : (
-
 //                         <div className="apl-image-placeholder">
-//                           No image
+//                           No Image
 //                         </div>
-
 //                       )}
-
 
 //                       {/* BADGES */}
 
 //                       <div className="apl-card-badges">
-
-//                         {/* STOCK */}
-
-//                         {product.isActive === false ? (
-
+//                         {product.isActive ===
+//                         false ? (
 //                           <span className="apl-badge-stock apl-badge-out">
-
-//                             <span className="apl-stock-dot"></span>
-
+//                             <span className="apl-stock-dot" />
 //                             Out of Stock
-
 //                           </span>
-
 //                         ) : (
-
 //                           <span className="apl-badge-stock apl-badge-active">
-
-//                             <span className="apl-stock-dot"></span>
-
+//                             <span className="apl-stock-dot" />
 //                             Active
-
 //                           </span>
-
 //                         )}
 
-
-//                         {/* FEATURED */}
-
 //                         {product.featured && (
-
 //                           <span className="apl-badge-featured">
-
 //                             <svg
 //                               width="10"
 //                               height="10"
 //                               viewBox="0 0 10 10"
 //                               fill="none"
 //                             >
-
 //                               <path
 //                                 d="M5 0L6.5 3.5L10 4L7.5 6.5L8.5 10L5 8L1.5 10L2.5 6.5L0 4L3.5 3.5L5 0Z"
 //                                 fill="currentColor"
 //                               />
-
 //                             </svg>
 
 //                             Featured
-
 //                           </span>
-
 //                         )}
-
-
-//                         {/* DISCOUNT */}
 
 //                         {Number(
-//                           product.discountPercent || 0
+//                           product.discountPercent
 //                         ) > 0 && (
-
 //                           <span className="apl-badge-discount">
-
-//                             {product.discountPercent}
+//                             {
+//                               product.discountPercent
+//                             }
 //                             % OFF
-
 //                           </span>
-
 //                         )}
-
 //                       </div>
-
 //                     </div>
-
 
 //                     {/* =================================================
 //                         CONTENT
 //                     ================================================= */}
 
 //                     <div className="apl-card-content">
-
 //                       <span className="apl-category">
 //                         {product.category ||
 //                           "Uncategorized"}
 //                       </span>
 
-
 //                       <h3 className="apl-title">
 //                         {product.title}
 //                       </h3>
 
-
 //                       <div className="apl-pricing">
-
 //                         <span className="apl-price-current">
-
 //                           €
 //                           {discountedPrice.toFixed(
 //                             0
 //                           )}
-
 //                         </span>
 
-
 //                         {Number(
-//                           product.discountPercent || 0
+//                           product.discountPercent
 //                         ) > 0 && (
-
 //                           <span className="apl-price-original">
-
 //                             €
-//                             {product.price}
-
+//                             {Number(
+//                               product.price ||
+//                                 0
+//                             ).toFixed(0)}
 //                           </span>
-
 //                         )}
-
 //                       </div>
 
-
-//                       {/* ACTIONS */}
+//                       {/* =================================================
+//                           ACTIONS
+//                       ================================================= */}
 
 //                       <div className="apl-actions">
-
 //                         <Link
 //                           to={`/admin/products/edit/${product.id}`}
 //                           className="apl-btn-edit"
-//                           onClick={(event) =>
-//                             event.stopPropagation()
+//                           onPointerDown={(e) =>
+//                             e.stopPropagation()
 //                           }
 //                         >
-
 //                           <svg
 //                             width="14"
 //                             height="14"
 //                             viewBox="0 0 14 14"
 //                             fill="none"
 //                           >
-
 //                             <path
 //                               d="M10 2l2 2-8 8H2v-2l8-8z"
 //                               stroke="currentColor"
@@ -4632,33 +6094,29 @@
 //                               strokeLinecap="round"
 //                               strokeLinejoin="round"
 //                             />
-
 //                           </svg>
 
 //                           Edit
-
 //                         </Link>
-
 
 //                         <button
 //                           type="button"
-//                           onClick={(event) => {
-//                             event.stopPropagation();
-
+//                           onPointerDown={(e) =>
+//                             e.stopPropagation()
+//                           }
+//                           onClick={() =>
 //                             deleteProduct(
 //                               product.id
-//                             );
-//                           }}
+//                             )
+//                           }
 //                           className="apl-btn-delete"
 //                         >
-
 //                           <svg
 //                             width="14"
 //                             height="14"
 //                             viewBox="0 0 14 14"
 //                             fill="none"
 //                           >
-
 //                             <path
 //                               d="M2 4h10M5 4V2h4v2M4 4v7a1 1 0 001 1h4a1 1 0 001-1V4"
 //                               stroke="currentColor"
@@ -4666,33 +6124,28 @@
 //                               strokeLinecap="round"
 //                               strokeLinejoin="round"
 //                             />
-
 //                           </svg>
 
 //                           Delete
-
 //                         </button>
-
 //                       </div>
-
 //                     </div>
-
 //                   </div>
 //                 );
 //               }
 //             )}
-
 //           </div>
-
 //         )}
-
 //       </div>
-
 //     </AdminLayout>
 //   );
 // }
 
 // export default ProductsList;
+
+
+
+
 
 
 import {
@@ -4723,9 +6176,6 @@ function ProductsList() {
   const [stockFilter, setStockFilter] = useState("all");
   const [featuredFilter, setFeaturedFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
-
-  // IMPORTANT:
-  // custom = database sortOrder
   const [sortOption, setSortOption] = useState("custom");
 
   // =====================================================
@@ -4738,15 +6188,25 @@ function ProductsList() {
 
   const gridRef = useRef(null);
 
-  const dragStateRef = useRef({
-    active: false,
-    productId: null,
-    pointerId: null,
+  // IMPORTANT:
+  // Refs are used here instead of relying only on React state.
+  // This prevents stale state during pointerup.
+  const draggedProductIdRef = useRef(null);
+  const dragOverProductIdRef = useRef(null);
+
+  const pointerPositionRef = useRef({
     x: 0,
     y: 0,
   });
 
+  const productsRef = useRef([]);
+
   const scrollAnimationRef = useRef(null);
+
+  // Always keep latest products available to drag handlers
+  useEffect(() => {
+    productsRef.current = products;
+  }, [products]);
 
   // =====================================================
   // FETCH PRODUCTS
@@ -4754,17 +6214,29 @@ function ProductsList() {
 
   const fetchProducts = useCallback(async () => {
     try {
-      const { data } = await api.get("/products");
+      setLoading(true);
+
+      const response = await api.get("/products");
+
+      const data = response.data;
 
       if (Array.isArray(data)) {
         setProducts(data);
+        productsRef.current = data;
       } else if (Array.isArray(data?.products)) {
         setProducts(data.products);
+        productsRef.current = data.products;
       } else {
         setProducts([]);
+        productsRef.current = [];
       }
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error("FAILED TO FETCH PRODUCTS:", error);
+
+      alert(
+        error?.response?.data?.message ||
+          "Failed to fetch products."
+      );
     } finally {
       setLoading(false);
     }
@@ -4781,11 +6253,11 @@ function ProductsList() {
   const deleteProduct = async (id) => {
     const token = localStorage.getItem("token");
 
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this product?"
-      )
-    ) {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+    if (!confirmed) {
       return;
     }
 
@@ -4798,7 +6270,8 @@ function ProductsList() {
 
       await fetchProducts();
     } catch (error) {
-      console.error("Delete product error:", error);
+      console.error("DELETE PRODUCT ERROR:", error);
+
       alert(
         error?.response?.data?.message ||
           "Failed to delete product."
@@ -4829,9 +6302,9 @@ function ProductsList() {
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // -------------------------------------------------
+    // ---------------------------------------------------
     // SEARCH
-    // -------------------------------------------------
+    // ---------------------------------------------------
 
     const searchValue = search
       .trim()
@@ -4852,38 +6325,35 @@ function ProductsList() {
       });
     }
 
-    // -------------------------------------------------
+    // ---------------------------------------------------
     // STOCK
-    // -------------------------------------------------
+    // ---------------------------------------------------
 
     if (stockFilter === "active") {
       result = result.filter(
-        (product) =>
-          product.isActive !== false
+        (product) => product.isActive !== false
       );
     }
 
     if (stockFilter === "out_of_stock") {
       result = result.filter(
-        (product) =>
-          product.isActive === false
+        (product) => product.isActive === false
       );
     }
 
-    // -------------------------------------------------
+    // ---------------------------------------------------
     // FEATURED
-    // -------------------------------------------------
+    // ---------------------------------------------------
 
     if (featuredFilter === "featured") {
       result = result.filter(
-        (product) =>
-          product.featured === true
+        (product) => product.featured === true
       );
     }
 
-    // -------------------------------------------------
+    // ---------------------------------------------------
     // CATEGORY
-    // -------------------------------------------------
+    // ---------------------------------------------------
 
     if (categoryFilter !== "all") {
       result = result.filter(
@@ -4892,9 +6362,9 @@ function ProductsList() {
       );
     }
 
-    // -------------------------------------------------
+    // ---------------------------------------------------
     // SORT
-    // -------------------------------------------------
+    // ---------------------------------------------------
 
     result.sort((a, b) => {
       switch (sortOption) {
@@ -4923,16 +6393,12 @@ function ProductsList() {
           );
 
         case "name_az":
-          return String(
-            a.title || ""
-          ).localeCompare(
+          return String(a.title || "").localeCompare(
             String(b.title || "")
           );
 
         case "name_za":
-          return String(
-            b.title || ""
-          ).localeCompare(
+          return String(b.title || "").localeCompare(
             String(a.title || "")
           );
 
@@ -4956,7 +6422,7 @@ function ProductsList() {
   ]);
 
   // =====================================================
-  // FILTER STATE
+  // FILTER STATUS
   // =====================================================
 
   const hasActiveFilters =
@@ -4964,6 +6430,10 @@ function ProductsList() {
     stockFilter !== "all" ||
     featuredFilter !== "all" ||
     categoryFilter !== "all";
+
+  // =====================================================
+  // CLEAR FILTERS
+  // =====================================================
 
   const clearFilters = () => {
     setSearch("");
@@ -4974,24 +6444,15 @@ function ProductsList() {
   };
 
   // =====================================================
-  // CAN DRAG?
+  // DRAG ENABLED ONLY FOR CUSTOM ORDER
   // =====================================================
-
-  /*
-    IMPORTANT:
-    Dragging is enabled only in Custom Order mode
-    and when no search/filter is active.
-
-    This prevents accidentally changing the global
-    order while looking at a filtered subset.
-  */
 
   const canDrag =
     sortOption === "custom" &&
     !hasActiveFilters;
 
   // =====================================================
-  // GET ACTUAL SCROLL CONTAINER
+  // GET SCROLL PARENT
   // =====================================================
 
   const getScrollParent = (element) => {
@@ -5010,24 +6471,29 @@ function ProductsList() {
 
       const overflowY = style.overflowY;
 
-      const canScroll =
-        (overflowY === "auto" ||
+      const scrollable =
+        (
+          overflowY === "auto" ||
           overflowY === "scroll" ||
-          overflowY === "overlay") &&
+          overflowY === "overlay"
+        ) &&
         parent.scrollHeight > parent.clientHeight;
 
-      if (canScroll) {
+      if (scrollable) {
         return parent;
       }
 
       parent = parent.parentElement;
     }
 
-    return document.scrollingElement || document.documentElement;
+    return (
+      document.scrollingElement ||
+      document.documentElement
+    );
   };
 
   // =====================================================
-  // AUTO SCROLL
+  // STOP AUTO SCROLL
   // =====================================================
 
   const stopAutoScroll = useCallback(() => {
@@ -5040,8 +6506,14 @@ function ProductsList() {
     }
   }, []);
 
+  // =====================================================
+  // AUTO SCROLL WHILE DRAGGING
+  // =====================================================
+
   const autoScroll = useCallback(() => {
-    if (!dragStateRef.current.active) {
+    if (
+      !draggedProductIdRef.current
+    ) {
       stopAutoScroll();
       return;
     }
@@ -5054,7 +6526,7 @@ function ProductsList() {
     }
 
     const pointerY =
-      dragStateRef.current.y;
+      pointerPositionRef.current.y;
 
     const scrollParent =
       getScrollParent(grid);
@@ -5081,12 +6553,12 @@ function ProductsList() {
       bottom = rect.bottom;
     }
 
-    const edgeSize = 110;
-    const maxSpeed = 18;
+    const edgeSize = 120;
+    const maxSpeed = 20;
 
     let speed = 0;
 
-    // Scroll UP
+    // Scroll up
     if (pointerY < top + edgeSize) {
       const distance =
         Math.max(
@@ -5095,16 +6567,18 @@ function ProductsList() {
         );
 
       const intensity =
-        1 -
-        distance / edgeSize;
+        1 - distance / edgeSize;
 
       speed =
-        -Math.ceil(
-          maxSpeed * intensity
+        -Math.max(
+          2,
+          Math.ceil(
+            maxSpeed * intensity
+          )
         );
     }
 
-    // Scroll DOWN
+    // Scroll down
     if (pointerY > bottom - edgeSize) {
       const distance =
         Math.max(
@@ -5113,12 +6587,14 @@ function ProductsList() {
         );
 
       const intensity =
-        1 -
-        distance / edgeSize;
+        1 - distance / edgeSize;
 
       speed =
-        Math.ceil(
-          maxSpeed * intensity
+        Math.max(
+          2,
+          Math.ceil(
+            maxSpeed * intensity
+          )
         );
     }
 
@@ -5126,6 +6602,7 @@ function ProductsList() {
       if (isDocument) {
         window.scrollBy({
           top: speed,
+          left: 0,
           behavior: "auto",
         });
       } else {
@@ -5134,8 +6611,14 @@ function ProductsList() {
     }
 
     scrollAnimationRef.current =
-      requestAnimationFrame(autoScroll);
+      requestAnimationFrame(
+        autoScroll
+      );
   }, [stopAutoScroll]);
+
+  // =====================================================
+  // START AUTO SCROLL
+  // =====================================================
 
   const startAutoScroll = useCallback(() => {
     if (
@@ -5145,7 +6628,9 @@ function ProductsList() {
     }
 
     scrollAnimationRef.current =
-      requestAnimationFrame(autoScroll);
+      requestAnimationFrame(
+        autoScroll
+      );
   }, [autoScroll]);
 
   // =====================================================
@@ -5181,13 +6666,202 @@ function ProductsList() {
       )
     );
 
-    return Number.isFinite(id)
-      ? id
-      : null;
+    if (!Number.isInteger(id)) {
+      return null;
+    }
+
+    return id;
   };
 
   // =====================================================
-  // POINTER MOVE
+  // SAVE PRODUCT ORDER
+  // =====================================================
+
+  const saveProductOrder = async (
+    orderedProducts
+  ) => {
+    setSavingOrder(true);
+
+    const token =
+      localStorage.getItem("token");
+
+    try {
+      const payload = {
+        products:
+          orderedProducts.map(
+            (product, index) => ({
+              id: Number(product.id),
+              sortOrder: index + 1,
+            })
+          ),
+      };
+
+      const response =
+        await api.patch(
+          "/products/orders",
+          payload,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+      // If backend returns updated products,
+      // use those as the source of truth.
+      if (
+        Array.isArray(
+          response.data?.products
+        )
+      ) {
+        setProducts(
+          response.data.products
+        );
+
+        productsRef.current =
+          response.data.products;
+      }
+
+    } catch (error) {
+      console.error(
+        "SAVE PRODUCT ORDER ERROR:",
+        error
+      );
+
+      alert(
+        error?.response?.data?.message ||
+          "Failed to save product order."
+      );
+
+      // Restore server order
+      await fetchProducts();
+
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
+  // =====================================================
+  // FINISH DRAG
+  // =====================================================
+
+  const finishDrag = useCallback(
+    async () => {
+      const sourceId =
+        draggedProductIdRef.current;
+
+      const targetId =
+        dragOverProductIdRef.current;
+
+      // Immediately clear refs
+      draggedProductIdRef.current =
+        null;
+
+      dragOverProductIdRef.current =
+        null;
+
+      stopAutoScroll();
+
+      setDraggedProductId(null);
+      setDragOverProductId(null);
+
+      document.body.style.userSelect =
+        "";
+
+      document.body.style.cursor =
+        "";
+
+      // No valid drop
+      if (
+        !sourceId ||
+        !targetId ||
+        sourceId === targetId
+      ) {
+        return;
+      }
+
+      // IMPORTANT:
+      // Always use the latest products ref.
+      const currentProducts =
+        productsRef.current;
+
+      const sourceIndex =
+        currentProducts.findIndex(
+          (product) =>
+            Number(product.id) ===
+            Number(sourceId)
+        );
+
+      const targetIndex =
+        currentProducts.findIndex(
+          (product) =>
+            Number(product.id) ===
+            Number(targetId)
+        );
+
+      if (
+        sourceIndex === -1 ||
+        targetIndex === -1
+      ) {
+        return;
+      }
+
+      // -------------------------------------------------
+      // REORDER
+      // -------------------------------------------------
+
+      const reordered = [
+        ...currentProducts,
+      ];
+
+      const [movedProduct] =
+        reordered.splice(
+          sourceIndex,
+          1
+        );
+
+      reordered.splice(
+        targetIndex,
+        0,
+        movedProduct
+      );
+
+      // -------------------------------------------------
+      // ASSIGN NEW SORT ORDER
+      // -------------------------------------------------
+
+      const updatedProducts =
+        reordered.map(
+          (product, index) => ({
+            ...product,
+            sortOrder: index + 1,
+          })
+        );
+
+      // -------------------------------------------------
+      // UPDATE UI
+      // -------------------------------------------------
+
+      setProducts(
+        updatedProducts
+      );
+
+      productsRef.current =
+        updatedProducts;
+
+      // -------------------------------------------------
+      // SAVE
+      // -------------------------------------------------
+
+      await saveProductOrder(
+        updatedProducts
+      );
+    },
+    [stopAutoScroll, saveProductOrder]
+  );
+
+  // =====================================================
+  // POINTER MOVE / POINTER UP
   // =====================================================
 
   useEffect(() => {
@@ -5195,18 +6869,20 @@ function ProductsList() {
       return undefined;
     }
 
-    const handlePointerMove = (event) => {
-      if (
-        !dragStateRef.current.active
-      ) {
+    const handlePointerMove = (
+      event
+    ) => {
+      const draggedId =
+        draggedProductIdRef.current;
+
+      if (!draggedId) {
         return;
       }
 
-      dragStateRef.current.x =
-        event.clientX;
-
-      dragStateRef.current.y =
-        event.clientY;
+      pointerPositionRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+      };
 
       const targetId =
         findProductAtPoint(
@@ -5216,16 +6892,18 @@ function ProductsList() {
 
       if (
         targetId &&
-        targetId !==
-          draggedProductId
+        targetId !== draggedId
       ) {
+        dragOverProductIdRef.current =
+          targetId;
+
         setDragOverProductId(
           targetId
         );
-      } else if (
-        targetId ===
-        draggedProductId
-      ) {
+      } else {
+        dragOverProductIdRef.current =
+          null;
+
         setDragOverProductId(
           null
         );
@@ -5238,6 +6916,25 @@ function ProductsList() {
 
     const handlePointerUp = () => {
       finishDrag();
+    };
+
+    const handlePointerCancel = () => {
+      draggedProductIdRef.current =
+        null;
+
+      dragOverProductIdRef.current =
+        null;
+
+      stopAutoScroll();
+
+      setDraggedProductId(null);
+      setDragOverProductId(null);
+
+      document.body.style.userSelect =
+        "";
+
+      document.body.style.cursor =
+        "";
     };
 
     document.addEventListener(
@@ -5255,7 +6952,7 @@ function ProductsList() {
 
     document.addEventListener(
       "pointercancel",
-      handlePointerUp
+      handlePointerCancel
     );
 
     return () => {
@@ -5271,178 +6968,15 @@ function ProductsList() {
 
       document.removeEventListener(
         "pointercancel",
-        handlePointerUp
+        handlePointerCancel
       );
     };
   }, [
     draggedProductId,
     startAutoScroll,
+    finishDrag,
+    stopAutoScroll,
   ]);
-
-  // =====================================================
-  // FINISH DRAG
-  // =====================================================
-
-  const finishDrag = async () => {
-    const state =
-      dragStateRef.current;
-
-    if (!state.active) {
-      return;
-    }
-
-    const sourceId =
-      state.productId;
-
-    const targetId =
-      dragOverProductId;
-
-    state.active = false;
-    state.productId = null;
-    state.pointerId = null;
-
-    stopAutoScroll();
-
-    setDraggedProductId(null);
-    setDragOverProductId(null);
-
-    document.body.style.userSelect =
-      "";
-    document.body.style.cursor = "";
-
-    if (
-      !sourceId ||
-      !targetId ||
-      sourceId === targetId
-    ) {
-      return;
-    }
-
-    const sourceIndex =
-      products.findIndex(
-        (product) =>
-          Number(product.id) ===
-          Number(sourceId)
-      );
-
-    const targetIndex =
-      products.findIndex(
-        (product) =>
-          Number(product.id) ===
-          Number(targetId)
-      );
-
-    if (
-      sourceIndex === -1 ||
-      targetIndex === -1
-    ) {
-      return;
-    }
-
-    // -------------------------------------------------
-    // CREATE NEW ORDER
-    // -------------------------------------------------
-
-    const reordered = [
-      ...products,
-    ];
-
-    const [
-      movedProduct,
-    ] = reordered.splice(
-      sourceIndex,
-      1
-    );
-
-    reordered.splice(
-      targetIndex,
-      0,
-      movedProduct
-    );
-
-    // -------------------------------------------------
-    // ASSIGN SORT ORDER
-    // -------------------------------------------------
-
-    const updatedProducts =
-      reordered.map(
-        (product, index) => ({
-          ...product,
-          sortOrder: index + 1,
-        })
-      );
-
-    // -------------------------------------------------
-    // OPTIMISTIC UPDATE
-    // -------------------------------------------------
-
-    setProducts(
-      updatedProducts
-    );
-
-    // -------------------------------------------------
-    // SAVE TO DATABASE
-    // -------------------------------------------------
-
-    await saveProductOrder(
-      updatedProducts
-    );
-  };
-
-  // =====================================================
-  // SAVE PRODUCT ORDER
-  // =====================================================
-
-  const saveProductOrder =
-    async (orderedProducts) => {
-      setSavingOrder(true);
-
-      const token =
-        localStorage.getItem(
-          "token"
-        );
-
-      try {
-        await api.patch(
-          "/products/orders",
-          {
-            products:
-              orderedProducts.map(
-                (
-                  product,
-                  index
-                ) => ({
-                  id: Number(
-                    product.id
-                  ),
-                  sortOrder:
-                    index + 1,
-                })
-              ),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      } catch (error) {
-        console.error(
-          "Failed to save product order:",
-          error
-        );
-
-        alert(
-          error?.response?.data?.message ||
-            "Failed to save product order."
-        );
-
-        // Restore server order
-        await fetchProducts();
-      } finally {
-        setSavingOrder(false);
-      }
-    };
 
   // =====================================================
   // START DRAG
@@ -5456,25 +6990,31 @@ function ProductsList() {
       return;
     }
 
+    if (
+      event.button !== undefined &&
+      event.button !== 0
+    ) {
+      return;
+    }
+
     event.preventDefault();
     event.stopPropagation();
 
-    dragStateRef.current = {
-      active: true,
-      productId: Number(productId),
-      pointerId:
-        event.pointerId,
+    const id = Number(productId);
+
+    draggedProductIdRef.current =
+      id;
+
+    dragOverProductIdRef.current =
+      null;
+
+    pointerPositionRef.current = {
       x: event.clientX,
       y: event.clientY,
     };
 
-    setDraggedProductId(
-      Number(productId)
-    );
-
-    setDragOverProductId(
-      null
-    );
+    setDraggedProductId(id);
+    setDragOverProductId(null);
 
     document.body.style.userSelect =
       "none";
@@ -5486,15 +7026,22 @@ function ProductsList() {
   };
 
   // =====================================================
-  // CLEANUP DRAG ON UNMOUNT
+  // CLEANUP
   // =====================================================
 
   useEffect(() => {
     return () => {
       stopAutoScroll();
 
+      draggedProductIdRef.current =
+        null;
+
+      dragOverProductIdRef.current =
+        null;
+
       document.body.style.userSelect =
         "";
+
       document.body.style.cursor =
         "";
     };
@@ -5509,6 +7056,7 @@ function ProductsList() {
       <AdminLayout>
         <div className="apl-loading">
           <div className="apl-loading-spinner" />
+
           <p>
             Loading products...
           </p>
@@ -5518,7 +7066,7 @@ function ProductsList() {
   }
 
   // =====================================================
-  // PAGE
+  // RENDER
   // =====================================================
 
   return (
@@ -5600,14 +7148,14 @@ function ProductsList() {
 
             <input
               type="text"
+              className="apl-search-input"
               placeholder="Search products..."
               value={search}
-              onChange={(e) =>
+              onChange={(event) =>
                 setSearch(
-                  e.target.value
+                  event.target.value
                 )
               }
-              className="apl-search-input"
             />
           </div>
 
@@ -5616,9 +7164,9 @@ function ProductsList() {
           <select
             className="apl-filter-select"
             value={stockFilter}
-            onChange={(e) =>
+            onChange={(event) =>
               setStockFilter(
-                e.target.value
+                event.target.value
               )
             }
           >
@@ -5640,9 +7188,9 @@ function ProductsList() {
           <select
             className="apl-filter-select"
             value={featuredFilter}
-            onChange={(e) =>
+            onChange={(event) =>
               setFeaturedFilter(
-                e.target.value
+                event.target.value
               )
             }
           >
@@ -5660,9 +7208,9 @@ function ProductsList() {
           <select
             className="apl-filter-select"
             value={categoryFilter}
-            onChange={(e) =>
+            onChange={(event) =>
               setCategoryFilter(
-                e.target.value
+                event.target.value
               )
             }
           >
@@ -5691,9 +7239,9 @@ function ProductsList() {
                 : ""
             }`}
             value={sortOption}
-            onChange={(e) =>
+            onChange={(event) =>
               setSortOption(
-                e.target.value
+                event.target.value
               )
             }
           >
@@ -5732,9 +7280,7 @@ function ProductsList() {
             <button
               type="button"
               className="apl-clear-filters"
-              onClick={
-                clearFilters
-              }
+              onClick={clearFilters}
             >
               Clear
             </button>
@@ -5745,8 +7291,7 @@ function ProductsList() {
             CUSTOM ORDER NOTICE
         ================================================= */}
 
-        {sortOption ===
-          "custom" && (
+        {sortOption === "custom" && (
           <div className="apl-order-notice">
             <div className="apl-order-notice-icon">
               ⋮⋮
@@ -5759,7 +7304,7 @@ function ProductsList() {
 
               <span>
                 {canDrag
-                  ? "Press and hold the handle on a product, then drag it to a new position."
+                  ? "Press and hold the handle, then drag the product to a new position."
                   : "Clear search and filters to rearrange products."}
               </span>
             </div>
@@ -5773,16 +7318,14 @@ function ProductsList() {
         )}
 
         {/* =================================================
-            RESULTS
+            RESULTS BAR
         ================================================= */}
 
         <div className="apl-results-bar">
           <span>
             Showing{" "}
             <strong>
-              {
-                filteredProducts.length
-              }
+              {filteredProducts.length}
             </strong>{" "}
             of{" "}
             <strong>
@@ -5794,10 +7337,8 @@ function ProductsList() {
           {hasActiveFilters && (
             <button
               type="button"
-              onClick={
-                clearFilters
-              }
               className="apl-reset-link"
+              onClick={clearFilters}
             >
               Reset filters
             </button>
@@ -5805,11 +7346,10 @@ function ProductsList() {
         </div>
 
         {/* =================================================
-            PRODUCTS
+            PRODUCT GRID
         ================================================= */}
 
-        {filteredProducts.length ===
-        0 ? (
+        {filteredProducts.length === 0 ? (
           <div className="apl-empty">
             <svg
               width="48"
@@ -5853,9 +7393,7 @@ function ProductsList() {
               <button
                 type="button"
                 className="apl-empty-reset"
-                onClick={
-                  clearFilters
-                }
+                onClick={clearFilters}
               >
                 Clear Filters
               </button>
@@ -5872,17 +7410,20 @@ function ProductsList() {
           >
             {filteredProducts.map(
               (product, index) => {
-                const discountedPrice =
+                const price =
                   Number(
                     product.price || 0
-                  ) -
-                  (Number(
-                    product.price || 0
-                  ) *
-                    Number(
-                      product.discountPercent ||
-                        0
-                    )) /
+                  );
+
+                const discount =
+                  Number(
+                    product.discountPercent ||
+                      0
+                  );
+
+                const discountedPrice =
+                  price -
+                  (price * discount) /
                     100;
 
                 const isDragging =
@@ -5906,13 +7447,16 @@ function ProductsList() {
                     className={[
                       "apl-card",
                       "apl-card-drop-target",
+
                       product.isActive ===
                       false
                         ? "apl-card-out-of-stock"
                         : "",
+
                       isDragging
                         ? "apl-card-dragging"
                         : "",
+
                       isDropTarget
                         ? "apl-card-drag-over"
                         : "",
@@ -5920,9 +7464,9 @@ function ProductsList() {
                       .filter(Boolean)
                       .join(" ")}
                   >
-                    {/* =================================================
+                    {/* =====================================
                         DRAG HANDLE
-                    ================================================= */}
+                    ===================================== */}
 
                     {sortOption ===
                       "custom" && (
@@ -5933,7 +7477,7 @@ function ProductsList() {
                         aria-label={`Drag ${product.title}`}
                         title={
                           canDrag
-                            ? "Drag to reorder"
+                            ? "Hold and drag to reorder"
                             : "Clear filters to reorder"
                         }
                         onPointerDown={(
@@ -5956,9 +7500,9 @@ function ProductsList() {
                       </button>
                     )}
 
-                    {/* =================================================
+                    {/* =====================================
                         ORDER NUMBER
-                    ================================================= */}
+                    ===================================== */}
 
                     {sortOption ===
                       "custom" && (
@@ -5967,9 +7511,9 @@ function ProductsList() {
                       </span>
                     )}
 
-                    {/* =================================================
+                    {/* =====================================
                         IMAGE
-                    ================================================= */}
+                    ===================================== */}
 
                     <div className="apl-card-image">
                       {product.image ? (
@@ -6021,22 +7565,17 @@ function ProductsList() {
                           </span>
                         )}
 
-                        {Number(
-                          product.discountPercent
-                        ) > 0 && (
+                        {discount > 0 && (
                           <span className="apl-badge-discount">
-                            {
-                              product.discountPercent
-                            }
-                            % OFF
+                            {discount}% OFF
                           </span>
                         )}
                       </div>
                     </div>
 
-                    {/* =================================================
+                    {/* =====================================
                         CONTENT
-                    ================================================= */}
+                    ===================================== */}
 
                     <div className="apl-card-content">
                       <span className="apl-category">
@@ -6056,29 +7595,28 @@ function ProductsList() {
                           )}
                         </span>
 
-                        {Number(
-                          product.discountPercent
-                        ) > 0 && (
+                        {discount > 0 && (
                           <span className="apl-price-original">
                             €
-                            {Number(
-                              product.price ||
-                                0
-                            ).toFixed(0)}
+                            {price.toFixed(
+                              0
+                            )}
                           </span>
                         )}
                       </div>
 
-                      {/* =================================================
+                      {/* =================================
                           ACTIONS
-                      ================================================= */}
+                      ================================= */}
 
                       <div className="apl-actions">
                         <Link
                           to={`/admin/products/edit/${product.id}`}
                           className="apl-btn-edit"
-                          onPointerDown={(e) =>
-                            e.stopPropagation()
+                          onPointerDown={(
+                            event
+                          ) =>
+                            event.stopPropagation()
                           }
                         >
                           <svg
@@ -6101,15 +7639,17 @@ function ProductsList() {
 
                         <button
                           type="button"
-                          onPointerDown={(e) =>
-                            e.stopPropagation()
+                          className="apl-btn-delete"
+                          onPointerDown={(
+                            event
+                          ) =>
+                            event.stopPropagation()
                           }
                           onClick={() =>
                             deleteProduct(
                               product.id
                             )
                           }
-                          className="apl-btn-delete"
                         >
                           <svg
                             width="14"
