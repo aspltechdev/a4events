@@ -30,6 +30,9 @@ model Product {
 
   isActive Boolean @default(true)
 
+  // Product display order
+  sortOrder Int @default(0)
+
   ingredients ProductIngredient[]
 
   heroSlides HeroSlide[]
