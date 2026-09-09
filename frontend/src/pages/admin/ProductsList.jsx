@@ -6698,7 +6698,7 @@ function ProductsList() {
 
       const response =
         await api.patch(
-          "/products/orders",
+          "/products/sortorders",
           payload,
           {
             headers: {
