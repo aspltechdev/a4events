@@ -11219,194 +11219,288 @@ function ProductsList() {
   // SAVE PRODUCT ORDER
   // =====================================================
 
-  const saveProductOrder =
-    useCallback(
-      async (
-        orderedProducts
-      ) => {
+  // const saveProductOrder =
+  //   useCallback(
+  //     async (
+  //       orderedProducts
+  //     ) => {
 
-        setSavingOrder(
-          true
-        );
-
-
-        try {
-
-          // -------------------------------------------------
-          // IMPORTANT
-          //
-          // Backend expects:
-          //
-          // {
-          //   products: [
-          //     {
-          //       id: 234,
-          //       sortOrder: 1
-          //     }
-          //   ]
-          // }
-          //
-          // NOT:
-          //
-          // [
-          //   {
-          //     id: 234,
-          //     sortOrder: 1
-          //   }
-          // ]
-          // -------------------------------------------------
-
-          const payload = {
-
-            products:
-              orderedProducts.map(
-                (
-                  product,
-                  index
-                ) => ({
-
-                  id:
-                    Number(
-                      product.id
-                    ),
-
-                  sortOrder:
-                    index + 1,
-
-                })
-              ),
-
-          };
+  //       setSavingOrder(
+  //         true
+  //       );
 
 
-          console.log(
-            "================================"
-          );
+  //       try {
 
-          console.log(
-            "SAVING PRODUCT ORDER"
-          );
+  //         // -------------------------------------------------
+  //         // IMPORTANT
+  //         //
+  //         // Backend expects:
+  //         //
+  //         // {
+  //         //   products: [
+  //         //     {
+  //         //       id: 234,
+  //         //       sortOrder: 1
+  //         //     }
+  //         //   ]
+  //         // }
+  //         //
+  //         // NOT:
+  //         //
+  //         // [
+  //         //   {
+  //         //     id: 234,
+  //         //     sortOrder: 1
+  //         //   }
+  //         // ]
+  //         // -------------------------------------------------
 
-          console.log(
-            "PAYLOAD:",
-            payload
-          );
+  //         const payload = {
 
-          console.log(
-            "PRODUCT COUNT:",
-            payload.products.length
-          );
+  //           products:
+  //             orderedProducts.map(
+  //               (
+  //                 product,
+  //                 index
+  //               ) => ({
 
-          console.log(
-            "================================"
-          );
+  //                 id:
+  //                   Number(
+  //                     product.id
+  //                   ),
 
+  //                 sortOrder:
+  //                   index + 1,
 
-          // -------------------------------------------------
-          // DO NOT send a bare array.
-          //
-          // Also don't manually add Authorization here.
-          // The shared Axios api instance should handle auth.
-          // -------------------------------------------------
+  //               })
+  //             ),
 
-          const response =
-            await api.patch(
-              "/products/sortorder",
-              payload
-            );
-
-
-          console.log(
-            "PRODUCT ORDER SAVE RESPONSE:",
-            response.data
-          );
-
-
-          // -------------------------------------------------
-          // USE BACKEND RESPONSE
-          // -------------------------------------------------
-
-          if (
-            Array.isArray(
-              response.data?.products
-            )
-          ) {
-
-            setProducts(
-              response.data.products
-            );
-
-            productsRef.current =
-              response.data.products;
-
-          } else {
-
-            // If backend doesn't return
-            // products, refresh from server.
-
-            await fetchProducts();
-
-          }
+  //         };
 
 
-        } catch (error) {
+  //         console.log(
+  //           "================================"
+  //         );
 
-          console.error(
-            "================================"
-          );
+  //         console.log(
+  //           "SAVING PRODUCT ORDER"
+  //         );
 
-          console.error(
-            "SAVE PRODUCT ORDER ERROR:",
-            error
-          );
+  //         console.log(
+  //           "PAYLOAD:",
+  //           payload
+  //         );
 
-          console.error(
-            "STATUS:",
-            error?.response?.status
-          );
+  //         console.log(
+  //           "PRODUCT COUNT:",
+  //           payload.products.length
+  //         );
 
-          console.error(
-            "RESPONSE:",
-            error?.response?.data
-          );
-
-          console.error(
-            "MESSAGE:",
-            error?.message
-          );
-
-          console.error(
-            "================================"
-          );
+  //         console.log(
+  //           "================================"
+  //         );
 
 
-          alert(
-            error?.response?.data?.message ||
-            error?.message ||
-            "Failed to save product order."
-          );
+  //         // -------------------------------------------------
+  //         // DO NOT send a bare array.
+  //         //
+  //         // Also don't manually add Authorization here.
+  //         // The shared Axios api instance should handle auth.
+  //         // -------------------------------------------------
+
+  //         const response =
+  //           await api.patch(
+  //             "/products/sortorder",
+  //             payload
+  //           );
 
 
-          // -------------------------------------------------
-          // RESTORE SERVER ORDER
-          // -------------------------------------------------
+  //         console.log(
+  //           "PRODUCT ORDER SAVE RESPONSE:",
+  //           response.data
+  //         );
 
-          await fetchProducts();
 
-        } finally {
+  //         // -------------------------------------------------
+  //         // USE BACKEND RESPONSE
+  //         // -------------------------------------------------
 
-          setSavingOrder(
-            false
-          );
+  //         if (
+  //           Array.isArray(
+  //             response.data?.products
+  //           )
+  //         ) {
 
-        }
+  //           setProducts(
+  //             response.data.products
+  //           );
 
-      },
-      [
-        fetchProducts,
-      ]
+  //           productsRef.current =
+  //             response.data.products;
+
+  //         } else {
+
+  //           // If backend doesn't return
+  //           // products, refresh from server.
+
+  //           await fetchProducts();
+
+  //         }
+
+
+  //       } catch (error) {
+
+  //         console.error(
+  //           "================================"
+  //         );
+
+  //         console.error(
+  //           "SAVE PRODUCT ORDER ERROR:",
+  //           error
+  //         );
+
+  //         console.error(
+  //           "STATUS:",
+  //           error?.response?.status
+  //         );
+
+  //         console.error(
+  //           "RESPONSE:",
+  //           error?.response?.data
+  //         );
+
+  //         console.error(
+  //           "MESSAGE:",
+  //           error?.message
+  //         );
+
+  //         console.error(
+  //           "================================"
+  //         );
+
+
+  //         alert(
+  //           error?.response?.data?.message ||
+  //           error?.message ||
+  //           "Failed to save product order."
+  //         );
+
+
+  //         // -------------------------------------------------
+  //         // RESTORE SERVER ORDER
+  //         // -------------------------------------------------
+
+  //         await fetchProducts();
+
+  //       } finally {
+
+  //         setSavingOrder(
+  //           false
+  //         );
+
+  //       }
+
+  //     },
+  //     [
+  //       fetchProducts,
+  //     ]
+  //   );
+
+
+  const saveProductOrder = async (orderedProducts) => {
+  setSavingOrder(true);
+
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Your admin session has expired. Please login again.");
+      return;
+    }
+
+    const payload = {
+      products: orderedProducts.map(
+        (product, index) => ({
+          id: Number(product.id),
+          sortOrder: index + 1,
+        })
+      ),
+    };
+
+    console.log("SAVE ORDER");
+    console.log("Token exists:", Boolean(token));
+    console.log("Payload:", payload);
+
+    const response = await api.patch(
+      "/products/sortorder",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
+    console.log(
+      "ORDER SAVE STATUS:",
+      response.status
+    );
+
+    // 204 = successful save
+    if (
+      response.status === 200 ||
+      response.status === 204
+    ) {
+      console.log(
+        "✅ Product order saved successfully"
+      );
+
+      return;
+    }
+
+    throw new Error(
+      `Unexpected response: ${response.status}`
+    );
+
+  } catch (error) {
+
+    console.error(
+      "SAVE PRODUCT ORDER ERROR:",
+      error
+    );
+
+    console.error(
+      "STATUS:",
+      error?.response?.status
+    );
+
+    console.error(
+      "RESPONSE:",
+      error?.response?.data
+    );
+
+    if (
+      error?.response?.status === 401
+    ) {
+      alert(
+        "Your admin session has expired. Please login again."
+      );
+      return;
+    }
+
+    alert(
+      error?.response?.data?.message ||
+      error?.message ||
+      "Failed to save product order."
+    );
+
+  } finally {
+
+    setSavingOrder(false);
+
+  }
+};
 
   // =====================================================
   // FINISH DRAG
