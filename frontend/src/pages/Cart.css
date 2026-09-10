@@ -938,3 +938,27 @@
     font-size: 12px;
   }
 }
+
+
+/* =====================================================
+   EXPECTED DELIVERY DATE — ERROR STATE
+===================================================== */
+
+.expected-delivery-input.has-error {
+  border-color: #dc2626;
+  outline-color: #dc2626;
+}
+
+.expected-delivery-error {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #dc2626;
+  line-height: 1.4;
+}
+
+.expected-delivery-note {
+  margin: 6px 0 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
