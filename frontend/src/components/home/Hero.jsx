@@ -3958,6 +3958,320 @@
 
 
 
+// import { useEffect, useState, useRef, useCallback } from "react";
+// import { Link } from "react-router-dom";
+// import api from "../../services/api";
+// import "./Hero.css";
+
+// function Hero() {
+//   const [slides, setSlides] = useState([]);
+//   const [current, setCurrent] = useState(0);
+//   const [isAnimating, setIsAnimating] = useState(false);
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [contentVisible, setContentVisible] = useState(false);
+//   const [imageOrientations, setImageOrientations] = useState({});
+//   const [showPopup, setShowPopup] = useState(false);
+
+//   const heroRef = useRef(null);
+//   const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL || "https://a4agroup.eu";
+
+//   useEffect(() => {
+//     loadSlides();
+//     const timer = setTimeout(() => {
+//       setShowPopup(true);
+//     }, 800);
+//     return () => clearTimeout(timer);
+//   }, []);
+
+//   useEffect(() => {
+//     if (isLoaded && slides.length) {
+//       setTimeout(() => setContentVisible(true), 400);
+//     }
+//   }, [isLoaded, slides]);
+
+//   useEffect(() => {
+//     if (!slides.length || isAnimating) return;
+//     const timer = setInterval(() => {
+//       handleSlideChange((current + 1) % slides.length);
+//     }, 7000);
+//     return () => clearInterval(timer);
+//   }, [slides, current, isAnimating]);
+
+//   const loadSlides = async () => {
+//     try {
+//       const { data } = await api.get("/hero-slides");
+//       const activeSlides = data
+//         .filter((slide) => slide.isActive)
+//         .sort((a, b) => a.order - b.order);
+//       setSlides(activeSlides);
+//       detectOrientations(activeSlides);
+//       setTimeout(() => setIsLoaded(true), 300);
+//     } catch (err) {
+//       console.error("Failed to load hero slides:", err);
+//     }
+//   };
+
+//   const getImageUrl = (imagePath) => {
+//     if (!imagePath) return "";
+//     const cleanPath = imagePath.startsWith("/") ? imagePath.slice(1) : imagePath;
+//     const base = IMAGE_BASE.endsWith("/") ? IMAGE_BASE.slice(0, -1) : IMAGE_BASE;
+//     return `${base}/${cleanPath}`;
+//   };
+
+//   const detectOrientations = (slides) => {
+//     const orientations = {};
+//     slides.forEach((slide, index) => {
+//       const img = new Image();
+//       img.onload = () => {
+//         orientations[index] = img.width >= img.height ? "landscape" : "portrait";
+//         setImageOrientations((prev) => ({ ...prev, ...orientations }));
+//       };
+//       img.onerror = () => {
+//         orientations[index] = "landscape";
+//         setImageOrientations((prev) => ({ ...prev, ...orientations }));
+//       };
+//       img.src = getImageUrl(slide.image);
+//     });
+//   };
+
+//   const handleSlideChange = useCallback(
+//     (index) => {
+//       if (isAnimating || index === current) return;
+//       setIsAnimating(true);
+//       setContentVisible(false);
+//       setTimeout(() => {
+//         setCurrent(index);
+//         setTimeout(() => {
+//           setContentVisible(true);
+//           setTimeout(() => setIsAnimating(false), 200);
+//         }, 200);
+//       }, 600);
+//     },
+//     [isAnimating, current]
+//   );
+
+//   const handleProgressClick = (index) => {
+//     if (index === current || isAnimating) return;
+//     handleSlideChange(index);
+//   };
+
+//   const closePopup = () => {
+//     setShowPopup(false);
+//   };
+
+//   if (!slides.length) {
+//     return (
+//       <section className="hero-modern hero-skeleton" aria-busy="true">
+//         <div className="hero-skeleton-container">
+//           <div className="skeleton-content">
+//             <div className="skeleton-chip" />
+//             <div className="skeleton-headline" />
+//             <div className="skeleton-subheadline" />
+//             <div className="skeleton-cta" />
+//           </div>
+//           <div className="skeleton-poster" />
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   const slide = slides[current];
+//   const nextSlide = slides[(current + 1) % slides.length];
+//   const orientation = imageOrientations[current] || "portrait";
+
+//   const getRedirectLink = () => {
+//     if (slide.slideType === "product" && slide.productId) return `/products/${slide.productId}`;
+//     if (slide.slideType === "event" && slide.eventId) return `/events/${slide.eventId}`;
+//     if (slide.buttonLink) return slide.buttonLink;
+//     return "/events";
+//   };
+
+//   const redirectLink = getRedirectLink();
+//   const isInternalLink = !redirectLink.startsWith("http");
+
+//   const getBadgeText = () => {
+//     if (slide.slideType === "product") return "New Collection";
+//     if (slide.slideType === "event") return "Featured Event";
+//     return "Since 1926";
+//   };
+
+//   return (
+//     <>
+//       {/* POPUP OVERLAY */}
+//       {showPopup && (
+//         <div className="hero-popup-overlay" onClick={closePopup}>
+//           <div className="hero-popup" onClick={(e) => e.stopPropagation()}>
+//             <button className="hero-popup-close" onClick={closePopup}>
+//               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                 <path d="M18 6L6 18M6 6l12 12" />
+//               </svg>
+//             </button>
+            
+//             <h2 className="hero-popup-title">
+//               Discover <span className="hero-popup-highlight">Premium Flowers</span>
+//             </h2>
+            
+//             <p className="hero-popup-description">
+//               German precision meets Indian soul — premium blooms for every occasion.
+//             </p>
+            
+//             <Link to="/products" className="hero-popup-btn" onClick={closePopup}>
+//               <span>Shop Now</span>
+//               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//                 <path d="M5 12h14M12 5l7 7-7 7" />
+//               </svg>
+//             </Link>
+//           </div>
+//         </div>
+//       )}
+
+//       <section
+//         ref={heroRef}
+//         className={`hero-modern ${isLoaded ? "is-loaded" : ""}`}
+//         aria-label="Featured content"
+//       >
+//         {/* BACKGROUND IMAGE - Full screen with overlay */}
+//         <div className="hero-bg-wrapper">
+//           <div
+//             className={`hero-bg-image ${isAnimating ? "bg-exit" : "bg-active"}`}
+//             style={{
+//               backgroundImage: `url(${getImageUrl(slide.image)})`,
+//             }}
+//           />
+//           <div
+//             className={`hero-bg-image hero-bg-next ${isAnimating ? "bg-enter" : ""}`}
+//             style={{
+//               backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
+//             }}
+//           />
+//           <div className="hero-bg-overlay" />
+//           <div className="hero-bg-gradient" />
+//         </div>
+
+//         {/* MAIN CONTENT - Split layout: Left text, Right image card */}
+//         <div className="hero-container">
+//           {/* LEFT - Text Content */}
+//           <div className="hero-content-left">
+//             <div className={`hero-content ${contentVisible ? "content-enter" : "content-exit"}`}>
+//               <div className="hero-badge">
+//                 <span>{getBadgeText()}</span>
+//               </div>
+
+//               <h1 className="hero-title">
+//                 {slide.title}
+//               </h1>
+
+//               <p className="hero-description">{slide.subtitle}</p>
+
+//               <div className="hero-actions">
+//                 {isInternalLink ? (
+//                   <Link to={redirectLink} className="hero-btn hero-btn--primary">
+//                     <span>{slide.buttonText || "Explore Now"}</span>
+//                     <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//                       <path d="M5 12h14M12 5l7 7-7 7" />
+//                     </svg>
+//                   </Link>
+//                 ) : (
+//                   <a
+//                     href={redirectLink}
+//                     target="_blank"
+//                     rel="noopener noreferrer"
+//                     className="hero-btn hero-btn--primary"
+//                   >
+//                     <span>{slide.buttonText || "Explore Now"}</span>
+//                     <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//                       <path d="M5 12h14M12 5l7 7-7 7" />
+//                     </svg>
+//                   </a>
+//                 )}
+
+//                 <Link to="/events" className="hero-btn hero-btn--secondary">
+//                   <span>View All</span>
+//                 </Link>
+//               </div>
+
+//               <div className="hero-slide-indicator">
+//                 <span>{String(current + 1).padStart(2, '0')}</span>
+//                 <span className="hero-slide-indicator-line" />
+//                 <span>{String(slides.length).padStart(2, '0')}</span>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* RIGHT - Image Card with overlay */}
+//           <div className="hero-image-right">
+//             <div className="hero-image-card">
+//               <div
+//                 className={`hero-card-image ${isAnimating ? "card-exit" : "card-active"}`}
+//                 style={{
+//                   backgroundImage: `url(${getImageUrl(slide.image)})`,
+//                 }}
+//               />
+//               <div
+//                 className={`hero-card-image hero-card-next ${isAnimating ? "card-enter" : ""}`}
+//                 style={{
+//                   backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
+//                 }}
+//               />
+//               <div className="hero-card-overlay" />
+//               <div className="hero-card-content">
+//                 <div className="hero-card-badge">
+//                   <span>{current + 1}</span>
+//                   <span>/{slides.length}</span>
+//                 </div>
+//                 <div className="hero-card-footer">
+//                   <div className="hero-card-tags">
+//                     <span className="hero-card-tag">Premium</span>
+//                     <span className="hero-card-tag">Limited</span>
+//                   </div>
+//                   <div className="hero-card-nav">
+//                     <button 
+//                       className="hero-card-nav-btn" 
+//                       onClick={() => handleProgressClick((current - 1 + slides.length) % slides.length)}
+//                       aria-label="Previous"
+//                     >
+//                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                         <path d="M15 18l-6-6 6-6" />
+//                       </svg>
+//                     </button>
+//                     <button 
+//                       className="hero-card-nav-btn" 
+//                       onClick={() => handleProgressClick((current + 1) % slides.length)}
+//                       aria-label="Next"
+//                     >
+//                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                         <path d="M9 18l6-6-6-6" />
+//                       </svg>
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Bottom Navigation Dots */}
+//         <div className="hero-nav-dots">
+//           {slides.map((_, index) => (
+//             <button
+//               key={index}
+//               className={`hero-dot ${index === current ? "is-active" : ""}`}
+//               onClick={() => handleProgressClick(index)}
+//               aria-label={`Slide ${index + 1}`}
+//             />
+//           ))}
+//         </div>
+//       </section>
+//     </>
+//   );
+// }
+
+// export default Hero;
+
+
+
+/// remoeved popup 
+
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
@@ -3970,17 +4284,12 @@ function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
   const [imageOrientations, setImageOrientations] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
 
   const heroRef = useRef(null);
   const IMAGE_BASE = import.meta.env.VITE_IMAGE_URL || "https://a4agroup.eu";
 
   useEffect(() => {
     loadSlides();
-    const timer = setTimeout(() => {
-      setShowPopup(true);
-    }, 800);
-    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -4055,10 +4364,6 @@ function Hero() {
     handleSlideChange(index);
   };
 
-  const closePopup = () => {
-    setShowPopup(false);
-  };
-
   if (!slides.length) {
     return (
       <section className="hero-modern hero-skeleton" aria-busy="true">
@@ -4096,173 +4401,143 @@ function Hero() {
   };
 
   return (
-    <>
-      {/* POPUP OVERLAY */}
-      {showPopup && (
-        <div className="hero-popup-overlay" onClick={closePopup}>
-          <div className="hero-popup" onClick={(e) => e.stopPropagation()}>
-            <button className="hero-popup-close" onClick={closePopup}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-            
-            <h2 className="hero-popup-title">
-              Discover <span className="hero-popup-highlight">Premium Flowers</span>
-            </h2>
-            
-            <p className="hero-popup-description">
-              German precision meets Indian soul — premium blooms for every occasion.
-            </p>
-            
-            <Link to="/products" className="hero-popup-btn" onClick={closePopup}>
-              <span>Shop Now</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      )}
+    <section
+      ref={heroRef}
+      className={`hero-modern ${isLoaded ? "is-loaded" : ""}`}
+      aria-label="Featured content"
+    >
+      {/* BACKGROUND IMAGE - Full screen with overlay */}
+      <div className="hero-bg-wrapper">
+        <div
+          className={`hero-bg-image ${isAnimating ? "bg-exit" : "bg-active"}`}
+          style={{
+            backgroundImage: `url(${getImageUrl(slide.image)})`,
+          }}
+        />
+        <div
+          className={`hero-bg-image hero-bg-next ${isAnimating ? "bg-enter" : ""}`}
+          style={{
+            backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
+          }}
+        />
+        <div className="hero-bg-overlay" />
+        <div className="hero-bg-gradient" />
+      </div>
 
-      <section
-        ref={heroRef}
-        className={`hero-modern ${isLoaded ? "is-loaded" : ""}`}
-        aria-label="Featured content"
-      >
-        {/* BACKGROUND IMAGE - Full screen with overlay */}
-        <div className="hero-bg-wrapper">
-          <div
-            className={`hero-bg-image ${isAnimating ? "bg-exit" : "bg-active"}`}
-            style={{
-              backgroundImage: `url(${getImageUrl(slide.image)})`,
-            }}
-          />
-          <div
-            className={`hero-bg-image hero-bg-next ${isAnimating ? "bg-enter" : ""}`}
-            style={{
-              backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
-            }}
-          />
-          <div className="hero-bg-overlay" />
-          <div className="hero-bg-gradient" />
-        </div>
+      {/* MAIN CONTENT - Split layout: Left text, Right image card */}
+      <div className="hero-container">
+        {/* LEFT - Text Content */}
+        <div className="hero-content-left">
+          <div className={`hero-content ${contentVisible ? "content-enter" : "content-exit"}`}>
+            <div className="hero-badge">
+              <span>{getBadgeText()}</span>
+            </div>
 
-        {/* MAIN CONTENT - Split layout: Left text, Right image card */}
-        <div className="hero-container">
-          {/* LEFT - Text Content */}
-          <div className="hero-content-left">
-            <div className={`hero-content ${contentVisible ? "content-enter" : "content-exit"}`}>
-              <div className="hero-badge">
-                <span>{getBadgeText()}</span>
-              </div>
+            <h1 className="hero-title">
+              {slide.title}
+            </h1>
 
-              <h1 className="hero-title">
-                {slide.title}
-              </h1>
+            <p className="hero-description">{slide.subtitle}</p>
 
-              <p className="hero-description">{slide.subtitle}</p>
-
-              <div className="hero-actions">
-                {isInternalLink ? (
-                  <Link to={redirectLink} className="hero-btn hero-btn--primary">
-                    <span>{slide.buttonText || "Explore Now"}</span>
-                    <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                ) : (
-                  <a
-                    href={redirectLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hero-btn hero-btn--primary"
-                  >
-                    <span>{slide.buttonText || "Explore Now"}</span>
-                    <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                )}
-
-                <Link to="/events" className="hero-btn hero-btn--secondary">
-                  <span>View All</span>
+            <div className="hero-actions">
+              {isInternalLink ? (
+                <Link to={redirectLink} className="hero-btn hero-btn--primary">
+                  <span>{slide.buttonText || "Explore Now"}</span>
+                  <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </Link>
-              </div>
+              ) : (
+                <a
+                  href={redirectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-btn hero-btn--primary"
+                >
+                  <span>{slide.buttonText || "Explore Now"}</span>
+                  <svg className="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              )}
 
-              <div className="hero-slide-indicator">
-                <span>{String(current + 1).padStart(2, '0')}</span>
-                <span className="hero-slide-indicator-line" />
-                <span>{String(slides.length).padStart(2, '0')}</span>
-              </div>
+              <Link to="/events" className="hero-btn hero-btn--secondary">
+                <span>View All</span>
+              </Link>
             </div>
-          </div>
 
-          {/* RIGHT - Image Card with overlay */}
-          <div className="hero-image-right">
-            <div className="hero-image-card">
-              <div
-                className={`hero-card-image ${isAnimating ? "card-exit" : "card-active"}`}
-                style={{
-                  backgroundImage: `url(${getImageUrl(slide.image)})`,
-                }}
-              />
-              <div
-                className={`hero-card-image hero-card-next ${isAnimating ? "card-enter" : ""}`}
-                style={{
-                  backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
-                }}
-              />
-              <div className="hero-card-overlay" />
-              <div className="hero-card-content">
-                <div className="hero-card-badge">
-                  <span>{current + 1}</span>
-                  <span>/{slides.length}</span>
-                </div>
-                <div className="hero-card-footer">
-                  <div className="hero-card-tags">
-                    <span className="hero-card-tag">Premium</span>
-                    <span className="hero-card-tag">Limited</span>
-                  </div>
-                  <div className="hero-card-nav">
-                    <button 
-                      className="hero-card-nav-btn" 
-                      onClick={() => handleProgressClick((current - 1 + slides.length) % slides.length)}
-                      aria-label="Previous"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M15 18l-6-6 6-6" />
-                      </svg>
-                    </button>
-                    <button 
-                      className="hero-card-nav-btn" 
-                      onClick={() => handleProgressClick((current + 1) % slides.length)}
-                      aria-label="Next"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div className="hero-slide-indicator">
+              <span>{String(current + 1).padStart(2, '0')}</span>
+              <span className="hero-slide-indicator-line" />
+              <span>{String(slides.length).padStart(2, '0')}</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Navigation Dots */}
-        <div className="hero-nav-dots">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`hero-dot ${index === current ? "is-active" : ""}`}
-              onClick={() => handleProgressClick(index)}
-              aria-label={`Slide ${index + 1}`}
+        {/* RIGHT - Image Card with overlay */}
+        <div className="hero-image-right">
+          <div className="hero-image-card">
+            <div
+              className={`hero-card-image ${isAnimating ? "card-exit" : "card-active"}`}
+              style={{
+                backgroundImage: `url(${getImageUrl(slide.image)})`,
+              }}
             />
-          ))}
+            <div
+              className={`hero-card-image hero-card-next ${isAnimating ? "card-enter" : ""}`}
+              style={{
+                backgroundImage: `url(${getImageUrl(nextSlide.image)})`,
+              }}
+            />
+            <div className="hero-card-overlay" />
+            <div className="hero-card-content">
+              <div className="hero-card-badge">
+                <span>{current + 1}</span>
+                <span>/{slides.length}</span>
+              </div>
+              <div className="hero-card-footer">
+                <div className="hero-card-tags">
+                  <span className="hero-card-tag">Premium</span>
+                  <span className="hero-card-tag">Limited</span>
+                </div>
+                <div className="hero-card-nav">
+                  <button 
+                    className="hero-card-nav-btn" 
+                    onClick={() => handleProgressClick((current - 1 + slides.length) % slides.length)}
+                    aria-label="Previous"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button 
+                    className="hero-card-nav-btn" 
+                    onClick={() => handleProgressClick((current + 1) % slides.length)}
+                    aria-label="Next"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Bottom Navigation Dots */}
+      <div className="hero-nav-dots">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            className={`hero-dot ${index === current ? "is-active" : ""}`}
+            onClick={() => handleProgressClick(index)}
+            aria-label={`Slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 
